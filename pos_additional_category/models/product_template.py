@@ -21,6 +21,6 @@ class PosCategoryMulti(models.Model):
     def compute_pos_category_ids(self):
         for product in self:
             pos_categ_ids = []
-#            pos_categ_ids = product.pos_categ_id.ids if product.pos_categ_id else self.env['pos.category']
-#            pos_categ_ids += product.pos_additional_categ_ids.ids if product.pos_additional_categ_ids else []
+            pos_categ_ids = product.pos_categ_id.ids if product.pos_categ_id else self.env['pos.category']
+            pos_categ_ids += product.pos_additional_categ_ids.ids if product.pos_additional_categ_ids else []
             product.pos_category_ids = pos_categ_ids
