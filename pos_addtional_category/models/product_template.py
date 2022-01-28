@@ -7,11 +7,11 @@ class PosCategoryMulti(models.Model):
 
     pos_additional_categ_ids  = fields.Many2many(
         'pos.category',
-        'pos_product_category_rel','product_tmpl_id','pos_category_id',
+        'pos_product_category_rel','pos_category_id','product_tmpl_id',
         string='Additional Categories')
     pos_category_ids = fields.Many2many(
         'pos.category',
-        'pos_product_category_add_rel','product_tmpl_id','pos_category_id',
+        'pos_product_category_add_rel','pos_category_id','product_tmpl_id',
         string="POS Categories",
         help="Those categories are used to group similar products for point of sale.",
         compute='compute_pos_category_ids',store=True
