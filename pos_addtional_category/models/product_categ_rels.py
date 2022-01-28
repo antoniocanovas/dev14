@@ -1,6 +1,4 @@
-import logging
-_logger = logging.getLogger(__name__)
-
+from odoo import fields, models, api
 
 class ProductCategRel(models.Model):
     _name = 'pos.product.category.rel'
