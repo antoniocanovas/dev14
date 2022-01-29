@@ -14,7 +14,7 @@ class PosCategoryMulti(models.Model):
         'pos_product_category_add_rel','pos_category_id','product_tmpl_id',
         string="POS Categories",
         help="Those categories are used to group similar products for point of sale.",
-        #        compute='compute_pos_category_ids',store=True
+        compute='compute_pos_category_ids',store=True
     )
 
     @api.depends('categ_id','pos_additional_categ_ids')
