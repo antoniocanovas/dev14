@@ -13,9 +13,9 @@
     "license": "Other OSI approved licence",  # MIT
     "price": 15.00,
     "currency": "EUR",
-    "depends": ["point_of_sale"],
+    "depends": ["point_of_sale", "base_automation"],
     "external_dependencies": {"python": [], "bin": []},
-    "data": ["template.xml", "view.xml"],
+    "data": ["template.xml", "view.xml", "data/action_server.xml"],
     "demo": [],
     "qweb": [],
     "post_load": None,
