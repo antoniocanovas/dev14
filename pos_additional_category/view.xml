@@ -12,7 +12,6 @@
                     widget="many2many_tags"
                     attrs="{'invisible': [('available_in_pos', '=', False)]}"
                     help="These categories are shared across all Product Variants"
-                    invisible="0"
                 />
             </field>
         </field>
