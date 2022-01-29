@@ -22,9 +22,9 @@ class PosCategoryMulti(models.Model):
         for record in self:
             categories = []
             if record.pos_categ_id.id:
-                categories.append(record.pos_categ_id.id)
+                categories.append(record.pos_categ_id)
             for ca in record.pos_additional_categ_ids:
-                categories.append(ca.id)
+                categories.append(ca)
             record['pos_category_ids'] = [(6, 0, categories)]
     #            pos_categ_ids = []
     #            pos_categ_ids = product.pos_categ_id.ids if product.pos_categ_id else self.env['pos.category']
