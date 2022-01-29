@@ -5,7 +5,7 @@
             <field name="model_id" ref="model_product_template"/>
             <field name="state">code</field>
             <field name="code">
-if record.pos_categ_id.id not in record.pos_category_ids.ids:
+if (record.pos_categ_id.id) and (record.pos_categ_id.id not in record.pos_category_ids.ids):
   record['pos_category_ids'] = [(4,record.pos_categ_id.id)]
             </field>
             <field name="trigger">on_change</field>
