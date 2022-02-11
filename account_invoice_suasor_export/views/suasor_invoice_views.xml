@@ -19,7 +19,7 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='date_due']" position="after">
+            <xpath expr="//field[@name='payment_reference']" position="after">
                 <field name="suasor_invoice_id" readonly="True"/>
             </xpath>
         </field>
