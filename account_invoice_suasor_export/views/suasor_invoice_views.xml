@@ -35,10 +35,8 @@
                     </h2>
                     <group>
                         <field name="invoice_id"/>
-
                     </group>
                 </sheet>
-
             </form>
         </field>
         <field name="field_parent" eval="False"/>
