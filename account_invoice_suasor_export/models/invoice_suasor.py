@@ -13,7 +13,7 @@ class SuasorInvoice(models.Model):
     _description = 'Export to Suasor'
 
     invoice_id = fields.Many2one(
-            'account.invoice',
+            'account.move',
         )
 
     name = fields.Char('DESCRIPCIÓN')

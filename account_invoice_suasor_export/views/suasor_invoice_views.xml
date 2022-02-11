@@ -3,7 +3,7 @@
 
     <record id="view_invoice_supplier_form_suasor_inh" model="ir.ui.view">
         <field name="name">Supplier form inh suasor</field>
-        <field name="model">account.invoice</field>
+        <field name="model">account.move</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="account.invoice_supplier_form"/>
         <field name="arch" type="xml">
@@ -15,7 +15,7 @@
 
     <record id="view_invoice_form_suasor_inh" model="ir.ui.view">
         <field name="name">Form inh suasor</field>
-        <field name="model">account.invoice</field>
+        <field name="model">account.move</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">

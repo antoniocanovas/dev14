@@ -8,8 +8,8 @@
     'author': 'Serincloud',
     'depends': [
         'base_automation',
-        'account_cancel',
-        'web_export_view',
+    #    'account_cancel',
+    #    'web_export_view',
     ],
     'data': [
         'views/suasor_invoice_views.xml',
