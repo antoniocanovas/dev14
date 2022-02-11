@@ -4,7 +4,7 @@
 
         <record id="suasor_invoice_create" model="base.automation">
             <field name="name">=>Crea Factura Suasor</field>
-            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="model_id" ref="account.model_account_move"/>
             <field name="state">code</field>
             <field name="code">
 
