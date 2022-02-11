@@ -139,7 +139,9 @@
     </record>
 
     <record id="action_suasor_invoice" model="ir.actions.act_window">
+ <!-- NO PARA V14
         <field name="auto_search" eval="True"/>
+ -->
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
         <field name="context">{}</field>
