@@ -12,10 +12,7 @@ class SuasorInvoice(models.Model):
     _name = 'suasor.invoice'
     _description = 'Export to Suasor'
 
-    invoice_id = fields.Many2one(
-            'account.move',
-        )
-
+    invoice_id = fields.Many2one('account.move', 'Factura')
     name = fields.Char('DESCRIPCIÓN')
     fecha_emision = fields.Char('FECHA')
     fecha_emision_filtro = fields.Date('FECHA EMISIÓN FILTRO')

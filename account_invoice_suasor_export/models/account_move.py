@@ -11,6 +11,4 @@ _logger = logging.getLogger(__name__)
 class AccountInvoiceSuasor(models.Model):
     _inherit = 'account.move'
 
-    suasor_invoice_id = fields.Many2one(
-        'suasor.invoice',
-    )
+    suasor_invoice_id = fields.Many2one('suasor.invoice', 'Suasor')

@@ -12,7 +12,7 @@
     #    'web_export_view',
     ],
     'data': [
-      #  'views/suasor_invoice_views.xml',
+        'views/suasor_invoice_views.xml',
       #  'data/create_suasor_invoice.xml',
         'security/ir.model.access.csv',
     ],
