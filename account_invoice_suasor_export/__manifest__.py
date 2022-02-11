@@ -13,7 +13,7 @@
     ],
     'data': [
         'views/suasor_invoice_views.xml',
-        'data/create_suasor_invoice.xml',
+      #  'data/create_suasor_invoice.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,
