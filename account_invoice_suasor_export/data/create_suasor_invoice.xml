@@ -8,16 +8,17 @@
             <field name="state">code</field>
             <field name="code">
 
-
-
 if record.state in ['cancel']:
     record.suasor_invoice_id.unlink()
 
-if record.state in ['open']:
-    numerofactura, revisadas, lineas_ids, contador = "", [], [], 1
+if record.state in ['posted']:
+    numerofactura, revisadas, lineas_ids, contador, cuentacontableok = "", [], [], 1, False
     for li in record.invoice_line_ids:
       if li.display_type == False:
         lineas_ids.append(li)
+        if cuentacontableok == False:
+          primeracuentacontable = li.account_id
+          cuentacontableok = True
     lineas_num = len(lineas_ids)
 
       # La mayoría de las variables (distintas de false) no hacen falta para cálculo, pero si para ver por pantalla o escribir:
@@ -35,11 +36,11 @@ if record.state in ['open']:
         'SE':'41', 'SO':'42', 'T':'43', 'TE':'44', 'TO':'45', 'V':'46', 'VA':'47', 'VI':'48', 'ZA':'49','Z':'50', 'CE':'51', 'ME':'52'}
 
       # Si es factura de cliente hemos de poner nuestro número de factura, si es de proveedor el suyo:
-    if   (record.number)  and (record.type in ['out_invoice','out_refund']): numerofactura = record.number
-    elif (record.reference) and (record.type in ['in_invoice','in_refund']): numerofactura = record.reference
+    if   (record.name)  and (record.move_type in ['out_invoice','out_refund']): numerofactura = record.name
+    elif (record.ref) and (record.move_type in ['in_invoice','in_refund']): numerofactura = record.ref
 
-    if record.type in ['out_invoice','in_invoice']: factor = ''
-    elif record.type in ['in_refund','out_refund']: factor = '-'
+    if record.move_type in ['out_invoice','in_invoice']: factor = ''
+    elif record.move_type in ['in_refund','out_refund']: factor = '-'
 
     cod_provincia = record.partner_id.state_id.code
     if (cod_provincia) and (cod_provincia in provincias):
@@ -49,11 +50,11 @@ if record.state in ['open']:
       if not li.display_type:
           # Para el primer grupo de SUASOR:
           if (li.id not in revisadas) and (contador == 1) and (lineas_num > 0):
-            impuestos = li.invoice_line_tax_ids.ids
+            impuestos = li.tax_ids.ids
             impuestos.sort()  # Ordenamos para poder comparar (por si se han introducido en otro orden en otras líneas)
             revisadas.append(li.id)
             cc1 = li.account_id.code
-            if li.asset_id.id: activo1="X"
+            if li.asset_profile_id.id: activo1="X"
             lineas_num -= 1
 
             neto = li.price_subtotal
@@ -101,7 +102,7 @@ if record.state in ['open']:
                 req_tax1     = abs(neto * tax.amount / 100)
 
             for li1 in lineas_ids:
-              impg1 = li1.invoice_line_tax_ids.ids
+              impg1 = li.tax_ids.ids
               impg1.sort()
               if (li1.id not in revisadas) and (impg1 == impuestos):
                 revisadas.append(li1.id)
@@ -121,11 +122,11 @@ if record.state in ['open']:
 
           # Para el segundo grupo de SUASOR:
           if (li.id not in revisadas) and (contador == 2) and (lineas_num > 0):
-            impuestos = li.invoice_line_tax_ids.ids
+            impuestos = li.tax_ids.ids
             impuestos.sort()  # Ordenamos para poder comparar (por si se han introducido en otro orden en otras líneas)
             revisadas.append(li.id)
             cc2 = li.account_id.code
-            if li.asset_id.id: activo2="X"
+            if li.asset_profile_id.id: activo2="X"
             lineas_num -= 1
 
             neto = li.price_subtotal
@@ -172,7 +173,7 @@ if record.state in ['open']:
                 req_tax2     = abs(neto * tax.amount / 100)
 
             for li1 in lineas_ids:
-              impg1 = li1.invoice_line_tax_ids.ids
+              impg1 = li1.tax_ids.ids
               impg1.sort()
               if (li1.id not in revisadas) and (impg1 == impuestos):
                 revisadas.append(li1.id)
@@ -192,11 +193,11 @@ if record.state in ['open']:
 
           # Para el tercer  grupo de SUASOR:
           if (li.id not in revisadas) and (contador == 3) and (lineas_num > 0):
-            impuestos = li.invoice_line_tax_ids.ids
+            impuestos = li.tax_ids.ids
             impuestos.sort()  # Ordenamos para poder comparar (por si se han introducido en otro orden en otras líneas)
             revisadas.append(li.id)
             cc3 = li.account_id.code
-            if li.asset_id.id: activo3="X"
+            if li.asset_profile_id.id: activo3="X"
             lineas_num -= 1
 
             neto = li.price_subtotal
@@ -244,7 +245,7 @@ if record.state in ['open']:
                 req_tax3     = abs(neto * tax.amount / 100)
 
             for li1 in lineas_ids:
-              impg1 = li1.invoice_line_tax_ids.ids
+              impg1 = li1.tax_ids.ids
               impg1.sort()
               if (li1.id not in revisadas) and (impg1 == impuestos):
                 revisadas.append(li1.id)
@@ -263,24 +264,22 @@ if record.state in ['open']:
             contador = 4
 
 
-
     if (not record.suasor_invoice_id.id):
           # Finalizar: Comprobamos que hemos pasado por todas las líneas, y escribimos el registro oportuno:
         if (len(lineas_ids) - len(revisadas) > 0):
           suasor_invoice_id = env['suasor.invoice'].create({
                   'name': 'Suasor' + str(numerofactura) + 'No procesada',
-                  'fecha_emision': datetime.datetime.strftime(record.date_invoice, '%d/%m/%Y'),
-                  'tipo_factura': record.type,
+                  'fecha_emision': datetime.datetime.strftime(record.invoice_date, '%d/%m/%Y'),
+                  'tipo_factura': record.move_type,
                   'n_documento': numerofactura,
                   'total_factura': str(record.amount_total).replace('.',','),
-                  'cuenta': record.account_id.code,
+                  'cuenta': primeracuentacontable.code,
                   'nif': str(record.partner_id.vat),
                   'nombre': record.partner_id.name,
                   'provincia': str(cod_provincia),
                   'pais': (str(record.partner_id.country_id.code)),
-                  'terminos_pago': str(record.payment_term_id.name),
-                  'grupo': str(record.account_id.group_id.code_prefix),
-
+                  'terminos_pago': str(record.invoice_payment_term_id.name),
+                  'grupo': str(primeracuentacontable.group_id.code_prefix_start),
                   'invoice_id': record.id,
           })
           record['suasor_invoice_id']=suasor_invoice_id.id
@@ -311,18 +310,18 @@ if record.state in ['open']:
 
           suasor_invoice_id = env['suasor.invoice'].create({
                   'name': 'Suasor' + str(numerofactura),
-                  'fecha_emision': datetime.datetime.strftime(record.date_invoice, '%d/%m/%Y'),
-                  'fecha_emision_filtro': record.date_invoice,
-                  'tipo_factura': record.type,
+                  'fecha_emision': datetime.datetime.strftime(record.invoice_date, '%d/%m/%Y'),
+                  'fecha_emision_filtro': record.invoice_date,
+                  'tipo_factura': record.move_type,
                   'n_documento': numerofactura,
                   'total_factura': tot,
-                  'cuenta': record.account_id.code,
+                  'cuenta': primeracuentacontable.code,
                   'nif': str(record.partner_id.vat),
                   'nombre': record.partner_id.name,
                   'provincia': str(cod_provincia),
                   'pais': (str(record.partner_id.country_id.code)),
-                  'terminos_pago': str(record.payment_term_id.name),
-                  'grupo': str(record.account_id.group_id.code_prefix),
+                  'terminos_pago': str(record.invoice_payment_term_id.name),
+                  'grupo': str(record.account_id.group_id.code_prefix_start),
                   'base_iva1':in1,
                   'iva_percent1': str(iva_cod1).replace('.',','),
                   'iva_tax1': it1,
@@ -368,20 +367,18 @@ if record.state in ['open']:
         if (len(lineas_ids) - len(revisadas) > 0):
           record.suasor_invoice_id.write({
                   'name': 'Suasor' + str(numerofactura) + 'No procesada',
-                  'fecha_emision': datetime.datetime.strftime(record.date_invoice, '%d/%m/%Y'),
-                  'fecha_emision_filtro': record.date_invoice,
-                  'tipo_factura': record.type,
+                  'fecha_emision': datetime.datetime.strftime(record.invoice_date, '%d/%m/%Y'),
+                  'fecha_emision_filtro': record.invoice_date,
+                  'tipo_factura': record.move_type,
                   'n_documento': numerofactura,
                   'total_factura': str(record.amount_total).replace('.',','),
-                  'cuenta': record.account_id.code,
+                  'cuenta': primeracuentacontable.code,
                   'nif': str(record.partner_id.vat),
                   'nombre': record.partner_id.name,
                   'provincia': str(cod_provincia),
                   'pais': (str(record.partner_id.country_id.code)),
-                  'terminos_pago': str(record.payment_term_id.name),
-                  'grupo': str(record.account_id.group_id.code_prefix),
-
-
+                  'terminos_pago': str(record.invoice_payment_term_id.name),
+                  'grupo': str(record.account_id.group_id.code_prefix_start),
                   'invoice_id': record.id,
           })
         else:
@@ -409,18 +406,18 @@ if record.state in ['open']:
           else: it3 = ""
           record.suasor_invoice_id.write({
                   'name': 'Suasor' + str(numerofactura),
-                  'fecha_emision': datetime.datetime.strftime(record.date_invoice, '%d/%m/%Y'),
-                  'fecha_emision_filtro': record.date_invoice,
-                  'tipo_factura': record.type,
+                  'fecha_emision': datetime.datetime.strftime(record.invoice_date, '%d/%m/%Y'),
+                  'fecha_emision_filtro': record.invoice_date,
+                  'tipo_factura': record.move_type,
                   'n_documento': numerofactura,
                   'total_factura':tot,
-                  'cuenta': record.account_id.code,
+                  'cuenta': primeracuentacontable.code,
                   'nif': str(record.partner_id.vat),
                   'nombre': record.partner_id.name,
                   'provincia': str(cod_provincia),
                   'pais': (str(record.partner_id.country_id.code)),
-                  'terminos_pago': str(record.payment_term_id.name),
-                  'grupo': str(record.account_id.group_id.code_prefix),
+                  'terminos_pago': str(record.invoice_payment_term_id.name),
+                  'grupo': str(record.account_id.group_id.code_prefix_start),
 
                   'base_iva1': in1,
                   'iva_percent1': str(iva_cod1).replace('.',','),
@@ -460,7 +457,6 @@ if record.state in ['open']:
 
                   'invoice_id': record.id,
           })
-
 
 
             </field>

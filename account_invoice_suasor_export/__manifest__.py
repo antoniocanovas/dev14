@@ -8,13 +8,12 @@
     'author': 'Serincloud',
     'depends': [
         'base_automation',
-    #    'account_cancel',
-    #    'web_export_view',
+        'sql_export',
     ],
     'data': [
-    #    'views/suasor_invoice_views.xml',
-    #    'data/create_suasor_invoice.xml',
-    #    'security/ir.model.access.csv',
+        'views/suasor_invoice_views.xml',
+        'data/create_suasor_invoice.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
 }
