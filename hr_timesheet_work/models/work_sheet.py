@@ -97,7 +97,7 @@ class TimeSheetWorkSheet(models.Model):
         for record in self:
             if record.signature and not record.signature_status:
                 # generate pdf from report, use report's id as reference
-                report_id = 'hr_timesheet_timesheet.work_sheet_report'
+                report_id = 'hr_timesheet_work.work_sheet_report'
                 pdf = self.env.ref(report_id)._render_qweb_pdf(record.ids[0])
                 # pdf result is a list
                 b64_pdf = base64.b64encode(pdf[0])
