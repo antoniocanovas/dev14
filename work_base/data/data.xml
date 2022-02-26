@@ -1,0 +1,21 @@
+<odoo>
+
+    <data>
+
+        <record id="work_sheet_work_type_estandar" model="working.type">
+            <field name="name">Estándar</field>
+        </record>
+        <record id="work_sheet_work_type_extra" model="working.type">
+            <field name="name">Extra</field>
+        </record>
+        <record id="work_sheet_work_type_festivo" model="working.type">
+            <field name="name">Festivo</field>
+        </record>
+        <record id="work_sheet_work_type_compensar" model="working.type">
+            <field name="name">A compensar</field>
+        </record>
+
+    </data>
+
+
+</odoo>
