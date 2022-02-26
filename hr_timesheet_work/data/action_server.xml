@@ -73,7 +73,7 @@ elif (record.work_id.type == "production") and (record.workorder_id.id):
           'loss_id':record.production_loss_id.id, 'date_start':date_start, 'date_end':date_end, 'type_id':record.type_id.id,
           'user_id':li.user_id.id
     })
-
+-->
 
             </field>
         </record>
@@ -218,7 +218,6 @@ else:
             price_unit = round(price_unit_cost * (1 + record.margin / 100),monetary_precision)
 
         liudo.write({'price_unit': price_unit, 'price_unit_cost': price_unit_cost})
-        -->
             </field>
     </record>
 
