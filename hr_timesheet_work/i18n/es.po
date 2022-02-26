@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* work_base
+# 	* hr_timesheet_work
 #
 msgid ""
 msgstr ""
@@ -15,9 +15,9 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: work_base
-#: model:ir.model.fields,help:work_base.field_stock_move__mrp_state
-#: model:ir.model.fields,help:work_base.field_work_sheet__mrp_state
+#. module: hr_timesheet_work
+#: model:ir.model.fields,help:hr_timesheet_work.field_stock_move__mrp_state
+#: model:ir.model.fields,help:hr_timesheet_work.field_work_sheet__mrp_state
 msgid ""
 " * Draft: The MO is not confirmed yet.\n"
 " * Confirmed: The MO is confirmed, the stock rules and the reordering of the components are trigerred.\n"
@@ -34,22 +34,22 @@ msgstr ""
 " * Listo: el MO está cerrado, los movimientos de acciones se registran.\n"
 " * Cancelado: el MO ha sido cancelado, ya no se puede confirmar."
 
-#. module: work_base
-#: model:ir.actions.report,print_report_name:work_base.work_sheet_report
+#. module: hr_timesheet_work
+#: model:ir.actions.report,print_report_name:hr_timesheet_work.work_sheet_report
 msgid "((str(object.type_id.name) or ''))"
 msgstr ""
 
-#. module: work_base
-#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+#. module: hr_timesheet_work
+#: model_terms:ir.ui.view,arch_db:hr_timesheet_work.work_sheet_form
 msgid "<i>(Production REQUIRED)</i>"
 msgstr "<i>(Producción REQUERIDO)</i>"
 
-#. module: work_base
-#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+#. module: hr_timesheet_work
+#: model_terms:ir.ui.view,arch_db:hr_timesheet_work.work_sheet_form
 msgid "<i>(Project REQUIRED, optional task)</i>"
 msgstr "<i>(Proyecto Requerido, Tarea opcional)</i>"
 
-#. module: work_base
+#. module: hr_timesheet_work
 #: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
 msgid "<i>(Project and task REQUIRED)</i>"
 msgstr "<i>(Proyecto y tarea REQUERIDO)</i>"

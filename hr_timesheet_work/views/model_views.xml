@@ -219,7 +219,7 @@
                       </tree>
                     </field>
                     <group col="4">
-                        <button class="oe_highlight" type="action" name="work_base.sale_order_from_aal" string="Create quotation from real products and works"/>
+                        <button class="oe_highlight" type="action" name="work_basehr_timesheet_work.sale_order_from_aal" string="Create quotation from real products and works"/>
                         <field name="new_sale_id" readonly="1"/>
                     </group>
                 </page>
