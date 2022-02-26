@@ -167,7 +167,7 @@
                 <sheet>
                     <h1><field name="name"/></h1>
                     <group>
-                        <field name="type" widget="selection"/>
+                        <field name="type" widget="selection" invisible="1"/>
                         <field name="partner_id"/>
                         <field name="set_start_stop" string="Start/stop time" attrs="{'invisible':[('type','not in',['repair','project'])]}"/>
                     </group>

@@ -5,6 +5,7 @@
             <field name="model_id" ref="model_work_sheet"/>
             <field name="state">code</field>
             <field name="code">
+                <!--
 # Required start to concatenate later, required duration to change later if startstop:
 start = ""
 duration = record.duration
@@ -217,6 +218,7 @@ else:
             price_unit = round(price_unit_cost * (1 + record.margin / 100),monetary_precision)
 
         liudo.write({'price_unit': price_unit, 'price_unit_cost': price_unit_cost})
+        -->
             </field>
     </record>
 
