@@ -2,7 +2,7 @@
 
     <record id="personal_work_sheet" model="ir.rule">
         <field name="name">See own work sheet</field>
-        <field name="model_id" ref='work_base.model_work_sheet'/>
+        <field name="model_id" ref='hr_timesheet_work.model_work_sheet'/>
         <field name="groups" eval="[(6,0, [ref('hr_timesheet.group_hr_timesheet_user')])]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="True"/>
@@ -13,7 +13,7 @@
 
     <record id="admin_work_sheet_all" model="ir.rule">
         <field name="name">See all work sheet</field>
-        <field name="model_id" ref='work_base.model_work_sheet'/>
+        <field name="model_id" ref='hr_timesheet_work.model_work_sheet'/>
         <field name="groups" eval="[(6,0, [ref('hr_timesheet.group_hr_timesheet_approver')])]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="True"/>
