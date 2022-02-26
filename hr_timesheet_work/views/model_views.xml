@@ -128,9 +128,7 @@
                 <field name="type" filter_domain="[('type_id', 'ilike', self)]"/>
                 <field name="work_id" filter_domain="[('work_id', 'ilike', self)]"/>
                 <separator/>
-#                <filter string="Repairs" name="type_repair" domain="[('type', '=', 'repair')]"/>
                 <filter string="Projects" name="type_project" domain="[('type', '=', 'project')]"/>
-#                <filter string="Productions" name="type_production" domain="[('type', '=', 'production')]"/>
                 <separator/>
                 <group expand="0" name="group_by" string="Group By">
                     <filter name="schedule" string="Schedule" domain="[]" context="{'group_by' : 'type_id'}" />
@@ -149,8 +147,6 @@
                 <field name="name"/>
                 <field name="type"/>
                 <field name="partner_id"/>
-#                <field name="repair_service_id"/>
-#                <field name="production_loss_id" attrs="{'readonly':[('type', '!=', 'production')]}"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
