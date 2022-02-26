@@ -17,7 +17,7 @@
         'data/rules.xml',
         'views/model_views.xml',
         'views/menu_views.xml',
-#        'views/templates.xml',
+        'views/templates.xml',
 #        'views/work_sheet_report.xml',
     ],
     'installable': True,
