@@ -5,8 +5,8 @@ _logger = logging.getLogger(__name__)
 
 
 class WorkExtended(models.Model):
-    _name = 'work.work'
-    _inherit = ['work.work','mail.thread', 'mail.activity.mixin']
+    _name = 'timesheet.work'
+    _inherit = ['timesheet.work','mail.thread', 'mail.activity.mixin']
 
     user_id = fields.Many2one('res.users', string='Supervisor')
     saleperson_id = fields.Many2one('res.users', string='Salesman')

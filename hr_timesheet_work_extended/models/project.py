@@ -12,4 +12,4 @@ class Project(models.Model):
         if not self.work_id:
             self.work_id = self.sale_order_id.work_id
 
-    work_id = fields.Many2one('work.work', 'Work extended', compute='get_work_id', readonly=False)
+    work_id = fields.Many2one('timesheet.work', 'Work extended', compute='get_work_id', readonly=False)

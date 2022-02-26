@@ -9,6 +9,6 @@ class WorkEmployee(models.Model):
     _description = 'WorkEmployee'
 
     employee_id = fields.Many2one('hr.employee', 'Employee')
-    work_id = fields.Many2one('work.work', 'Work')
+    work_id = fields.Many2one('timesheet.work', 'Work')
     function_ids = fields.Many2many('hr.job')
 

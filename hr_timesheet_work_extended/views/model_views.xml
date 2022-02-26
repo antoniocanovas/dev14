@@ -29,7 +29,7 @@
 
     <record id="wb_work_form_inh" model="ir.ui.view">
         <field name="name">Extended work base inh</field>
-        <field name="model">work.work</field>
+        <field name="model">timesheet.work</field>
         <field name="inherit_id" ref="work_base.work_work_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/h1" position="before">
