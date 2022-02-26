@@ -27,7 +27,7 @@
         </field>
     </record>
 
-    <record id="wb_work_form_inh" model="ir.ui.view">
+    <record id="ts_extended_work_form_inh" model="ir.ui.view">
         <field name="name">Extended work base inh</field>
         <field name="model">timesheet.work</field>
         <field name="inherit_id" ref="hr_timesheet_work.timesheet_work_form"/>
@@ -42,7 +42,7 @@
                     </button>
                 </div>
             </xpath>
-            <xpath expr="//form/sheet/group[@name='repair']" position="after">
+            <xpath expr="//form/sheet/group[@name='project']" position="after">
                 <notebook>
                     <page string="General" name="work_general">
                         <group col="4">
