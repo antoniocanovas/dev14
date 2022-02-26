@@ -22,7 +22,7 @@ class TimeSheetWorkSheet(models.Model):
     start = fields.Float('Start')
     stop = fields.Float('Stop')
     work_id = fields.Many2one('timesheet.work')
-    type = fields.Selection(string='Type', related='work_id.type')
+    type = fields.Selection(string='Type', related='timesheeet.time.type')
     employee_ids = fields.Many2many('hr.employee')
     project_id = fields.Many2one('project.project')
     task_id = fields.Many2one('project.task')
