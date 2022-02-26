@@ -26,7 +26,7 @@ class TimeSheetWorkSheet(models.Model):
     employee_ids = fields.Many2many('hr.employee')
     project_id = fields.Many2one('project.project')
     task_id = fields.Many2one('project.task')
-    type_id = fields.Many2one('timesheet.time.type', 'Schedule', required=True)
+    type_id = fields.Many2one('project.time.type', 'Schedule', required=True)
 
     set_start_stop = fields.Boolean(related='work_id.set_start_stop', string='Set start & stop time')
     duration = fields.Float('Duration')
