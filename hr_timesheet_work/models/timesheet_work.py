@@ -5,7 +5,7 @@ _logger = logging.getLogger(__name__)
 
 
 TYPES = [
-    ('project', 'Project')
+    ('project', 'Project'),
 ]
 
 
@@ -16,7 +16,7 @@ class TimesheetWork(models.Model):
     name = fields.Char('Name', required=True)
     active = fields.Boolean(default=True)
     partner_id = fields.Many2one('res.partner', string='Partner')
-    type = fields.Selection(TYPES, required=True, string='Type', default='project')
+    type = fields.Selection(selection=TYPES, required=True, string='Type', default='project')
     project_id = fields.Many2one('project.project')
     set_start_stop = fields.Boolean('Set start & stop time')
 
