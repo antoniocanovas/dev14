@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="work_sheet_report" model="ir.actions.report">
+        <record id="work_sheet_report_document_report" model="ir.actions.report">
             <field name="name">Work Base Sheet</field>
             <field name="model">work.sheet</field>
             <field name="report_type">qweb-pdf</field>
