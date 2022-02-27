@@ -1,0 +1,223 @@
+<odoo>
+
+    <record id="create_lot_services_work_sheet" model="ir.actions.server">
+            <field name="name">=> Create Lot Services in work sheet</field>
+            <field name="model_id" ref="model_work_sheet"/>
+            <field name="state">code</field>
+            <field name="code">
+# Required start to concatenate later, required duration to change later if startstop:
+start = ""
+duration = record.duration
+
+# Chek time consumed:
+if (record.set_start_stop == False) and (record.duration == 0):
+  raise Warning('Please, set the time consumed in Duration.')
+elif (record.set_start_stop == True) and ((record.stop - record.start) &lt; 0):
+  raise Warning('Please review start and stop time consumed.')
+elif (record.set_start_stop == True) and ((record.stop - record.start) == 0):
+  raise Warning('Please, set the time consumed in start/stop.')
+
+
+# Only if production or set_start_stop = True:
+if (record.type == 'production') or (record.set_start_stop == True):
+  duration =  (record.stop - record.start)
+  # Calculate local time diference with UTC:
+  date_today = datetime.datetime(year=record.date.year, month=record.date.month, day=record.date.day, hour=12, minute=0)
+  date_utc = date_today.astimezone(timezone(user.tz))
+  inc = date_utc.hour - date_today.hour
+
+  # Change 'hour/min' in record.start to string format to include in fields "name":
+  start = str(datetime.timedelta(hours=record.start))
+  if (record.start >= 10): start = start[:5]
+  else: start = " - " + start[:4]
+
+# CASE USER NOT ADMINISTRATOR, CAN'T SEE FIELD employee_ids => Self timesheet:
+if record.employee_ids.ids:
+  employee_ids = record.employee_ids
+else:
+  employee_ids = [user.employee_id]
+
+# CASE PROJECT:
+if (record.work_id.type == "project") and (record.project_id.id):
+  for li in employee_ids:
+    name = record.name + start
+    new = env['account.analytic.line'].create({'work_sheet_id':record.id, 'name': name, 'project_id':record.project_id.id,
+          'task_id':record.task_id.id, 'date':record.date, 'account_id': record.project_analytic_id.id, 'company_id':record.company_id.id,
+          'employee_id':li.id, 'unit_amount':duration, 'type_id':record.type_id.id
+    })
+
+# CASE REPAIR:
+elif (record.work_id.type == "repair") and (record.repair_id.id):
+  if (record.work_id.repair_service_id.id):
+    product_id = record.work_id.repair_service_id
+    for li in employee_ids:
+        name = product_id.name + start + " - " + li.name
+        new = env['repair.fee'].create({'work_sheet_id':record.id, 'product_id':product_id.id,
+        'name': name, 'repair_id':record.repair_id.id, 'company_id':record.company_id.id,
+        'create_uid':li.user_id.id, 'product_uom_qty':duration, 'price_unit':product_id.list_price,
+        'product_uom':product_id.uom_id.id, 'type_id':record.type_id.id, 'employee_id':li.id, 'date':record.date
+        })
+  else: raise Warning('Se requiere definir el PRODUCTO en el tipo de asistencia para poder crear las imputaciones !!')
+
+# CASE PRODUCTION:
+elif (record.work_id.type == "production") and (record.workorder_id.id):
+  date_start = datetime.datetime(year=record.date.year,  month=record.date.month, day=record.date.day,
+      hour=int(record.start - inc), minute=int((record.start - int(record.start))*60))
+  date_end = datetime.datetime(year=record.date.year,  month=record.date.month, day=record.date.day,
+      hour=int(record.stop - inc), minute=int((record.stop-int(record.stop))*60))
+  for li in employee_ids:
+    name = record.workorder_id.name  + start + " - " + li.name
+    new = env['mrp.workcenter.productivity'].create({'work_sheet_id':record.id, 'description': name, 'production_id':record.mrp_id.id,
+          'workorder_id':record.workorder_id.id, 'workcenter_id':record.workorder_id.workcenter_id.id, 'company_id':record.company_id.id,
+          'loss_id':record.production_loss_id.id, 'date_start':date_start, 'date_end':date_end, 'type_id':record.type_id.id,
+          'user_id':li.user_id.id
+    })
+
+
+            </field>
+        </record>
+
+    <record id="sale_order_from_aal" model="ir.actions.server">
+            <field name="name">=> Presupuesto desde AALs</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.timesheet_ids.ids or record.work_sheet_consumed_ids.ids:
+  neworder = env['sale.order'].create({'partner_id':record.partner_id.id})
+  if record.work_sheet_consumed_ids:
+    # Creating Section "Products":
+    section_product = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':neworder.partner_id.id, 
+      'display_type':'line_section', 'name':'Products:'})
+    for li in record.work_sheet_consumed_ids:
+      newsol = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':record.partner_id.id,
+        'product_id':li.product_id.id, 'product_uom_qty':li.unit_amount, 'product_uom':li.product_uom_id.id})
+  if record.timesheet_ids:
+    # Creating Section "Services":
+    section_product = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':neworder.partner_id.id, 
+      'display_type':'line_section', 'name':'Services:'})
+    for li in record.timesheet_ids:
+      date = str(li.date)
+      date_str = date[0:4] + "/" + date[5:7] + "/" + date[-2:]
+      name = date_str + " - " + li.so_line.name
+      newsol = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':record.partner_id.id,
+        'product_id':li.so_line.product_id.id, 'product_uom_qty':li.unit_amount, 'price_unit':li.so_line.price_unit, 
+        'product_uom':li.product_uom_id.id, 'name':name})
+  record.write({'new_sale_id':neworder.id})
+else:
+  raise Warning('No products or services consumed.')
+            </field>
+        </record>
+
+        <record id="update_analytic_line_from_work_sheet" model="base.automation">
+            <field name="name">=> Update analytic.line from Work Sheet</field>
+            <field name="model_id" ref="model_account_analytic_line"/>
+            <field name="state">code</field>
+            <field name="code">
+if (record.work_sheet_so_line_id.id) and (record.work_sheet_so_line_id.product_id.id != record.product_id.id):
+  record.write({'product_id':record.work_sheet_so_line_id.product_id.id, 'amount':-record.unit_amount * record.work_sheet_so_line_id.price_unit_cost,
+    'product_uom_id':record.work_sheet_so_line_id.product_uom.id
+  })
+            </field>
+            <field name="trigger">on_create_or_write</field>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>            
+    </record>
+
+    <record id="recalculate_special_discounts" model="ir.actions.server">
+            <field name="name">=> Recalculate Special Discounts</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">
+# Round prices with Odoo monetary_precision:
+monetary_precision = env['decimal.precision'].search([('id','=',1)]).digits
+
+# CASE "TARGER_PRICE" (udo prices are not recalculated, working with discount in SOL):
+if record.discount_type == 'target_price':
+  # Requirement: user discount per sale order line:
+  group_id = env['ir.model.data'].search([('model','=','res.groups'),('name','=','group_discount_per_so_line')]).res_id
+  group = env['res.groups'].search([('id','=',group_id)])
+  if user not in group.users:
+    raise Warning('It is required to enable discounts per sale order line in sales settings, please ask to your administrator.')
+
+  # Calculating real total cost and sale without discount:
+  cost_amount, price_amount, margin = 0,0,0
+  for li in record.order_line:
+    if (len(li.udo_line_ids.ids) == 0) and (li.product_uom_qty > 0):
+      cost_amount += li.price_unit_cost * li.product_uom_qty
+      price_amount += li.lst_price * li.product_uom_qty
+    elif (len(li.udo_line_ids.ids) > 0) and (li.product_uom_qty > 0):
+      cost_amount  += round(li.udo_cost_amount,monetary_precision)
+      price_amount += round(li.price_subtotal / (1-li.discount/100),monetary_precision)
+
+  if (record.target_price &lt; cost_amount):
+    raise Warning('Saling under cost, not allowed.')
+
+  else:
+    margin = (1 - (record.target_price / price_amount)) * 100
+
+  for li in record.order_line:
+    if (len(li.udo_line_ids.ids) == 0) and (li.product_uom_qty > 0):
+      li.write({'price_unit':li.lst_price, 'discount':margin})
+    elif (len(li.udo_line_ids.ids) > 0) and (li.product_uom_qty > 0):
+      for udoline in li.udo_line_ids:
+        udoline['price_unit'] = udoline.price_unit * (1-margin/100)
+
+  diference = round(record.target_price - record.amount_untaxed,2)
+  if diference != 0:
+    review = True
+    for li in record.order_line:
+      if (li.product_uom_qty == 1) and (review == True):
+        li['price_unit'] = li.price_unit + diference
+        review = False
+
+# CASES INTEGRALIA  or  MARGIN_OVER_COST:
+else:
+  for li in record.order_line:
+    # If we use type, there is not line discount:
+    if (li.discount != 0):
+      li['discount'] = 0
+
+    # Line NOT UDO:
+    if (len(li.udo_line_ids.ids) == 0) and (li.product_uom_qty > 0):
+      if li.product_uom.uom_type == 'reference':
+        qty_uom = li.product_uom_qty
+      elif li.product_uom.uom_type == 'bigger':
+        qty_uom = li.product_uom_qty * li.product_uom.factor_inv
+      elif li.product_uom.uom_type == 'smaller':
+        qty_uom = li.product_uom_qty / li.product_uom.factor
+
+      # Case 'services' and 'fixed_service_price':
+      if (li.product_id.product_tmpl_id.our_service == True) and (record.discount_type == 'fixed_service_margin_over_cost'):
+        li.write({'price_unit':record.price_our_service * qty_oum, 'lst_price':li.product_id.lst_price * qty_uom})
+      # ... others:
+      else:
+        if (record.margin &lt; 100):
+          li.write({'price_unit':(li.product_id.standard_price / (1 - record.margin / 100) * qty_uom), 'lst_price':li.product_id.lst_price * qty_uom})
+        else:
+          li.write({'price_unit':(li.product_id.standard_price  * (1 + record.margin / 100) * qty_uom), 'lst_price':li.product_id.lst_price * qty_uom})
+
+    # Case Line IS 'computed by udos':
+    elif (len(li.udo_line_ids.ids) > 0):
+      for liudo in li.udo_line_ids:
+            # Price unit cost:
+        if (liudo.fix_price_unit_cost == True):
+          price_unit_cost = liudo.price_unit_cost
+        else:
+          price_unit_cost = round(liudo.product_id.standard_price, monetary_precision)
+            # Price unit sale:
+        if (liudo.fix_price_unit_sale == True):
+          price_unit = liudo.price_unit
+        elif (liudo.fix_price_unit_sale == False) and (liudo.product_id.product_tmpl_id.our_service == True) and (record.discount_type == 'fixed_service_margin_over_cost'):
+          price_unit = record.price_our_service
+        else:
+          if (record.margin &lt; 100):
+            price_unit = round(price_unit_cost / (1 - record.margin / 100), monetary_precision)
+          else:
+            price_unit = round(price_unit_cost * (1 + record.margin / 100),monetary_precision)
+
+        liudo.write({'price_unit': price_unit, 'price_unit_cost': price_unit_cost})
+            </field>
+    </record>
+
+</odoo>
