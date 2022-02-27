@@ -79,7 +79,7 @@
         <template id="work_sheet_report_document">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="hr_timesheet_work.work_sheet_report_document_report" t-lang="lang"/>
+                    <t t-call="hr_timesheet_work.work_sheet_report_document" t-lang="lang"/>
                 </t>
             </t>
         </template>
