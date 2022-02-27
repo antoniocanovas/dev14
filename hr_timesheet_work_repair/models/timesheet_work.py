@@ -7,5 +7,5 @@ class TimesheetWork(models.Model):
     _name = 'timesheet.work'
     _description = 'Timesheet Work'
 
-    type = fields.Selection(selection_add=[('repair','Repair')], ondelete={'repair': 'set null'})
+    type = fields.Selection(selection_add=[('repair','Repair'),('project',)], ondelete={'repair': 'set null'})
 
