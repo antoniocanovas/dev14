@@ -3,7 +3,7 @@
 <odoo>
     <data>
 
-        <template id="work_sheet_report_document_report">
+        <template id="work_sheet_report_document">
             <t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <div class="page">
