@@ -10,9 +10,11 @@ class SaleOrderiSet(models.Model):
 
     def get_worksheets_products(self):
         for record in self:
-            aal = self.env['account.analytic.line'].search([
-                ('analytic_id','=',record.analytic_account_id.id),
-                ('product_id.type','in',['product','consu'])])
-            record.product_consumed_ids = [(6, 0, aal.ids)]
+            aal = []
+            if record.analytic_account_id.id:
+                aal = self.env['account.analytic.line'].search([
+                    ('analytic_id','=',record.analytic_account_id.id),
+                    ('product_id.type','in',['product','consu'])]).ids
+            record.product_consumed_ids = [(6, 0, aal)]
     product_consumed_ids = fields.Many2many('account.analytic.line', compute=get_worksheets_products, store=False)
     new_sale_id = fields.Many2one('sale.order', string='New quotation')

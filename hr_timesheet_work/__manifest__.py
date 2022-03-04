@@ -9,6 +9,7 @@
     'depends': [
         'base_automation',
         'sale_timesheet',
+        'purchase',
         'hr_timesheet_time_type',
     ],
     'data': [
