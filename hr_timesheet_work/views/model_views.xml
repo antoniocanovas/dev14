@@ -51,25 +51,9 @@
                                 </tree>
                             </field>
                             <h2>Pickings:</h2>
-                            <field name="picking_ids"/>
+                            <field name="picking_ids"  attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
                             <h2>Products:</h2><i>(Project REQUIRED, optional task)</i>
-                            <field name="project_product_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_sale_id':project_so_id, 'default_name':'/', 'default_account_id':project_analytic_id, 'default_company_id': company_id}">
-                                <tree editable="bottom" string="Products consumed">
-                                    <field name="work_sheet_so_line_id" options="{'no_create': True}" attrs="{'readonly':[('product_id','!=',False)]}" domain="[('order_id','=',sale_id),('product_id.type','!=','service')]"/>
-                                    <field name="user_id" invisible="1"/>
-                                    <field name="product_id" domain="[('type','!=','service')]" attrs="{'readonly':[('work_sheet_so_line_id','!=',False)]}" options="{'no_create': True}"/>
-                                    <field name="name"/>
-                                    <field name="unit_amount"/>
-                                    <field name="amount" groups="hr_timesheet.group_hr_timesheet_approver" attrs="{'readonly':[('work_sheet_so_line_id','!=',False)]}"/>
-                                    <field name="product_uom_id" attrs="{'readonly':[('work_sheet_so_line_id','!=',False),('product_uom_id','=',False)]}" options="{'no_create': True}"/>
-                                    <field name="product_uom_category_id" invisible="1"/>
-                                    <field name="date"/>
-                                    <field name="project_id" invisible="1"/>
-                                    <field name="account_id" invisible="1"/>
-                                    <field name="sale_id" invisible="1"/>
-                                    <field name="company_id" invisible="1"/>
-                                </tree>
-                            </field>
+                            <field name="project_product_ids"/>
                         </div>
                     </div>
 
