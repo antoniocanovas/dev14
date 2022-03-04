@@ -53,7 +53,14 @@
                             <h2>Pickings:</h2>
                             <field name="picking_ids"  attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
                             <h2>Products:</h2><i>(Project REQUIRED, optional task)</i>
-                            <field name="project_product_ids"/>
+                            <field name="project_product_ids">
+                                    <tree>
+                                        <field name="product_id"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="product_uom"/>
+                                        <field name="state"/>
+                                    </tree>
+                            </field>
                         </div>
                     </div>
 
