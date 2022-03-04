@@ -74,9 +74,9 @@
     </record>
 
     <menuitem id="menu_sale_wup"
-              name="WU"
-              parent="sale.sale_menu_root"
-              sequence="6"/>
+              name="Work Units"
+              parent="sale.menu_sale_config"
+              sequence="20"/>
     <menuitem id="sale_wup_template_menu"
               name="Template"
               parent="sale_wup.menu_sale_wup"
