@@ -56,7 +56,6 @@ class TimeSheetWorkSheet(models.Model):
         string='Imputaciones'
     )
 
-
     @api.depends('picking_ids')
     def get_project_products(self):
         for record in self:
