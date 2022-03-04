@@ -176,7 +176,7 @@
                 <separator/>
                 <group expand="0" string="Group By">
                     <filter string="Product" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>
-                    <filter string="Sale line" name="group_by_sale_line_name" domain="[]" context="{'group_by': 'sale_line_name'}"/>
+                    <filter string="Sale line" name="group_by_sale_line_id" domain="[]" context="{'group_by': 'sale_line_id'}"/>
                 </group>
             </search>
         </field>
