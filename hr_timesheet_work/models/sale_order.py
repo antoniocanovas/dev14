@@ -13,7 +13,7 @@ class SaleOrderiSet(models.Model):
             aal = []
             if record.analytic_account_id.id:
                 aal = self.env['account.analytic.line'].search([
-                    ('analytic_id','=',record.analytic_account_id.id),
+                    ('account_id','=',record.analytic_account_id.id),
                     ('product_id.type','in',['product','consu'])]).ids
             record.product_consumed_ids = [(6, 0, aal)]
     product_consumed_ids = fields.Many2many('account.analytic.line', compute=get_worksheets_products, store=False)

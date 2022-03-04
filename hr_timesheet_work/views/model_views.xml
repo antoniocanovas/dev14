@@ -199,7 +199,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page/field[@name='order_line']/.." position="after">
-                <page string="Product Consumed" name="product_consumed" attrs="{'invisible': [('state', 'in', ['draft'])]}">
+                <page string="Product Consumed" name="product_consumed" attrs="{'invisible': ['|',(),('state', 'in', ['draft'])]}">
                     <field name="product_consumed_ids" readonly="1">
                       <tree>
                         <field name="date"/>
