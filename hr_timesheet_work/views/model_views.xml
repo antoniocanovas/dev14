@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="create_lot_services_iset" string="Create lot services" type="object" class="btn-primary"/>
+                    <button name="create_lot_worksheet_services" string="Create lot services" type="object" class="btn-primary"/>
                     <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
                     <!--<field name="signature_status" widget="statusbar" />-->
                 </header>
@@ -95,7 +95,7 @@
     <record id="work_sheet_tree" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-            <tree name="iSet_tree" string="Work Sheet"  default_order='create_date desc'>
+            <tree name="work_sheet_tree" string="Work Sheet"  default_order='create_date desc'>
                 <field name="name"/>
                 <field name="work_id"/>
                 <field name="date"/>
@@ -113,7 +113,7 @@
     </record>
 
     <record id="work_sheet_tree_search" model="ir.ui.view">
-        <field name="name">iset.tree.search</field>
+        <field name="name">work.sheet.tree.search</field>
         <field name="model">work.sheet</field>
         <field name="arch" type="xml">
             <search string="Search Work Sheet">
@@ -193,14 +193,14 @@
     </record>
 
 
-    <record id="sale_order_iset_consumed" model="ir.ui.view">
-        <field name="name">sale.order.iset_consumed</field>
+    <record id="sale_order_product_consumed_ids" model="ir.ui.view">
+        <field name="name">sale.order.product_consumed</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page/field[@name='order_line']/.." position="after">
-                <page string="iSet Consumed" name="iset_consumed" attrs="{'invisible': [('state', 'in', ['draft'])]}">
-                    <field name="iset_consumed_ids" readonly="1">
+                <page string="Product Consumed" name="product_consumed" attrs="{'invisible': [('state', 'in', ['draft'])]}">
+                    <field name="product_consumed_ids" readonly="1">
                       <tree>
                         <field name="date"/>
                         <field name="work_sheet_so_line_id"/>

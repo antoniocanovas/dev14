@@ -129,7 +129,7 @@ class TimeSheetWorkSheet(models.Model):
 
     signature_status = fields.Boolean(string='Signed & Approved',  compute=get_signed_report, store=True)
 
-    def create_lot_services_iset(self):
+    def create_lot_worksheet_services(self):
         # Check required fields:
         for record in self:
             # Required start to concatenate later, required duration to change later if startstop:
