@@ -61,7 +61,7 @@ class TimeSheetWorkSheet(models.Model):
     def get_project_products(self):
         for record in self:
             products = self.env['stock.move'].search([('picking_id','in',record.picking_ids.ids)])
-            record.project_product_ids = [(6, 0, products)]
+            record.project_product_ids = [(6, 0, products.ids)]
     project_product_ids = fields.Many2many('stock.move', compute=get_project_products, store=False)
 
 
