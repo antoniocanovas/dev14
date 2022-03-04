@@ -78,7 +78,7 @@
               parent="sale.menu_sale_config"
               sequence="20"/>
     <menuitem id="sale_wup_template_menu"
-              name="Template"
+              name="Templates"
               parent="sale_wup.menu_sale_wup"
               action="action_sale_wup_template"
               sequence="1"/>
