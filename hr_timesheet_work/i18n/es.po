@@ -1,0 +1,1002 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_timesheet_work
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-21 09:37+0000\n"
+"PO-Revision-Date: 2022-01-21 09:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_timesheet_work
+#: model:ir.model.fields,help:hr_timesheet_work.field_stock_move__mrp_state
+#: model:ir.model.fields,help:hr_timesheet_work.field_work_sheet__mrp_state
+msgid ""
+" * Draft: The MO is not confirmed yet.\n"
+" * Confirmed: The MO is confirmed, the stock rules and the reordering of the components are trigerred.\n"
+" * In Progress: The production has started (on the MO or on the WO).\n"
+" * To Close: The production is done, the MO has to be closed.\n"
+" * Done: The MO is closed, the stock moves are posted. \n"
+" * Cancelled: The MO has been cancelled, can't be confirmed anymore."
+msgstr ""
+"* Borrador: El MO aún no está confirmado.\n"
+" * Confirmado: El MO está confirmado, las reglas de stock y el "
+"reordenamiento de los componentes se gestionan.\n"
+" * En curso: la producción ha comenzado (en el MO o en el WO).\n"
+" * Para cerrar: La producción está hecha, el MO tiene que estar cerrado.\n"
+" * Listo: el MO está cerrado, los movimientos de acciones se registran.\n"
+" * Cancelado: el MO ha sido cancelado, ya no se puede confirmar."
+
+#. module: hr_timesheet_work
+#: model:ir.actions.report,print_report_name:hr_timesheet_work.work_sheet_report
+msgid "((str(object.type_id.name) or ''))"
+msgstr ""
+
+#. module: hr_timesheet_work
+#: model_terms:ir.ui.view,arch_db:hr_timesheet_work.work_sheet_form
+msgid "<i>(Production REQUIRED)</i>"
+msgstr "<i>(Producción REQUERIDO)</i>"
+
+#. module: hr_timesheet_work
+#: model_terms:ir.ui.view,arch_db:hr_timesheet_work.work_sheet_form
+msgid "<i>(Project REQUIRED, optional task)</i>"
+msgstr "<i>(Proyecto Requerido, Tarea opcional)</i>"
+
+#. module: hr_timesheet_work
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "<i>(Project and task REQUIRED)</i>"
+msgstr "<i>(Proyecto y tarea REQUERIDO)</i>"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "<i>(Repair REQUIRED)</i>"
+msgstr "<i>(Reparación REQUERIDO)</i>"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "<i>(Workorder REQUIRED)</i>"
+msgstr "<i>(Orden de trabajo REQUERIDO)</i>"
+
+#. module: work_base
+#: model:ir.actions.server,name:work_base.create_lot_services_work_sheet
+msgid "=> Create Lot Services in work sheet"
+msgstr "=> Crear lote de servicios desde hoja de trabajo"
+
+#. module: work_base
+#: model:ir.actions.server,name:work_base.sale_order_from_aal
+msgid "=> Presupuesto desde AALs"
+msgstr ""
+
+#. module: work_base
+#: model:ir.actions.server,name:work_base.recalculate_special_discounts
+msgid "=> Recalculate Special Discounts"
+msgstr "=> Recalcular descuentos Especiales"
+
+#. module: work_base
+#: model:base.automation,name:work_base.update_analytic_line_from_work_sheet
+#: model:ir.actions.server,name:work_base.update_analytic_line_from_work_sheet_ir_actions_server
+msgid "=> Update analytic.line from Work Sheet"
+msgstr "=> Actualizar anlatytic.line desde Hoja de Trabajo"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "A consumir"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__active
+msgid "Active"
+msgstr "Activa"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Active productions:"
+msgstr "Producciones activas:"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Active projects:"
+msgstr "Proyectos activos:"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Active repairs:"
+msgstr "Reparaciones activas:"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Excepción de actividad"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono de tipo de actividad"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Línea analítica"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__project_analytic_id
+msgid ""
+"Analytic account to which this project is linked for financial management.\n"
+"Use an analytic account to record cost and revenue on your project."
+msgstr ""
+"Cuenta analítica a la que se vincula este proyecto para la gestión financiera.\n"
+"Utilice una cuenta analítica para registrar los gastos y los ingresos de su proyecto."
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__attachment_id
+msgid "Attachment"
+msgstr "Adjuntos"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de adjuntos"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Cantidad"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Centro de producción"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Create lot services"
+msgstr "Crear Lote de servicios"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.sale_order_iset_consumed
+msgid "Create quotation from real products and works"
+msgstr "Crear cotizaciones desde productos reales y trabajos"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__create_uid
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__create_uid
+#: model:ir.model.fields,field_description:work_base.field_working_type__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__create_date
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__create_date
+#: model:ir.model.fields,field_description:work_base.field_working_type__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_mrp_production__partner_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_repair_fee__date
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__date
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+msgid "Date"
+msgstr "Fecha"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__mrp_date_planned_start
+msgid "Date at which you plan to start the production."
+msgstr "Fecha estimada de comienzo"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Descripción"
+msgstr "Descripción"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_account_analytic_line__display_name
+#: model:ir.model.fields,field_description:work_base.field_mrp_production__display_name
+#: model:ir.model.fields,field_description:work_base.field_mrp_workcenter_productivity__display_name
+#: model:ir.model.fields,field_description:work_base.field_repair_fee__display_name
+#: model:ir.model.fields,field_description:work_base.field_repair_line__display_name
+#: model:ir.model.fields,field_description:work_base.field_sale_order__display_name
+#: model:ir.model.fields,field_description:work_base.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:work_base.field_stock_move__display_name
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__display_name
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__display_name
+#: model:ir.model.fields,field_description:work_base.field_working_type__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Duración"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__duration
+msgid "Duration"
+msgstr "Duración"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Empleado"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_repair_fee__employee_id
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__employee_ids
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_working_type__extra_time
+msgid "Extra"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Fecha"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Fecha de inicio"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Fecha final"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Firmado por:"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (canales)"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icono de fuente grande, ej. fa-tasks"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+msgid "Group By"
+msgstr "Agrupado por"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_account_analytic_line__id
+#: model:ir.model.fields,field_description:work_base.field_mrp_production__id
+#: model:ir.model.fields,field_description:work_base.field_mrp_workcenter_productivity__id
+#: model:ir.model.fields,field_description:work_base.field_repair_fee__id
+#: model:ir.model.fields,field_description:work_base.field_repair_line__id
+#: model:ir.model.fields,field_description:work_base.field_sale_order__id
+#: model:ir.model.fields,field_description:work_base.field_sale_order_line__id
+#: model:ir.model.fields,field_description:work_base.field_stock_move__id
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__id
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__id
+#: model:ir.model.fields,field_description:work_base.field_working_type__id
+msgid "ID"
+msgstr "Identificación"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una excepción en la actividad"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__message_needaction
+#: model:ir.model.fields,help:work_base.field_work_sheet__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si marcado, los mensajes nuevos requieren tu atención."
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__message_has_error
+#: model:ir.model.fields,help:work_base.field_work_sheet__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si marcado, algunos mensajes tienen error de entrega."
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Importe"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__project_service_ids
+msgid "Imputaciones"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__mrp_date_deadline
+msgid ""
+"Informative date allowing to define when the manufacturing order should be "
+"processed at the latest to fulfill delivery on time."
+msgstr ""
+"Fecha informativa que permite definir cuándo debe tramitarse la orden de "
+"fabricación a más tardar para cumplir con la entrega a tiempo."
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_stock_move__mrp_is_locked
+msgid "Is Locked"
+msgstr "Está cerrado"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_account_analytic_line____last_update
+#: model:ir.model.fields,field_description:work_base.field_mrp_production____last_update
+#: model:ir.model.fields,field_description:work_base.field_mrp_workcenter_productivity____last_update
+#: model:ir.model.fields,field_description:work_base.field_repair_fee____last_update
+#: model:ir.model.fields,field_description:work_base.field_repair_line____last_update
+#: model:ir.model.fields,field_description:work_base.field_sale_order____last_update
+#: model:ir.model.fields,field_description:work_base.field_sale_order_line____last_update
+#: model:ir.model.fields,field_description:work_base.field_stock_move____last_update
+#: model:ir.model.fields,field_description:work_base.field_work_sheet____last_update
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work____last_update
+#: model:ir.model.fields,field_description:work_base.field_working_type____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__write_uid
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__write_uid
+#: model:ir.model.fields,field_description:work_base.field_working_type__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__write_date
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__write_date
+#: model:ir.model.fields,field_description:work_base.field_working_type__write_date
+msgid "Last Updated on"
+msgstr "Actualizado en "
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Linea de presupuesto Work Sheet"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__mrp_location_src_id
+msgid "Location where the system will look for components."
+msgstr "Localización donde el sistema buscará los componentes."
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__production_loss_id
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__production_loss_id
+msgid "Loss"
+msgstr "Perdidas"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Lote/Número de serie"
+msgstr ""
+
+#. module: work_base
+#: model:ir.ui.menu,name:work_base.menu_work_base_mrp
+msgid "MRP"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_location_src_id
+msgid "MRP Location src"
+msgstr "MRP localización"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_date_planned_start
+msgid "MRP Planned Start"
+msgstr "MRP Comienzo planificado"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_state
+msgid "MRP State"
+msgstr "MRP Estado"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_date_deadline
+msgid "MRP deadline"
+msgstr "MRP Fecha límite"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_is_locked
+msgid "MRP is Locked"
+msgstr "MRP Bloqueado"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunto principal"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_has_error
+msgid "Message Delivery error"
+msgstr "Error entrega de mensaje"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Motivo de la pérdida"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Mi fecha límite de actividad"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__name
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__name
+#: model:ir.model.fields,field_description:work_base.field_working_type__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_sale_order__new_sale_id
+msgid "New quotation"
+msgstr "Nueva cotización"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha límite próxima actividad"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen próxima actividad"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_type_id
+msgid "Next Activity Type"
+msgstr "Próximo tipo de actividad"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requerieren acción"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes sin leer"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "OoM"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_picking_type_id
+msgid "Operation Type"
+msgstr "Tipo de operación"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Operations"
+msgstr "Operaciones"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__repair_location_id
+msgid "Origin Location"
+msgstr "Localización Origen"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Partes:"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__partner_id
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__repair_product_ids
+msgid "Parts"
+msgstr "Partes"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Parts:"
+msgstr "Partes:"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__repair_service_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_id
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__production_ids
+#: model:ir.model.fields.selection,name:work_base.selection__timesheet_work__type__production
+msgid "Production"
+msgstr "Producción"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_location_id
+msgid "Production Location"
+msgstr "Localización  de producción"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__production_sale_id
+msgid "Production Sale"
+msgstr "Venta"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+msgid "Productions"
+msgstr "Producciones"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Producto"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__project_product_ids
+msgid "Productos"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Productos:"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_product_ids
+msgid "Products"
+msgstr "Productos"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Products consumed"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Products:"
+msgstr "Productos:"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__project_analytic_id
+msgid "Proj. Analytic"
+msgstr "Pyto. Analítico"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__project_id
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__project_ids
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__project_id
+#: model:ir.model.fields.selection,name:work_base.selection__timesheet_work__type__project
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+msgid "Projects"
+msgstr "Proyectos"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__work_readonly
+msgid "Read only"
+msgstr "Sólo lectura"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__repair_ids
+#: model:ir.model.fields.selection,name:work_base.selection__timesheet_work__type__repair
+#: model:ir.ui.menu,name:work_base.menu_work_base_repairs
+msgid "Repair"
+msgstr "Reparación"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_repair_fee
+msgid "Repair Fees"
+msgstr "Tarifas de reparación"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_repair_line
+msgid "Repair Line (parts)"
+msgstr "Línea de Reparación (partes)"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__repair_id
+msgid "Repair Order"
+msgstr "Orden de reparación"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__repair_service_id
+msgid "Repair Service"
+msgstr "Servicio de reparaciones"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+msgid "Repairs"
+msgstr "Reparaciones"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error entrega SMS"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_mrp_production__sale_id
+msgid "Sale"
+msgstr "Venta"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__project_so_id
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__task_sale_order_id
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_account_analytic_line__sale_id
+msgid "Sale order"
+msgstr "Pedido de venta"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__project_so_id
+msgid "Sales order to which the project is linked."
+msgstr "Pedido de venta enlazado a proyecto"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__task_sale_order_id
+msgid "Sales order to which the task is linked."
+msgstr "Pedido de venta enlazado a tarea."
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__type_id
+#: model:ir.ui.menu,name:work_base.menu_work_base_working_type
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+msgid "Schedule"
+msgstr "Planificación"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+msgid "Search Work Sheet"
+msgstr "Búsqueda de Hoja de trabajo"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Services:"
+msgstr "servicios:"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Servicios:"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__set_start_stop
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__set_start_stop
+msgid "Set start & stop time"
+msgstr "Tiempo de inicio/parada"
+
+#. module: work_base
+#: model:ir.ui.menu,name:work_base.menu_work_base_sheet
+msgid "Sheet"
+msgstr "Hoja"
+
+#. module: work_base
+#: model:ir.actions.act_window,name:work_base.action_work_base_sheet
+msgid "Sheets"
+msgstr "Hojas"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Sign"
+msgstr "Firmar"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__signature
+msgid "Signature"
+msgstr "Firma"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__signature_status
+msgid "Signed & Approved"
+msgstr "Firmado y aprovado"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__partner_id
+msgid "Signed by"
+msgstr "Firmado por"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__start
+msgid "Start"
+msgstr "Comenzar"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.timesheet_work_form
+msgid "Start/stop time"
+msgstr "Comenzar/terminar tiempo"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_stock_move__mrp_state
+msgid "State"
+msgstr "Estado"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en actividades\n"
+"Atrasado: la fecha de vencimiento ya pasó\n"
+"Hoy: la fecha de actividad es hoy\n"
+"Planificado: actividades futuras."
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__stop
+msgid "Stop"
+msgstr "Parar"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Tarea"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__task_id
+#: model:ir.ui.menu,name:work_base.menu_work_base_task
+msgid "Task"
+msgstr "Tarea"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__repair_service_ids
+msgid "Tech. Services"
+msgstr "Servicios Tec."
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__repair_location_id
+msgid "This is the location where the product to repair is located."
+msgstr "Esta es la localización donde el producto está siendo reparado."
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__mrp_service_ids
+msgid "Time consumed"
+msgstr "Tiempo empleado"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Timesheet Activities"
+msgstr "Actividades"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Tipo"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "To Consume"
+msgstr "A Consumir"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_account_analytic_line__type_id
+#: model:ir.model.fields,field_description:work_base.field_mrp_workcenter_productivity__type_id
+#: model:ir.model.fields,field_description:work_base.field_repair_fee__type_id
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__type
+#: model:ir.model.fields,field_description:work_base.field_timesheet_work__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de excepción en la actividad."
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_working_type
+msgid "Types of jobs/works"
+msgstr "Tipos de trabajos"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "Unidad de medida"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_unread
+msgid "Unread Messages"
+msgstr "No leidos"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de mensajes sin leer"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "UoM"
+msgstr ""
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes Web"
+
+#. module: work_base
+#: model:ir.model.fields,help:work_base.field_work_sheet__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de mensajes en la web"
+
+#. module: work_base
+#: model:ir.actions.act_window,name:work_base.action_work_base_work
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__work_id
+#: model:ir.ui.menu,name:work_base.menu_work_base_work
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree_search
+#: model_terms:ir.ui.view,arch_db:work_base.timesheet_work_tree
+msgid "Work"
+msgstr "Trabajo"
+
+#. module: work_base
+#: model:ir.actions.report,name:work_base.work_sheet_report
+msgid "Work Base Sheet"
+msgstr "Hoja de trabajo base"
+
+#. module: work_base
+#: model:ir.actions.act_window,name:work_base.action_work_base_working_type
+msgid "Work Schedule"
+msgstr "Planificador de hoja de trabajo"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_work_sheet
+#: model:ir.model.fields,field_description:work_base.field_account_analytic_line__work_sheet_id
+#: model:ir.model.fields,field_description:work_base.field_mrp_workcenter_productivity__work_sheet_id
+#: model:ir.model.fields,field_description:work_base.field_repair_fee__work_sheet_id
+#: model:ir.model.fields,field_description:work_base.field_repair_line__work_sheet_id
+#: model:ir.model.fields,field_description:work_base.field_sale_order__iset_consumed_ids
+#: model:ir.model.fields,field_description:work_base.field_sale_order_line__timesheet_qty
+#: model:ir.model.fields,field_description:work_base.field_stock_move__work_sheet_id
+#: model_terms:ir.ui.view,arch_db:work_base.sale_order_inh_timesheet_qty
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_tree
+msgid "Work Sheet"
+msgstr "Hoja de trabajo"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_account_analytic_line__work_sheet_so_line_id
+msgid "Work Sheet So Line"
+msgstr "Hoja de trabajo So Línea"
+
+#. module: work_base
+#: model:ir.ui.menu,name:work_base.menu_work_base
+msgid "Work Sheets"
+msgstr "Hojas de trabajo"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_mrp_workcenter_productivity
+msgid "Workcenter Productivity Log"
+msgstr "Registro de productividad del centro de trabajo"
+
+#. module: work_base
+#: model:ir.model.fields,field_description:work_base.field_work_sheet__workorder_id
+msgid "Workorder"
+msgstr "Orden de trabajo"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_report_document_report
+msgid "el"
+msgstr ""
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.sale_order_iset_consumed
+msgid "iSet Consumed"
+msgstr "Hoja de trabajo consumida"
+
+#. module: work_base
+#: model:ir.model,name:work_base.model_timesheet_work
+msgid "iSet Work"
+msgstr "Hoja de trabajo"
+
+#. module: work_base
+#: model_terms:ir.ui.view,arch_db:work_base.work_sheet_form
+msgid "repair_services"
+msgstr "servicios de reparación"

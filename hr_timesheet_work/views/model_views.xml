@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="work_sheet_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="create_lot_services_iset" string="Create lot services" type="object" class="btn-primary"/>
+                    <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
+                    <!--<field name="signature_status" widget="statusbar" />-->
+                </header>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group><group>
+                        <field name="date"/>
+                        <field name="work_id" force_save="1" widget="selection" attrs="{'readonly':[('work_readonly','=',True)]}"/>
+                        <field name="work_readonly" invisible="1"/>
+                        <field name="employee_ids" widget="many2many_tags" groups="hr_timesheet.group_hr_timesheet_approver"/>
+                    </group><group>
+                        <field name="start" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
+                        <field name="stop" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
+                        <field name="duration" widget="timesheet_uom" attrs="{'invisible':['|',('set_start_stop','=',True),('type','=','production')]}"/>
+                        <field name="type_id" widget='selection'/>
+                        <field name="partner_id"/>
+                    </group></group>
+
+                    <div name="project_product_service" attrs="{'invisible':[('type','!=','project')]}">
+                        <group>
+                            <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('type','=','project')]}"/>
+                            <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','=','project')], 'invisible':[('project_id','=',False)]}"/>
+                        </group>
+                        <div attrs="{'invisible':[('project_id','!=',False)]}">
+                            <h2>Active projects:</h2>
+                            <field name="project_ids"/>
+                        </div>
+                        <div attrs="{'invisible':[('project_id','=',False)]}">
+                            <h2>Services: </h2><i>(Project and task REQUIRED)</i>
+                            <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id, 'default_task_id':task_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
+                                <tree editable="bottom" string="Timesheet Activities" default_order="date">
+                                    <field name="task_id" options="{'no_create': True}"/>
+                                    <field name="user_id" invisible="1"/>
+                                    <field name="employee_id" required="1" widget="many2one_avatar_employee" options="{'no_create': True}"/>
+                                    <field name="name" required="0"/>
+                                    <field name="unit_amount" widget="timesheet_uom" decoration-danger="unit_amount &gt; 24"/>
+                                    <field name="type_id"/>
+                                    <field name="project_id" invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="account_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                            <h2>Products:</h2><i>(Project REQUIRED, optional task)</i>
+                            <field name="project_product_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_sale_id':project_so_id, 'default_name':'/', 'default_account_id':project_analytic_id, 'default_company_id': company_id}">
+                                <tree editable="bottom" string="Products consumed">
+                                    <field name="work_sheet_so_line_id" options="{'no_create': True}" attrs="{'readonly':[('product_id','!=',False)]}" domain="[('order_id','=',sale_id),('product_id.type','!=','service')]"/>
+                                    <field name="user_id" invisible="1"/>
+                                    <field name="product_id" domain="[('type','!=','service')]" attrs="{'readonly':[('work_sheet_so_line_id','!=',False)]}" options="{'no_create': True}"/>
+                                    <field name="name"/>
+                                    <field name="unit_amount"/>
+                                    <field name="amount" groups="hr_timesheet.group_hr_timesheet_approver" attrs="{'readonly':[('work_sheet_so_line_id','!=',False)]}"/>
+                                    <field name="product_uom_id" attrs="{'readonly':[('work_sheet_so_line_id','!=',False),('product_uom_id','=',False)]}" options="{'no_create': True}"/>
+                                    <field name="product_uom_category_id" invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="project_id" invisible="1"/>
+                                    <field name="account_id" invisible="1"/>
+                                    <field name="sale_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </div>
+
+                    <div name="signature">
+                        <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
+                    </div>
+                    <field name="type" invisible="1"/>
+                    <field name="set_start_stop" invisible="1"/>
+                    <field name="project_analytic_id" invisible="1"/>
+                    <field name="project_so_id" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">work.sheet</field>
+        <field name="name">Work Sheet form view</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="work_sheet_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree name="iSet_tree" string="Work Sheet"  default_order='create_date desc'>
+                <field name="name"/>
+                <field name="work_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">work.sheet</field>
+        <field name="name">Work Sheet Tree View</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <record id="work_sheet_tree_search" model="ir.ui.view">
+        <field name="name">iset.tree.search</field>
+        <field name="model">work.sheet</field>
+        <field name="arch" type="xml">
+            <search string="Search Work Sheet">
+                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="type" filter_domain="[('type_id', 'ilike', self)]"/>
+                <field name="work_id" filter_domain="[('work_id', 'ilike', self)]"/>
+                <separator/>
+                <filter string="Projects" name="type_project" domain="[('type', '=', 'project')]"/>
+                <separator/>
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="schedule" string="Schedule" domain="[]" context="{'group_by' : 'type_id'}" />
+                    <filter name="work_type" string="Work" context="{'group_by': 'work_id'}"/>
+                    <filter name="date" string="Date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="timesheet_work_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree string="Work" sample="1"  default_order='create_date desc'>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="partner_id"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">timesheet.work</field>
+        <field name="name">Work Work default Tree View</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <record id="timesheet_work_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <field name="type" widget="selection"/>
+                        <field name="partner_id"/>
+                        <field name="set_start_stop" string="Start/stop time" attrs="{'invisible':[('type','not in',['repair','project'])]}"/>
+                    </group>
+                    <group name="project" attrs="{'invisible':[('type','!=','project')]}">
+                        <field name="project_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">timesheet.work</field>
+        <field name="name">Work form default View</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="sale_order_inh_timesheet_qty" model="ir.ui.view">
+        <field name="name">sale.order.inh.timesheet.qty</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='qty_invoiced']" position="after">
+                <field name="timesheet_qty" string='Work Sheet' attrs="{'invisible':[('parent.project_ids','=',[])]}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="sale_order_iset_consumed" model="ir.ui.view">
+        <field name="name">sale.order.iset_consumed</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/field[@name='order_line']/.." position="after">
+                <page string="iSet Consumed" name="iset_consumed" attrs="{'invisible': [('state', 'in', ['draft'])]}">
+                    <field name="iset_consumed_ids" readonly="1">
+                      <tree>
+                        <field name="date"/>
+                        <field name="work_sheet_so_line_id"/>
+                        <field name="product_id"/>
+                        <field name="name"/>
+                        <field name="unit_amount"/>
+                        <field name="product_uom_id"/>
+                        <field name="amount"/>
+                      </tree>
+                    </field>
+                    <group col="4">
+                        <button class="oe_highlight" type="action" name="hr_timesheet_work.sale_order_from_aal" string="Create quotation from real products and works"/>
+                        <field name="new_sale_id" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
