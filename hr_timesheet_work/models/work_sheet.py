@@ -55,16 +55,16 @@ class TimeSheetWorkSheet(models.Model):
         store=True,
         string='Imputaciones'
     )
-    project_product_ids = fields.One2many(
-        'account.analytic.line',
-        'work_sheet_id',
-# marzo 22        domain=['|',('product_id','!=',False),('work_sheet_so_line_id','!=',False)],
-        domain=[('product_id.type', 'in', ['product','consu'])],
-        readonly=True,
-# hasta aquí.
-        store=True,
-        string='Productos'
-    )
+
+
+    @api.depends('picking_ids')
+    def get_project_products(self):
+        for record in self:
+            products = self.env['stock.move'].search([('picking_id','in',record.picking_ids.ids)])
+            record.project_product_ids = [(6, 0, products)]
+    project_product_ids = fields.Many2many('stock.move', compute=get_project_products, store=False)
+
+
     task_sale_order_id = fields.Many2one('sale.order', related='task_id.sale_order_id', string='Sale Order')
 
     @api.depends('work_id')

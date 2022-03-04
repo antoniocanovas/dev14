@@ -50,6 +50,8 @@
                                     <field name="company_id" invisible="1"/>
                                 </tree>
                             </field>
+                            <h2>Pickings:</h2>
+                            <field name="picking_ids"/>
                             <h2>Products:</h2><i>(Project REQUIRED, optional task)</i>
                             <field name="project_product_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_sale_id':project_so_id, 'default_name':'/', 'default_account_id':project_analytic_id, 'default_company_id': company_id}">
                                 <tree editable="bottom" string="Products consumed">
