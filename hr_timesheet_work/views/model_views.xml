@@ -183,18 +183,6 @@
         <field name="type">form</field>
     </record>
 
-    <record id="sale_order_inh_timesheet_qty" model="ir.ui.view">
-        <field name="name">sale.order.inh.timesheet.qty</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form/sheet/notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='qty_invoiced']" position="after">
-                <field name="timesheet_qty" string='Work Sheet' attrs="{'invisible':[('parent.project_ids','=',[])]}"/>
-            </xpath>
-        </field>
-    </record>
-
-
     <record id="sale_order_product_consumed_ids" model="ir.ui.view">
         <field name="name">sale.order.product_consumed</field>
         <field name="model">sale.order</field>
