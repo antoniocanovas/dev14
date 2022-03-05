@@ -44,7 +44,7 @@ if (record.work_id.type == "project") and (record.project_id.id):
     name = record.name + start
     new = env['account.analytic.line'].create({'work_sheet_id':record.id, 'name': name, 'project_id':record.project_id.id,
           'task_id':record.task_id.id, 'date':record.date, 'account_id': record.project_analytic_id.id, 'company_id':record.company_id.id,
-          'employee_id':li.id, 'unit_amount':duration, 'type_id':record.type_id.id
+          'employee_id':li.id, 'unit_amount':duration, 'type_id':record.type_id.id, 'tag_ids':[(6,0,record.analytic_tag_ids.ids)]
     })
 
 # CASE REPAIR:
