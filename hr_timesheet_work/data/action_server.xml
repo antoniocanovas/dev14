@@ -84,24 +84,23 @@ elif (record.work_id.type == "production") and (record.workorder_id.id):
             <field name="state">code</field>
             <field name="code">
 if record.timesheet_ids.ids or record.product_consumed_ids.ids:
-  partner = record.partner_id
-  neworder = env['sale.order'].create({'partner_id':partner.id})
+  neworder = env['sale.order'].create({'partner_id':record.partner_id.id})
   if record.product_consumed_ids:
     # Creating Section "Products":
-    section_product = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':partner.id,
+    section_product = env['sale.order.line'].create({'order_id':neworder.id,
       'display_type':'line_section', 'name':'Products:'})
     for li in record.product_consumed_ids:
-      newsol = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':partner.id,
+      newsol = env['sale.order.line'].create({'order_id':neworder.id,
         'product_id':li.product_id.id, 'product_uom_qty':li.unit_amount, 'product_uom':li.product_uom_id.id})
   if record.timesheet_ids:
     # Creating Section "Services":
-    section_product = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':partner.id,
+    section_product = env['sale.order.line'].create({'order_id':neworder.id,
       'display_type':'line_section', 'name':'Services:'})
     for li in record.timesheet_ids:
       date = str(li.date)
       date_str = date[0:4] + "/" + date[5:7] + "/" + date[-2:]
       name = date_str + " - " + li.so_line.name
-      newsol = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':partner.id,
+      newsol = env['sale.order.line'].create({'order_id':neworder.id,
         'product_id':li.so_line.product_id.id, 'product_uom_qty':li.unit_amount, 'price_unit':li.so_line.price_unit, 
         'product_uom':li.product_uom_id.id, 'name':name})
   record.write({'new_sale_id':neworder.id})
