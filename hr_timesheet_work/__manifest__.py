@@ -10,6 +10,7 @@
         'base_automation',
         'sale_timesheet',
         'purchase',
+        'stock',
         'hr_timesheet_time_type',
     ],
     'data': [
