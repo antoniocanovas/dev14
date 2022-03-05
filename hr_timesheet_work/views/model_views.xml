@@ -29,6 +29,7 @@
                         <group>
                             <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('type','=','project')]}"/>
                             <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','=','project')], 'invisible':[('project_id','=',False)]}"/>
+                            <field name="analytic_tag_ids" widget="may2many_tags"/>
                         </group>
                         <div attrs="{'invisible':[('project_id','!=',False)]}">
                             <h2>Active projects:</h2>
