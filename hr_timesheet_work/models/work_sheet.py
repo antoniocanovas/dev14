@@ -52,7 +52,7 @@ class TimeSheetWorkSheet(models.Model):
     project_service_ids = fields.One2many(
         'account.analytic.line',
         'work_sheet_id',
-        domain=[('product_id','=',False),('work_sheet_so_line_id','=',False)],
+        domain=['|',('product_id','=',False),('product_id.type','=','service')],
         store=True,
         string='Imputaciones'
     )

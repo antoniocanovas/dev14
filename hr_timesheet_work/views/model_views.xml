@@ -205,7 +205,6 @@
                     <field name="product_consumed_ids" readonly="1">
                       <tree>
                         <field name="date"/>
-                        <field name="work_sheet_so_line_id"/>
                         <field name="product_id"/>
                         <field name="name"/>
                         <field name="unit_amount"/>
