@@ -173,7 +173,7 @@ class TimeSheetWorkSheet(models.Model):
                     new = self.env['account.analytic.line'].create(
                         {'work_sheet_id': record.id, 'name': name, 'project_id': record.project_id.id,
                          'task_id': record.task_id.id, 'date': record.date, 'account_id': record.project_analytic_id.id,
-                         'company_id': record.company_id.id, 'tag_ids': [(6,0,record.analytic_tag_ids.ids)]
+                         'company_id': record.company_id.id, 'tag_ids': [(6,0,record.analytic_tag_ids.ids)],
                          'employee_id': li.id, 'unit_amount': duration, 'type_id': record.type_id.id
                          })
 
