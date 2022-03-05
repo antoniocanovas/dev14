@@ -218,6 +218,11 @@
                 </page>
             </xpath>
         </field>
+        <field name="active" eval="True"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="priority">32</field>
+        <field name="type">form</field>
     </record>
 
 </odoo>
