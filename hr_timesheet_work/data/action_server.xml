@@ -83,13 +83,13 @@ elif (record.work_id.type == "production") and (record.workorder_id.id):
             <field name="model_id" ref="model_sale_order"/>
             <field name="state">code</field>
             <field name="code">
-if record.timesheet_ids.ids or record.work_sheet_consumed_ids.ids:
+if record.timesheet_ids.ids or record.product_consumed_ids.ids:
   neworder = env['sale.order'].create({'partner_id':record.partner_id.id})
-  if record.work_sheet_consumed_ids:
+  if record.product_consumed_ids:
     # Creating Section "Products":
     section_product = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':neworder.partner_id.id, 
       'display_type':'line_section', 'name':'Products:'})
-    for li in record.work_sheet_consumed_ids:
+    for li in record.product_consumed_ids:
       newsol = env['sale.order.line'].create({'order_id':neworder.id, 'partner_id':record.partner_id.id,
         'product_id':li.product_id.id, 'product_uom_qty':li.unit_amount, 'product_uom':li.product_uom_id.id})
   if record.timesheet_ids:
@@ -107,22 +107,6 @@ if record.timesheet_ids.ids or record.work_sheet_consumed_ids.ids:
 else:
   raise Warning('No products or services consumed.')
             </field>
-        </record>
-
-        <record id="update_analytic_line_from_work_sheet" model="base.automation">
-            <field name="name">=> Update analytic.line from Work Sheet</field>
-            <field name="model_id" ref="model_account_analytic_line"/>
-            <field name="state">code</field>
-            <field name="code">
-if (record.work_sheet_so_line_id.id) and (record.work_sheet_so_line_id.product_id.id != record.product_id.id):
-  record.write({'product_id':record.work_sheet_so_line_id.product_id.id, 'amount':-record.unit_amount * record.work_sheet_so_line_id.price_unit_cost,
-    'product_uom_id':record.work_sheet_so_line_id.product_uom.id
-  })
-            </field>
-            <field name="trigger">on_create_or_write</field>
-            <field name="filter_pre_domain"></field>
-            <field name="filter_domain"></field>
-            <field name="active" eval="True"/>            
     </record>
 
     <record id="recalculate_special_discounts" model="ir.actions.server">
