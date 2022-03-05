@@ -29,7 +29,9 @@ class TimeSheetWorkSheet(models.Model):
     type_id = fields.Many2one('project.time.type', 'Schedule', required=True)
     # Nuevo marzo 22:
     picking_ids = fields.One2many('stock.picking', 'work_sheet_id', string='Pickings')
-    analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags')
+    analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags',
+                                        domain=[('timesheet_hidden', '=', False)]
+                                        )
 
     set_start_stop = fields.Boolean(related='work_id.set_start_stop', string='Set start & stop time')
     duration = fields.Float('Duration')
