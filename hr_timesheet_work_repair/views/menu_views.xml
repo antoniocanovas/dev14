@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="menu_hr_timesheet_work_repairs" model="ir.ui.menu">
+        <field name="action" ref="repair.action_repair_order_tree"/>
+        <field name="active" eval="True"/>
+        <field name="groups_id" eval="[(6, 0, [ref('hr_timesheet.group_hr_timesheet_approver')])]"/>
+        <field name="name">Repair</field>
+        <field name="parent_id" ref="hr_timesheet_work.menu_hr_timesheet_work"/>
+        <field name="sequence">4</field>
+        <field name="web_icon" eval="False"/>
+    </record>
+
+</odoo>

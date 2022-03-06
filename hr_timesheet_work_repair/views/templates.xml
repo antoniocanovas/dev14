@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<odoo>
+    <data>
+
+        <template id="work_sheet_repair" inherit_id="hr_timesheet_work.work_sheet_report_document_report">
+            <xpath expr="//t[@name='project']" position="after">
+                <t name="repair" t-if="o.type == 'repair'">
+                    <h2>Servicios:</h2>
+                    <table class="table table-sm o_main_table">
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th name="th_product">Producto</th>
+                                <th name="th_Description">Descripción</th>
+                                <th name="th_quantity">Cantidad</th>
+                                <th name="th_uom">Unidad de medida</th>
+                                <th name="th_type">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="o.repair_service_ids" t-as="rp">
+                                <tr>
+                                    <td name="td_product"><span t-field="rp.product_id" /></td>
+                                    <td name="td_description"><span t-field="rp.name" /></td>
+                                    <td name="td_quantity"><span t-field="rp.product_uom_qty" /></td>
+                                    <td name="td_uom"><span t-field="rp.product_uom" /></td>
+                                    <td name="td_type"><span t-field="rp.type_id" /></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <h2>Partes:</h2>
+                    <table class="table table-sm o_main_table">
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th name="th_type">Tipo</th>
+                                <th name="th_product">Producto</th>
+                                <th name="th_Description">Descripción</th>
+                                <th name="th_lot">Lote/Número de serie</th>
+                                <th name="th_quantity">Cantidad</th>
+                                <th name="th_uom">OoM</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="o.repair_product_ids" t-as="rp">
+                                <tr>
+                                    <td name="td_type"><span t-field="rp.type" /></td>
+                                    <td name="td_product"><span t-field="rp.product_id" /></td>
+                                    <td name="td_description"><span t-field="rp.name" /></td>
+                                    <td name="td_lot"><span t-field="rp.lot_id" /></td>
+                                    <td name="td_quantity"><span t-field="rp.product_uom_qty" /></td>
+                                    <td name="td_uom"><span t-field="rp.product_uom" /></td>
+
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <br/>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
