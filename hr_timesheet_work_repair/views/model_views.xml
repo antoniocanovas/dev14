@@ -6,7 +6,7 @@
         <field name="model">work.sheet</field>
         <field name="inherit_id" ref="hr_timesheet_work.work_sheet_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='project_product_service']" position="after">
+            <xpath expr="//div[@name='project_picking_products']" position="after">
                 <div name="repair" attrs="{'invisible':[('type','!=','repair')]}">
                     <group>
                         <field name="repair_id" domain="[('id','in',repair_ids)]" attrs="{'required':[('type','=','repair')]}" options="{'no_create': True}"/>
