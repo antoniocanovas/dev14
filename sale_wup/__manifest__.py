@@ -24,5 +24,5 @@
         'views/product_views.xml',
         #'data/data.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
