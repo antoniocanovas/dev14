@@ -4,7 +4,7 @@
     <record id="work_sheet_form" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-            <form>
+<form>
                 <header>
                     <button name="create_lot_worksheet_services" string="Create lot services" type="object" class="btn-primary"/>
                     <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
@@ -21,11 +21,11 @@
                         <field name="start" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
                         <field name="stop" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
                         <field name="duration" widget="timesheet_uom" attrs="{'invisible':['|',('set_start_stop','=',True),('type','=','production')]}"/>
-                        <field name="type_id" widget='selection'/>
+                        <field name="type_id" widget="selection"/>
                         <field name="partner_id"/>
                     </group></group>
 
-                    <div name="project_product_service" attrs="{'invisible':[('type','!=','project')]}">
+                    <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <group>
                             <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('type','=','project')]}"/>
                             <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','=','project')], 'invisible':[('project_id','=',False)]}"/>
@@ -52,8 +52,11 @@
                                     <field name="company_id" invisible="1"/>
                                 </tree>
                             </field>
+                        </div>
+                    </div>
+                    <div name="project_picking_products" attrs="{'invisible':[('type','!=','project')]}">
                             <h2>Pickings:</h2>
-                            <field name="picking_ids"  attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
+                            <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
                             <h2>Products:</h2><i>(Project REQUIRED, optional task)</i>
                             <field name="project_product_ids">
                                     <tree>
@@ -63,7 +66,6 @@
                                         <field name="state"/>
                                     </tree>
                             </field>
-                        </div>
                     </div>
 
                     <div name="signature">
