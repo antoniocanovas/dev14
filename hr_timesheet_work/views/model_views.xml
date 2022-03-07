@@ -27,8 +27,8 @@
 
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <group>
-                            <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]"/>
-                            <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'invisible':[('project_id','=',False)]}"/>
+                            <field name="project_id" options="{'no_create': True}" required="1" domain="[('id','in',project_ids)]"/>
+                            <field name="task_id" options="{'no_create': True}" required="1" domain="[('project_id','=',project_id)]" attrs="{'invisible':[('project_id','=',False)]}"/>
                             <field name="analytic_tag_ids" widget="many2many_tags"/>
                         </group>
                         <div attrs="{'invisible':[('project_id','!=',False)]}">
