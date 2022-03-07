@@ -166,11 +166,8 @@
                     <group>
                         <field name="type" widget="selection"/>
                         <field name="partner_id"/>
-                        <field name="set_start_stop" string="Start/stop time" attrs="{'invisible':[('type','not in',['repair','project'])]}"/>
-                    </group>
-                    <group name="project" attrs="{'invisible':[('type','!=','project')]}">
                         <field name="project_id"/>
-                    </group>
+                        <field name="set_start_stop" string="Start/stop time" attrs="{'invisible':[('type','not in',['repair','project'])]}"/>
                 </sheet>
             </form>
         </field>
