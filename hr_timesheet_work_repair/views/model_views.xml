@@ -7,16 +7,16 @@
         <field name="inherit_id" ref="hr_timesheet_work.work_sheet_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='work_sheet_project_products']" position="after">
-                <page name="wor_sheet_repair_products" attrs="{'invisible':[('type','!=','repair')]}">
+                <page name="wor_sheet_repair_products" string="Repair parts" attrs="{'invisible':[('type','!=','repair')]}">
                     <group>
                         <field name="repair_id" domain="[('id','in',repair_ids)]" attrs="{'required':[('type','=','repair')]}" options="{'no_create': True}"/>
                     </group>
                     <div attrs="{'invisible':[('repair_id','!=',False)]}">
-                        <h2>Active repairs:</h2>
+                        <h3>Active repairs:</h3>
                         <field name="repair_ids"/>
                     </div>
                     <div attrs="{'invisible':[('repair_id','=',False)]}">
-                        <h2>Parts:</h2>
+                        <h3>Parts:</h3>
                         <field name="repair_product_ids" attrs="{'readonly':[('repair_id','=',False)]}" context="{'default_repair_id':repair_id, 'default_location_id':repair_location_id, 'default_company_id': company_id}">
                             <tree string="Operations" editable="bottom">
                                 <field name="company_id" invisible="1" force_save="1"/>
