@@ -22,7 +22,7 @@
                     </group></group>
 
                     <notebook name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
-                        <page string="Services">
+                        <page name="project_services" string="Services">
                             <group><group>
                                 <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('work_id','!=',False)]}"/>
                                 <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'required':[('work_id','!=',False)], 'invisible':[('project_id','=',False)]}"/>
@@ -55,11 +55,10 @@
                                 </field>
                             </div>
                         </page>
-                    </notebook>
-                    <notebook name="project_picking_products" attrs="{'invisible':[('type','!=','project')]}">
                         <page string="Products">
+                            <h3>Pickings:</h3>
                             <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
-                            <h2>Products:</h2><i>(Project REQUIRED, optional task)</i>
+                            <h3>Products:</h3>
                             <field name="project_product_ids">
                                     <tree>
                                         <field name="product_id"/>
