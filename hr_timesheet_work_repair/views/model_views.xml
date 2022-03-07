@@ -10,7 +10,7 @@
                 <field name="repair_id" domain="[('id','in',repair_ids)]" attrs="{'invisible':[('type','!=','repair')], 'required':[('type','=','repair')]}" options="{'no_create': True}"/>
             </field>
             <xpath expr="//group[@name='work_sheet_main']" position="after">
-                <div attrs="{'invisible':['|',('type','!=','repair),('repair_id','!=',False)]}">
+                <div attrs="{'invisible':['|',('type','!=','repair'),('repair_id','!=',False)]}">
                     <h3>Active repairs:</h3>
                     <field name="repair_ids"/>
                 </div>
