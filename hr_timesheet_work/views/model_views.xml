@@ -21,42 +21,43 @@
                         <field name="work_readonly" invisible="1"/>
                     </group></group>
 
-                    <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
-                        <h2>Services: </h2><!-- <i>(Project and task REQUIRED)</i> -->
-                        <group><group>
-                            <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('work_id','!=',False)]}"/>
-                            <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'required':[('work_id','!=',False)], 'invisible':[('project_id','=',False)]}"/>
-                            <field name="employee_ids" widget="many2many_tags" groups="hr_timesheet.group_hr_timesheet_approver"/>
-                        </group><group>
-                            <field name="start" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
-                            <field name="stop" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
-                            <field name="duration" widget="timesheet_uom" attrs="{'invisible':['|',('set_start_stop','=',True),('type','=','production')]}"/>
-                            <field name="type_id" widget="selection"/>
-                        </group></group>
-                        <div attrs="{'invisible':[('project_id','!=',False)]}">
-                            <h2>Active projects:</h2>
-                            <field name="project_ids"/>
-                        </div>
-                        <div attrs="{'invisible':[('project_id','=',False)]}">
-                            <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id, 'default_task_id':task_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
-                                <tree editable="bottom" string="Timesheet Activities" default_order="date">
-                                    <field name="task_id" options="{'no_create': True}"/>
-                                    <field name="user_id" invisible="1"/>
-                                    <field name="employee_id" required="1" widget="many2one_avatar_employee" options="{'no_create': True}"/>
-                                    <field name="name" required="0"/>
-                                    <field name="unit_amount" widget="timesheet_uom" decoration-danger="unit_amount &gt; 24"/>
-                                    <field name="type_id"/>
-                                    <field name="project_id" invisible="1"/>
-                                    <field name="date"/>
-                                    <field name="tag_ids" widget="many2many_tags"/>
-                                    <field name="account_id" invisible="1"/>
-                                    <field name="company_id" invisible="1"/>
-                                </tree>
-                            </field>
-                        </div>
-                    </div>
-                    <div name="project_picking_products" attrs="{'invisible':[('type','!=','project')]}">
-                            <h2>Pickings:</h2>
+                    <notebook name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
+                        <page string="Services">
+                            <group><group>
+                                <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('work_id','!=',False)]}"/>
+                                <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'required':[('work_id','!=',False)], 'invisible':[('project_id','=',False)]}"/>
+                                <field name="employee_ids" widget="many2many_tags" groups="hr_timesheet.group_hr_timesheet_approver"/>
+                            </group><group>
+                                <field name="start" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
+                                <field name="stop" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
+                                <field name="duration" widget="timesheet_uom" attrs="{'invisible':['|',('set_start_stop','=',True),('type','=','production')]}"/>
+                                <field name="type_id" widget="selection"/>
+                            </group></group>
+                            <div attrs="{'invisible':[('project_id','!=',False)]}">
+                                <h2>Active projects:</h2>
+                                <field name="project_ids"/>
+                            </div>
+                            <div attrs="{'invisible':[('project_id','=',False)]}">
+                                <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id, 'default_task_id':task_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
+                                    <tree editable="bottom" string="Timesheet Activities" default_order="date">
+                                        <field name="task_id" options="{'no_create': True}"/>
+                                        <field name="user_id" invisible="1"/>
+                                        <field name="employee_id" required="1" widget="many2one_avatar_employee" options="{'no_create': True}"/>
+                                        <field name="name" required="0"/>
+                                        <field name="unit_amount" widget="timesheet_uom" decoration-danger="unit_amount &gt; 24"/>
+                                        <field name="type_id"/>
+                                        <field name="project_id" invisible="1"/>
+                                        <field name="date"/>
+                                        <field name="tag_ids" widget="many2many_tags"/>
+                                        <field name="account_id" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+                    </notebook>
+                    <notebook name="project_picking_products" attrs="{'invisible':[('type','!=','project')]}">
+                        <page string="Products">
                             <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
                             <h2>Products:</h2><i>(Project REQUIRED, optional task)</i>
                             <field name="project_product_ids">
@@ -67,7 +68,8 @@
                                         <field name="state"/>
                                     </tree>
                             </field>
-                    </div>
+                        </page>
+                    </notebook>
 
                     <div name="signature">
                         <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
