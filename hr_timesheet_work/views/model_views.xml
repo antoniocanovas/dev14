@@ -55,7 +55,7 @@
                                 </field>
                             </div>
                         </page>
-                        <page string="Products">
+                        <page name="work_sheet_project_products" string="Products" attrs="{'invisible':[('type','!=','project')]}">
                             <h3>Pickings:</h3>
                             <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
                             <h3>Products:</h3>
