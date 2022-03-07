@@ -22,7 +22,7 @@
                     </group></group>
 
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
-                        <h2>Services: </h2><i>(Project and task REQUIRED)</i>
+                        <h2>Services: </h2><!-- <i>(Project and task REQUIRED)</i> -->
                         <group><group>
                             <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('work_id','!=',False)]}"/>
                             <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'required':[('work_id','!=',False)], 'invisible':[('project_id','=',False)]}"/>

@@ -16,7 +16,7 @@
                         <field name="repair_ids"/>
                     </div>
                     <div attrs="{'invisible':[('repair_id','=',False)]}">
-                        <h2>Parts:</h2><i>(Repair REQUIRED)</i>
+                        <h2>Parts:</h2><!--<i>(Repair REQUIRED)</i>-->
                         <field name="repair_product_ids" attrs="{'readonly':[('repair_id','=',False)]}" context="{'default_repair_id':repair_id, 'default_location_id':repair_location_id, 'default_company_id': company_id}">
                             <tree string="Operations" editable="bottom">
                                 <field name="company_id" invisible="1" force_save="1"/>
