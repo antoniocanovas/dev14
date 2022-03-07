@@ -12,7 +12,7 @@
                 </header>
                 <sheet>
                     <h1><field name="name"/></h1>
-                    <group><group>
+                    <group name="work_sheet_main"><group>
                         <field name="date"/>
                         <field name="work_id" force_save="1" widget="selection" attrs="{'readonly':[('work_readonly','=',True)]}"/>
                     </group><group>
