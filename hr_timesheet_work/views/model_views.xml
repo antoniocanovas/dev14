@@ -168,6 +168,7 @@
                         <field name="partner_id"/>
                         <field name="project_id"/>
                         <field name="set_start_stop" string="Start/stop time" attrs="{'invisible':[('type','not in',['repair','project'])]}"/>
+                    </group>
                 </sheet>
             </form>
         </field>
