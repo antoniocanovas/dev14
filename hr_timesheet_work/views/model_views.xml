@@ -163,7 +163,7 @@
             <form>
                 <sheet>
                     <h1><field name="name"/></h1>
-                    <group>
+                    <group name="project">
                         <field name="type" widget="selection"/>
                         <field name="partner_id"/>
                         <field name="project_id"/>
