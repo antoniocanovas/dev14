@@ -32,7 +32,7 @@
                             <field name="stop" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
                             <field name="duration" widget="timesheet_uom" attrs="{'invisible':['|',('set_start_stop','=',True),('type','=','production')]}"/>
                             <field name="type_id" widget="selection"/>
-                        </group>
+                        </group></group>
                         <div attrs="{'invisible':[('project_id','!=',False)]}">
                             <h2>Active projects:</h2>
                             <field name="project_ids"/>
