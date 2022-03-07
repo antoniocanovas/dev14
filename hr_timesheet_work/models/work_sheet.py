@@ -75,13 +75,13 @@ class TimeSheetWorkSheet(models.Model):
             projects = []
             partner = record.work_id.partner_id
             project = record.work_id.project_id
-            if (partner.id) and (not project.id) and (record.type == 'project'):
+            if (partner.id) and (not project.id):
                 projects = self.env['project.project'].search([('partner_id', '=', partner.id)]).ids
-            elif (not partner.id) and (project.id) and (record.type == 'project'):
+            elif (not partner.id) and (project.id):
                 projects = self.env['project.project'].search([('id', '=', project.id)]).ids
-            elif (partner.id) and (project.id) and (record.type == 'project'):
+            elif (partner.id) and (project.id):
                 projects = self.env['project.project'].search([('id', '=', project.id)]).ids
-            elif (not partner.id) and not (project.id) and (record.type == 'project'):
+            elif (not partner.id) and not (project.id):
                 projects = self.env['project.project'].search([]).ids
             record.project_ids = [(6, 0, projects)]
 
