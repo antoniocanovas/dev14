@@ -9,12 +9,22 @@
                     <h2>
                         <field name="name" modifiers="{}"/>
                     </h2>
-                    <group col="2">
-                        <field name="user_id" can_create="true" can_write="true" modifiers="{}"/>
-                        <field name="departament_id" modifiers="{}"/>
-                        <field name="task_description" colspan="4" modifiers="{}"/>
-                        <field name="interval"/>
-                        <field name="active"/>
+                    <group>
+                        <field name="priority"/>
+                        <field name="name"/>
+                        <field name="type"/>
+                        <field name="user_id"/>
+                        <field name="date_limit"/>
+                        <field name="state"/>
+                    </group>
+                    <group>
+                        <field name="project_id"/>
+                        <field name="lead_id"/>
+                        <field name="sale_id"/>
+                        <field name="purchase_id"/>
+                        <field name="task_id"/>
+                        <field name="picking_id"/>
+                        <field name="invoice_id"/>
                     </group>
                 </sheet>
             </form>
