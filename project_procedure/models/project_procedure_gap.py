@@ -12,7 +12,7 @@ class ProjectProcedure(models.Model):
     name = fields.Char(string='Nombre', required=True)
     priority = fields.inteber(string='Prioridad')
     user_id = fields.Many2one('res.users', string='Responsable', required=True, store=True)
-    date_limit = fields.Date=(string='Fecha límite')
+    date_limit = fields.Date(string='Fecha límite')
     project_id = fields.Many2one('project.project', string='Proyecto')
 
     state = fields.Selection([('new', 'Nuevo'), ('working', 'En curso'), ('done', 'Terminado'),
