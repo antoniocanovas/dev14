@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+
+    <record id="procedure_action_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree string="Tipos de trámites">
+                <field name="name" modifiers="{}"/>
+                <field name="user_id"/>
+                <field name="departament_id"/>
+                <field name="interval"/>
+                <field name="active"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.procedure.action</field>
+        <field name="name">Default tree view for procedure</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <record id="procedure_action_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Tipos de trámites">
+                    <h2>
+                        <field name="name" modifiers="{}"/>
+                    </h2>
+                    <group col="2">
+                        <field name="user_id" can_create="true" can_write="true" modifiers="{}"/>
+                        <field name="departament_id" modifiers="{}"/>
+                        <field name="task_description" colspan="4" modifiers="{}"/>
+                        <field name="interval"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.procedure.action</field>
+        <field name="name">Default form view for procedure</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="procedure_line_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree string="Líneas de tipo de procedimiento">
+                <field name="name" modifiers="{&quot;readonly&quot;: true}"/>
+                <field name="user_id"/>
+                <field name="departament_id"/>
+                <field name="interval"/>
+                <field name="dependency_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.procedure.line</field>
+        <field name="name">Default tree view for procedimiento_line_type</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <record id="procedure_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" options="{'clickable': '1', 'default_value':'borrador'}" widget="statusbar"/>
+                </header>
+                <sheet string="Tipos de procedures">
+                    <h1>
+                        <field name="name" modifiers="{}"/>
+                    </h1>
+                    <group>
+                        <field name="departament_id"/>
+                        <field name="stage_ids">
+                            <tree>
+                                <field name="sequence" widget="handle" optional="show"/>
+                                <field name="name"/>
+                                <field name="description" optional="show"/>
+                                <field name="fold" optional="show"/>
+                                <field name="mail_template_id" optional="show"/>
+                                <field name="rating_template_id" optional="show"/>
+                                <field name="project_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <field name="line_ids" string="Trámites" attrs="{'readonly':[('state','!=','borrador')]}">
+                        <tree string="Líneas de tipo de procedimientos" editable="bottom">
+                            <field name="procedure_id"/>
+                            <field name="name" invisible="1"/>
+                            <field name="user_id"/>
+                            <field name="departament_id"/>
+                            <field name="dependency_ids" widget="many2many_tags"/>
+                            <field name="interval"/>
+                        </tree>
+                    </field>
+                    <group col="2">
+                        <field name="task_name" placeholder="Por ejemplo: Trámites"/>
+                    </group>
+                    <h5 attrs="{'invisible':[('state','=','borrador')]}">NOTAS: Sólo son visibles las "Activas" en los procedimientos y ha de pasar a "Borrador" SI DESEA modificar los trámites y dependencias</h5>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.procedure</field>
+        <field name="name">Default form view for procedure_type</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="procedure_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree string="Tipos de procedimientos">
+                <field name="name" modifiers="{}"/>
+                <field name="line_ids" widget="many2many_tags"/>
+                <field name="state"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.procedure</field>
+        <field name="name">Default tree view for procedure_type</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <record id="line_procedure_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Líneas de tipos de procedimientos">
+                    <h2>
+                        <field name="name" modifiers="{}"/>
+                    </h2>
+                    <group col="2">
+                        <field name="procedure_id" on_change="1" can_create="true" can_write="true" modifiers="{&quot;required&quot;: true}"/>
+                        <field name="interval" modifiers="{&quot;readonly&quot;: true}"/>
+                        <newline/>
+                        <field name="user_id" can_create="true" can_write="true" modifiers="{}"/>
+                        <field name="departament_id" can_create="true" can_write="true" modifiers="{&quot;readonly&quot;: true}"/>
+                        <field name="type_id" can_create="true" can_write="true" modifiers="{&quot;readonly&quot;: true, &quot;required&quot;: true}"/>
+                        <newline/>
+                    </group>
+                    <h4>Acciones previas:</h4>
+                    <field name="dependency_ids" colspan="4" can_create="true" can_write="true" modifiers="{}"/>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.procedure.line</field>
+        <field name="name">Default form view for procedure_line_type</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+</odoo>
