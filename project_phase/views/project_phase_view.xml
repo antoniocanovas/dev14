@@ -11,20 +11,19 @@
                     </h2>
                     <group>
                         <field name="priority"/>
-                        <field name="name"/>
                         <field name="type"/>
                         <field name="user_id"/>
                         <field name="date_limit"/>
                         <field name="state"/>
                     </group>
                     <group>
-                        <field name="project_id"/>
-                        <field name="lead_id"/>
-                        <field name="sale_id"/>
-                        <field name="purchase_id"/>
-                        <field name="task_id"/>
-                        <field name="picking_id"/>
-                        <field name="invoice_id"/>
+                        <field name="lead_id" attrs="{'invisible':[('type','!=','lead')]}"/>
+                        <field name="sale_id" attrs="{'invisible':[('type','!=','sale')]}"/>
+                        <field name="purchase_id" attrs="{'invisible':[('type','!=','purchase')]}"/>
+                        <field name="task_id" attrs="{'invisible':[('type','!=','task')]}"/>
+                        <field name="picking_id" attrs="{'invisible':[('type','!=','picking')]}"/>
+                        <field name="invoice_id" attrs="{'invisible':[('type','!=','invoice')]}"/>
+                        <field name="project_id" readonly="1"/>
                     </group>
                 </sheet>
             </form>
