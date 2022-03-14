@@ -25,7 +25,7 @@ class ProjectProcedure(models.Model):
                                 relation='project_gap_rel',
                                 column1='gap_id',
                                 column2='sale_id',
-                                ))
+                                )
     purchase_ids = fields.Many2many('purchase.order')
     task_ids = fields.Many2many('project.task')
     picking_ids = fields.Many2many('stock.picking')
