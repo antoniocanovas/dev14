@@ -5,9 +5,9 @@
 from odoo import fields, models, api
 
 
-class ProjectProcedure(models.Model):
-    _name = 'project.procedure.gap'
-    _description = 'Etapas en procedimiento de proyectos'
+class ProjectPhase(models.Model):
+    _name = 'project.phase'
+    _description = 'Project phases'
 
     name = fields.Char(string='Nombre', required=True)
     priority = fields.Integer(string='Prioridad')

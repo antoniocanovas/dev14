@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="project_phase_from_inh" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="description" position="before">
+                    <field name="phase_ids">
+                        <tree name="project_phases" editable="botton" default_order="priority desc">
+                            <field name="priority"/>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="user_id"/>
+                            <field name="state"/>
+                            <field name="date_limit"/>
+                        </tree>
+                    </field>
+                </field>
+            </data>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="key" eval="False"/>
+        <field name="mode">extension</field>
+        <field name="model">project.project</field>
+        <field name="name">project.phase.form.inh</field>
+        <field name="priority">99</field>
+        <field name="type">form</field>
+    </record>
+
+</odoo>
