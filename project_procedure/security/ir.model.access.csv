@@ -5,4 +5,6 @@ access_project_procedure_line, Usuario Líneas de procedimientos,model_project_p
 access_project_procedure_manager, Manager Plantillas Procedimientosw ,model_project_procedure,project.group_project_manager,1,1,1,1
 access_project_procedure_action_manager, Manger Acciones de procedimientos,model_project_procedure_action,project.group_project_manager,1,1,1,1
 access_project_procedure_line_manager, Manager Líneas de procedimientos,model_project_procedure_line,project.group_project_manager,1,1,1,1
+access_project_procedure_gap, Usuario GAP,model_project_procedure_gap, project.group_project_user,1,1,0,0
+access_project_procedure_gap_manager, Manager GAP ,model_project_procedure_gap,project.group_project_manager,1,1,1,1
 
