@@ -5,8 +5,8 @@
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <data>
-                <h4>Etapas del proyecto</h4>
                 <field name="description" position="before">
+                    <h4>Etapas del proyecto</h4>
                     <field name="phase_ids">
                         <tree name="project_phases" editable="botton" default_order="priority desc">
                             <field name="priority"/>
@@ -17,8 +17,8 @@
                             <field name="date_limit"/>
                         </tree>
                     </field>
+                    <h4>Descripción</h4>
                 </field>
-                <h4>Descrición</h4>
             </data>
         </field>
         <field name="field_parent" eval="False"/>
