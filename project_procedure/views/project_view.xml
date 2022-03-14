@@ -30,7 +30,7 @@
                         </field>
                     </page>
                 </xpath>
-                <field name="description" position="after">
+                <field name="description" position="before">
                     <field name="gap_ids" attrs="{'invisible':[('is_procedure','=',False)]}">
                         <tree name="project_gaps" editable="botton">
                             <field name="name"/>
