@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="procedure_phase_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Fases del proyecto">
+                    <h2>
+                        <field name="name" modifiers="{}"/>
+                    </h2>
+                    <group col="2">
+                        <field name="user_id" can_create="true" can_write="true" modifiers="{}"/>
+                        <field name="departament_id" modifiers="{}"/>
+                        <field name="task_description" colspan="4" modifiers="{}"/>
+                        <field name="interval"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.phase</field>
+        <field name="name">Default project phase form view</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+</odoo>

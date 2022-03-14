@@ -8,13 +8,13 @@
                 <field name="description" position="before">
                     <h4>Etapas del proyecto</h4>
                     <field name="phase_ids">
-                        <tree name="project_phases" editable="botton" default_order="priority desc">
+                        <tree name="project_phases" default_order="priority desc">
                             <field name="priority"/>
                             <field name="name"/>
                             <field name="type"/>
                             <field name="user_id"/>
-                            <field name="state"/>
                             <field name="date_limit"/>
+                            <field name="state"/>
                         </tree>
                     </field>
                     <h4>Descripción</h4>
