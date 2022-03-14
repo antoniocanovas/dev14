@@ -11,7 +11,7 @@ class project(models.Model):
     is_procedure = fields.Boolean(string='Basado en procedimiento')
     procedure_id = fields.Many2one('project.procedure',domain=[('state','=','activo')],string='Plantilla')
     departament_id = fields.Many2one('hr.department',string='Departamento')
-    gap_ids = fields.One2many('project.product.gap', 'project_id', string='Etapas')
+    gap_ids = fields.One2many('project.procedure.gap', 'project_id', string='Etapas')
 
     def compute_get_task(self):
         for record in self:
