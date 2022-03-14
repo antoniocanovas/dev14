@@ -32,11 +32,11 @@
                 </xpath>
                 <field name="description" position="before">
                     <field name="gap_ids" attrs="{'invisible':[('is_procedure','=',False)]}">
-                        <tree name="project_gaps" editable="botton">
+                        <tree name="project_gaps" editable="botton" default_order="priority desc">
+                            <field name="priority"/>
                             <field name="name"/>
                             <field name="type"/>
                             <field name="user_id"/>
-                            <field name="priority"/>
                             <field name="state"/>
                             <field name="date_limit"/>
                         </tree>
