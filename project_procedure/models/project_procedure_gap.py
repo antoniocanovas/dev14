@@ -20,9 +20,9 @@ class ProjectProcedure(models.Model):
     type = fields.Selection([('lead','Oportunidad'), ('sale','Venta'), ('purchase','Compra'), ('task','Tarea'),
                              ('picking','Albarán'),('invoice','Factura')], required=True)
 
-    lead_ids = fields.Many2many('crm.lead')
-    sale_ids = fields.Many2many('sale.order')
-    purchase_ids = fields.Many2many('purchase.order')
-    task_ids = fields.Many2many('project.task')
-    picking_ids = fields.Many2many('stock.picking')
-    invoice_ids = fields.Many2many('account.move')
+    lead_id = fields.Many2one('crm.lead', string='Oportunidad')
+    sale_id = fields.Many2one('sale.order', string='Venta')
+    purchase_id = fields.Many2one('purchase.order', string='Compra')
+    task_id = fields.Many2one('project.task', string='Tarea')
+    picking_id = fields.Many2one('stock.picking', string='Albarán')
+    invoice_id = fields.Many2one('account.move', string='Factura')
