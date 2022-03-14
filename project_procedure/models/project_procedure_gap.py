@@ -21,11 +21,7 @@ class ProjectProcedure(models.Model):
                              ('picking','Albarán'),('invoice','Factura')], required=True)
 
     lead_ids = fields.Many2many('crm.lead')
-    sale_ids = fields.Many2many(comodel_name='sale.order',
-                                relation='project_gap_rel',
-                                column1='gap_id',
-                                column2='sale_id',
-                                )
+    sale_ids = fields.Many2many('sale.order')
     purchase_ids = fields.Many2many('purchase.order')
     task_ids = fields.Many2many('project.task')
     picking_ids = fields.Many2many('stock.picking')
