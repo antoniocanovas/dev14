@@ -10,7 +10,7 @@ class ProjectProcedure(models.Model):
     _description = 'Etapas en procedimiento de proyectos'
 
     name = fields.Char(string='Nombre', required=True)
-    priority = fields.integer(string='Prioridad')
+    priority = fields.Integer(string='Prioridad')
     user_id = fields.Many2one('res.users', string='Responsable', required=True, store=True)
     date_limit = fields.Date(string='Fecha límite')
     project_id = fields.Many2one('project.project', string='Proyecto')
