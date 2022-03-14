@@ -5,7 +5,7 @@
 from odoo import fields, models, api
 import datetime
 
-class project(models.Model):
+class ProjectProject(models.Model):
     _inherit = 'project.project'
 
     phase_ids = fields.One2many('project.phase', 'project_id', string='Etapas')

@@ -4,7 +4,7 @@
 
 from odoo import fields, models, api
 
-class Account.Move(models.Model):
+class AccountMove(models.Model):
     _inherit = 'account.move'
 
     project_phase_id = fields.Many2one('project.phase',string='Fase')

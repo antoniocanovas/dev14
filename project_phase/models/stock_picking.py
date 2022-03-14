@@ -4,7 +4,7 @@
 
 from odoo import fields, models, api
 
-class Stock.Picking(models.Model):
+class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     project_phase_id = fields.Many2one('project.phase',string='Fase')
