@@ -14,9 +14,6 @@ class ProjectPhase(models.Model):
     user_id = fields.Many2one('res.users', string='Responsable', required=True, store=True)
     date_limit = fields.Date(string='Fecha límite')
     project_id = fields.Many2one('project.project', string='Proyecto')
-
-    state = fields.Selection([('new', 'Nuevo'), ('working', 'En curso'), ('done', 'Terminado'),
-                              ('cancel', 'Cancelado')], default='new', string='Estado')
     type = fields.Selection([('lead','Oportunidad'), ('sale','Venta'), ('purchase','Compra'), ('task','Tarea'),
                              ('picking','Albarán'),('invoice','Factura')], required=True)
 
@@ -26,3 +23,10 @@ class ProjectPhase(models.Model):
     task_id = fields.Many2one('project.task', string='Tarea')
     picking_id = fields.Many2one('stock.picking', string='Albarán')
     invoice_id = fields.Many2one('account.move', string='Factura')
+
+    @api.depends('write_date')
+    def _get_phase_state(self):
+        for record in self:
+            record.state = 'hola'
+    state = fields.Char(string='Estado', compute="_get_phase_state", store=True)
+    #[('new', 'Nuevo'), ('working', 'En curso'), ('done', 'Terminado'), ('cancel', 'Cancelado')], default='new',
