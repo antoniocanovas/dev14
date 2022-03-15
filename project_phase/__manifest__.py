@@ -1,5 +1,5 @@
 {
-    'name': 'Procedures',
+    'name': 'Project business phases',
     'version': '14.0.0.1',
     'category': 'Projects',
     'description': u"""
@@ -7,6 +7,7 @@
 """,
     'author': 'Serincloud',
     'depends': [
+        'crm',
         'project',
         'sale_management',
         'purchase',

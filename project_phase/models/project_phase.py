@@ -27,6 +27,24 @@ class ProjectPhase(models.Model):
     @api.depends('write_date')
     def _get_phase_state(self):
         for record in self:
-            record.state = 'hola'
-    state = fields.Char(string='Estado', compute="_get_phase_state", store=True)
-    #[('new', 'Nuevo'), ('working', 'En curso'), ('done', 'Terminado'), ('cancel', 'Cancelado')], default='new',
+            state = 'Pendiente'
+            if (type == 'lead') and (lead_id.id):
+                state = 'Flujo de venta'
+                if (lead_id.probability == 0):
+                    state = 'Perdido'
+                elif (lead_id.probability == 100):
+                    state = 'Ganado'
+            elif (type == 'sale') and (sale_id.id):
+                state = sale_id.state
+            elif (type == 'purchase') and (purchase_id.id):
+                state = purchase_id.state
+            elif (type == 'task') and (task_id.id):
+                state = task_id.stage_id.name
+            elif (type == 'picking') and (picking_id.id):
+                state = picking_id.state
+            elif (type == 'invoice') and (invoice_id.id) and (invoice_id.state != 'posted'):
+                state = invoice_id.state
+            elif (type == 'invoice') and (invoice_id.id) and (invoice_id.state == 'posted'):
+                state = invoice_id.payment_state
+            record.state = state
+    state = fields.Char(string='Estado', compute="_get_phase_state", store=True, default='New')
