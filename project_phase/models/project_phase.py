@@ -28,23 +28,23 @@ class ProjectPhase(models.Model):
     def _get_phase_state(self):
         for record in self:
             state = 'Pendiente'
-            if (type == 'lead') and (lead_id.id):
+            if (record.type == 'lead') and (record.lead_id.id):
                 state = 'Flujo de venta'
-                if (lead_id.probability == 0):
+                if (record.lead_id.probability == 0):
                     state = 'Perdido'
-                elif (lead_id.probability == 100):
+                elif (record.lead_id.probability == 100):
                     state = 'Ganado'
-            elif (type == 'sale') and (sale_id.id):
-                state = sale_id.state
-            elif (type == 'purchase') and (purchase_id.id):
-                state = purchase_id.state
-            elif (type == 'task') and (task_id.id):
-                state = task_id.stage_id.name
-            elif (type == 'picking') and (picking_id.id):
-                state = picking_id.state
-            elif (type == 'invoice') and (invoice_id.id) and (invoice_id.state != 'posted'):
-                state = invoice_id.state
-            elif (type == 'invoice') and (invoice_id.id) and (invoice_id.state == 'posted'):
-                state = invoice_id.payment_state
+            elif (record.type == 'sale') and (record.sale_id.id):
+                state = record.sale_id.state
+            elif (record.type == 'purchase') and (record.purchase_id.id):
+                state = record.purchase_id.state
+            elif (record.type == 'task') and (record.task_id.id):
+                state = record.task_id.stage_id.name
+            elif (record.type == 'picking') and (record.picking_id.id):
+                state = record.picking_id.state
+            elif (record.type == 'invoice') and (record.invoice_id.id) and (record.invoice_id.state != 'posted'):
+                state = record.invoice_id.state
+            elif (record.type == 'invoice') and (record.invoice_id.id) and (record.invoice_id.state == 'posted'):
+                state = record.invoice_id.payment_state
             record.state = state
     state = fields.Char(string='Estado', compute="_get_phase_state", store=True, default='New')
