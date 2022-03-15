@@ -24,12 +24,12 @@ class ProjectPhase(models.Model):
     picking_id = fields.Many2one('stock.picking', string='Albarán')
     invoice_id = fields.Many2one('account.move', string='Factura')
 
-    @api.depends('write_date')
+    @api.depends('lead_id.probability', 'sale_id.state', 'purchase_id.state', 'task_id.stage_id', 'picking_id.state',
+                 'invoice_id.state')
     def _get_phase_state(self):
         for record in self:
-            state = 'Pendiente'
             if (record.type == 'lead') and (record.lead_id.id):
-                state = 'Flujo de venta'
+                state = record.lead_id.stage_id.name
                 if (record.lead_id.probability == 0):
                     state = 'Perdido'
                 elif (record.lead_id.probability == 100):

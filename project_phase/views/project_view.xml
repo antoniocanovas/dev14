@@ -8,7 +8,7 @@
                 <field name="description" position="before">
                     <h4>Etapas del proyecto</h4>
                     <field name="phase_ids">
-                        <tree name="project_phases" default_order="priority desc">
+                        <tree name="project_phases" default_order="priority asc">
                             <field name="priority"/>
                             <field name="name"/>
                             <field name="type"/>
