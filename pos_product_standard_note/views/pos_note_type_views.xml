@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="pos_note_type_list">
+            <field name="name">pos.note.type.list</field>
+            <field name="model">pos.note.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pos_note_type_form">
+            <field name="name">pos.note.type.form</field>
+            <field name="model">pos.note.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="note_ids" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="pos_note_type_action_window">
+            <field name="name">Pos Note Type</field>
+            <field name="res_model">pos.note.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- actions -->
+
+
+        <menuitem name="Pos Note Type" id="pos_note_type_menu" parent="point_of_sale.menu_point_config_product"
+                  action="pos_note_type_action_window"/>
+    </data>
+</odoo>

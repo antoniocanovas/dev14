@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_product_standard_note
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-27 10:52+0000\n"
+"PO-Revision-Date: 2022-01-27 10:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_product_standard_note
+#. openerp-web
+#: code:addons/pos_product_standard_note/static/src/js/Screens/ProductScreen/ControlButtons/OrderlineNoteButton.js:0
+#, python-format
+msgid "Add Note"
+msgstr "Añadir nota"
+
+#. module: pos_product_standard_note
+#. openerp-web
+#: code:addons/pos_product_standard_note/static/src/xml/Popups/TextAreaPopup.xml:0
+#, python-format
+msgid "Clear"
+msgstr "Limpiar"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note__create_uid
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note__create_date
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__create_date
+msgid "Created on"
+msgstr "creado el"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note__display_name
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__display_name
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_order_line__display_name
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_product_template__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note__id
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__id
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_order_line__id
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_product_template__id
+msgid "ID"
+msgstr ""
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note____last_update
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type____last_update
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_order_line____last_update
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_product_template____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note__write_uid
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note__write_date
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note__name
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: pos_product_standard_note
+#. openerp-web
+#: code:addons/pos_product_standard_note/static/src/xml/Screens/ReceiptScreen/OrderReceipt.xml:0
+#, python-format
+msgid "Notes:"
+msgstr "Notas:"
+
+#. module: pos_product_standard_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_order_line__order_note
+msgid "Order Notes"
+msgstr "Ordenar notas"
+
+#. module: pos_product_standard_note
+#: model:ir.model,name:pos_product_standard_note.model_pos_order_line
+msgid "Point of Sale Order Lines"
+msgstr "Líneas de Orden de Punto de Venta"
+
+#. module: pos_product_standard_note
+#: model:ir.actions.act_window,name:pos_product_standard_note.pos_note_action_window
+#: model:ir.model,name:pos_product_standard_note.model_pos_note
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_pos_note_type__note_ids
+#: model:ir.ui.menu,name:pos_product_standard_note.pos_note_menu
+msgid "Pos Note"
+msgstr "Nota Pos"
+
+#. module: pos_product_standard_note
+#: model:ir.actions.act_window,name:pos_product_standard_note.pos_note_type_action_window
+#: model:ir.model,name:pos_product_standard_note.model_pos_note_type
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_product_product__pos_note_type_id
+#: model:ir.model.fields,field_description:pos_product_standard_note.field_product_template__pos_note_type_id
+#: model:ir.ui.menu,name:pos_product_standard_note.pos_note_type_menu
+msgid "Pos Note Type"
+msgstr "Nota tipo Pos"
+
+#. module: pos_product_standard_note
+#: model:ir.model,name:pos_product_standard_note.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"

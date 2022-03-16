@@ -32,4 +32,19 @@
         <field name="type">form</field>
     </record>
 
+    <record id="project_html_tree_template" model="ir.ui.view">
+        <field name="name">project.html.tree.template</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <tree
+                string="Messages"
+                default_order="id desc"
+                create='false'
+                edit='false'
+            >
+                <field name="project_phase_display" string="Message" />
+            </tree>
+        </field>
+    </record>
+
 </odoo>

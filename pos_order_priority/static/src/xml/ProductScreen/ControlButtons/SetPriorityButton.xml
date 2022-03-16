@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="SetPriorityButton" owl="1">
+        <div class="control-button o_state_button">
+            <i class="fa fa-th-list" role="img" aria-label="Priority" title="Priority" />
+            <t t-esc="currentPriority"/>
+        </div>
+    </t>
+
+</templates>

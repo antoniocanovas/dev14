@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright 2019 LevelPrime
+  ~ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+  -->
+<odoo>
+
+    <template id="pos_order_priority" inherit_id="point_of_sale.assets" name="button add">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pos_order_priority/static/src/js/ProductScreen/ControlButtons/SetPriorityButton.js"/>
+            <script type="text/javascript" src="/pos_order_priority/static/src/js/models.js"/>
+            <script type="text/javascript" src="/pos_order_priority/static/src/js/orderline.js"/>
+            <script type="text/javascript" src="/pos_order_priority/static/src/js/multiprint.js"/>
+        </xpath>
+    </template>
+
+</odoo>

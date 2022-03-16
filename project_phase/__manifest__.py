@@ -19,7 +19,7 @@
         'security/ir.model.access.csv',
         'views/project_view.xml',
         'views/project_phase_view.xml',
-#        'views/views_menu.xml',
+        'views/views_menu.xml',
     ],
     'installable':True,
 }

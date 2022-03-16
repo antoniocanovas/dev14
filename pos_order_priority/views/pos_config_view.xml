@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pos_config_view_form_inherited_priority" model="ir.ui.view">
+        <field name="name">pos.config.form.priority.view</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <div id="company" position="after">
+                <div id="state_ids" class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <label for="priority_ids"/>
+                        <div>
+                            <field name="priority_ids" widget="many2many_tags"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+     <record id="action_pos_config_priority" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="domain" eval="False"/>
+        <field name="filter" eval="False"/>
+        <field name="limit">80</field>
+        <field name="name">Prioritys</field>
+        <field name="res_model">pos.order.line.priority</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="usage" eval="False"/>
+        <field name="view_id" eval="False"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="menu_pos_config_priority" model="ir.ui.menu">
+        <field name="action" ref="action_pos_config_priority"/>
+        <field name="active" eval="True"/>
+        <field name="name">Prioritys</field>
+        <field name="parent_id" ref="point_of_sale.menu_point_config_product"/>
+        <field name="sequence">10</field>
+        <field name="web_icon" eval="False"/>
+    </record>
+
+</odoo>
