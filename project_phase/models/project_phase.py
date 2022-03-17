@@ -16,7 +16,7 @@ class ProjectPhase(models.Model):
     project_id = fields.Many2one('project.project', string='Proyecto')
     type = fields.Selection([('lead','Oportunidad'), ('sale','Venta'), ('purchase','Compra'), ('task','Tarea'),
                              ('picking','Albarán'),('invoice','Factura')], required=True)
-
+    phase_user_avatar = fields.Binary(string="Avatar", related="user_id.partner_id.image_128")
     lead_id = fields.Many2one('crm.lead', string='Oportunidad')
     sale_id = fields.Many2one('sale.order', string='Venta')
     purchase_id = fields.Many2one('purchase.order', string='Compra')

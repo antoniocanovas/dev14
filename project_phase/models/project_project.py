@@ -16,17 +16,11 @@ TREE_TEMPLATE = (
     "<tbody>"
     "<tr>"
     '<td id="name"><strong><span id="name">%s</span></strong></td>'
-    "<td>"
+    "<td></td>"
     "</tr>"
     "<tr>"
     '<td id="description"><span id="description">%s</span></td>'
-    "<td>"
-    "</tr>"
-    "<tr>"
-    "<td>"
-    '<p id="project-phase" style="font-size: x-small;"><strong>Project Phase</strong></p></td>'
-    "<td>"
-    "</tr>"
+    "<td></td>"
     "</tr>"
     "</tbody>"
     "</table>"
@@ -60,15 +54,13 @@ class ProjectProject(models.Model):
             for phase in rec.phase_ids:
                 phase_template += (
                     '<tr>'
-                    '<td style="width: 20%%;"><img class="rounded-circle"'
-                    ' style="width: 64px; padding:10px;" src="data:image/png;base64,%s"'
-                    ' alt="Avatar" title="avatar" width="100" border="0" /></td>' 
+                    '<td style="width: 20%%;"><strong>%s</strong></td>' 
                     '<td style="width: 20%%;"><strong>%s</strong></td>'
                     '<td style="width: 20%%;"><strong>%s</strong></td>'
                     '<td style="width: 20%%;"><strong>%s</strong></td>'
                     '<td style="width: 20%%;"><strong>%s</strong></td>'
                     '</tr>' % (
-                        phase.user_id.partner_id.image_128.decode("utf-8") if phase.user_id.image_128 else IMAGE_PLACEHOLDER,
+                        phase.user_id.name,
                         phase.name,
                         phase.type,
                         phase.date_limit,
@@ -77,7 +69,6 @@ class ProjectProject(models.Model):
                 )
 
             phase_template += (
-                "</tr>"
                 "</tbody>"
                 "</table>"
                 "</td>"
