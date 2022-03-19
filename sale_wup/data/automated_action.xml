@@ -1,7 +1,7 @@
 <odoo>
     <record id="update_sol_unit_price_if_wup_changing_qty" model="base.automation">
             <field name="name">=> Update SOL if WUP and change QTY</field>
-            <field name="model_id" ref="sale_wup.model_sale_order_line"/>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
             <field name="state">code</field>
             <field name="code">
 # Change default behaviour when change QYT on SOL for WUP:
