@@ -18,7 +18,7 @@ class WupLine(models.Model):
     effective_hours = fields.Float(string="Eff. Hours", related='task_id.effective_hours', store=False)
     sale_line_name = fields.Char(string='Sale line', related='sale_line_id.name')
 
-    @api.depends('sale_line_id.product_uom_qty, 'product_uom_qty')
+    @api.depends('sale_line_id.product_uom_qty', 'product_uom_qty')
     def get_wup_product_sale_qty(self):
         for record in self:
             record.product_sale_qty = record.product_uom_qty * record.sale_line_id.product_uom_qty
