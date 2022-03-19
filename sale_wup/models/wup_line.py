@@ -22,7 +22,7 @@ class WupLine(models.Model):
     def get_wup_product_sale_qty(self):
         for record in self:
             record.product_sale_qty = record.product_uom_qty * record.sale_line_id.product_uom_qty
-    product_sale_qty = fields.Float(string='Units', compute='get_wup_product_sale_qty')
+    product_sale_qty = fields.Float(string='Sale Qty', compute='get_wup_product_sale_qty')
 
 
     @api.depends('product_id')
