@@ -1,0 +1,65 @@
+<odoo>
+    <record id="update_sol_unit_price_if_wup_changing_qty" model="base.automation">
+            <field name="name">=> Update SOL if WUP and change QTY</field>
+            <field name="model_id" ref="sale_wup.model_sale_order_line"/>
+            <field name="state">code</field>
+            <field name="code">
+# Change default behaviour when change QYT on SOL for WUP:
+if record.wup_line_ids.ids:
+    price_unit, subtotal, discount, cost = 0, 0, 0, 0
+    for li in record.wup_line_ids:
+        subtotal += li.price_unit * record.product_uom_qty
+    record.write({'price_unit': subtotal, 'discount': 0})
+            </field>
+            <field name="trigger">on_change</field>
+            <field name="on_change_field_ids" eval="[(6,0, [ref('sale.field_sale_order_line__product_uom_qty')])]"/>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+    <record id="update_sol_from_wup" model="base.automation">
+            <field name="name">=> Update SOL from wup_line</field>
+            <field name="model_id" ref="sale_wup.model_wup_line"/>
+            <field name="state">code</field>
+            <field name="code">
+# Compute price unit of sale_order_line from wup_line when updated:
+price_unit, subtotal, discount, cost = 0,0,0,0
+for li in record.sale_line_id.wup_line_ids:
+  subtotal += li.price_unit * li.product_uom_qty
+record.sale_line_id.write({'price_unit': subtotal, 'discount':0})
+
+            </field>
+            <field name="trigger">on_create_or_write</field>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="so_wup_tasks" model="base.automation">
+            <field name="name">=>SO WUP Tasks</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">
+# Task creation of service products in wup.line:
+if (record.state == 'sale'):
+  wuplines = env['wup.line'].search([('sale_id','=',record.id),('product_id.service_tracking','=','task_in_project'),('task_id','=',False)])
+  if (wuplines.ids) and not (record.project_id.id):
+    newproject = env['project.project'].create({'name':record.name, 'partner_id':record.partner_id.id,
+      'sale_order_id':record.id, 'allow_timesheets':True, 'allow_billable':True})
+    record.write({'project_id':newproject.id, 'visible_project':True, 'analytic_account_id':newproject.analytic_account_id.id})
+  for li in wuplines:
+    name = li.sale_line_id.name + ".- " + li.name
+    newtask = env['project.task'].create({'name':name, 'sale_line_id':li.sale_line_id.id ,'sale_order_id':record.id,
+      'project_id': record.project_id.id, 'planned_hours':li.product_uom_qty, 'wup_line_id':li.id})
+    li['task_id'] = newtask.id
+            </field>
+            <field name="trigger">on_create_or_write</field>
+            <!--<field name="on_change_fields">state</field>-->
+            <field name="filter_pre_domain">[('state','=','sale')]</field>
+            <field name="filter_domain">[('state','=','sale')]</field>
+            <field name="active" eval="True"/>
+        </record>
+
+
+</odoo>
