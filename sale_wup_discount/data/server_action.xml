@@ -1,0 +1,100 @@
+<odoo>
+    <data>
+        <record id="sale_order_recalculate_sd" model="ir.actions.server">
+                <field name="name">=> Recalculate Special Discounts</field>
+                <field name="model_id" ref="model_sale_order"/>
+                <field name="state">code</field>
+                <field name="code">
+# Round prices with Odoo monetary_precision:
+monetary_precision = env['decimal.precision'].sudo().search([('id','=',1)]).digits
+
+# CASE "TARGER_PRICE" (wup prices are not recalculated, working with discount in SOL):
+if record.discount_type == 'target_price':
+  # Requirement: user discount per sale order line:
+  group_id = env['ir.model.data'].search([('model','=','res.groups'),('name','=','group_discount_per_so_line')]).res_id
+  group = env['res.groups'].search([('id','=',group_id)])
+  if user not in group.users:
+    raise Warning('It is required to enable discounts per sale order line in sales settings, please ask to your administrator.')
+
+  # Calculating real total cost and sale without discount:
+  cost_amount, price_amount, margin = 0,0,0
+  for li in record.order_line:
+    if (len(li.wup_line_ids.ids) == 0) and (li.product_uom_qty &gt; 0):
+      cost_amount += li.price_unit_cost * li.product_uom_qty
+      price_amount += li.lst_price * li.product_uom_qty
+    elif (len(li.wup_line_ids.ids) &gt; 0) and (li.product_uom_qty &gt; 0):
+      cost_amount  += round(li.wup_cost_amount,monetary_precision)
+      price_amount += round(li.price_subtotal / (1-li.discount/100),monetary_precision)
+
+  if (record.target_price &lt; cost_amount):
+    raise Warning('Saling under cost, not allowed.')
+
+  else:
+    margin = (1 - (record.target_price / price_amount)) * 100
+
+  for li in record.order_line:
+    if (len(li.wup_line_ids.ids) == 0) and (li.product_uom_qty &gt; 0):
+      li.write({'price_unit':li.lst_price, 'discount':margin})
+    elif (len(li.wup_line_ids.ids) &gt; 0) and (li.product_uom_qty &gt; 0):
+      for wupline in li.wup_line_ids:
+        wupline['price_unit'] = wupline.price_unit * (1-margin/100)
+
+  diference = round(record.target_price - record.amount_untaxed,2)
+  if diference != 0:
+    review = True
+    for li in record.order_line:
+      if (li.product_uom_qty == 1) and (review == True):
+        li['price_unit'] = li.price_unit + diference
+        review = False
+
+# CASES INTEGRALIA  or  MARGIN_OVER_COST:
+else:
+  for li in record.order_line:
+    # If we use type, there is not line discount:
+    if (li.discount != 0):
+      li['discount'] = 0
+
+    # Line NOT WUP:
+    if (len(li.wup_line_ids.ids) == 0) and (li.product_uom_qty &gt; 0):
+      if li.product_uom.uom_type == 'reference':
+        qty_uom = li.product_uom_qty
+      elif li.product_uom.uom_type == 'bigger':
+        qty_uom = li.product_uom_qty * li.product_uom.factor_inv
+      elif li.product_uom.uom_type == 'smaller':
+        qty_uom = li.product_uom_qty / li.product_uom.factor
+
+      # Case 'services' and 'fixed_service_price':
+      if (li.product_id.product_tmpl_id.our_service == True) and (record.discount_type == 'fixed_service_margin_over_cost'):
+        li.write({'price_unit':record.price_our_service * qty_oum, 'lst_price':li.product_id.lst_price * qty_uom})
+      # ... others:
+      else:
+        if (record.margin &lt; 100):
+          li.write({'price_unit':(li.product_id.standard_price / (1 - record.margin / 100) * qty_uom), 'lst_price':li.product_id.lst_price * qty_uom})
+        else:
+          li.write({'price_unit':(li.product_id.standard_price  * (1 + record.margin / 100) * qty_uom), 'lst_price':li.product_id.lst_price * qty_uom})
+
+    # Case Line IS 'computed by wups':
+    elif (len(li.wup_line_ids.ids) &gt; 0):
+      for liwup in li.wup_line_ids:
+            # Price unit cost:
+        if (liwup.fix_price_unit_cost == True):
+          price_unit_cost = liwup.price_unit_cost
+        else:
+          price_unit_cost = round(liwup.product_id.standard_price, monetary_precision)
+            # Price unit sale:
+        if (liwup.fix_price_unit_sale == True):
+          price_unit = liwup.price_unit
+        elif (liwup.fix_price_unit_sale == False) and (liwup.product_id.product_tmpl_id.our_service == True) and (record.discount_type == 'fixed_service_margin_over_cost'):
+          price_unit = record.price_our_service
+        else:
+          if (record.margin &lt; 100):
+            price_unit = round(price_unit_cost / (1 - record.margin / 100), monetary_precision)
+          else:            
+            price_unit = round(price_unit_cost * (1 + record.margin / 100),monetary_precision)
+            
+        liwup.write({'price_unit': price_unit, 'price_unit_cost': price_unit_cost})
+
+                </field>
+        </record>
+    </data>
+</odoo>
