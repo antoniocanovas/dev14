@@ -47,7 +47,12 @@ if record.discount_type == 'target_price':
         li['price_unit'] = li.price_unit + diference
         review = False
 
-# CASES INTEGRALIA  or  MARGIN_OVER_COST:
+# CASI WUP_PRICING_UPDATE:
+if record.discount_type == 'wup_pricing_update':
+  raise Warning('ok')
+
+
+# CASES FIXED_SERVICE_MARGIN_OVER_COST  or  MARGIN_OVER_COST:
 else:
   for li in record.order_line:
     # If we use type, there is not line discount:
