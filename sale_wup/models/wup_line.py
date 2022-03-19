@@ -10,6 +10,7 @@ class WupLine(models.Model):
 
     product_id = fields.Many2one('product.product', string='Product')
     product_uom_qty = fields.Float(string='Quantity')
+    product_total_qty = fields.Float(string='Units', compute='get_product_total_qty')
     product_uom = fields.Many2one('uom.uom', string='Unit', related='product_id.uom_id')
     currency_id = fields.Many2one('res.currency')
     sale_line_id = fields.Many2one('sale.order.line', string='SO Line')
@@ -17,6 +18,13 @@ class WupLine(models.Model):
     task_id = fields.Many2one('project.task', string='WU Task')
     effective_hours = fields.Float(string="Eff. Hours", related='task_id.effective_hours', store=False)
     sale_line_name = fields.Char(string='Sale line', related='sale_line_id.name')
+
+    @api.depends('sale_line_id.product_uom_qty, 'product_uom_qty')
+    def get_wup_product_total_qty(self):
+        for record in self:
+            record.product_total_qty = record.product_uom_qty * record.sale_line_id.product_uom_qty
+    product_total_qty = fields.Float(string='Units', compute='get_wup_product_total_qty')
+
 
     @api.depends('product_id')
     def get_product_id_name(self):
