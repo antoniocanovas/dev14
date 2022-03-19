@@ -7,7 +7,7 @@ VALUES = [
     ('fixed_service_margin_over_cost', 'Our services with fixed price, and margin over cost for others.'),
     ('margin_over_cost', 'Margin over cost.'),
     ('target_price', 'Target price.'),
-    ('wup_pricing_update', 'Update WUP products prices.'),
+    ('wup_pricing_update', 'Update WUP products prices and remove fixed amounts.'),
 ]
 
 
