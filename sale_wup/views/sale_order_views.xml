@@ -37,7 +37,7 @@
                             <button class="oe_highlight oe_edit_only" type="action" name="%(sale_wup.wup_line_from_wup_template)d" string="Add WuPs" attrs="{'invisible':[('state','!=','draft')]}"/>
                         </group>
                     </group>
-                    <field name="wup_line_ids" attrs="{'readonly':[('state','!=','draft')]}">
+                    <field name="wup_line_ids" context="{'default_product_uom_qty':1}" attrs="{'readonly':[('state','!=','draft')]}">
                         <tree editable="bottom">
                             <field name="product_id" required="1"/>
                             <field name="name" attrs="{'required':[('product_id','!=',False)]}"/>
