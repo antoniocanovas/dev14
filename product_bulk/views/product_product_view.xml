@@ -5,18 +5,18 @@
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <data>
-                <field name="property_stock_inventory" position="after">
+                <page name="inventory" position="inside">
                     <group string="Bulk product">
                         <field name="bulk_id"/>
                         <field name="bulk_uom_id"/>
                         <field name="bulk_ratio"/>
                     </group>
-                </field>
+                </page>
             </data>
         </field>
         <field name="field_parent" eval="False"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
-        <field name="inherit_id" ref="sale.product_form_view_sale_order_button"/>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="key" eval="False"/>
         <field name="mode">primary</field>
         <field name="model">product.product</field>
