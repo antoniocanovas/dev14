@@ -16,6 +16,7 @@
     'data': [
         'views/product_product_view.xml',
 #        'views/stock_picking_view.xml',
+        'date/automated_action.xml',
     ],
     'installable':True,
 }
