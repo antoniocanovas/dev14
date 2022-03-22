@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+
+  <record id="action_html_tree_template" model="ir.actions.act_window">
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="limit">80</field>
+    <field name="name">Projects</field>
+    <field name="res_model">project.project</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <!--<field name="view_id" eval="ocr_account_invoice_tree"/>-->
+    <field name="view_ids" eval="[(5, 0, 0),
+    (0, 0, {'view_mode': 'tree', 'view_id': ref('project_html_tree_template')}),]"/>
+    <!--<field name="view_mode">tree,form</field>
+    <field name="view_type">tree</field>-->
+  </record>
+
+
+  <record id="menu_html_tree_projects" model="ir.ui.menu">
+    <field name="action" ref="action_html_tree_template"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Projects V</field>
+    <field name="parent_id" ref="project.menu_main_pm"/>
+    <field name="sequence">1</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+
+</odoo>

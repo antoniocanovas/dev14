@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="procedure_phase_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Fases del proyecto">
+                    <h2>
+                        <field name="name" modifiers="{}"/>
+                    </h2>
+                    <group>
+                        <field name="priority"/>
+                        <field name="type"/>
+                        <field name="user_id"/>
+                        <field name="date_limit"/>
+                    </group>
+                    <group>
+                        <field name="lead_id" attrs="{'invisible':[('type','!=','lead')]}"/>
+                        <field name="sale_id" attrs="{'invisible':[('type','!=','sale')]}"/>
+                        <field name="purchase_id" attrs="{'invisible':[('type','!=','purchase')]}"/>
+                        <field name="task_id" attrs="{'invisible':[('type','!=','task')]}"/>
+                        <field name="picking_id" attrs="{'invisible':[('type','!=','picking')]}"/>
+                        <field name="invoice_id" attrs="{'invisible':[('type','!=','invoice')]}"/>
+                        <field name="state"/>
+                        <field name="project_id" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.phase</field>
+        <field name="name">Default project phase form view</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+</odoo>
