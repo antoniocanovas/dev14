@@ -1,5 +1,5 @@
 <odoo>
-    <record id="update_sol_unit_price_if_wup_changing_qty" model="base.automation">
+    <record id="product_bulk_computations" model="base.automation">
             <field name="name">=> Bulk product in picking</field>
             <field name="model_id" ref="stock.model_stock_picking"/>
             <field name="state">code</field>
