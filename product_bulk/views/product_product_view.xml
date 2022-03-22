@@ -16,7 +16,7 @@
         </field>
         <field name="field_parent" eval="False"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
-        <field name="inherit_id" ref="product.product.form"/>
+        <field name="inherit_id" ref="sale.product_form_view_sale_order_button"/>
         <field name="key" eval="False"/>
         <field name="mode">primary</field>
         <field name="model">product.product</field>
