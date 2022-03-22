@@ -1,0 +1,22 @@
+<odoo>
+    <record id="update_sol_unit_price_if_wup_changing_qty" model="base.automation">
+            <field name="name">=> Bulk product in picking</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="state">code</field>
+            <field name="code">
+# BULK product:
+if record.state != 'draft':
+  for sm in record.move_ids_without_package:
+    if (sm.product_id.bulk_id.id) and not (sm.bulk_line_id.id):
+      new_sm = sm.copy()
+      new_sm.write({'product_id':sm.product_id.bulk_id.id, 'location_dest_id':8, 'location_id':15})
+      sm['bulk_line_id'] = new_sm.id
+            </field>
+            <field name="trigger">on_change</field>
+            <field name="on_change_field_ids"><field/>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+</odoo>
