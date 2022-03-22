@@ -5,13 +5,13 @@
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <data>
-                <page name="inventory" position="inside">
+                <field name="property_stock_inventory" position="after">
                     <group string="Bulk product">
                         <field name="bulk_id"/>
                         <field name="bulk_uom_id"/>
                         <field name="bulk_ratio"/>
                     </group>
-                </page>
+                </field>
             </data>
         </field>
         <field name="field_parent" eval="False"/>
