@@ -14,7 +14,7 @@
         <field name="mode">extension</field>
         <field name="model">stock.picking</field>
         <field name="name">product.bulk.form.inh</field>
-        <field name="priority">99</field>
+        <field name="priority">32</field>
         <field name="type">form</field>
     </record>
 
