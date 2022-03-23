@@ -8,19 +8,19 @@
 production = env['stock.location'].search([('usage','=','production')])[0]
 stock = record.picking_type_id.default_location_dest_id
 for sm in record.move_ids_without_package:
-if (sm.product_id.bulk_id.id) and not (sm.bulk_line_id.id):
-  new_sm = sm.copy()
-  new_sm.write({'product_id':sm.product_id.bulk_id.id, 'location_dest_id':stock.id, 'location_id':production.id})
-  sm.write({'bulk_line_id':new_sm.id, 'location_dest_id':production.id})
-if (not sm.bulk_line_id.bulk_avco_done) and (sm.bulk_line_id.product_id.categ_id.property_cost_method == 'average') and (record.state == 'done'):
-  new_sm = sm.bulk_line_id
-  units_now = new_sm.product_id.qty_available - new_sm.quantity_done
-  cost_now = new_sm.product_id.standard_price
-  units_new = sm.quantity_done
-  cost_new = sm.purchase_line_id.price_subtotal / sm.purchase_line_id.product_qty
-  avco_new = (units_now * cost_now + units_new * cost_new ) / (units_now + units_new)
-  new_sm['bulk_avco_done'] = True
-  new_sm.product_id['standard_price'] = avco_new
+    if (sm.product_id.bulk_id.id) and not (sm.bulk_line_id.id):
+        new_sm = sm.copy()
+        new_sm.write({'product_id':sm.product_id.bulk_id.id, 'location_dest_id':stock.id, 'location_id':production.id})
+        sm.write({'bulk_line_id':new_sm.id, 'location_dest_id':production.id})
+    if (not sm.bulk_line_id.bulk_avco_done) and (sm.bulk_line_id.product_id.categ_id.property_cost_method == 'average') and (record.state == 'done'):
+        new_sm = sm.bulk_line_id
+        units_now = new_sm.product_id.qty_available - new_sm.quantity_done
+        cost_now = new_sm.product_id.standard_price
+        units_new = sm.quantity_done
+        cost_new = sm.purchase_line_id.price_subtotal / sm.purchase_line_id.product_qty
+        avco_new = (units_now * cost_now + units_new * cost_new ) / (units_now + units_new)
+        new_sm['bulk_avco_done'] = True
+        new_sm.product_id['standard_price'] = avco_new
             </field>
             <field name="trigger">on_write</field>
             <field name="filter_pre_domain"></field>
