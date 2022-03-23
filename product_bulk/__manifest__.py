@@ -13,10 +13,6 @@
         'account',
         'base_automation',
     ],
-    'data': [
-        'views/product_product_view.xml',
-#        'views/stock_picking_view.xml',
-        'data/automated_action.xml',
-    ],
+    'data': ['data/automated_action.xml'],
     'installable':True,
 }

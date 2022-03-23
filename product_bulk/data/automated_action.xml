@@ -4,23 +4,37 @@
             <field name="model_id" ref="stock.model_stock_picking"/>
             <field name="state">code</field>
             <field name="code">
-# BULK product (It requires to mark origin products with push rule to production, for AVCO authomatic update):
-production = env['stock.location'].search([('usage','=','production')])[0]
-stock = record.picking_type_id.default_location_dest_id
+# SM cost in Purchase Kits, proportional to original BOM:
 for sm in record.move_ids_without_package:
-    if (sm.product_id.bulk_id.id) and not (sm.bulk_line_id.id):
-        new_sm = sm.copy()
-        new_sm.write({'product_id':sm.product_id.bulk_id.id, 'location_dest_id':stock.id, 'location_id':production.id})
-        sm.write({'bulk_line_id':new_sm.id})
-    if (not sm.bulk_line_id.bulk_avco_done) and (sm.bulk_line_id.product_id.categ_id.property_cost_method == 'average') and (record.state == 'done'):
-        new_sm = sm.bulk_line_id
-        units_now = new_sm.product_id.qty_available - new_sm.quantity_done
-        cost_now = new_sm.product_id.standard_price
-        units_new = sm.quantity_done
-        cost_new = sm.purchase_line_id.price_subtotal / sm.purchase_line_id.product_qty
-        avco_new = (units_now * cost_now + units_new * cost_new ) / (units_now + units_new)
-        new_sm['bulk_avco_done'] = True
-        new_sm.product_id['standard_price'] = avco_new
+
+    # ONLY kits products and purchases:
+    if (sm.product_id.id != sm.purchase_line_id.product_id.id) and (record.purchase_id.id):
+      cost_unit = sm.purchase_line_id.price_subtotal / sm.purchase_line_id.product_qty
+
+      # Proportional costs from BOM:
+      bomline = env['mrp.bom.line'].search([('product_id','=',sm.product_id.id), ('bom_id.type','=','phantom'),
+        ('bom_id.product_tmpl_id','=',sm.purchase_line_id.product_id.product_tmpl_id.id)])[0]
+      if bomline.id:
+        cost_bom_product_id, cost_total, cost_bom_percentage = 0, 0, 1
+        for li in bomline.bom_id.bom_line_ids:
+          cost_total += li.product_id.standard_price * li.product_qty
+          if li.product_id.id == sm.product_id.id:
+            cost_bom_product_id += li.product_id.standard_price * li.product_qty
+        if cost_total > 0:
+          cost_bom_percentage = cost_bom_product_id / cost_total
+
+        # RATIO of bought products and deployed on Kit:
+        ratio = bomline.product_qty / bomline.bom_id.product_qty
+        sm['price_unit'] = cost_unit / ratio * cost_bom_percentage
+
+    # Update QTY_DELIVERY for Kits on purchase_order_line (by default only integer):
+    if (sm.product_id.id != sm.purchase_line_id.product_id.id) and (record.purchase_id.id) and (record.state == 'done'):
+      sm_allpickings = env['stock.move'].search([('product_id','=',sm.product_id.id),
+        ('purchase_line_id','=',sm.purchase_line_id.id), ('state','=','done')])
+      totaldelivery = 0
+      for sm in sm_allpickings:
+        totaldelivery += sm.product_qty
+      sm.purchase_line_id['qty_received'] = totaldelivery / ratio
             </field>
             <field name="trigger">on_write</field>
             <field name="filter_pre_domain"></field>
