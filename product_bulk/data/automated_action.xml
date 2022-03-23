@@ -37,8 +37,9 @@ for sm in record.move_ids_without_package:
       sm.purchase_line_id['qty_received'] = totaldelivery / ratio
             </field>
             <field name="trigger">on_write</field>
+            <field name="trigger_field_ids" eval="[(6,0, [ref('stock.field_stock_picking__state')])]"/>
             <field name="filter_pre_domain"></field>
-            <field name="filter_domain"></field>
+            <field name="filter_domain">[('purchase_id','!=',False)]</field>
             <field name="active" eval="True"/>
         </record>
 
