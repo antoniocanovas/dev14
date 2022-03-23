@@ -12,7 +12,7 @@ if record.state != 'draft':
       new_sm.write({'product_id':sm.product_id.bulk_id.id, 'location_dest_id':8, 'location_id':15})
       sm['bulk_line_id'] = new_sm.id
             </field>
-            <field name="trigger">on_change</field>
+            <field name="trigger">on_write</field>
             <field name="on_change_field_ids"></field>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
