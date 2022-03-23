@@ -4,14 +4,14 @@
             <field name="model_id" ref="stock.model_stock_picking"/>
             <field name="state">code</field>
             <field name="code">
-# BULK product:
+# BULK product (It requires to mark origin products with push rule to production, for AVCO authomatic update):
 production = env['stock.location'].search([('usage','=','production')])[0]
 stock = record.picking_type_id.default_location_dest_id
 for sm in record.move_ids_without_package:
     if (sm.product_id.bulk_id.id) and not (sm.bulk_line_id.id):
         new_sm = sm.copy()
         new_sm.write({'product_id':sm.product_id.bulk_id.id, 'location_dest_id':stock.id, 'location_id':production.id})
-        sm.write({'bulk_line_id':new_sm.id, 'location_dest_id':production.id})
+        sm.write({'bulk_line_id':new_sm.id})
     if (not sm.bulk_line_id.bulk_avco_done) and (sm.bulk_line_id.product_id.categ_id.property_cost_method == 'average') and (record.state == 'done'):
         new_sm = sm.bulk_line_id
         units_now = new_sm.product_id.qty_available - new_sm.quantity_done
