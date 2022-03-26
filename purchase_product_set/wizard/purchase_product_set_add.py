@@ -5,30 +5,30 @@
 from odoo import _, api, exceptions, fields, models
 
 
-class ProductSetAdd(models.TransientModel):
+class PurchaseProductSetAdd(models.TransientModel):
     _name = "purchase.product.set.add"
 #    _rec_name = "purchase_product_set_add"
     _description = "Wizard model to add product set into a quotation"
 
     order_id = fields.Many2one(
-        "sale.order",
-        "Sale Order",
+        "purchase.order",
+        "Purchase Order",
         required=True,
         default=lambda self: self.env.context.get("active_id")
-        if self.env.context.get("active_model") == "sale.order"
+        if self.env.context.get("active_model") == "purchase.order"
         else None,
         ondelete="cascade",
     )
     partner_id = fields.Many2one(related="order_id.partner_id", ondelete="cascade")
     product_set_id = fields.Many2one(
-        "product.set", "Product set", required=True, ondelete="cascade"
+        "purchase.product.set", "Product set", required=True, ondelete="cascade"
     )
     product_set_line_ids = fields.Many2many(
-        "product.set.line",
+        "purchase.product.set.line",
         "Product set lines",
         required=True,
         ondelete="cascade",
-        compute="_compute_product_set_line_ids",
+        compute="_compute_purchase_product_set_line_ids",
         readonly=False,
     )
     quantity = fields.Float(
@@ -42,9 +42,9 @@ class ProductSetAdd(models.TransientModel):
 
     @api.depends_context("product_set_add__set_line_ids")
     @api.depends("product_set_id")
-    def _compute_product_set_line_ids(self):
+    def _compute_purchase_product_set_line_ids(self):
         line_ids = self.env.context.get("product_set_add__set_line_ids", [])
-        lines_from_ctx = self.env["product.set.line"].browse(line_ids)
+        lines_from_ctx = self.env["purchase.product.set.line"].browse(line_ids)
         for rec in self:
             if rec.product_set_line_ids:
                 # Passed on creation
