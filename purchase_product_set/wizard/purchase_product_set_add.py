@@ -7,7 +7,7 @@ from odoo import _, api, exceptions, fields, models
 
 class ProductSetAdd(models.TransientModel):
     _name = "purchase.product.set.add"
-    _rec_name = "purchase_product_set_id"
+    _rec_name = "purchase_product_set_add"
     _description = "Wizard model to add product set into a quotation"
 
     order_id = fields.Many2one(
