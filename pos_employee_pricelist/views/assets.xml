@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_frontend" inherit_id="point_of_sale.assets" name="pos assets">
+        	<xpath expr="link[last()]" position="after">
+    			<link rel="stylesheet" type="text/css" href="/pos_employee_pricelist/static/src/css/custom.css" />
+    		</xpath>
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/pos_employee_pricelist/static/src/js/models.js"/>
+                <script type="text/javascript" src="/pos_employee_pricelist/static/src/js/SetPricelistButton.js"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

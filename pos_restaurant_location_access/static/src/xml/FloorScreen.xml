@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="FloorScreen" t-inherit="pos_restaurant.FloorScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('floor-selector')]" position="replace">
+        	<div class="floor-selector">
+                <t t-foreach="state.EPfloors" t-as="floor" t-key="floor.id">
+                    <span class="button button-floor" t-att-class="{ active: floor.id === state.selectedFloorId }" t-on-click="selectFloor(floor)">
+                        <t t-esc="floor.name" />
+                    </span>
+                </t>
+            </div>
+        </xpath>
+    </t>
+</templates>
