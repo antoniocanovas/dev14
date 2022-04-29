@@ -13,14 +13,14 @@
                         <field name="project_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="project_partner_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="is_new" widget="boolean_toggle"/>
-                        <field name="license" attrs="{'invisible':[('is_new','=',False)]}"/>
-                        <field name="partner_id" attrs="{'invisible':[('is_new','=',False)]}"/>
-                        <field name="model" attrs="{'invisible':[('is_new','=',False)]}"/>
+                        <field name="license" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
+                        <field name="partner_id" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
+                        <field name="model" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="user_id" attrs="{'invisible':[('is_new','=',False)]}"/>
                     </group>
                     <footer>
-                        <button t-if="project_id" name="create_workshop_task" string="Crear" class="oe_right oe_highlight"
-                                type="object"/>
+                        <button t-if="project_id" name="create_workshop_task" string="Crear presupuesto y OT"
+                                class="oe_left oe_highlight" type="object"/>
                     </footer>
                 </sheet>
             </form>
@@ -31,7 +31,7 @@
         <field name="key" eval="False"/>
         <field name="mode">primary</field>
         <field name="model">project.workshop</field>
-        <field name="name">Default form</field>
+        <field name="name">Default project workshop form</field>
         <field name="priority">16</field>
         <field name="type">form</field>
     </record>
@@ -52,7 +52,7 @@
         <field name="key" eval="False"/>
         <field name="mode">primary</field>
         <field name="model">project.workshop</field>
-        <field name="name">Default tree</field>
+        <field name="name">Default project workflow tree</field>
         <field name="priority">16</field>
         <field name="type">tree</field>
     </record>
