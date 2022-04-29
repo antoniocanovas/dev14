@@ -8,33 +8,17 @@
                     <h2>
                         <field name="name"/>
                     </h2>
-                    <!--<group name="basic_params" col="4">
-                        <field name="type"/>
-                        <field name="state"/>
-                        <field name="ocr_upload_id"/>
-                        <field name="invoice_reference"/>
+                    <group name="project_workgroup_general">
+                        <field name="note"/>
+                        <field name="project_id"/>
+                        <field name="project_partner_id"/>
+                        <field name="is_new"/>
+                        <field name="license"/>
+                        <field name="partner_id"/>
+                        <field name="model"/>
+                        <field name="user_id"/>
                     </group>
-                    <notebook colspan="4">
-                        <page string="Valores">
-                            <field name="value_ids" context="{'default_ocr_transaction_id': id}">
-                                <tree editable="bottom">
-                                    <field name="name"/>
-                                    <field name="value"/>
-                                    <field name="dictionary_id"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Job">
-                            <group col="2">
-                                <field name="attachment_id"/>
-                                <field name="token"/>
-                                <field name="json_text"/>
-                                <field name="create_date"/>
-                                <field name="write_date"/>
-                                <field name="transaction_error"/>
-                            </group>
-                        </page>
-                    </notebook>
+                    <!--
                     <footer>
                         <button t-if="invoice_id" name="create_work_shop" string="Ver Factura" class="oe_right oe_highlight"
                                 type="object"/>
@@ -59,7 +43,9 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-
+                <field name="project_id"/>
+                <field name="project_partner_id"/>
+                <field name="user_id"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
