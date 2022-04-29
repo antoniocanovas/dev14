@@ -3,20 +3,20 @@
       <record id="project_workshop_form" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-            <form>
+            <form name="project_workgroup_main_form">
                 <sheet string="Entradas">
                     <h2>
                         <field name="name"/>
                     </h2>
                     <group name="project_workgroup_general">
                         <field name="note"/>
-                        <field name="project_id"/>
-                        <field name="project_partner_id"/>
-                        <field name="is_new"/>
-                        <field name="license"/>
-                        <field name="partner_id"/>
-                        <field name="model"/>
-                        <field name="user_id"/>
+                        <field name="project_id" attrs="{'invisible':[('is_new','=',True)]}"/>
+                        <field name="project_partner_id" attrs="{'invisible':[('is_new','=',True)]}"/>
+                        <field name="is_new" widget="boolean_button"/>
+                        <field name="license" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
+                        <field name="partner_id" attrs="{'invisible':[('is_new','=',False), 'required':[('is_new','=',True)]}"/>
+                        <field name="model" attrs="{'invisible':[('is_new','=',False)]}"/>
+                        <field name="user_id" attrs="{'invisible':[('is_new','=',False)]}"/>
                     </group>
                     <!--
                     <footer>

@@ -11,7 +11,7 @@ class ProjectWorkshop(models.Model):
     _name = "project.workshop"
     _description = ""
 
-    name = fields.Char('Asunto')
+    name = fields.Char('Asunto', required=True, store=True)
     note = fields.Text('Notas')
     project_id = fields.Many2one('project.project', string='Vehículo')
     project_partner_id = fields.Many2one('res.partner', related='project_id.partner_id', string='Cliente')
