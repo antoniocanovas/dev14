@@ -21,6 +21,6 @@ class ProjectWorkshop(models.Model):
     model = fields.Char('Marca y modelo')
     user_id = fields.Many2one('res.users', string='Técnico')
 
-    #api.depends('')
-    #def create_work_shop(self):
-    #    for record in self:
+    def create_workshop_task(self):
+        for record in self:
+            a = 1
