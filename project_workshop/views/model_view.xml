@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <record id="project_workshop_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" delete="false">
+                <sheet string="Entradas">
+                    <h2>
+                        <field name="name"/>
+                    </h2>
+                    <!--<group name="basic_params" col="4">
+                        <field name="type"/>
+                        <field name="state"/>
+                        <field name="ocr_upload_id"/>
+                        <field name="invoice_reference"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Valores">
+                            <field name="value_ids" context="{'default_ocr_transaction_id': id}">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="value"/>
+                                    <field name="dictionary_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Job">
+                            <group col="2">
+                                <field name="attachment_id"/>
+                                <field name="token"/>
+                                <field name="json_text"/>
+                                <field name="create_date"/>
+                                <field name="write_date"/>
+                                <field name="transaction_error"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button t-if="invoice_id" name="create_work_shop" string="Ver Factura" class="oe_right oe_highlight"
+                                type="object"/>
+                    </footer>-->
+                </sheet>
+
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.workshop</field>
+        <field name="name">Default form</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="project_workshop_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.workshop</field>
+        <field name="name">Default tree</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+</odoo>

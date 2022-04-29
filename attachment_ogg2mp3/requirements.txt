@@ -1,0 +1,2 @@
+pip install pydub
+apt install ffmpeg
