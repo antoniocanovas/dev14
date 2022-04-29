@@ -19,7 +19,7 @@ class ProjectWorkshop(models.Model):
     license = fields.Char('Matrícula')
     partner_id = fields.Many2one('res.partner', 'Cliente')
     model = fields.Char('Marca y modelo')
-    user_id = fields.Many2one('res.user', string='Técnico')
+    user_id = fields.Many2one('res.users', string='Técnico')
 
     #api.depends('')
     #def create_work_shop(self):

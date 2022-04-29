@@ -12,7 +12,7 @@
                         <field name="note"/>
                         <field name="project_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="project_partner_id" attrs="{'invisible':[('is_new','=',True)]}"/>
-                        <field name="is_new" widget="boolean_button"/>
+                        <field name="is_new" widget="boolean_toggle"/>
                         <field name="license" attrs="{'invisible':[('is_new','=',False)]}"/>
                         <field name="partner_id" attrs="{'invisible':[('is_new','=',False)]}"/>
                         <field name="model" attrs="{'invisible':[('is_new','=',False)]}"/>
