@@ -3,7 +3,7 @@
       <record id="project_workshop_form" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-            <form create="false" edit="false" delete="false">
+            <form>
                 <sheet string="Entradas">
                     <h2>
                         <field name="name"/>
@@ -24,7 +24,6 @@
                                 type="object"/>
                     </footer>-->
                 </sheet>
-
             </form>
         </field>
         <field name="field_parent" eval="False"/>
