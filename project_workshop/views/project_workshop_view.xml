@@ -6,7 +6,7 @@
             <form name="project_workgroup_main_form">
                 <sheet string="Entradas">
                     <h2>
-                        <field name="name"/>
+                        <field name="name" placeholder="Breve descripción del problema ..."/>
                     </h2>
                     <group name="project_workgroup_general">
                         <field name="date_in"/>
@@ -24,9 +24,9 @@
                     </group>
                     <notebook>
                         <page name="description_page" string="Descripcion">
-                            <h3>Incidencia:</h3>
+                            <h3>Descripción ampliada:</h3>
                             <field name="description"/>
-                            <h3>Resolución:</h3>
+                            <h3>Resolución tras cierre de trabajos:</h3>
                             <field name="solution"/>
                             <group>
                                 <field name="task_id" readonly="1"/>
