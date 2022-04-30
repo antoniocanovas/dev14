@@ -12,7 +12,7 @@ class ProjectWorkshop(models.Model):
     _description = ""
 
     name = fields.Char('Asunto', required=True, store=True)
-    description = fields.Text('Notas')
+    description = fields.Html('Notas')
     project_id = fields.Many2one('project.project', string='Vehículo')
     project_partner_id = fields.Many2one('res.partner', related='project_id.partner_id', string='Cliente')
     is_new = fields.Boolean("Nuevo")
