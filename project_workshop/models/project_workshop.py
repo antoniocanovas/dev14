@@ -12,7 +12,7 @@ class ProjectWorkshop(models.Model):
     _description = ""
 
     name = fields.Char('Asunto', required=True, store=True)
-    note = fields.Text('Notas')
+    description = fields.Html('Notas')
     project_id = fields.Many2one('project.project', string='Vehículo')
     project_partner_id = fields.Many2one('res.partner', related='project_id.partner_id', string='Cliente')
     is_new = fields.Boolean("Nuevo")
@@ -20,7 +20,7 @@ class ProjectWorkshop(models.Model):
     partner_id = fields.Many2one('res.partner', 'Cliente')
     model = fields.Char('Marca y modelo')
     user_id = fields.Many2one('res.users', string='Técnico')
-    sale_line_id = fields.Many2one('sale.order.line', string='Línea de presupuesto')
+    sale_line_id = fields.Many2one('sale.order.line', string='Línea de pedido')
 
     def create_workshop_task(self):
         for record in self:
