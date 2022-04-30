@@ -32,8 +32,10 @@
                             </group>
                         </page>
                         <page name="other_info" string="Información adicional">
-                            <field name="sale_id" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
-                            <field name="sale_line_id" readonly="1" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
+                            <group>
+                                <field name="sale_id" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
+                                <field name="sale_line_id" readonly="1" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
+                            </group>
                         </page>
                     </notebook>
                     <div attrs="{'invisible':[('task_id','!=',False)]}">
