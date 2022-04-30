@@ -5,6 +5,11 @@
         <field name="arch" type="xml">
             <form name="project_workgroup_main_form">
                 <sheet string="Entradas">
+                  <!--
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object" name="action_view_task" icon="fa-task" attrs="{'invisible': [('task_id', '=', False)]}" string="OT" groups="project.group_project_user"/>
+                    </div>
+                  -->
                     <h2>
                         <field name="name" placeholder="Breve descripción del problema ..."/>
                     </h2>
