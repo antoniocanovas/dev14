@@ -29,7 +29,10 @@ class ProjectWorkshop(models.Model):
     date_in = fields.Date('Entrada')
     date_deadline = fields.Date('Compromiso')
     date_out = fields.Date('Entregado')
+    estimated_time = fields.Float('Horas estimadas')
+    estimated_product = fields.Monetary('Coste aprox. repuestos')
     active = fields.Boolean('Activo', default=True)
+    currency_id = fields.Many2one('res.currency', default=1)
 
     def create_workshop_task(self):
         for record in self:

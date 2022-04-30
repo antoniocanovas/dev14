@@ -34,8 +34,11 @@
                         </page>
                         <page name="other_info" string="Información adicional">
                             <group>
+                                <field name="estimated_time" widget="timesheet_uom_timer"/>
+                                <field name="estimated_product"/>
                                 <field name="sale_id" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
                                 <field name="sale_line_id" readonly="1" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
+                                <field name="currency_id" invisible="1"/>
                             </group>
                         </page>
                     </notebook>
