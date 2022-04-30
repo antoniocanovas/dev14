@@ -20,23 +20,22 @@
                         <field name="partner_id" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="model" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="user_id" attrs="{'invisible':[('is_new','=',False)]}"/>
-
-                        <field name="task_id" readonly="1"/>
-                        <field name="stage_id" attrs="{'invisible':[('task_id','=',False)]}"/>
-                        <field name="is_closed" attrs="{'invisible':[('task_id','=',False)]}"/>
-                        <notebook>
-                            <page name="description_page" string="Descripcion">
-                                <field name="description"/>
-                                <group>
-                                    <field name="date_out" attrs="{'invisible':[('task_id','=',False)]}"/>
-                                </group>
-                            </page>
-                            <page name="other_info" string="Información adicional">
-                                <field name="sale_id" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
-                                <field name="sale_line_id" readonly="1" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
-                            </page>
-                        </notebook>
                     </group>
+                    <notebook>
+                        <page name="description_page" string="Descripcion">
+                            <field name="description"/>
+                            <group>
+                                <field name="task_id" readonly="1"/>
+                                <field name="stage_id" attrs="{'invisible':[('task_id','=',False)]}"/>
+                                <field name="is_closed" attrs="{'invisible':[('task_id','=',False)]}"/>
+                                <field name="date_out" attrs="{'invisible':[('task_id','=',False)]}"/>
+                            </group>
+                        </page>
+                        <page name="other_info" string="Información adicional">
+                            <field name="sale_id" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
+                            <field name="sale_line_id" readonly="1" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
+                        </page>
+                    </notebook>
                     <div attrs="{'invisible':[('task_id','!=',False)]}">
                         <button name="create_workshop_task" string="Crear presupuesto y OT" class="oe_highlight" type="object"/>
                     </div>
