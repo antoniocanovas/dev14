@@ -30,7 +30,8 @@ class ProjectWorkshop(models.Model):
     date_deadline = fields.Date('Compromiso')
     date_out = fields.Date('Entregado')
     estimated_time = fields.Float('Horas estimadas')
-    estimated_product = fields.Monetary('Coste aprox. repuestos')
+    estimated_product = fields.Monetary('Estimación material')
+    effective_hours = fields.Float('Horas imputadas', related='task_id.effective_hours')
     active = fields.Boolean('Activo', default=True)
     currency_id = fields.Many2one('res.currency', default=1)
 
