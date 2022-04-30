@@ -21,6 +21,8 @@
                         <field name="sale_line_id" widget="selection"
                                domain="[('order_partner_id','=',project_partner_id),('is_service','=',True),('state','in',['sale'])]"/>
                         <field name="task_id" readonly="1"/>
+                        <field name="stage_id"/>
+                        <field name="is_closed"/>
                     </group>
                     <footer>
                         <button t-if="project_id" name="create_workshop_task" string="Crear presupuesto y OT"
@@ -48,6 +50,8 @@
                 <field name="project_id"/>
                 <field name="project_partner_id"/>
                 <field name="user_id"/>
+                <field name="stage_id"/>
+                <field name="is_closed"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
