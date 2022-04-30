@@ -20,6 +20,7 @@ class ProjectWorkshop(models.Model):
     partner_id = fields.Many2one('res.partner', 'Cliente')
     model = fields.Char('Marca y modelo')
     user_id = fields.Many2one('res.users', string='Técnico')
+    sale_line_id = fields.Many2one('sale.order.line', string='Línea de presupuesto')
 
     def create_workshop_task(self):
         for record in self:

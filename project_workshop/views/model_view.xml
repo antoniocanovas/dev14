@@ -17,6 +17,8 @@
                         <field name="partner_id" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="model" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="user_id" attrs="{'invisible':[('is_new','=',False)]}"/>
+                        <field name="sale_line_id" domain="[('partner_order_id','=',project_partner_id),
+                                                          ('is_service','=',True),('state','in',['sale'])]"/>
                     </group>
                     <footer>
                         <button t-if="project_id" name="create_workshop_task" string="Crear presupuesto y OT"
