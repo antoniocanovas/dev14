@@ -14,6 +14,7 @@
                         <field name="project_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="project_partner_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="is_new" widget="boolean_toggle" attrs="{'invisible':[('task_id','!=',False)]}"/>
+                        <field name="warranty" widget="boolean_toggle" attrs="{'invisible':['|',('sale_line_id','!=',False),('is_new','=',True)]}"/>
                         <field name="license" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="partner_id" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="model" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
