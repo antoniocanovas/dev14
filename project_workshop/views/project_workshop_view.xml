@@ -77,11 +77,11 @@
                 <field name="project_partner_id"/>
                 <field name="solution" optional="show"/>
                 <field name="user_id"/>
-                <field name="stage_id"/>
                 <field name="date_in" optional="show"/>
                 <field name="date_deadline" optional="show"/>
                 <field name="date_out" optional="show"/>
                 <field name="is_closed" optional="hide"/>
+                <field name="stage_id"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
