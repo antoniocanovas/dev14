@@ -16,12 +16,14 @@ class ProjectWorkshop(models.Model):
     project_id = fields.Many2one('project.project', string='Vehículo')
     project_partner_id = fields.Many2one('res.partner', related='project_id.partner_id', string='Cliente')
     is_new = fields.Boolean("Nuevo")
+    warranty = fields.Boolean("En garantía")
     license = fields.Char('Matrícula')
     partner_id = fields.Many2one('res.partner', 'Cliente')
     model = fields.Char('Marca y modelo')
     user_id = fields.Many2one('res.users', string='Técnico')
     sale_line_id = fields.Many2one('sale.order.line', string='Línea de pedido')
     sale_id = fields.Many2one('sale.order', related='sale_line_id.order_id', string='Presupuesto')
+    task_id = fields.Many2one('project.task', string='Tarea')
 
     def create_workshop_task(self):
         for record in self:
@@ -35,7 +37,7 @@ class ProjectWorkshop(models.Model):
                 record.write({'project_id': project.id, 'is_new': False})
 
             # Crear pedido de venta con línea de servicio y tarea asociada a la línea:
-            if (record.sale_line_id.id == False):
+            if (record.sale_line_id.id == False) and (record.warranty == False):
                 saleorder = self.env['sale.order'].create({'partner_id': project.partner_id.id})
                 saleline = self.env['sale.order.line'].create(
                     {'order_id': saleorder.id, 'product_id': project.timesheet_product_id.id})
@@ -43,3 +45,9 @@ class ProjectWorkshop(models.Model):
                 task = self.env['project.task'].create(
                     {'project_id': project.id, 'name': record.name, 'description': record.description,
                      'partner_id': project.partner_id.id, 'sale_line_id': saleline.id})
+            if (record.warranty == True):
+                task = self.env['project.task'].create(
+                    {'project_id': project.id, 'name': record.name, 'description': record.description,
+                     'partner_id': project.partner_id.id})
+            if task.id:
+                record['task_id'] = task.id
