@@ -10,6 +10,7 @@
                     </h2>
                     <group name="project_workgroup_general">
                         <field name="date_in"/>
+                        <field name="date_deadline"/>
                         <field name="project_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="project_partner_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="is_new" widget="boolean_toggle"
@@ -66,6 +67,7 @@
                 <field name="user_id"/>
                 <field name="stage_id"/>
                 <field name="is_closed"/>
+                <field name="date_deadline"/>
                 <field name="date_out"/>
             </tree>
         </field>

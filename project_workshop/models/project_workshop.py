@@ -27,6 +27,7 @@ class ProjectWorkshop(models.Model):
     stage_id = fields.Many2one('project.task.type', string='Etapa', related='task_id.stage_id')
     is_closed = fields.Boolean('Cerrado', related='stage_id.is_closed')
     date_in = fields.Date('Entrada')
+    date_deadline = fields.Date('Compromiso')
     date_out = fields.Date('Entregado')
     active = fields.Boolean('Activo', default=True)
 
