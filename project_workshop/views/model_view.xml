@@ -29,6 +29,9 @@
                         <field name="date_out" attrs="{'invisible':[('task_id','=',False)]}"/>
                         <field name="is_closed" attrs="{'invisible':[('task_id','=',False)]}"/>
                     </group>
+                    <div attrs="{'invisible':[('task_id','!=',False)]}">
+                        <button name="create_workshop_task" string="Crear presupuesto y OT" class="oe_highlight" type="object"/>
+                    </div>
                     <footer>
                         <button t-if="project_id" name="create_workshop_task" string="Crear presupuesto y OT"
                                 class="oe_left oe_highlight" type="object"/>
