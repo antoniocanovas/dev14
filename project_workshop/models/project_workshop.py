@@ -48,6 +48,18 @@ class ProjectWorkshop(models.Model):
         }
         return action_window
 
+    def action_view_so(self):
+        self.ensure_one()
+        action_window = {
+            "type": "ir.actions.act_window",
+            "res_model": "sale.order",
+            "name": "Sale Order",
+            "views": [[False, "form"]],
+            "context": {"create": False, "show_order": True},
+            "res_id": self.sale_id.id
+        }
+        return action_window
+
 #    def action_view_so(self):
 #        self.ensure_one()
 #        action_window = {
