@@ -9,6 +9,7 @@
                         <field name="name"/>
                     </h2>
                     <group name="project_workgroup_general">
+                        <field name="date_in"/>
                         <field name="description"/>
                         <field name="project_id" attrs="{'invisible':[('is_new','=',True)]}"/>
                         <field name="project_partner_id" attrs="{'invisible':[('is_new','=',True)]}"/>
@@ -22,6 +23,7 @@
                                domain="[('order_partner_id','=',project_partner_id),('is_service','=',True),('state','in',['draft','sale'])]"/>
                         <field name="task_id" readonly="1"/>
                         <field name="stage_id"/>
+                        <field name="date_out"/>
                         <field name="is_closed"/>
                     </group>
                     <footer>
@@ -46,12 +48,14 @@
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <tree>
+                <field name="date_in"/>
                 <field name="name"/>
                 <field name="project_id"/>
                 <field name="project_partner_id"/>
                 <field name="user_id"/>
                 <field name="stage_id"/>
                 <field name="is_closed"/>
+                <field name="date_out"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>

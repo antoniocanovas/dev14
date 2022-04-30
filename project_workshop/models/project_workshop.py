@@ -26,6 +26,8 @@ class ProjectWorkshop(models.Model):
     task_id = fields.Many2one('project.task', string='Tarea')
     stage_id = fields.Many2one('project.task.type', string='Etapa', related='task_id.stage_id')
     is_closed = fields.Boolean('Cerrado', related='stage_id.is_closed')
+    date_in = fields.Date('Entrada')
+    date_out = fields.Date('Entregado')
 
     def create_workshop_task(self):
         for record in self:
