@@ -51,12 +51,13 @@ class ProjectWorkshop(models.Model):
                 saleline = self.env['sale.order.line'].create(
                     {'order_id': saleorder.id, 'product_id': project.timesheet_product_id.id})
                 record['sale_line_id'] = saleline.id
-                task = self.env['project.task'].create(
-                    {'project_id': project.id, 'name': record.name, 'description': record.description,
-                     'partner_id': project.partner_id.id, 'sale_line_id': saleline.id})
+                task = self.env['project.task'].create({'name': record.name, 'project_id': project.id,
+                    'description': record.description, 'partner_id': project.partner_id.id,
+                    'date_deadline':record.date_deadline, 'planned_hours':record.estimated_time,
+                    'sale_line_id': saleline.id})
             if (record.warranty == True):
-                task = self.env['project.task'].create(
-                    {'project_id': project.id, 'name': record.name, 'description': record.description,
-                     'partner_id': project.partner_id.id})
+                task = self.env['project.task'].create({'name': record.name, 'project_id': project.id,
+                    'description': record.description, 'partner_id': project.partner_id.id,
+                    'date_deadline':record.date_deadline, 'planned_hours':record.estimated_time})
             if task.id:
                 record['task_id'] = task.id
