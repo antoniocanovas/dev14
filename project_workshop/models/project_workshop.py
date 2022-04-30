@@ -28,6 +28,7 @@ class ProjectWorkshop(models.Model):
     is_closed = fields.Boolean('Cerrado', related='stage_id.is_closed')
     date_in = fields.Date('Entrada')
     date_out = fields.Date('Entregado')
+    active = fields.Boolean('Activo')
 
     def create_workshop_task(self):
         for record in self:
