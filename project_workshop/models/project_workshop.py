@@ -35,6 +35,8 @@ class ProjectWorkshop(models.Model):
     effective_hours = fields.Float('Horas imputadas', related='task_id.effective_hours')
     active = fields.Boolean('Activo', default=True)
     currency_id = fields.Many2one('res.currency', default=1)
+    company_id = fields.Many2one("res.company", "Compañía",
+        default=lambda self: self.env.company, ondelete="cascade")
 
     def action_view_project(self):
         self.ensure_one()
