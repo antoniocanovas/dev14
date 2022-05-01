@@ -106,7 +106,7 @@
                     <field name="stage_id"/>
                     <field name="project_id"/>
 
-                    <filter string="Mis entradas asignadas inicialmente" name="my_entry" domain="[('user_id', '=', uid)]"/>
+                    <filter string="Mis entradas" name="my_entry" domain="[('user_id', '=', uid)]"/>
                     <filter string="Unassigned" name="unassigned" domain="[('user_id', '=', False)]"/>
                     <separator/>
                     <filter string="Late Tasks" name="late" domain="[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
