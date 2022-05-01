@@ -127,9 +127,9 @@
                         <filter string="Project" name="project" context="{'group_by': 'project_id'}"/>
                         <filter string="Customer" name="customer" context="{'group_by': 'project_partner_id'}"/>
                         <filter string="Creation Date" name="group_create_date" context="{'group_by': 'create_date'}"/>
-                        <filter string="Fecha de entrada" name="group_date_in" context="{'group_by': 'create_in'}"/>
-                        <filter string="Fecha de compromiso" name="group_date_deadline" context="{'group_by': 'create_date'}"/>
-                        <filter string="Fecha de entrega" name="group_date_out" context="{'group_by': 'create_out'}"/>
+                        <filter string="Fecha de entrada" name="group_date_in" context="{'group_by': 'date_in'}"/>
+                        <filter string="Fecha de compromiso" name="group_date_deadline" context="{'group_by': 'date_deadline'}"/>
+                        <filter string="Fecha de entrega" name="group_date_out" context="{'group_by': 'date_out'}"/>
                     </group>
             </search>
         </field>
