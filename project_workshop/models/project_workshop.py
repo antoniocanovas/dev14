@@ -26,7 +26,6 @@ class ProjectWorkshop(models.Model):
     sale_id = fields.Many2one('sale.order', related='sale_line_id.order_id', string='Presupuesto')
     task_id = fields.Many2one('project.task', string='Tarea')
     stage_id = fields.Many2one('project.task.type', string='Etapa', related='task_id.stage_id', store=True)
-    is_closed = fields.Boolean('Cerrado', related='stage_id.is_closed', store=True)
     date_in = fields.Date('Entrada')
     date_deadline = fields.Date('Compromiso')
     date_out = fields.Date('Entregado')
@@ -37,6 +36,17 @@ class ProjectWorkshop(models.Model):
     currency_id = fields.Many2one('res.currency', default=1)
     company_id = fields.Many2one("res.company", "Compañía",
         default=lambda self: self.env.company, ondelete="cascade")
+#    is_closed = fields.Boolean('Cerrado', related='stage_id.is_closed', store=True)
+
+    @api.depends('stage_id', 'date_out')
+    def _get_is_closed(self):
+        for record in self:
+            closed = False
+            if (record.date_out) and (record.stage_id.is_closed == True):
+                closed = True
+            record.is_closed = closed
+    is_closed = fields.Boolean('Cerrado', compute='_get_is_closed', store=True)
+
 
     def action_view_project(self):
         self.ensure_one()
@@ -73,18 +83,6 @@ class ProjectWorkshop(models.Model):
             "res_id": self.sale_id.id
         }
         return action_window
-
-#    def action_view_so(self):
-#        self.ensure_one()
-#        action_window = {
-#            "type": "ir.actions.act_window",
-#            "res_model": "sale.order",
-#            "name": "Sales Order",
-#            "views": [[False, "form"]],
-#            "context": {"create": False, "show_sale": True},
-#            "res_id": self.sale_order_id.id
-#        }
-#        return action_window
 
     def create_workshop_task(self):
         for record in self:
