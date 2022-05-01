@@ -26,7 +26,7 @@
                         <field name="license" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="partner_id" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
                         <field name="model" attrs="{'invisible':[('is_new','=',False)], 'required':[('is_new','=',True)]}"/>
-                        <field name="user_id" attrs="{'invisible':[('is_new','=',False)]}"/>
+                        <field name="user_id"/>
                     </group>
                     <notebook>
                         <page name="description_page" string="Descripción">
