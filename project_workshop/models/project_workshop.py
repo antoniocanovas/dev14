@@ -36,6 +36,18 @@ class ProjectWorkshop(models.Model):
     active = fields.Boolean('Activo', default=True)
     currency_id = fields.Many2one('res.currency', default=1)
 
+    def action_view_project(self):
+        self.ensure_one()
+        action_window = {
+            "type": "ir.actions.act_window",
+            "res_model": "project.project",
+            "name": "Project Project",
+            "views": [[False, "form"]],
+            "context": {"create": False, "show_project": True},
+            "res_id": self.project_id.id
+        }
+        return action_window
+
     def action_view_task(self):
         self.ensure_one()
         action_window = {

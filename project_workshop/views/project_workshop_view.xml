@@ -6,6 +6,7 @@
             <form name="project_workgroup_main_form">
                 <sheet string="Entradas">
                     <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_project" icon="fa-tasks" attrs="{'invisible': [('project_id', '=', False)]}" string="Proyecto" groups="project.group_project_user"/>
                         <button class="oe_stat_button" type="object" name="action_view_task" icon="fa-tasks" attrs="{'invisible': [('task_id', '=', False)]}" string="OT" groups="project.group_project_user"/>
                         <button class="oe_stat_button" type="object" name="action_view_so" icon="fa-dollar" attrs="{'invisible': [('sale_id', '=', False)]}" string="Presupuesto" groups="sales_team.group_sale_salesman"/>
                     </div>
@@ -28,7 +29,7 @@
                         <field name="user_id" attrs="{'invisible':[('is_new','=',False)]}"/>
                     </group>
                     <notebook>
-                        <page name="description_page" string="Descripcion">
+                        <page name="description_page" string="Descripción">
                             <h4>Descripción ampliada:</h4>
                             <field name="description"/>
                             <h4>Resolución tras cierre de trabajos:</h4>
