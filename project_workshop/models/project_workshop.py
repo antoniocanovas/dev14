@@ -42,7 +42,7 @@ class ProjectWorkshop(models.Model):
     def _get_is_closed(self):
         for record in self:
             closed = False
-            if (record.date_out) and (record.stage_id.is_closed == True):
+            if (record.stage_id.is_closed == True) and (record.date_out != False):
                 closed = True
             record.is_closed = closed
     is_closed = fields.Boolean('Cerrado', compute='_get_is_closed', store=True)
