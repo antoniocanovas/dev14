@@ -36,7 +36,6 @@ class ProjectWorkshop(models.Model):
     currency_id = fields.Many2one('res.currency', default=1)
     company_id = fields.Many2one("res.company", "Compañía",
         default=lambda self: self.env.company, ondelete="cascade")
-#    is_closed = fields.Boolean('Cerrado', related='stage_id.is_closed', store=True)
 
     @api.depends('stage_id', 'date_out')
     def _get_is_closed(self):
@@ -46,7 +45,6 @@ class ProjectWorkshop(models.Model):
                 closed = True
             record.is_closed = closed
     is_closed = fields.Boolean('Cerrado', compute='_get_is_closed', store=True)
-
 
     def action_view_project(self):
         self.ensure_one()
