@@ -109,9 +109,11 @@
                     <field name="project_id"/>
 
                     <filter string="Mis entradas" name="my_entry" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
                     <filter string="Sin responsable" name="unassigned" domain="[('user_id', '=', False)]"/>
                     <separator/>
                     <filter string="En curso" name="pending" domain="[('is_closed', '=', False)]"/>
+                    <separator/>
                     <filter string="Con retraso" name="late" domain="[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')),('is_closed','=',False)]"/>
                     <separator/>
                     <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
