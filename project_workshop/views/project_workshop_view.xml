@@ -94,4 +94,43 @@
         <field name="priority">16</field>
         <field name="type">tree</field>
     </record>
+
+    <record id="project_workshop_search" model="ir.ui.view">
+        <field name="name">Default project.workshop search</field>
+        <field name="model">project.workshop</field>
+        <field name="arch" type="xml">
+            <search string="Project Workshop">
+                    <field name="name" string="Asunto"/>
+                    <field name="user_id"/>
+                    <field name="project_partner_id" operator="child_of"/>
+                    <field name="stage_id"/>
+                    <field name="project_id"/>
+
+                    <filter string="My Tasks" name="my_tasks" domain="[('user_id', '=', uid)]"/>
+                    <filter string="Unassigned" name="unassigned" domain="[('user_id', '=', False)]"/>
+                    <separator/>
+                    <filter string="Late Tasks" name="late" domain="[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+
+<!--
+                    <filter string="Rated tasks" name="rating_task" domain="[('rating_last_value', '!=', 0.0)]" groups="project.group_project_rating"/>
+                    <separator/>
+                    <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction', '=', True)]"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <filter invisible="1" string="Late Activities" name="activities_overdue" domain="[('my_activity_date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]" help="Show all records which has next action date is before today"/>
+                    <filter invisible="1" string="Today Activities" name="activities_today" domain="[('my_activity_date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter invisible="1" string="Future Activities" name="activities_upcoming_all" domain="[('my_activity_date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+-->
+                    <group expand="0" string="Group By">
+                        <filter string="Stage" name="stage" context="{'group_by': 'stage_id'}"/>
+                        <filter string="Assigned to" name="user" context="{'group_by': 'user_id'}"/>
+                        <filter string="Project" name="project" context="{'group_by': 'project_id'}"/>
+                        <filter string="Customer" name="customer" context="{'group_by': 'project_partner_id'}"/>
+                        <filter string="Creation Date" name="group_create_date" context="{'group_by': 'create_date'}"/>
+                        <filter string="Fecha de compromiso" name="group_date_deadline" context="{'group_by': 'create_date'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
 </odoo>
