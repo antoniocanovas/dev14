@@ -26,7 +26,7 @@ class ProjectWorkshop(models.Model):
     sale_id = fields.Many2one('sale.order', related='sale_line_id.order_id', string='Presupuesto')
     task_id = fields.Many2one('project.task', string='Tarea')
     stage_id = fields.Many2one('project.task.type', string='Etapa', related='task_id.stage_id', store=True)
-    date_in = fields.Date('Entrada', default=lambda self: datetime.datetime.today())
+    date_in = fields.Date('Entrada', default=lambda self: datetime.today())
     date_deadline = fields.Date('Compromiso')
     date_out = fields.Date('Entregado')
     estimated_time = fields.Float('Horas estimadas')
