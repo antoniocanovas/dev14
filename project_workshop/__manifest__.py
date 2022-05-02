@@ -9,7 +9,8 @@
     "name": "Project Workshop",
     "version": "14.0.1.0.0",
     "category": "Project",
-    "author": "Comunitea",
+    "author": "Serincloud"
+              "Antonio Cánovas (antonio.canovas@ingenieriacloud.com)",
     "maintainer": "Serincloud",
     "website": "www.ingenieriacloud.com",
     "license": "AGPL-3",
