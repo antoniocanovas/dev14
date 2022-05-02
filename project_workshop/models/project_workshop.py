@@ -9,7 +9,8 @@ from datetime import datetime
 
 class ProjectWorkshop(models.Model):
     _name = "project.workshop"
-    _description = ""
+    _inherit = ['account.analytic.line', 'mail.thread', 'mail.activity.mixin']
+    _description = "Workshop Services (from Projects)"
 
     name = fields.Char('Asunto', required=True, store=True)
     description = fields.Html('Notas')
