@@ -9,6 +9,7 @@
                         <button class="oe_stat_button" type="object" name="action_view_project" icon="fa-puzzle-piece" attrs="{'invisible': [('project_id', '=', False)]}" string="Proyecto" groups="project.group_project_user"/>
                         <button class="oe_stat_button" type="object" name="action_view_task" icon="fa-tasks" attrs="{'invisible': [('task_id', '=', False)]}" string="OT" groups="project.group_project_user"/>
                         <button class="oe_stat_button" type="object" name="action_view_so" icon="fa-dollar" attrs="{'invisible': [('sale_id', '=', False)]}" string="Presupuesto" groups="sales_team.group_sale_salesman"/>
+                        <button class="oe_stat_button" type="object" name="action_set_date_out" icon="fa-arrow-circle-o-right" attrs="{'invisible': [('date_out', '!=', False)]}" string="Entregar" groups="project.group_project_user"/>
                     </div>
 
                     <h2>

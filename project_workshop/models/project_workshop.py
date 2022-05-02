@@ -46,6 +46,10 @@ class ProjectWorkshop(models.Model):
             record.is_closed = closed
     is_closed = fields.Boolean('Cerrado', compute='_get_is_closed', store=True)
 
+    def action_set_date_out(self):
+        for record in self:
+            record.date_out=datetime.now()
+
     def action_view_project(self):
         self.ensure_one()
         action_window = {
