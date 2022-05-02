@@ -5,7 +5,7 @@
 #    PedroGuirao pedro@serincloud.com
 ##############################################################################
 from odoo import api, fields, models, _
-from datetime import datetime
+from datetime import datetime, date
 
 class ProjectWorkshop(models.Model):
     _name = "project.workshop"
