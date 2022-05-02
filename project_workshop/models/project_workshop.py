@@ -4,7 +4,7 @@
 #    Copyright (C) 2021 Serincloud S.L. All Rights Reserved
 #    PedroGuirao pedro@serincloud.com
 ##############################################################################
-from odoo import api, fields, models, _
+from odoo import api, fields, models, datetime, _
 
 
 class ProjectWorkshop(models.Model):
