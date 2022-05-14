@@ -37,7 +37,7 @@ class ProjectWorkshop(models.Model):
     currency_id = fields.Many2one('res.currency', default=1)
 
     @api_depends('description')
-    def get_test:
+    def get_test(self):
         for record in self:
             record['test'] = html2plaintext(record.description)
     test = fields.Text('test', compute='get_test')
