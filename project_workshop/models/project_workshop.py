@@ -126,10 +126,10 @@ class ProjectWorkshop(models.Model):
                 record['sale_line_id'] = saleline.id
                 name = record.name
                 # Líneas: Nota de detale de la incidencia:
-#                if record.description:
-#                    description = html2plaintext(record.description)
-#                    saleline = self.env['sale.order.line'].create(
-#                       {'order_id': saleorder.id, 'name': description, 'display_type':'line_note'})
+                if record.description:
+                    description = html2plaintext(record.description)
+                    saleline = self.env['sale.order.line'].create(
+                       {'order_id': saleorder.id, 'name': description, 'display_type':'line_note'})
 
                 if record.pre_offer == True:
                     name += " **"
