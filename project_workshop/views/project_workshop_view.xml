@@ -83,7 +83,7 @@
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <tree name="project_workshop_tree" default_order="date_deadline asc">
-                <field name="project_id"/>
+                <field name="project_id" attrs="{'required':[('is_new','=',False)]}"/>
                 <field name="name"/>
                 <field name="project_partner_id"/>
                 <field name="solution" optional="show"/>
