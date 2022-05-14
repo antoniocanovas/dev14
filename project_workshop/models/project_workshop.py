@@ -137,9 +137,9 @@ class ProjectWorkshop(models.Model):
                     'description': record.description, 'partner_id': project.partner_id.id,
                     'date_deadline':record.date_deadline, 'planned_hours':record.estimated_time,
                     'sale_line_id': saleline.id, 'kanban_state': kanban_state})
+                record['task_id'] = task.id
             if (record.warranty == True):
                 task = self.env['project.task'].create({'name': record.name, 'project_id': project.id,
                     'description': record.description, 'partner_id': project.partner_id.id,
                     'date_deadline':record.date_deadline, 'planned_hours':record.estimated_time})
-            if task.id:
                 record['task_id'] = task.id
