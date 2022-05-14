@@ -35,7 +35,13 @@ class ProjectWorkshop(models.Model):
     effective_hours = fields.Float('Horas imputadas', related='task_id.effective_hours')
     active = fields.Boolean('Activo', default=True)
     currency_id = fields.Many2one('res.currency', default=1)
-    test = fields.Text('test', default=html2plaintext(record.description))
+
+    @api_depends('description')
+    def get_test:
+        for record in self:
+            record['test'] = html2plaintext(record.description)
+    test = fields.Text('test', compute='get_test')
+
     company_id = fields.Many2one("res.company", "Compañía",
         default=lambda self: self.env.company, ondelete="cascade")
 
