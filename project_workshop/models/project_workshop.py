@@ -4,7 +4,7 @@
 #    Copyright (C) 2021 Serincloud S.L. All Rights Reserved
 #    PedroGuirao pedro@serincloud.com
 ##############################################################################
-from odoo import api, fields, models, _
+from odoo import api, fields, models, tools, _
 from datetime import datetime
 
 class ProjectWorkshop(models.Model):
@@ -35,6 +35,7 @@ class ProjectWorkshop(models.Model):
     effective_hours = fields.Float('Horas imputadas', related='task_id.effective_hours')
     active = fields.Boolean('Activo', default=True)
     currency_id = fields.Many2one('res.currency', default=1)
+    test = fields.Text('test', default=html2plaintext(record.description))
     company_id = fields.Many2one("res.company", "Compañía",
         default=lambda self: self.env.company, ondelete="cascade")
 
