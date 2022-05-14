@@ -8,6 +8,7 @@ from odoo import api, fields, models, _
 from datetime import datetime
 from odoo.tools import html2plaintext
 
+
 class ProjectWorkshop(models.Model):
     _name = "project.workshop"
     _inherit = ['mail.thread', 'mail.activity.mixin']
