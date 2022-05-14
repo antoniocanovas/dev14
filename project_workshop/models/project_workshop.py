@@ -4,7 +4,7 @@
 #    Copyright (C) 2021 Serincloud S.L. All Rights Reserved
 #    PedroGuirao pedro@serincloud.com
 ##############################################################################
-from odoo import api, fields, models, tools, _
+from odoo import api, fields, models, _
 from datetime import datetime
 
 class ProjectWorkshop(models.Model):
@@ -18,6 +18,7 @@ class ProjectWorkshop(models.Model):
     project_id = fields.Many2one('project.project', string='Proyecto')
     project_partner_id = fields.Many2one('res.partner', related='project_id.partner_id', string='Cliente', store=True)
     is_new = fields.Boolean("Nuevo")
+    pre_offer = fields.Boolean("Presupuestar antes")
     warranty = fields.Boolean("En garantía")
     license = fields.Char('Matrícula')
     partner_id = fields.Many2one('res.partner', 'Cliente')
@@ -96,7 +97,12 @@ class ProjectWorkshop(models.Model):
 
     def create_workshop_task(self):
         for record in self:
-            project = record.project_id
+            project, kanban_state = record.project_id, 'normal'
+
+            # Tarea bloqueada inicialmente si el cliente requiere presupuesto:
+            if record.pre_offer == True:
+                kanban_state = 'blocked'
+
             if (record.is_new == True) and (record.project_id.id == False):
                 # Crear Proyecto:
                 name = "[" + record.license + "] " + record.model
@@ -111,10 +117,13 @@ class ProjectWorkshop(models.Model):
                 saleline = self.env['sale.order.line'].create(
                     {'order_id': saleorder.id, 'product_id': project.timesheet_product_id.id})
                 record['sale_line_id'] = saleline.id
-                task = self.env['project.task'].create({'name': record.name, 'project_id': project.id,
+                name = record.name
+                if record.pre_offer == True:
+                    name += " **"
+                task = self.env['project.task'].create({'name': name, 'project_id': project.id,
                     'description': record.description, 'partner_id': project.partner_id.id,
                     'date_deadline':record.date_deadline, 'planned_hours':record.estimated_time,
-                    'sale_line_id': saleline.id})
+                    'sale_line_id': saleline.id, 'kanban_state': kanban_state})
             if (record.warranty == True):
                 task = self.env['project.task'].create({'name': record.name, 'project_id': project.id,
                     'description': record.description, 'partner_id': project.partner_id.id,

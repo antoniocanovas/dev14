@@ -21,8 +21,9 @@
     "data": [
         "security/ir.model.access.csv",
         "security/rule_project_workshop.xml",
-        "views/menu_view.xml",
         "views/project_workshop_view.xml",
+        "views/menu_view.xml",
+
     ],
     "installable": True,
 }
