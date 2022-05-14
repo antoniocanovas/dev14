@@ -19,7 +19,7 @@
                         <field name="date_in"/>
                         <field name="date_deadline"/>
                         <field name="project_id" options="{'no_create': True}"
-                               attrs="{'invisible':[('is_new','=',True), 'required':[('is_new','=',False)]}"
+                               attrs="{'invisible':[('is_new','=',True)], 'required':[('is_new','=',False)]}"
                                domain="[('allow_timesheets','=',True),('allow_billable','=',True)]"/>
                         <field name="project_partner_id" attrs="{'invisible':['|',('project_id','=',False),('is_new','=',True)]}"/>
                         <field name="is_new" widget="boolean_toggle"
