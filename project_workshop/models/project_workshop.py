@@ -118,8 +118,8 @@ class ProjectWorkshop(models.Model):
                 saleorder = self.env['sale.order'].create({'partner_id': project.partner_id.id})
 
                 # Líneas: Sección general:
-                #saleline = self.env['sale.order.line'].create(
-                #    {'order_id': saleorder.id, 'name': record.name, 'display_type':'line_section'})
+                saleline = self.env['sale.order.line'].create(
+                    {'order_id': saleorder.id, 'name': record.name, 'display_type':'line_section'})
                 # Líneas: Producto de servicio:
                 saleline = self.env['sale.order.line'].create(
                     {'order_id': saleorder.id, 'product_id': project.timesheet_product_id.id})
