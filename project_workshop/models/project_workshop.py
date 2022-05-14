@@ -115,7 +115,8 @@ class ProjectWorkshop(models.Model):
 
             # Crear pedido de venta con línea de servicio y tarea asociada a la línea:
             if (record.sale_line_id.id == False) and (record.warranty == False):
-                saleorder = self.env['sale.order'].create({'partner_id': project.partner_id.id})
+                saleorder = self.env['sale.order'].create(
+                    {'partner_id': project.partner_id.id, 'note':html2plaintext(record.description)})
 
                 # Líneas: Sección general:
                 saleline = self.env['sale.order.line'].create(
@@ -125,9 +126,6 @@ class ProjectWorkshop(models.Model):
                     {'order_id': saleorder.id, 'product_id': project.timesheet_product_id.id})
                 record['sale_line_id'] = saleline.id
                 name = record.name
-                # Líneas: Nota de detale de la incidencia:
-                if record.description:
-                    record['note'] = html2plaintext(record.description)
 
                 if record.pre_offer == True:
                     name += " **"
