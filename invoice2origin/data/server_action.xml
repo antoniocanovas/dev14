@@ -7,7 +7,7 @@
             <field name="state">code</field>
             <field name="code">
 # Localizar pedidos de venta implicados:
-sale_order, linecount = [], 0
+sale_order, linecount = [], False
 for li in record.invoice_line_ids:
   for sol in li.sale_line_ids:
     if sol.order_id.id and sol.order_id not in sale_order:
@@ -25,10 +25,10 @@ for so in sale_order:
       new = env['account.move.line'].create({'name':li.name, 'display_type':'line_note', 'move_id':record.id, 'exclude_from_invoice_tab':False})
     elif li.display_type == False:
 
-      if linecount > 0:
+      if linecount == True:
         new = env['account.move.line'].create({'name':'....', 'display_type':'line_section', 'move_id':record.id, 'exclude_from_invoice_tab':False})
       else:
-        linecount += 1
+        linecount == True
 
       account = li.product_id.property_account_expense_id
       if not li.product_id.property_account_expense_id.id:
