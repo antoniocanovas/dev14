@@ -7,7 +7,7 @@ from odoo import fields, models, api
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    invoice2origin_title = fields.Text('sale.order', string='Obra FEO')
+    invoice2origin_title = fields.Text(string='Obra F.E.O.')
 
 
 
