@@ -7,7 +7,7 @@
             <field name="state">code</field>
             <field name="code">
 # Localizar pedidos de venta implicados:
-sale_order, linecount = [], False
+sale_order, linecount, firstline = [], False, True
 
 # Chequeos previos:
 if not record.ref: raise Warning('Indica en esta factura la referencia para imprimir en origen indicando fecha, certificación, etc. Campo referencia en pestaña Otra información')
@@ -21,9 +21,14 @@ for li in record.invoice_line_ids:
 
 # Borrar las líneas actuales ya que hay que ponerlas con total:
 record['line_ids'] = ([(6,0,[])])
+# Cabecera obra:
 
 # Nuevas líneas, recorrer SOs y buscar líneas ya facturadas:
 for so in sale_order:
+  if (firstline == True) and (so.ids):
+    new = env['account.move.line'].create({'name':so.invoice2origin_title, 'display_type':'line_note', 'move_id':record.id, 'exclude_from_invoice_tab':False})
+    firstline = False
+
   for li in so.order_line:
     if li.display_type == 'line_section':
       new = env['account.move.line'].create({'name':li.name, 'display_type':'line_section', 'move_id':record.id, 'exclude_from_invoice_tab':False})
@@ -34,7 +39,6 @@ for so in sale_order:
       if linecount == True:
         new = env['account.move.line'].create({'name':'....', 'display_type':'line_section', 'move_id':record.id, 'exclude_from_invoice_tab':False})
       else:
-        new = env['account.move.line'].create({'name':li.order_id.invoice2origin_title, 'display_type':'line_note', 'move_id':record.id, 'exclude_from_invoice_tab':False})
         linecount == True
 
       account = li.product_id.property_account_expense_id
@@ -60,25 +64,33 @@ for so in sale_order:
               'exclude_from_invoice_tab':True
           })]
 
-        # Buscar otras líneas de factura de este tipo y ponerlas como negativo:
+        # Otras líneas de factura de esta línea de venta:
       invoiced = env['account.move.line'].search([('sale_line_ids','=',[li.id]),('move_id','!=',record.id),('parent_state','=','posted')])
-      for invoiceline in invoiced:
+        # Facturas de esas líneas anteriores:
+      invoices = invoiced.move_id
+        # Cantidad de otras líneas por factura:
+
+
+      for invoice in invoices:
+        linesinvoiced = env['account.move.line'].search([('sale_line_ids','=',[li.id]),('move_id','=',invoice.id),('parent_state','=','posted')])
+        total, debit = 0, 0
+        for invoiceline in linesinvoiced:
+          total += invoiceline.quantity
+          debit += invoiceline.price_subtotal
         record['line_ids'] = [(0,0,{
                 'product_id':invoiceline.product_id.id,
                 'name': invoiceline.move_id.ref,
-                'quantity':-invoiceline.quantity,
+                'quantity':-total,
                 'price_unit':invoiceline.price_unit,
                 'product_uom_id':invoiceline.product_uom_id.id,
-                #'credit': abs(invoiceline.price_subtotal),
-                'debit': invoiceline.quantity * invoiceline.price_unit,
+                'debit': debit,
                 'account_id': account.id,
                 'analytic_account_id':li.order_id.analytic_account_id.id,
                 'partner_id': record.partner_id.id,
                 'sale_line_ids':[(6,0,[li.id])]
             }), (0, 0, {
                 'name': record.name or '/',
-                #'debit': abs(-invoiceline.price_subtotal),
-                'credit': invoiceline.quantity * invoiceline.price_unit,
+                'credit': debit,
                 'account_id': record.partner_id.property_account_receivable_id.id,
                 'partner_id': record.partner_id.id,
                 'exclude_from_invoice_tab':True
