@@ -1,0 +1,83 @@
+<odoo>
+
+    <record id="invoice2origin_account_move" model="ir.actions.server">
+            <field name="name">=> Convertir a F.E.O.</field>
+            <field name="model_id" ref="model_account_move"/>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="state">code</field>
+            <field name="code">
+# Localizar pedidos de venta implicados:
+sale_order, linecount = [], 0
+for li in record.invoice_line_ids:
+  for sol in li.sale_line_ids:
+    if sol.order_id.id and sol.order_id not in sale_order:
+      sale_order.append(sol.order_id)
+
+# Borrar las líneas actuales ya que hay que ponerlas con total:
+record['line_ids'] = ([(6,0,[])])
+
+# Nuevas líneas, recorrer SOs y buscar líneas ya facturadas:
+for so in sale_order:
+  for li in so.order_line:
+    if li.display_type == 'line_section':
+      new = env['account.move.line'].create({'name':li.name, 'display_type':'line_section', 'move_id':record.id, 'exclude_from_invoice_tab':False})
+    elif li.display_type == 'line_note':
+      new = env['account.move.line'].create({'name':li.name, 'display_type':'line_note', 'move_id':record.id, 'exclude_from_invoice_tab':False})
+    elif li.display_type == False:
+
+      if linecount > 0:
+        new = env['account.move.line'].create({'name':'....', 'display_type':'line_section', 'move_id':record.id, 'exclude_from_invoice_tab':False})
+      else:
+        linecount += 1
+
+      account = li.product_id.property_account_expense_id
+      if not li.product_id.property_account_expense_id.id:
+        account = li.product_id.categ_id.property_account_expense_categ_id
+
+      record['line_ids'] = [(0,0,{
+              'product_id':li.product_id.id,
+              'name': li.name,
+              'quantity':li.qty_delivered,
+              'price_unit':li.price_unit,
+              'product_uom_id':li.product_uom.id,
+              'credit': abs(li.price_unit * li.qty_delivered),
+              'account_id': account.id,
+              'analytic_account_id':li.order_id.analytic_account_id.id,
+              'partner_id': record.partner_id.id,
+              'sale_line_ids':[(6,0,[li.id])]
+          }), (0, 0, {
+              'name': record.name or '/',
+              'debit': abs(li.price_unit * li.qty_delivered),
+              'account_id': record.partner_id.property_account_receivable_id.id,
+              'partner_id': record.partner_id.id,
+              'exclude_from_invoice_tab':True
+          })]
+
+        # Buscar otras líneas de factura de este tipo y ponerlas como negativo:
+      invoiced = env['account.move.line'].search([('sale_line_ids','=',[li.id]),('move_id','!=',record.id),('parent_state','=','posted')])
+      for invoiceline in invoiced:
+        record['line_ids'] = [(0,0,{
+                'product_id':invoiceline.product_id.id,
+                'name': invoiceline.move_id.name,
+                'quantity':-invoiceline.quantity,
+                'price_unit':invoiceline.price_unit,
+                'product_uom_id':invoiceline.product_uom_id.id,
+                #'credit': abs(invoiceline.price_subtotal),
+                'debit': invoiceline.quantity * invoiceline.price_unit,
+                'account_id': account.id,
+                'analytic_account_id':li.order_id.analytic_account_id.id,
+                'partner_id': record.partner_id.id,
+                'sale_line_ids':[(6,0,[li.id])]
+            }), (0, 0, {
+                'name': record.name or '/',
+                #'debit': abs(-invoiceline.price_subtotal),
+                'credit': invoiceline.quantity * invoiceline.price_unit,
+                'account_id': record.partner_id.property_account_receivable_id.id,
+                'partner_id': record.partner_id.id,
+                'exclude_from_invoice_tab':True
+            })]
+
+            </field>
+    </record>
+
+</odoo>
