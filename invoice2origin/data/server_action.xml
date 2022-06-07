@@ -1,5 +1,5 @@
 <odoo>
-
+<!--
     <record id="invoice2origin_account_move_with_lines_by_product" model="ir.actions.server">
             <field name="name">=> F.E.O. por producto</field>
             <field name="model_id" ref="account.model_account_move"/>
@@ -98,7 +98,7 @@ for so in sale_order:
 
             </field>
     </record>
-
+-->
     <record id="invoice2origin_account_move_line_qty" model="ir.actions.server">
             <field name="name">=> F.E.O. qty</field>
             <field name="model_id" ref="account.model_account_move"/>
