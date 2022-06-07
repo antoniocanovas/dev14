@@ -11,6 +11,7 @@
     ],
     'data': [
         'views/sale_order_view.xml',
+        'views/account_move_view.xml',
         'data/server_action.xml',
     ],
     'installable':True,
