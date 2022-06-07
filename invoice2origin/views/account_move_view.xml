@@ -9,8 +9,8 @@
             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
                 <field name="invoice2origin_qty"/>
             </xpath>
-            <field name="partner_bank_id" position="after">
-                <field name="invoice2origin_previous_ids"/>
+            <field name="narration" position="after">
+                <field name="invoice2origin_previous_ids" readonly="1" attrs="{'invisible':[('invoice2origin_previous_ids','=',[])]}"/>
             </field>
         </field>
     </record>

@@ -105,8 +105,6 @@ for so in sale_order:
             <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="state">code</field>
             <field name="code">
-
-# Calcula total servido en base a facturas, por línea:
 # Localizar pedidos de venta implicados:
 sale_order, linecount = [], False
 
@@ -175,10 +173,11 @@ for so in sale_order:
           })]
 
 
-        # Otras líneas de factura de esta línea de venta:
-      invoiced = env['account.move.line'].search([('sale_line_ids','=',[li.id]),('move_id','!=',record.id),('parent_state','=','posted')])
-        # Facturas de esas líneas anteriores:
-      record['invoice2origin_previous_ids'] = [(6,0,invoiced.move_id.ids)]
+      # Otras líneas de factura de esta línea de venta:
+    invoiced = env['account.move.line'].search([('sale_line_ids','in',so.order_line.ids),('move_id','!=',record.id),('parent_state','=','posted')])
+      # Facturas de esas líneas anteriores:
+    invoices = invoiced.move_id
+    record['invoice2origin_previous_ids'] = [(6,0,invoices.ids)]
 
             </field>
     </record>
