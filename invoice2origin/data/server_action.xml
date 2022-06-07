@@ -105,9 +105,10 @@ for so in sale_order:
             <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="state">code</field>
             <field name="code">
+
 # Calcula total servido en base a facturas, por línea:
 # Localizar pedidos de venta implicados:
-sale_order, linecount, firstline = [], False, True
+sale_order, linecount = [], False
 
 # Chequeos previos:
 if not record.ref: raise Warning('Indica en esta factura la referencia para imprimir en origen indicando fecha, certificación, etc. Campo referencia en pestaña Otra información')
@@ -126,22 +127,24 @@ for li in record.invoice_line_ids:
 # Nuevas líneas, recorrer SOs, añadir las que faltan y totalizar líneas ya facturadas:
 for so in sale_order:
   # Nombre de la obra:
-  if (firstline == True) and (so.ids):
-    new = env['account.move.line'].create({'name':so.invoice2origin_title, 'display_type':'line_note', 'move_id':record.id, 'exclude_from_invoice_tab':False})
-    firstline = False
-
-
+  new = env['account.move.line'].create({'name':so.invoice2origin_title, 'display_type':'line_note', 'move_id':record.id, 'exclude_from_invoice_tab':False})
 
   for li in so.order_line:
-    if (li.display_type == 'line_section') and (li.id not in record.invoice_line_ids.sale_order_ids.ids):
+    # Secciones que no se han creado automáticamente:
+    if (li.display_type == 'line_section') and (li.id not in record.invoice_line_ids.sale_line_ids.ids):
       new = env['account.move.line'].create({'name':li.name, 'display_type':'line_section', 'move_id':record.id, 'exclude_from_invoice_tab':False})
 
-
-
-    elif li.display_type == 'line_note':
+    # Notas que no se han creado automáticamente:
+    elif (li.display_type == 'line_note') and (li.id not in record.invoice_line_ids.sale_line_ids.ids):
       new = env['account.move.line'].create({'name':li.name, 'display_type':'line_note', 'move_id':record.id, 'exclude_from_invoice_tab':False})
-    elif li.display_type == False:
 
+    # Actualizar líneas facturables con la cantidad certificada total:
+    elif (li.display_type == False) and (li.id in record.invoice_line_ids.sale_line_ids.ids):
+      line = env['account.move.line'].search([('sale_line_ids','=',li.id)])
+      line['invoice2origin_qty'] = li.qty_delivered
+
+    # Líneas que no se han creado automáticamente y hacen falta para tener el total desde origen (al multiplicar por invoice2origin_qty):
+    elif (li.display_type == False) and (li.id not in record.invoice_line_ids.sale_line_ids.ids):
       if linecount == True:
         new = env['account.move.line'].create({'name':'....', 'display_type':'line_section', 'move_id':record.id, 'exclude_from_invoice_tab':False})
       else:
@@ -154,53 +157,28 @@ for so in sale_order:
       record['line_ids'] = [(0,0,{
               'product_id':li.product_id.id,
               'name': li.name,
-              'quantity':li.qty_delivered,
+              'quantity':0,
+              'invoice2origin_qty':li.qty_delivered,
               'price_unit':li.price_unit,
               'product_uom_id':li.product_uom.id,
-              'credit': abs(li.price_unit * li.qty_delivered),
+              'credit': 0,
               'account_id': account.id,
               'analytic_account_id':li.order_id.analytic_account_id.id,
               'partner_id': record.partner_id.id,
               'sale_line_ids':[(6,0,[li.id])]
           }), (0, 0, {
               'name': record.name or '/',
-              'debit': abs(li.price_unit * li.qty_delivered),
+              'debit': 0,
               'account_id': record.partner_id.property_account_receivable_id.id,
               'partner_id': record.partner_id.id,
               'exclude_from_invoice_tab':True
           })]
 
+
         # Otras líneas de factura de esta línea de venta:
       invoiced = env['account.move.line'].search([('sale_line_ids','=',[li.id]),('move_id','!=',record.id),('parent_state','=','posted')])
         # Facturas de esas líneas anteriores:
-      invoices = invoiced.move_id
-        # Cantidad de otras líneas por factura:
-
-
-      for invoice in invoices:
-        linesinvoiced = env['account.move.line'].search([('sale_line_ids','=',[li.id]),('move_id','=',invoice.id),('parent_state','=','posted')])
-        total, debit = 0, 0
-        for invoiceline in linesinvoiced:
-          total += invoiceline.quantity
-          debit += invoiceline.price_subtotal
-        record['line_ids'] = [(0,0,{
-                'product_id':invoiceline.product_id.id,
-                'name': invoiceline.move_id.ref,
-                'quantity':-total,
-                'price_unit':invoiceline.price_unit,
-                'product_uom_id':invoiceline.product_uom_id.id,
-                'debit': debit,
-                'account_id': account.id,
-                'analytic_account_id':li.order_id.analytic_account_id.id,
-                'partner_id': record.partner_id.id,
-                'sale_line_ids':[(6,0,[li.id])]
-            }), (0, 0, {
-                'name': record.name or '/',
-                'credit': debit,
-                'account_id': record.partner_id.property_account_receivable_id.id,
-                'partner_id': record.partner_id.id,
-                'exclude_from_invoice_tab':True
-            })]
+      record['invoice2origin_previous_ids'] = [(6,0,invoiced.move_id.ids)]
 
             </field>
     </record>
