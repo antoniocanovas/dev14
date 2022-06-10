@@ -39,7 +39,7 @@ class SaleOrder(models.Model):
         result["domain"] = ["|", ("active", "=", False), ("active", "=", True)]
         result["context"] = {
             "active_test": 0,
-            "search_default_unrevisioned_name": self.unrevisioned_name,
+            "search_default_x_unrevisioned_id": self.x_unrevisioned_id.id,
             "default_current_revision_id": self.id,
         }
         return result
