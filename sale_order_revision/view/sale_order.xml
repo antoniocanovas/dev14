@@ -25,6 +25,7 @@
                 />
             </xpath>
             <xpath expr="//button[@name='action_view_invoice']" position="after">
+                <!--
                 <button
                     name="action_view_revisions"
                     type="object"
@@ -38,7 +39,8 @@
                         string="Prev. revisions"
                     />
                 </button>
-                <button
+                -->
+                <button>
                     name="action_view_revisions2"
                     type="object"
                     class="oe_stat_button"
