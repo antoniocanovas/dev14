@@ -48,10 +48,9 @@ class SaleOrder(models.Model):
         self.ensure_one()
         action = self.env.ref("sale.action_orders")
         result = action.read()[0]
-        numberlen = len(record.name) -3
-        number = record.name[:numberlen]
-        saleorders = env['sale.order'].search([('name','like',number)])
-        result["domain"] = [('id','in',saleorders.ids),("active", "=", False), "|", ("active", "=", True), ('id','in',saleorders.ids)]
+        txt = record.name.split("-")[0]
+        saleorders = env['sale.order'].search([('name', 'like', txt), ('active', 'in', [True, False])])
+        result["domain"] = [('id','in',saleorders.ids)]
         result["context"] = {
             "active_test": 0,
     #        "search_default_current_revision_id": self.id,
