@@ -43,12 +43,14 @@
                     type="object"
                     class="oe_stat_button"
                     icon="fa-file-archive-o"
+            <!--
                     attrs="{'invisible': ['|', ('has_old_revisions', '=', False),('revision_count', '=', 0)]}"
+            -->
                 >
                     <field
                         name="revision_count"
                         widget="statinfo"
-                        string="All revisions"
+                        string="All versions"
                     />
                 </button>
             </xpath>
