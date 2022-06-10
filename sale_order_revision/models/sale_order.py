@@ -50,7 +50,7 @@ class SaleOrder(models.Model):
         result = action.read()[0]
         numberlen = len(record.name) -3
         number = record.name[:numberlen]
-        saleorders = env['sale.order'].search([('number','like',number)])
+        saleorders = env['sale.order'].search([('name','like',number)])
         result["domain"] = [('id','in',saleorders.ids),("active", "=", False), "|", ("active", "=", True), ('id','in',saleorders.ids)]
         result["context"] = {
             "active_test": 0,
