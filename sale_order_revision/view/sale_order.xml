@@ -46,11 +46,6 @@
                     class="oe_stat_button"
                     icon="fa-file-archive-o"
                 >
-                    <field
-                        name="revision_count"
-                        widget="statinfo"
-                        string="All versions"
-                    />
                 </button>
             </xpath>
             <field name="client_order_ref" position="after">
