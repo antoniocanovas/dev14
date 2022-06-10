@@ -40,7 +40,7 @@
                     />
                 </button>
                 -->
-                <button>
+                <button
                     name="action_view_revisions2"
                     type="object"
                     class="oe_stat_button"
