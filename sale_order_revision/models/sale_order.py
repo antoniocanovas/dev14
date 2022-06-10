@@ -53,7 +53,7 @@ class SaleOrder(models.Model):
         result["domain"] = [('id','in',saleorders.ids)]
         result["context"] = {
             "active_test": 0,
-            "search_default_current_revision_id": [('id','in',saleorders.ids)],
+            "search_default_id": [('id','in',saleorders.ids)],
             "default_current_revision_id": self.id,
         }
         return result
