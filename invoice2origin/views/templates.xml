@@ -110,7 +110,7 @@
                                     </tr>
 
                                     <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
-                                        <tr class="is-subtotal text-right">
+                                        <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                                             <td colspan="99">
                                                 <strong class="mr16">Subtotal</strong>
                                                 <span t-esc="current_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
@@ -120,29 +120,26 @@
                                 </t>
                             </tbody>
                         </table>
+                        <table class="table table-sm o_main_table" name="invoiced_orders_table">
+                            <tbody>
+                                <t t-if="o.invoice2origin_previous_ids">
+                                    <t t-set="old_lines" t-value="o.invoice2origin_previous_ids.sorted(key=lambda l: (-l.id), reverse=True)"/>
 
-                        <div class="clearfix">
-                            <div id="total" class="row">
-                                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
-                                    <table class="table table-sm">
-                                        <t t-set="old_lines" t-value="o.invoice2origin_previous_ids.sorted(key=lambda l: (-l.id), reverse=True)"/>
-
-                                        <t t-foreach="old_lines" t-as="line">
-                                            <tr class="o_subtotal" style="">
-                                                <td><strong><span t-field="line.ref"/></strong></td>
-                                                <td class="text-right">
-                                                    - <span t-field="line.amount_total"/>
-                                                </td>
-                                            </tr>
-                                        </t>
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                                    <t t-foreach="old_lines" t-as="line">
+                                        <tr style="">
+                                            <td colspan="99">
+                                                <strong> Deducción <span t-field="line.ref"/>
+                                                Factura <span t-field="line.name"/>
+                                                </strong>
+                                            </td>
+                                            <td class="text-right">
+                                                - <span t-field="line.amount_total"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
 
                         <div class="clearfix">
                             <div id="total" class="row">
