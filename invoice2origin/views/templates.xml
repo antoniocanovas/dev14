@@ -133,7 +133,7 @@
                                                 </strong>
                                             </td>
                                             <td class="text-right">
-                                                - <span t-field="line.amount_total"/>
+                                                - <span t-field="line.amount_untaxed"/>
                                             </td>
                                         </tr>
                                     </t>
