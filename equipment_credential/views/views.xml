@@ -27,6 +27,9 @@
                     <field name="credential_count" string="Credenciales" widget="statinfo"/>
                 </button>
             </xpath>
+            <field name="category_id" position="after">
+                <field name="ip_address"/>
+            </field>
         </field>
     </record>
 

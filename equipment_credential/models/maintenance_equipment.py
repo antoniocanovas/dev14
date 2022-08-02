@@ -7,6 +7,7 @@ from odoo import fields, models, api
 class MaintenanceEquipmentCredentials(models.Model):
     _inherit = 'maintenance.equipment'
 
+    ip_address = fields.Char('Ip Address')
     credentials_ids = fields.One2many('partner.credentials', 'equipment_id')
 
     def _get_credentials_equipment(self):
