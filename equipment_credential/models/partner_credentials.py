@@ -7,6 +7,7 @@ from odoo import fields, models, api
 class PartnerCredentialEquipment(models.Model):
     _inherit = 'partner.credentials'
 
-    equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    service_id = fields.Many2one('equipment.service', string="Service")
+    equipment_id = fields.Many2one('maintenance.equipment', string="Equipment", related='service_id.equipment_id')
 
 

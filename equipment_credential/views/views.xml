@@ -36,6 +36,7 @@
         <field name="inherit_id" ref="partner_credentials.credentials_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='password']" position="after">
+                <field name="service_id"/>
                 <field name="equipment_id"/>
             </xpath>
         </field>
