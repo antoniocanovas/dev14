@@ -13,7 +13,7 @@ class EquipmentService(models.Model):
     type_id = fields.Many2one('equipment.service.type', string="Type")
     equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
     note = fields.Text('Description')
-    active = fields.Boolean('Active')
+    active = fields.Boolean('Active', default=True)
 
 
 
