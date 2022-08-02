@@ -15,7 +15,6 @@
     ],
     'data': [
         'views/views.xml',
-        'views/views_menu.xml',
     ],
     'installable': True,
     'application': False,
