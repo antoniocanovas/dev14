@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="action_view_credentials" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="context">{'search_default_equipment_id': active_id,'default_equipment_id': active_id}</field>
+        <field name="domain">[('equipment_id', '=',active_id)]</field>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="help"><![CDATA[<p> Credentials for equipment </p>]]></field>
+        <field name="limit">80</field>
+        <field name="name">Credentials</field>
+        <field name="res_model">partner.credentials</field>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="partner_credentials.credentials_tree"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="hr_equipment_view_form_credentials" model="ir.ui.view">
+        <field name="name">hr.equipment.view.form.credentials</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" icon="fa-diamond" type="action" name="%(partner_credentials_equipment.action_view_credentials)d">
+                    <field name="credential_count" string="Credenciales" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="partner_credentials_form_equipment" model="ir.ui.view">
+        <field name="name">partner.credentials.form.equipment</field>
+        <field name="model">partner.credentials</field>
+        <field name="inherit_id" ref="partner_credentials.credentials_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='password']" position="after">
+                <field name="equipment_id"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
