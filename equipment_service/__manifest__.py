@@ -7,15 +7,14 @@
     'license': 'AGPL-3',
     'website': "https://ingenieriacloud.com",
     'category': 'Tools',
-    'version': '14.0.1.0.1',
+    'version': '14.0.1.0.0',
     'depends': [
-        'partner_credentials',
         'maintenance',
-        'equipment_service',
     ],
     'data': [
         'views/views.xml',
         'views/views_menu.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'application': False,

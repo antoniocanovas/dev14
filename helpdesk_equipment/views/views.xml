@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="view_credentials_ticket" model="ir.ui.view">
+        <field name="name">credentials ticket</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group/group[1]/field[@name='priority']" position="after">
+                <field name="service_id"/>
+                <field name="equipment_id"/>
+                <field name="partner_credentials_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_view_tickets" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="context">{'search_default_partner_credentials_id': active_id,'default_partner_credentials_id': active_id}</field>
+        <field name="domain">[('partner_credentials_id', '=', active_id)]</field>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="help"><![CDATA[<p>Tickets asociados a Credencial</p>]]></field>
+        <field name="limit">80</field>
+        <field name="name">Tickets</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="helpdesk_mgmt.ticket_view_tree"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_credentials_ticket_count" model="ir.ui.view">
+        <field name="name">partner credentials tickets</field>
+        <field name="model">partner.credentials</field>
+        <field name="inherit_id" ref="partner_credentials.credentials_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" icon="fa-info" type="action" name="%(helpdesk_credential.action_view_tickets)d">
+                    <field name="tickets_count" string="Tickets" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

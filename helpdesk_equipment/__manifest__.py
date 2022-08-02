@@ -1,22 +1,21 @@
 {
-    'name': "Equipment credentials",
+    'name': "HelpDesk tickets link partner credentials",
     'summary': """
-        Services and credentials by maintenance equipment.
+        Equipment service in helpdesk ticket.
         """,
     'author': "Serincloud SL",
     'license': 'AGPL-3',
     'website': "https://ingenieriacloud.com",
     'category': 'Tools',
-    'version': '14.0.1.0.1',
+    'version': '14.0.1.0.0',
     'depends': [
         'partner_credentials',
-        'maintenance',
-        'equipment_service',
+        'helpdesk_mgmt',
+        'equipment_credential',
     ],
     'data': [
         'views/views.xml',
-        'views/views_menu.xml',
     ],
     'installable': True,
-    'application': False,
+    'application': True,
 }

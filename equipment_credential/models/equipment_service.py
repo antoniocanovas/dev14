@@ -3,14 +3,14 @@
 
 from odoo import fields, models, api
 
-
 class EquipmentService(models.Model):
-    _name = 'equipment.service'
-    _description = 'Equipment Service'
+    _inherit = 'equipment.service'
 
-    name = fields.Char('Name')
-    type_id = fields.Many2one('equipment.service.type', string="Type")
-    equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    credentials_ids = fields.One2many('partner.credentials', 'service_id')
 
+    def _get_credentials_service(self):
+        results = self.env['partner.credentials'].search([('service_id', '=', self.id)])
+        self.credential_count = len(results)
+    credential_count = fields.Integer('Credentials', compute=_get_credentials_service, store=False)
 
 
