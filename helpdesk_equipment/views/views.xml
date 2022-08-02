@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-
+    <!-- Helpdesk inh view for service and equipment: -->
     <record id="helpdek_equipment_view_inh" model="ir.ui.view">
         <field name="name">credentials ticket</field>
         <field name="model">helpdesk.ticket</field>
@@ -48,8 +48,8 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="view_equipment_ticket_count" model="ir.ui.view">
-        <field name="name">equipment tickets</field>
+    <record id="equipment_tickets_view" model="ir.ui.view">
+        <field name="name">Equipment Tickets</field>
         <field name="model">maintenance.equipment</field>
         <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
         <field name="arch" type="xml">
