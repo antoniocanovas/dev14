@@ -30,4 +30,19 @@
         </field>
     </record>
 
+    <record id="credential_equipment_view_form_inh" model="ir.ui.view">
+        <field name="name">credential.equipment.view.form.inh</field>
+        <field name="model">partner.credentials</field>
+        <field name="inherit_id" ref="partner_credentials.credentials_form"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="equipment_id"/>
+            </field>
+            <field name="public" position="after">
+                <field name="service_id"/>
+            </field>
+        </field>
+    </record>
+
+
 </odoo>
