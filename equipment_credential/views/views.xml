@@ -29,6 +29,7 @@
             </xpath>
             <field name="category_id" position="after">
                 <field name="ip_address"/>
+                <field name="pathway_id"/>
             </field>
         </field>
     </record>
