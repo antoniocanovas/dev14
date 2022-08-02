@@ -72,6 +72,7 @@
                 <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction', '=', True)]"/>
                 <separator/>
                 <group expand="0" string="Group By">
+                    <filter string="Type" name="Equipment" context="{'group_by': 'type_id'}"/>
                     <filter string="Equipment" name="Equipment" context="{'group_by': 'equipment_id'}"/>
                 </group>
             </search>
@@ -90,7 +91,7 @@
                         <field name="name" placeholder="Service type name ..."/>
                     </h2>
                     <group>
-                        <field name="is_pathway" placeholder="Enabled for vpn and routers giving path to other services"/>
+                        <field name="is_pathway"/>
                     </group>
                 </sheet>
             </form>
