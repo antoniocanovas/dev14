@@ -8,7 +8,8 @@ class MaintenanceEquipmentCredentials(models.Model):
     _inherit = 'maintenance.equipment'
 
     ip_address = fields.Char('Ip Address')
-    pathway_id = fields.Many2one('equipment.service', name="Pathway", domain=[('is_pathway','=',True)])
+    pathway_id = fields.Many2one('equipment.service', name="Pathway",
+                                 domain=[('type_id.is_pathway','=',True)])
     credentials_ids = fields.One2many('partner.credentials', 'equipment_id')
 
     def _get_credentials_equipment(self):
