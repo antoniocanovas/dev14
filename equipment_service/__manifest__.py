@@ -1,7 +1,7 @@
 {
-    'name': "Equipment credentials",
+    'name': "Equipment Services",
     'summary': """
-        Services and credentials by maintenance equipment.
+        Services by maintenance equipment.
         """,
     'author': "Serincloud SL",
     'license': 'AGPL-3',
