@@ -10,4 +10,3 @@ class EquipmentServiceType(models.Model):
 
     name = fields.Char('Name')
     is_pathway = fields.Boolean("Is pathway")
-

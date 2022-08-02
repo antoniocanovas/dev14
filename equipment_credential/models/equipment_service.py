@@ -10,5 +10,7 @@ class EquipmentService(models.Model):
 
     name = fields.Char('Name')
     type_id = fields.Many2one('equipment.service.type', string="Type")
+    equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+
 
 
