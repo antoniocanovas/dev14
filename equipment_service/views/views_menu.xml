@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <!-- Equipment.Service Action -->
+    <record id="action_equipment_service" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <!--<field name="context" eval="False"></field>-->
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">Services</field>
+        <field name="res_model">equipment.service</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="usage" eval="False"/>
+        <field name="view_id" eval="False"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Equipment.Service.Type Action -->
+    <record id="action_equipment_service_type" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <!--<field name="context" eval="False"></field>-->
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">Services</field>
+        <field name="res_model">equipment.service.type</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="usage" eval="False"/>
+        <field name="view_id" eval="False"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Equipment.Service Menu -->
+    <record id="menu_equipment_services" model="ir.ui.menu">
+        <field name="action" ref="action_equipment_service"/>
+        <field name="active" eval="True"/>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        <field name="name">Services</field>
+        <field name="parent_id" ref="maintenance.menu_maintenance_title"/>
+        <field name="sequence">5</field>
+        <field name="web_icon" eval="False"/>
+    </record>
+
+
+    <!-- Equipment.Service.Type Menu -->
+    <record id="menu_equipment_service_type" model="ir.ui.menu">
+        <field name="action" ref="action_equipment_service_type"/>
+        <field name="active" eval="True"/>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        <field name="name">Equipment Service Types</field>
+        <field name="parent_id" ref="maintenance.menu_maintenance_configuration"/>
+        <field name="sequence">5</field>
+        <field name="web_icon" eval="False"/>
+    </record>
+
+</odoo>
