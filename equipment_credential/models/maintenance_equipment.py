@@ -21,4 +21,4 @@ class MaintenanceEquipmentCredentials(models.Model):
     def _get_services_equipment(self):
         results = self.env['equipment.service'].search([('equipment_id', '=', self.id)])
         self.services_count = len(results)
-    services_count = fields.Integer('Credentials', compute=_get_credentials_equipment, store=False)
+    services_count = fields.Integer('Credentials', compute=_get_services_equipment, store=False)
