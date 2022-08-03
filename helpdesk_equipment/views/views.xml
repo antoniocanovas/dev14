@@ -31,7 +31,22 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="equipment_tickets_view" model="ir.ui.view">
+        <field name="name">Equipment Tickets</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" icon="fa-info" type="action" name="%(helpdesk_equipment.action_view_equipment_tickets)d">
+                    <field name="tickets_count" string="Tickets" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
 
+
+
+    <!-- Related tickets in Equipment Service view (action) -->
     <record id="action_view_service_tickets" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
@@ -47,22 +62,7 @@
         <field name="view_id" ref="helpdesk_mgmt.ticket_view_tree"/>
         <field name="view_mode">tree,form</field>
     </record>
-
-    <record id="equipment_tickets_view" model="ir.ui.view">
-        <field name="name">Equipment Tickets</field>
-        <field name="model">maintenance.equipment</field>
-        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button class="oe_stat_button" icon="fa-info" type="action" name="%(helpdesk_equipment.action_view_equipment_tickets)d">
-                    <field name="tickets_count" string="Tickets" widget="statinfo"/>
-                </button>
-            </xpath>
-        </field>
-    </record>
-
-    <!--
-
+    <!-- Related tickets in Equipment Service view (inherited view) -->
     <record id="view_service_ticket_count" model="ir.ui.view">
         <field name="name">Equipment Service tickets</field>
         <field name="model">equipment.service</field>
@@ -75,5 +75,5 @@
             </xpath>
         </field>
     </record>
-    -->
+
 </odoo>
