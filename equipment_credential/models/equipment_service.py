@@ -8,9 +8,9 @@ class EquipmentService(models.Model):
 
     credential_ids = fields.One2many('partner.credentials', 'service_id')
 
-    def _get_credentials_service(self):
+    def _get_credentials_count(self):
         results = self.env['partner.credentials'].search([('service_id', '=', self.id)])
         self.credential_count = len(results)
-    credential_count = fields.Integer('Credentials', compute=_get_credentials_service, store=False)
+    credential_count = fields.Integer('Credentials', compute=_get_credentials_count, store=False)
 
 
