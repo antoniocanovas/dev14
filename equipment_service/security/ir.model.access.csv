@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-equipment_service_type, Equipment Service Type User,model_equipment_service_type,base.group_user,1,0,0,0
-equipment_service_type, Equipment Service Type Admin,model_equipment_service_type,maintenance.group_equipment_manager,1,1,1,1
-equipment_service, Equipment Service User,model_equipment_service,base.group_user,1,0,0,0
-equipment_service, Equipment Service Admin,model_equipment_service,maintenance.group_equipment_manager,1,1,1,1
