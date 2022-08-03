@@ -6,7 +6,7 @@ from odoo import fields, models, api
 class EquipmentService(models.Model):
     _inherit = 'equipment.service'
 
-    credentials_ids = fields.One2many('partner.credentials', 'service_id')
+    credential_ids = fields.One2many('partner.credentials', 'service_id')
 
     def _get_credentials_service(self):
         results = self.env['partner.credentials'].search([('service_id', '=', self.id)])
