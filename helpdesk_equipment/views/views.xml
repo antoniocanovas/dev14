@@ -63,7 +63,7 @@
     </record>
 
 
-    <!-- Related tickets in Equipment Service view (inherited view) -->
+    <!-- Related tickets in Equipment Service view (inherited view)
     <record id="view_service_ticket_count" model="ir.ui.view">
         <field name="name">Equipment Service tickets</field>
         <field name="model">equipment.service</field>
@@ -76,5 +76,5 @@
             </xpath>
         </field>
     </record>
-
+ -->
 </odoo>
