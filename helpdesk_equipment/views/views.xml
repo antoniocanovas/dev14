@@ -63,11 +63,11 @@
     </record>
 
 
-    <!-- Related tickets in Equipment Service view (inherited view)
+    <!-- Related tickets in Equipment Service view (inherited view) -->
     <record id="view_service_ticket_count" model="ir.ui.view">
         <field name="name">Equipment Service tickets</field>
         <field name="model">equipment.service</field>
-        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="inherit_id" ref="equipment_service.equipment_service_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button class="oe_stat_button" icon="fa-info" type="action" name="%(helpdesk_equipment.action_button_view_service_tickets)d">
@@ -76,5 +76,4 @@
             </xpath>
         </field>
     </record>
- -->
 </odoo>

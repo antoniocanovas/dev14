@@ -15,5 +15,3 @@ class EquipmentService(models.Model):
     note = fields.Text('Description')
     active = fields.Boolean('Active', default=True)
 
-
-

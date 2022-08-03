@@ -8,6 +8,7 @@
             <form name="equipment_service_default_form">
                 <sheet string="Equipment">
                     <div class="oe_button_box" name="button_box">
+
                     </div>
                     <h2>
                         <field name="name" placeholder="Service name ..."/>
