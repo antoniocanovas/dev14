@@ -8,17 +8,19 @@
     </record>
 
 
-    <!-- Sales can see prices   -->
+    <!-- Saleman can see prices   -->
     <record id="sales_team.group_sale_salesman" model="res.groups">
-        <field name="name">Product prices</field>
         <field name="implied_ids" eval="[(4, ref('group_product_price'))]"/>
     </record>
-<!--
-    <record id="sales_team.group_sale_salesman" model="res.groups">
-        <field name="name">Product prices</field>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
-        <field name="rule_groups" eval="[(4, ref('base.res_company_rule_erp_manager'))]"/>
+
+    <!-- Purchase users can see prices   -->
+    <record id="purchase.group_purchase_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_product_price'))]"/>
     </record>
-    -->
+
+    <!-- Invoicing users can see prices   -->
+    <record id="account.group_account_invoice" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_product_price'))]"/>
+    </record>
+
 </odoo>
