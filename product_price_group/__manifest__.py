@@ -10,6 +10,9 @@
     'version': '14.0.1.0.0',
     'depends': [
         'product',
+        'sale_management',
+        'purchase',
+        'account',
     ],
     'data': [
         'views/views.xml',
