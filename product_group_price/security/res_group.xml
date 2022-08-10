@@ -3,9 +3,7 @@
 
     <record id="group_product_prices" model="res.groups">
         <field name="name">Product prices</field>
-        <field name="implied_ids" eval=False/>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
-        <field name="rule_groups" eval=False/>
     </record>
 
     <!--    -->
