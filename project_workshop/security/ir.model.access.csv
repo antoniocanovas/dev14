@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-workshop_manager,Read-Write-Create access on project workshop to Project Manager,model_project_workshop,project.group_project_manager,1,1,1,1
-workshop_user,Read access on purchase.product.set to Purchase Persons,model_project_workshop,project.group_project_user,1,1,1,0
