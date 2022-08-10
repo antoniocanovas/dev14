@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="group_product_prices" model="res.groups">
+    <record id="group_product_price" model="res.groups">
         <field name="name">Product prices</field>
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
-        <field name="share">True</field>
+        <field name="share" eval='True'</field>
     </record>
 
     <!--    -->

@@ -1,5 +1,5 @@
 {
-    'name': "Group see prices",
+    'name': "Product prices group",
     'summary': """
         Hide prices to users not in sales, purchases and invoicing.
         """,
