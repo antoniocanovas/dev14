@@ -61,7 +61,7 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_kanban_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//ul[0]" position="attributes">
+            <xpath expr="//ul" position="attributes">
                 <attribute name="groups">product_price_group.group_product_price</attribute>
             </xpath>
         </field>
