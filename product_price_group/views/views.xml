@@ -9,6 +9,9 @@
             <field name="list_price" position="attributes">
                 <attribute name="groups">product_price_group.group_product_price</attribute>
             </field>
+            <field name="standard_price" position="attributes">
+                <attribute name="groups">product_price_group.group_product_price</attribute>
+            </field>
         </field>
     </record>
 
