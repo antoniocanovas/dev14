@@ -12,7 +12,7 @@
         'product',
     ],
     'data': [
-#        'views/views.xml',
+        'views/views.xml',
         'security/res_group.xml',
     ],
     'installable': True,
