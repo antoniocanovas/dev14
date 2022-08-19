@@ -21,6 +21,7 @@ class SaleTarget(models.Model):
     lead_count = fields.Integer(string='Leads', readonly=True)
     lead_amount = fields.Monetary(string='Leads amount', readonly=True)
 
+    sale_over_target = fields.Monetary('Sale over Target', related='target', store=False)
     gap_vs_lead = fields.Monetary('Gap vs leads', related='target_gap', store=False)
     gap_vs_quotation = fields.Monetary('Gap vs quotations', related='target_gap', store=False)
     lead_vs_gap = fields.Monetary('Leads vs Gap', related='lead_amount', store=False)
@@ -36,6 +37,7 @@ class SaleTarget(models.Model):
     target_year = fields.Integer('Year')
     lead_lt_gap = fields.Boolean('Leads < GAP')
     quotation_lt_gap = fields.Boolean('Quotations < GAP')
+    target_lt_sale = fields.Boolean('Sale over target')
 
     @api.depends('target','sale_amount')
     def get_target_gap(self):
@@ -43,3 +45,9 @@ class SaleTarget(models.Model):
             record['target_gap'] = record.target - record.sale_amount
     target_gap = fields.Monetary(string='Target GAP', compute='get_target_gap', store=False)
 
+    @api.depends('target','sale_amount')
+    def get_target_multiple(self):
+        for record in self:
+            multiple = int(record.sale_amount / record.target) +1
+            record['target_multiple'] = record.target * multiple
+    target_multiple = fields.Monetary(string='Target Multiple', compute='get_target_multiple', store=False)

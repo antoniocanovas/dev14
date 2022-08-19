@@ -17,13 +17,12 @@ if (hoy.year) == (record.target_year):
   pr_margin, pv_margin = 0, 0
   pv_count, pv_value = 0, 0
   fv_value, trim = 0, ''
-  op_count_trim, op_count_trim,  = 0, 0
-  pr_count_trim = 0
+  op_count_trim, op_count_trim, op_value_trim, pr_count_trim  = 0, 0, 0, 0
 # pr_value_trim = 0
   pv_count_trim, pv_value_trim = 0, 0
   op_de_pptos, pr_de_trim = [], []
   pr_version_count = 0
-  lead_lt_gap, quotation_lt_gap = False, False
+  lead_lt_gap, quotation_lt_gap, target_lt_sale = False, False, False
 
 # Vamos a actualizar el general y la línea del trimestre actual, si ya existía actualizo, si no la creo:
   if    hoy.month in [1,2,3]:
@@ -101,12 +100,13 @@ if (hoy.year) == (record.target_year):
   gap = record.target - pv_value
   if op_value &lt; gap: lead_lt_gap = True
   if pr_value &lt; gap: quotation_lt_gap = True
+  if target &lt; pv_value: target_lt_sale = True
 
   record.write({'lead_count':op_count, 'lead_amount':op_value,
     'quotation_count':pr_count, 'quotation_amount':pr_value, 'quotation_margin':pr_margin,
     'sale_count':pv_count, 'sale_amount':pv_value, 'sale_margin':pv_margin,
     'invoiced_amount':fv_value, 'target_gap': gap,
-    'lead_lt_gap':lead_lt_gap, 'quotation_lt_gap':quotation_lt_gap
+    'lead_lt_gap':lead_lt_gap, 'quotation_lt_gap':quotation_lt_gap, 'target_lt_sale':target_lt_sale
   })
 
   lineatrim.write({'lead_count':op_count_trim, 'lead_amount':op_value_trim, 'quotation_count':pr_count_trim,
