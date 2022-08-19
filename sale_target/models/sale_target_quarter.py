@@ -13,7 +13,7 @@ class SaleTargetQuarter(models.Model):
 
     name = fields.Char(string='Name', required=True)
     currency_id = fields.Many2one('res.currency', default='1')
-    target_id = fields.Many2one('sale.target', 'string'='Target')
+    target_id = fields.Many2one('sale.target', string='Target')
     lead_count = fields.Integer(string='Leads', readonly=True)
     lead_amount = fields.Monetary(string='Leads amount', readonly=True)
     sale_count = fields.Integer(string='Sales', readonly=True)
