@@ -58,7 +58,7 @@ if (actualiza):
     lineatrim = env['sale_target_quarter'].create({'target_id':record.id, 'quarter_id':trim, 'name':nombre})
 
 # Cálculos para los datos generales y trimestrales:
-  oportunidades = env['crm.lead'].search([('user_id','=',record.user_id.id),('probability','>',0),('probability','<',100)])
+  oportunidades = env['crm.lead'].search([('user_id','=',record.user_id.id),('probability','&gt;',0),('probability','&lt;',100)])
   op_count = len(oportunidades.ids)
   for op in oportunidades:
     lead_amount += op.planned_revenue
