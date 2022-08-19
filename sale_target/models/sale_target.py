@@ -31,7 +31,7 @@ class SaleTarget(models.Model):
     quarter_ids = fields.One2many('sale.target.quarter', 'target_id', string="Quarters")
     target_year = fields.Integer('Year')
 
-    @api.depends(target, sale_amount)
+    @api.depends('target','sale_amount')
     def get_target_pending(self):
         for record in self:
             record['target_pending'] = record.target - record.sale_amount
