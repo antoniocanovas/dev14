@@ -48,6 +48,8 @@ class SaleTarget(models.Model):
     @api.depends('target','sale_amount')
     def get_target_multiple(self):
         for record in self:
-            multiple = int(record.sale_amount / record.target) +1
+            multiple = 1
+            if record.target > 0:
+                multiple = int(record.sale_amount / record.target) +1
             record['target_multiple'] = record.target * multiple
     target_multiple = fields.Monetary(string='Target Multiple', compute='get_target_multiple', store=False)
