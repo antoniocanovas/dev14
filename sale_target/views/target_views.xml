@@ -85,10 +85,13 @@
         <field name="arch" type="xml">
             <tree string="Targets">
                 <field name="name"/>
-                <field name="team_id"/>
-                <field name="lead_count" sum="Leads"/>
-                <field name="lead_amount" sum="Possible"/>
-                <field name="quotation_amount" sum="Quotations"/>
+                <field name="team_id" optional="hide"/>
+                <field name="lead_count" sum="Leads" optional="show"/>
+                <field name="lead_amount" sum="Possible" widget="monetary" optional="show"/>
+                <field name="quotation_count" sum="Quotations" optional="show"/>
+                <field name="quotation_amount" sum="Quotations" widget="monetary" optional="show"/>
+                <field name="invoiced_amount" sum="Invoiced" widget="monetary" optional="hide"/>
+                <field name="currency_id" invisible="1"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
@@ -108,12 +111,12 @@
         <field name="arch" type="xml">
             <tree string="Target - Quarters" create="0">
                 <field name="name"/>
-                <field name="lead_count"/>
-                <field name="lead_amount"/>
-                <field name="quotation_count"/>
-                <field name="revision_count"/>
-                <field name="sale_count"/>
-                <field name="sale_amount"/>
+                <field name="lead_count" optional="show"/>
+                <field name="lead_amount" widget="monetary"/>
+                <field name="quotation_count" optional="hide"/>
+                <field name="revision_count" optional="hide"/>
+                <field name="sale_count" optional="hide"/>
+                <field name="sale_amount" widget="monetary" optional="show"/>
                 <field name="currency_id" invisible="1"/>
             </tree>
         </field>
