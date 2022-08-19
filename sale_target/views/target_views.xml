@@ -15,9 +15,21 @@
                     <notebook name="carpetas_objetivos">
                         <page name="objetivo_resultados" string="Resumen">
                             <group name="objetivo_graficos">
-                                <field name="target_pending" widget="gauge" options="{'max_field':'target'}" nolabel="1"/>
-                                <field name="target_vs_lead_amount" string="Vs Leads" widget="gauge" options="{'max_field':'lead_amount'}" nolabel="1"/>
-                                <field name="target_vs_quotation_amount" string="Vs Quotations" widget="gauge" options="{'max_field':'quotation_amount'}" nolabel="1"/>
+                                <field name="target_gap" widget="gauge" options="{'max_field':'target'}" nolabel="1"/>
+
+                                <field name="gap_vs_lead" string="Gap Vs Leads" widget="gauge"
+                                       options="{'max_field':'lead_amount'}" nolabel="1"
+                                       attrs="{'invisible':[('lead_lt_gap','=',True)]}"/>
+                                <field name="gap_vs_quotation" string="Gap Vs Quotations" widget="gauge"
+                                       options="{'max_field':'quotation_amount'}" nolabel="1"
+                                       attrs="{'invisible':[('quotation_lt_gap','=',True)]}"/>
+                                <field name="lead_vs_gap" string="Leads vs Gap" widget="gauge"
+                                       options="{'max_field':'target_gap'}" nolabel="1"
+                                       attrs="{'invisible':[('lead_lt_gap','=',False)]}"/>
+                                <field name="quotation_vs_gap" string="Quotations vs Gap" widget="gauge"
+                                       options="{'max_field':'target_gap'}" nolabel="1"
+                                       attrs="{'invisible':[('quotation_lt_gap','=',False)]}"/>
+
                                 <field name="quotation_margin" widget="gauge" options="{'max_field':'quotation_amount'}" nolabel="1"/>
                                 <field name="sale_margin" widget="gauge" options="{'max_field':'sale_amount'}" nolabel="1"/>
                             </group>

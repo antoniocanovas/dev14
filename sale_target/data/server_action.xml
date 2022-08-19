@@ -31,6 +31,7 @@ if (hoy.year) == (record.target_year):
   op_de_pptos = []
   pr_de_trim  = []
   pr_version_count = 0
+  lead_lt_gap, quotation_ls_gap = False, False
 
 # Vamos a actualizar el general y la línea del trimestre actual, si ya existía actualizo, si no la creo:
   if    hoy.month in [1,2,3]:
@@ -59,7 +60,7 @@ if (hoy.year) == (record.target_year):
   oportunidades = env['crm.lead'].search([('user_id','=',record.user_id.id),('probability','&gt;',0),('probability','&lt;',100)])
   op_count = len(oportunidades.ids)
   for op in oportunidades:
-    lead_amount += op.expected_revenue
+    op_value += op.expected_revenue
     if (op.create_date > inicio) and (op.create_date &lt; fin):
       op_count_trim += 1
       op_value_trim += op.expected_revenue
@@ -99,15 +100,21 @@ if (hoy.year) == (record.target_year):
       pv_count_trim += 1
       pv_value_trim += pv.amount_untaxed
 
-  facturas = env['account.invoice'].search([('invoice_user_id','=',record.user_id.id),('state','in',['posted']),('invoice_date','>',dia1)])
+  facturas = env['account.move'].search([('invoice_user_id','=',record.user_id.id),('state','in',['posted']),('invoice_date','>',dia1)])
   for fv in facturas:
     if fv.move_type == 'out_invoice':  fv_value += fv.amount_untaxed
     elif fv.move_type == 'out_refund': fv_value -= fv.amount_untaxed
 
+  # Control fields in views:
+  gap = record.target - pv_value
+  if op_value &lt; gap: lead_lt_gap = True
+  if pr_value &lt; gap: quotation_lt_gap = True
+
   record.write({'lead_count':op_count, 'lead_amount':op_value,
     'quotation_count':pr_count, 'quotation_amount':pr_value, 'quotation_margin':pr_margin,
     'sale_count':pv_count, 'sale_amount':pv_value, 'sale_margin':pv_margin,
-    'invoiced_amount':fv_value, 'target_pending':record.target - pv_value
+    'invoiced_amount':fv_value, 'target_gap': gap,
+    'lead_lt_gap':lead_lt_gap, 'quotation_lt_gap':quotation_lt_gap
   })
 
   lineatrim.write({'lead_count':op_count_trim, 'lead_amount':op_value_trim, 'quotation_count':pr_count_trim,

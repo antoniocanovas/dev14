@@ -20,8 +20,12 @@ class SaleTarget(models.Model):
     target = fields.Monetary(string='Target')
     lead_count = fields.Integer(string='Leads', readonly=True)
     lead_amount = fields.Monetary(string='Leads amount', readonly=True)
-    target_vs_lead_amount = fields.Monetary('Pending vs leads', related='target_pending', store=False)
-    target_vs_quotation_amount = fields.Monetary('Pending vs quotations', related='target_pending', store=False)
+
+    gap_vs_lead = fields.Monetary('Gap vs leads', related='target_gap', store=False)
+    gap_vs_quotation = fields.Monetary('Gap vs quotations', related='target_gap', store=False)
+    lead_vs_gap = fields.Monetary('Leads vs Gap', related='lead_amount', store=False)
+    quotation_vs_gap = fields.Monetary('Quotations vs Gap', related='quotation_amount', store=False)
+
     sale_count = fields.Integer(string='Sales', readonly=True)
     sale_margin = fields.Monetary(string='Sales margin', readonly=True)
     sale_amount = fields.Monetary(string='Sales amount', readonly=True)
@@ -30,10 +34,12 @@ class SaleTarget(models.Model):
     quotation_amount = fields.Monetary(string='Quotations amount', readonly=True)
     quarter_ids = fields.One2many('sale.target.quarter', 'target_id', string="Quarters")
     target_year = fields.Integer('Year')
+    lead_lt_gap = fields.Boolean('Leads < GAP')
+    quotation_lt_gap = fields.Boolean('Quotations < GAP')
 
     @api.depends('target','sale_amount')
-    def get_target_pending(self):
+    def get_target_gap(self):
         for record in self:
-            record['target_pending'] = record.target - record.sale_amount
-    target_pending = fields.Monetary(string='Pending Target', compute='get_target_pending', store=False)
+            record['target_gap'] = record.target - record.sale_amount
+    target_gap = fields.Monetary(string='Target GAP', compute='get_target_gap', store=False)
 
