@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <menuitem
+            action="action_view_sale_target"
+            id="sale_target_main"
+            name="Targets"
+            sequence="3"
+            web_icon="sale_target,static/description/icon.png"
+    />
+
+  <record id="menu_sale_target" model="ir.ui.menu">
+    <field name="action" ref="action_view_sale_target"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Targets</field>
+    <field name="parent_id" ref="sale_target_main"/>
+    <field name="sequence">10</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="menu_sale_target_quarter" model="ir.ui.menu">
+    <field name="action" ref="action_view_sale_target_quarter"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Quarters</field>
+    <field name="parent_id" ref="sale_target_main"/>
+    <field name="sequence">20</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+</odoo>

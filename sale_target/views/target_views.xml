@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="sale_target_default_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+  <!--
+            <form>
+                <sheet string="Fases del proyecto">
+                    <h1>
+                        <field name="lead_id" attrs="{'invisible':['|',('type','!=','lead'),('lead_id','=',False)]}"/>
+                        <field name="sale_id" attrs="{'invisible':['|',('type','!=','sale'),('sale_id','=',False)]}"/>
+                        <field name="purchase_id" attrs="{'invisible':['|',('type','!=','purchase'),('purchase_id','=',False)]}"/>
+                        <field name="task_id" attrs="{'invisible':['|',('type','!=','task'),('task_id','=',False)]}"/>
+                        <field name="picking_id" attrs="{'invisible':['|',('type','!=','picking'),('picking_id','=',False)]}"/>
+                        <field name="invoice_id" attrs="{'invisible':['|',('type','!=','invoice'),('invoice_id','=',False)]}"/>
+                    </h1>
+                    <h4>
+                        <field name="name" modifiers="{}"/>
+                    </h4>
+                    <group>
+                        <field name="priority"/>
+                        <field name="type"/>
+                        <field name="lead_id" attrs="{'invisible':['|',('type','!=','lead'),('lead_id','!=',False)]}"/>
+                        <field name="sale_id" attrs="{'invisible':['|',('type','!=','sale'),('sale_id','!=',False)]}"/>
+                        <field name="purchase_id" attrs="{'invisible':['|',('type','!=','purchase'),('purchase_id','!=',False)]}"/>
+                        <field name="task_id" attrs="{'invisible':['|',('type','!=','task'),('task_id','!=',False)]}"  domain="[('stage_id.is_closed','=',False)]"/>
+                        <field name="picking_id" attrs="{'invisible':['|',('type','!=','picking'),('picking_id','!=',False)]}"/>
+                        <field name="invoice_id" attrs="{'invisible':['|',('type','!=','invoice'),('invoice_id','!=',False)]}"/>
+                        <field name="user_id"/>
+                        <field name="date_limit"/>
+                    </group>
+                    <group>
+                        <field name="state"/>
+                        <field name="active" widget="boolean_toggle"/>
+                        <field name="project_id" required="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh':'recipients'}"/>
+                </div>
+            </form>
+        -->
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">sale.target</field>
+        <field name="name">Default Sale Target form view</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="sale_target_default_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <!--
+            <tree name="sale_target_tree"
+                  multi_edit="1"
+                  decoration-success="active==False"
+                  decoration-danger="active==True and date_limit &lt; context_today().strftime('%Y-%m-%d')"
+                  default_order="active asc, priority asc">
+                <field name="is_favorite" widget="boolean_favorite" nolabel="1"/>
+                <field name="display_name"/>
+                <field name="priority" invisible="1"/>
+                <field name="type" invisible="1"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+                <field name="date_limit"/>
+                <field name="state"/>
+                <field name="active" string="Active" widget="boolean_toggle"/>
+                <field name="project_id" invisible="1"/>
+            </tree>
+            -->
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">sale.target</field>
+        <field name="name">Default sale target tree view</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <!-- voy por aquí -->
+
+    <record id="action_view_sale_target" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="help"></field>
+        <field name="limit">80</field>
+        <field name="name">Targets</field>
+        <field name="res_model">sale.target</field>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="sale_target_default_tree"/>
+        <field name="usage" eval="False"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record id="action_view_sale_target_quarter" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="help"></field>
+        <field name="limit">80</field>
+        <field name="name">Quarters</field>
+        <field name="res_model">sale.target.quarter</field>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="sale_target_quarter_default_tree"/>
+        <field name="usage" eval="False"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
