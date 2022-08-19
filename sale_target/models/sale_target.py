@@ -14,7 +14,7 @@ class SaleTarget(models.Model):
 
     name = fields.Char(string='Name', required=True)
     user_id = fields.Many2one('res.users', string='User')
-    currency_id = fields.Many2one('res.currency', default='1')
+    currency_id = fields.Many2one('res.currency', default=1)
     team_id = fields.Many2one('crm.team', related='user_id.sale_team_id', string='Team')
     invoiced_amount = fields.Monetary(string='Invoiced')
     target = fields.Monetary(string='Target')
