@@ -72,10 +72,12 @@
         <field name="arch" type="xml">
             <tree string="Targets">
                 <field name="name"/>
+                <!--
                 <field name="team_id"/>
                 <field name="lead_count" sum="Leads"/>
                 <field name="lead_amount" sum="Possible"/>
-                <field name="quotation_amount" sum="Quuotations"/>
+                <field name="quotation_amount" sum="Quotations"/>
+                -->
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
