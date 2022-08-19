@@ -6,9 +6,7 @@
         <field name="arch" type="xml">
             <form>
                     <header>
-                        <!--
-                        <button class="oe_highlight" type="action" name="1400" string="Actualizar"/>
-                        -->
+                        <button class="oe_highlight" type="action" name="sale_target_update" string="Actualizar"/>
                     </header>
 
                 <sheet string="Objetivos">
