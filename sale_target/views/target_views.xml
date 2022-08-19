@@ -4,45 +4,57 @@
     <record id="sale_target_default_form" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-  <!--
             <form>
-                <sheet string="Fases del proyecto">
-                    <h1>
-                        <field name="lead_id" attrs="{'invisible':['|',('type','!=','lead'),('lead_id','=',False)]}"/>
-                        <field name="sale_id" attrs="{'invisible':['|',('type','!=','sale'),('sale_id','=',False)]}"/>
-                        <field name="purchase_id" attrs="{'invisible':['|',('type','!=','purchase'),('purchase_id','=',False)]}"/>
-                        <field name="task_id" attrs="{'invisible':['|',('type','!=','task'),('task_id','=',False)]}"/>
-                        <field name="picking_id" attrs="{'invisible':['|',('type','!=','picking'),('picking_id','=',False)]}"/>
-                        <field name="invoice_id" attrs="{'invisible':['|',('type','!=','invoice'),('invoice_id','=',False)]}"/>
-                    </h1>
-                    <h4>
-                        <field name="name" modifiers="{}"/>
-                    </h4>
-                    <group>
-                        <field name="priority"/>
-                        <field name="type"/>
-                        <field name="lead_id" attrs="{'invisible':['|',('type','!=','lead'),('lead_id','!=',False)]}"/>
-                        <field name="sale_id" attrs="{'invisible':['|',('type','!=','sale'),('sale_id','!=',False)]}"/>
-                        <field name="purchase_id" attrs="{'invisible':['|',('type','!=','purchase'),('purchase_id','!=',False)]}"/>
-                        <field name="task_id" attrs="{'invisible':['|',('type','!=','task'),('task_id','!=',False)]}"  domain="[('stage_id.is_closed','=',False)]"/>
-                        <field name="picking_id" attrs="{'invisible':['|',('type','!=','picking'),('picking_id','!=',False)]}"/>
-                        <field name="invoice_id" attrs="{'invisible':['|',('type','!=','invoice'),('invoice_id','!=',False)]}"/>
-                        <field name="user_id"/>
-                        <field name="date_limit"/>
-                    </group>
-                    <group>
-                        <field name="state"/>
-                        <field name="active" widget="boolean_toggle"/>
-                        <field name="project_id" required="1"/>
-                    </group>
+                    <header>
+                        <!--
+                        <button class="oe_highlight" type="action" name="1400" string="Actualizar"/>
+                        -->
+                    </header>
+
+                <sheet string="Objetivos">
+                    <h2>
+                        <field name="name"/>
+                    </h2>
+                    <notebook name="carpetas_objetivos">
+                        <page name="objetivo_resultados" string="Resumen">
+                            <group name="objetivo_graficos">
+                                <field name="target_pending" widget="gauge" options="{'max_field':'target'}" nolabel="1"/>
+                                <field name="target_vs_lead_amount" widget="gauge" options="{'max_field':'lead_amount'}" nolabel="1"/>
+                                <field name="target_vs_quotation_amount" widget="gauge" options="{'max_field':'quotation_amount'}" nolabel="1"/>
+                                <field name="quotation_margin" widget="gauge" options="{'max_field':'quotation_amount'}" nolabel="1"/>
+                                <field name="sale_margin" widget="gauge" options="{'max_field':'sale_amount'}" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="objetivo_configuracion" string="General">
+                            <group>
+                                <field name="user_id" on_change="1" can_create="true" can_write="true" modifiers="{}"/>
+                                <field name="team_id" can_create="true" can_write="true" modifiers="{&quot;readonly&quot;: true}"/>
+                                <field name="target_year" modifiers="{}"/>
+                                <field name="target" modifiers="{}"/>
+                            </group>
+                            <group>
+                                <field name="lead_count" modifiers="{&quot;readonly&quot;: true}"/>
+                                <field name="lead_amount" modifiers="{&quot;readonly&quot;: true}"/>
+                                <field name="quotation_count" modifiers="{&quot;readonly&quot;: true}"/>
+                                <field name="quotation_amount" modifiers="{&quot;readonly&quot;: true}"/>
+                            </group>
+                            <group>
+                                <field name="sale_count" modifiers="{&quot;readonly&quot;: true}"/>
+                                <field name="sale_amount" modifiers="{&quot;readonly&quot;: true}"/>
+                                <field name="invoiced_amount" modifiers="{&quot;readonly&quot;: true}"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="objetivo_trimestres" string="Trimestres">
+                            <field name="quarter_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread" options="{'post_refresh':'recipients'}"/>
+                    <field name="message_ids" widget="mail_thread"/>
                 </div>
             </form>
-        -->
         </field>
         <field name="field_parent" eval="False"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
@@ -55,27 +67,17 @@
         <field name="type">form</field>
     </record>
 
+    <!-- SALE_TARGET TREE VIEW: -->
     <record id="sale_target_default_tree" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-            <!--
-            <tree name="sale_target_tree"
-                  multi_edit="1"
-                  decoration-success="active==False"
-                  decoration-danger="active==True and date_limit &lt; context_today().strftime('%Y-%m-%d')"
-                  default_order="active asc, priority asc">
-                <field name="is_favorite" widget="boolean_favorite" nolabel="1"/>
-                <field name="display_name"/>
-                <field name="priority" invisible="1"/>
-                <field name="type" invisible="1"/>
-                <field name="user_id" widget="many2one_avatar_user"/>
-                <field name="activity_ids" widget="list_activity" optional="show"/>
-                <field name="date_limit"/>
-                <field name="state"/>
-                <field name="active" string="Active" widget="boolean_toggle"/>
-                <field name="project_id" invisible="1"/>
+            <tree string="Targets">
+                <field name="name"/>
+                <field name="team_id"/>
+                <field name="lead_count" sum="Leads"/>
+                <field name="lead_amount" sum="Possible"/>
+                <field name="quotation_amount" sum="Quuotations"/>
             </tree>
-            -->
         </field>
         <field name="field_parent" eval="False"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
@@ -87,6 +89,33 @@
         <field name="priority">16</field>
         <field name="type">tree</field>
     </record>
+
+    <!-- SALE_TARGET_QUARTER TREE VIEW: -->
+    <record id="sale_target_quarter_default_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree string="Target - Quarters" create="0">
+                <field name="name"/>
+                <field name="lead_count"/>
+                <field name="lead_amount"/>
+                <field name="quotation_count"/>
+                <field name="revision_count"/>
+                <field name="sale_count"/>
+                <field name="sale_amount"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">sale.target.quarter</field>
+        <field name="name">Default sale target quarter tree view</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
 
     <!-- voy por aquí -->
 
