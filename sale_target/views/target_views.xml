@@ -14,7 +14,7 @@
                     </h2>
                     <notebook name="carpetas_objetivos">
                         <page name="objetivo_resultados" string="Resumen">
-                            <group name="objetivo_graficos">
+                            <group name="target_lead_quotation" col="1">
                                 <field name="target_gap" widget="gauge" options="{'max_field':'target'}" nolabel="1"/>
 
                                 <field name="gap_vs_lead" string="Gap Vs Leads" widget="gauge"
@@ -29,7 +29,8 @@
                                 <field name="quotation_vs_gap" string="Quotations vs Gap" widget="gauge"
                                        options="{'max_field':'target_gap'}" nolabel="1"
                                        attrs="{'invisible':[('quotation_lt_gap','=',False)]}"/>
-
+                            </group>
+                            <group name="target_magins">
                                 <field name="quotation_margin" widget="gauge" options="{'max_field':'quotation_amount'}" nolabel="1"/>
                                 <field name="sale_margin" widget="gauge" options="{'max_field':'sale_amount'}" nolabel="1"/>
                             </group>
