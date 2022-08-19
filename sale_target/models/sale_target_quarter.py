@@ -20,4 +20,4 @@ class SaleTargetQuarter(models.Model):
     sale_amount = fields.Monetary(string='Sales amount', readonly=True)
     quotation_count = fields.Integer(string='Quotations', readonly=True)
     revision_count = fields.Monetary(string='Quotations margin', readonly=True)
-    quarter_id = fields.Many2one('sale.target', string="Quarter")
+    quarter = fields.Char(string="Quarter", readonly=True)
