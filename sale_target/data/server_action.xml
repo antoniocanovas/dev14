@@ -100,7 +100,7 @@ if (hoy.year) == (record.target_year):
   gap = record.target - pv_value
   if op_value &lt; gap: lead_lt_gap = True
   if pr_value &lt; gap: quotation_lt_gap = True
-  if target &lt; pv_value: target_lt_sale = True
+  if record.target &lt; pv_value: target_lt_sale = True
 
   record.write({'lead_count':op_count, 'lead_amount':op_value,
     'quotation_count':pr_count, 'quotation_amount':pr_value, 'quotation_margin':pr_margin,
