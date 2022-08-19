@@ -21,7 +21,6 @@ class SaleTarget(models.Model):
     lead_count = fields.Integer(string='Leads', readonly=True)
     lead_amount = fields.Monetary(string='Leads amount', readonly=True)
 
-    sale_over_target = fields.Monetary('Sale over Target', related='target', store=False)
     gap_vs_lead = fields.Monetary('Gap vs leads', related='target_gap', store=False)
     gap_vs_quotation = fields.Monetary('Gap vs quotations', related='target_gap', store=False)
     lead_vs_gap = fields.Monetary('Leads vs Gap', related='lead_amount', store=False)
@@ -30,6 +29,7 @@ class SaleTarget(models.Model):
     sale_count = fields.Integer(string='Sales', readonly=True)
     sale_margin = fields.Monetary(string='Sales margin', readonly=True)
     sale_amount = fields.Monetary(string='Sales amount', readonly=True)
+    sale_over_target = fields.Monetary('Sale over Target', related='sale_amount', store=False)
     quotation_count = fields.Integer(string='Quotations', readonly=True)
     quotation_margin = fields.Monetary(string='Quotations margin', readonly=True)
     quotation_amount = fields.Monetary(string='Quotations amount', readonly=True)
