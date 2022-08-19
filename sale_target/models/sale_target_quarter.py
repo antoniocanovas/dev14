@@ -19,5 +19,5 @@ class SaleTargetQuarter(models.Model):
     sale_count = fields.Integer(string='Sales', readonly=True)
     sale_amount = fields.Monetary(string='Sales amount', readonly=True)
     quotation_count = fields.Integer(string='Quotations', readonly=True)
-    revision_count = fields.Monetary(string='Quotations margin', readonly=True)
+    revision_count = fields.Integer(string='Quot. Revisions', readonly=True)
     quarter = fields.Char(string="Quarter", readonly=True)
