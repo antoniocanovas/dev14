@@ -12,26 +12,18 @@ hoy   = datetime.datetime.now()
 dia1  = datetime.datetime(hoy.year, 1, 1, 0, 0, 0)
 
 if (hoy.year) == (record.target_year):
-  op_count = 0
-  op_value = 0
-  pr_count = 0
-  pr_value = 0
-  pr_margin = 0
-  pv_count = 0
-  pv_value = 0
-  pv_margin = 0
-  fv_value = 0
-  trim  = ''
-  op_count_trim = 0
-  op_value_trim = 0
+  op_count, op_value = 0, 0
+  pr_count, pr_value = 0, 0
+  pr_margin, pv_margin = 0, 0
+  pv_count, pv_value = 0, 0
+  fv_value, trim = 0, ''
+  op_count_trim, op_count_trim,  = 0, 0
   pr_count_trim = 0
 # pr_value_trim = 0
-  pv_count_trim = 0
-  pv_value_trim = 0
-  op_de_pptos = []
-  pr_de_trim  = []
+  pv_count_trim, pv_value_trim = 0, 0
+  op_de_pptos, pr_de_trim = [], []
   pr_version_count = 0
-  lead_lt_gap, quotation_ls_gap = False, False
+  lead_lt_gap, quotation_lt_gap = False, False
 
 # Vamos a actualizar el general y la línea del trimestre actual, si ya existía actualizo, si no la creo:
   if    hoy.month in [1,2,3]:
