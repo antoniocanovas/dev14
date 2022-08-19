@@ -18,13 +18,6 @@ class SaleTarget(models.Model):
     team_id = fields.Many2one('crm.team', related='user_id.sale_team_id', string='Team')
     invoiced_amount = fields.Monetary(string='Invoiced')
     target = fields.Monetary(string='Target')
-
-    @api.depends(target, sale_amount)
-    def get_target_pending(self):
-        for record in self:
-            record['target_pending'] = record.target - record.sale_amount
-    target_pending = fields.Monetary(string='Pending Target', compute='get_target_pending', store=False)
-
     lead_count = fields.Integer(string='Leads', readonly=True)
     lead_amount = fields.Monetary(string='Leads amount', readonly=True)
   #  target_vs_lead_amount = realated x_objetivo_pendiente (no se usa ya que es no almacenado)
@@ -37,3 +30,10 @@ class SaleTarget(models.Model):
     quotation_value = fields.Monetary(string='Quotations amount', readonly=True)
     quarter_ids = fields.One2many('sale.target.quarter', 'target_id', string="Quarters")
     target_year = fields.Integer('Year')
+
+    @api.depends(target, sale_amount)
+    def get_target_pending(self):
+        for record in self:
+            record['target_pending'] = record.target - record.sale_amount
+    target_pending = fields.Monetary(string='Pending Target', compute='get_target_pending', store=False)
+
