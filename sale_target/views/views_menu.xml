@@ -7,6 +7,7 @@
             name="Targets"
             sequence="3"
             web_icon="sale_target,static/description/icon.png"
+            groups="sales_team.group_sale_manager"
     />
 
   <record id="menu_sale_target" model="ir.ui.menu">
