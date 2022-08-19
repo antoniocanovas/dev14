@@ -10,6 +10,7 @@ Quarter resume.
     'depends': [
         'sale_management',
         'crm',
+        'account',
     ],
     'data': [
         'security/ir.model.access.csv',

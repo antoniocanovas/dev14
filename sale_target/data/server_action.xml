@@ -11,9 +11,7 @@
 hoy   = datetime.datetime.now()
 dia1  = datetime.datetime(hoy.year, 1, 1, 0, 0, 0)
 
-if (hoy.year) == (record.target_year): actualiza = True
-
-if (actualiza):
+if (hoy.year) == (record.target_year):
   op_count = 0
   op_value = 0
   pr_count = 0
@@ -61,10 +59,10 @@ if (actualiza):
   oportunidades = env['crm.lead'].search([('user_id','=',record.user_id.id),('probability','&gt;',0),('probability','&lt;',100)])
   op_count = len(oportunidades.ids)
   for op in oportunidades:
-    lead_amount += op.planned_revenue
+    lead_amount += op.expected_revenue
     if (op.create_date > inicio) and (op.create_date &lt; fin):
       op_count_trim += 1
-      op_value_trim += op.planned_revenue
+      op_value_trim += op.expected_revenue
 
   presupuestos = env['sale.order'].search([('user_id','=',record.user_id.id),('state','in',['draft','sent'])])
   pr_count = len(presupuestos.ids)
@@ -76,7 +74,7 @@ if (actualiza):
       pr_de_trim.append(pr.id)
       # Oportunidades de los presupuestos de este trimestre:
       if (pr.opportunity_id.id) and (pr.opportunity_id not in op_de_pptos): op_de_pptos.append(pr.opportunity_id)
-  #    op_value_trim += op.planned_revenue
+  #    op_value_trim += op.expected_revenue
 
   # Comprobación de los presupuestos que son revisión en este trimestre:
   for op in op_de_pptos:
@@ -101,12 +99,12 @@ if (actualiza):
       pv_count_trim += 1
       pv_value_trim += pv.amount_untaxed
 
-  facturas = env['account.invoice'].search([('user_id','=',record.user_id.id),('state','in',['open','paid']),('date_invoice','>',dia1)])
+  facturas = env['account.invoice'].search([('invoice_user_id','=',record.user_id.id),('state','in',['posted']),('invoice_date','>',dia1)])
   for fv in facturas:
-    if fv.type == 'out_invoice':  fv_value += fv.amount_untaxed
-    elif fv.type == 'out_refund': fv_value -= fv.amount_untaxed
+    if fv.move_type == 'out_invoice':  fv_value += fv.amount_untaxed
+    elif fv.move_type == 'out_refund': fv_value -= fv.amount_untaxed
 
-  record.write({'x_op_count':op_count, 'x_op_value':op_value,
+  record.write({'lead_count':op_count, 'lead_amount':op_value,
     'quotation_count':pr_count, 'quotation_amount':pr_value, 'quotation_margin':pr_margin,
     'sale_count':pv_count, 'sale_amount':pv_value, 'sale_margin':pv_margin,
     'invoiced_amount':fv_value, 'target_pending':record.target - pv_value
