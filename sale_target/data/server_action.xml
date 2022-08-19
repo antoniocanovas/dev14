@@ -52,10 +52,10 @@ if (actualiza):
     inicio  = datetime.datetime(hoy.year, 10, 1, 0, 0, 0)
     fin     = datetime.datetime(hoy.year, 12, 31, 23, 59, 59)
 
-  lineatrim  = env['sale_target_quarter'].search([('target_id','=',record.id),('quarter_id','=',trim)])
+  lineatrim  = env['sale.target.quarter'].search([('target_id','=',record.id),('quarter_id','=',trim)])
   if not lineatrim.id:
     nombre = trim + "/" + record.name
-    lineatrim = env['sale_target_quarter'].create({'target_id':record.id, 'quarter_id':trim, 'name':nombre})
+    lineatrim = env['sale.target.quarter'].create({'target_id':record.id, 'quarter_id':trim, 'name':nombre})
 
 # Cálculos para los datos generales y trimestrales:
   oportunidades = env['crm.lead'].search([('user_id','=',record.user_id.id),('probability','&gt;',0),('probability','&lt;',100)])

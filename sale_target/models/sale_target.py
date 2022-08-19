@@ -20,6 +20,8 @@ class SaleTarget(models.Model):
     target = fields.Monetary(string='Target')
     lead_count = fields.Integer(string='Leads', readonly=True)
     lead_amount = fields.Monetary(string='Leads amount', readonly=True)
+    target_vs_lead_amount = fields.Monetary('Pending vs leads', related='target_pending', store=False)
+    target_vs_quotation_amount = fields.Monetary('Pending vs quotations', related='target_pending', store=False)
     sale_count = fields.Integer(string='Sales', readonly=True)
     sale_margin = fields.Monetary(string='Sales margin', readonly=True)
     sale_amount = fields.Monetary(string='Sales amount', readonly=True)
