@@ -54,6 +54,7 @@
                                 <field name="team_id" can_create="true" can_write="true" readonly="1"/>
                                 <field name="target_year" modifiers="{}"/>
                                 <field name="target" modifiers="{}"/>
+                                <field name="target_gap" invisible="1"/>
                                 <field name="lead_lt_gap" invisible="1"/>
                                 <field name="quotation_lt_gap" invisible="1"/>
                                 <field name="target_lt_sale" invisible="1"/>
