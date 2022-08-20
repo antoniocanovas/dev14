@@ -15,7 +15,7 @@
                     <notebook name="carpetas_objetivos">
                         <page name="objetivo_resultados" string="Resumen">
                             <group name="target_lead_quotation" col="1">
-                                <field name="target_gap" widget="gauge"
+                                <field name="sale_vs_target" widget="gauge"
                                        options="{'max_field':'target'}" nolabel="1"
                                        attrs="{'invisible':[('target_lt_sale','=',True)]}"/>
                                 <field name="sale_over_target" widget="gauge"
