@@ -24,23 +24,23 @@
 
                                 <field name="gap_vs_lead" string="Gap Vs Leads" widget="gauge"
                                        options="{'max_field':'lead_amount'}" nolabel="1"
-                                       attrs="{'invisible':['|',('lead_lt_gap','=',True),('target_lt_sale','=',False)]}"/>
+                                       attrs="{'invisible':['|',('lead_lt_gap','=',True),('target_lt_sale','=',True)]}"/>
                                 <field name="lead_vs_gap" string="Leads vs Gap" widget="gauge"
                                        options="{'max_field':'target_gap'}" nolabel="1"
-                                       attrs="{'invisible':['|',('lead_lt_gap','=',False),('target_lt_sale','=',False)]}"/>
+                                       attrs="{'invisible':['|',('lead_lt_gap','=',False),('target_lt_sale','=',True)]}"/>
                                 <field name="lead_over_target" string="Adtional Leads" widget="gauge"
                                        options="{'max_field':'lead_over_target'}" nolabel="1"
-                                       attrs="{'invisible':[('target_lt_sale','=',True)]}"/>
+                                       attrs="{'invisible':[('target_lt_sale','=',False)]}"/>
 
                                 <field name="gap_vs_quotation" string="Gap Vs Quotations" widget="gauge"
                                        options="{'max_field':'quotation_amount'}" nolabel="1"
-                                       attrs="{'invisible':['|',('quotation_lt_gap','=',True),('target_lt_sale','=',False)]}"/>
+                                       attrs="{'invisible':['|',('quotation_lt_gap','=',True),('target_lt_sale','=',True)]}"/>
                                 <field name="quotation_vs_gap" string="Quotations vs Gap" widget="gauge"
                                        options="{'max_field':'target_gap'}" nolabel="1"
-                                       attrs="{'invisible':['|',('quotation_lt_gap','=',False),('target_lt_sale','=',False)]}"/>
+                                       attrs="{'invisible':['|',('quotation_lt_gap','=',False),('target_lt_sale','=',True)]}"/>
                                 <field name="quotation_over_target" string="Adtional Leads" widget="gauge"
                                        options="{'max_field':'quotation_over_target'}" nolabel="1"
-                                       attrs="{'invisible':[('target_lt_sale','=',True)]}"/>
+                                       attrs="{'invisible':[('target_lt_sale','=',False)]}"/>
 
                             </group>
                             <group name="target_magins">
