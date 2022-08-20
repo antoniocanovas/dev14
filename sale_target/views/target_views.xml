@@ -17,10 +17,12 @@
                             <group name="target_lead_quotation" col="1">
                                 <field name="sale_vs_target" widget="gauge"
                                        options="{'max_field':'target'}" nolabel="1"
-                                       attrs="{'invisible':[('target_lt_sale','=',True)]}"/>
+                                       attrs="{'invisible':[('target_lt_sale','=',True)]}"
+                                       help="You are under target, this is your pending roadmap."/>
                                 <field name="sale_over_target" widget="gauge"
                                        options="{'max_field':'target_multiple'}" nolabel="1"
-                                       attrs="{'invisible':[('target_lt_sale','=',False)]}"/>
+                                       attrs="{'invisible':[('target_lt_sale','=',False)]}"
+                                       help="Congrations !! Your target is done and exceeded !!"/>
 
                                 <field name="gap_vs_lead" string="Gap Vs Leads" widget="gauge"
                                        options="{'max_field':'lead_amount'}" nolabel="1"
