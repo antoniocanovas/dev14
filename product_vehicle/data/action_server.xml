@@ -1,0 +1,58 @@
+<odoo>
+
+        <record id="create_analytic_account_per_vehicle" model="base.automation">
+            <field name="name">=> Create analytic account per vehicle</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">
+# VEHICLE ANALYTICS:
+# Sequential code:
+if (record.is_vehicle == True) and (record.vehicle_code == False):
+  seq = env['ir.sequence'].next_by_code('product.vehicle.sequence')
+  record['vehicle_code'] = seq
+
+# New vehicles or without AA:
+if (record.is_vehicle == True) and (record.default_code):
+  name = "[" + record.vehicle_code + "] " + record.default_code + " - " + record.name
+elif (record.is_vehicle == True) and not (record.default_code):
+  name = "[" + record.vehicle_code + "] " + record.name
+
+if (record.is_vehicle) and not (record.income_analytic_account_id.id):
+  aa = env['account.analytic.account'].search([('name','=', name)])
+  if not aa.id:
+    aa = env['account.analytic.account'].create({'name': name})
+  record['income_analytic_account_id'] = aa.id
+  if not record.expense_analytic_account_id.id:
+    record['expense_analytic_account_id'] = aa.id
+
+# Renaming Analytic Accounts:
+elif (record.is_vehicle) and (record.income_analytic_account_id.id) and (record.income_analytic_account_id.name != name):
+  products_aa = env['product.template'].search([('income_analytic_account_id','=',record.income_analytic_account_id.id)])
+  if len(products_aa.ids) &lt; 2:
+    record.income_analytic_account_id['name'] = name
+            </field>
+            <field name="trigger">on_create_or_write</field>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
+        <record id="calculate_rebu_amount" model="base.automation">
+            <field name="name">=> Calculate REBU amount in vehicle</field>
+            <field name="model_id" ref="model_product_dealiership_estimation"/>
+            <field name="state">code</field>
+            <field name="code">
+vehiclept = record.product_id.product_tmpl_id
+rebu = 0
+if (record.product_id.product_tmpl_id.vehicle_tax_type == 'rebu') and (record.product_id.product_tmpl_id.id == record.product_vehicle_id.id):
+  # Buscar si ha metido varias compras del vehículo en estimaciones:
+  estimaciones_compra_vehiculo = env['product.vehicle.estimation'].search([('product_id','=',record.product_id.id)])
+  if len(estimaciones_compra_vehiculo) &gt; 1: raise Warning('Varias líneas con el producto vehículo, deja sólo la de compra.')
+            </field>
+            <field name="trigger">on_create_or_write</field>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
+</odoo>
