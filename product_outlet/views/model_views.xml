@@ -35,7 +35,7 @@
             <xpath expr="//div[@name='options']" position="inside">
                 <div>
                     <field name="outlet"/>
-                    <label for="Outlet"/>
+                    <label for="outlet"/>
                 </div>
             </xpath>
             <xpath expr="//page[@name='general_information']" position="before">
