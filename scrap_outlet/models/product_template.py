@@ -28,6 +28,6 @@ class ProductTemplate(models.Model):
     def get_refurbish_is_outlet(self):
         for record in self:
             outlet = record.outlet
-            if (record.unbuild_type == 'refurbish):
+            if (record.unbuild_type == 'refurbish'):
                 outlet = True
             record.outlet = outlet
