@@ -4,13 +4,13 @@
     <record id="action_product_outlet" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
-        <field name="domain" eval="[('dealership', '=', 'True')]"/>
+        <field name="domain" eval="[('outlet', '=', 'True')]"/>
         <field name="context"
                eval="{'search_default_filter_to_sell':1,'default_type':'product','default_outlet': True}"/>
         <field name="filter" eval="False"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="limit">80</field>
-        <field name="name">VehicleDealership</field>
+        <field name="name">Outlet</field>
         <field name="res_model">product.template</field>
         <field name="search_view_id" eval="False"/>
         <field name="target">current</field>
@@ -49,116 +49,116 @@
 
     <menuitem
             action="action_product_outlet"
-            id="menu_vehicle_dealership"
-            name="Vehicle dealership"
+            id="menu_outlet"
+            name="Outlet"
             sequence="10"
             web_icon="product_outlet,static/icon.png"
     />
 
-    <record id="menu_vehicle_dealership_vehicle" model="ir.ui.menu">
+    <record id="menu_outlet_vehicle" model="ir.ui.menu">
         <field name="action" ref="action_product_outlet"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Vehículos</field>
-        <field name="parent_id" ref="menu_vehicle_dealership"/>
+        <field name="parent_id" ref="menu_outlet"/>
         <field name="sequence">10</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_contact" model="ir.ui.menu">
+    <record id="menu_outlet_contact" model="ir.ui.menu">
         <field name="action" ref="contacts.action_contacts"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Contactos</field>
-        <field name="parent_id" ref="menu_vehicle_dealership"/>
+        <field name="parent_id" ref="menu_outlet"/>
         <field name="sequence">20</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_crm" model="ir.ui.menu">
+    <record id="menu_outlet_crm" model="ir.ui.menu">
         <field name="action" ref="crm.crm_lead_action_pipeline"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">CRM</field>
-        <field name="parent_id" ref="menu_vehicle_dealership"/>
+        <field name="parent_id" ref="menu_outlet"/>
         <field name="sequence">30</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_sale" model="ir.ui.menu">
+    <record id="menu_outlet_sale" model="ir.ui.menu">
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Ventas</field>
-        <field name="parent_id" ref="menu_vehicle_dealership"/>
+        <field name="parent_id" ref="menu_outlet"/>
         <field name="sequence">40</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_quotation" model="ir.ui.menu">
+    <record id="menu_outlet_quotation" model="ir.ui.menu">
         <field name="action" ref="sale.action_quotations_with_onboarding"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Presupuestos</field>
-        <field name="parent_id" ref="menu_vehicle_dealership_sale"/>
+        <field name="parent_id" ref="menu_outlet_sale"/>
         <field name="sequence">10</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_sale_confirmed" model="ir.ui.menu">
+    <record id="menu_outlet_sale_confirmed" model="ir.ui.menu">
         <field name="action" ref="sale.action_orders"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Ventas</field>
-        <field name="parent_id" ref="menu_vehicle_dealership_sale"/>
+        <field name="parent_id" ref="menu_outlet_sale"/>
         <field name="sequence">20</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_customer_invoice" model="ir.ui.menu">
+    <record id="menu_outlet_customer_invoice" model="ir.ui.menu">
         <field name="action" ref="account.action_move_out_invoice_type"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Facturas</field>
-        <field name="parent_id" ref="menu_vehicle_dealership_sale"/>
+        <field name="parent_id" ref="menu_outlet_sale"/>
         <field name="sequence">30</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_purchase" model="ir.ui.menu">
+    <record id="menu_outlet_purchase" model="ir.ui.menu">
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Compras</field>
-        <field name="parent_id" ref="menu_vehicle_dealership"/>
+        <field name="parent_id" ref="menu_outlet"/>
         <field name="sequence">50</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_purchase_rfq" model="ir.ui.menu">
+    <record id="menu_outlet_purchase_rfq" model="ir.ui.menu">
         <field name="action" ref="purchase.purchase_rfq"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Peticiones</field>
-        <field name="parent_id" ref="menu_vehicle_dealership_purchase"/>
+        <field name="parent_id" ref="menu_outlet_purchase"/>
         <field name="sequence">10</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_purchase_confirmed" model="ir.ui.menu">
+    <record id="menu_outlet_purchase_confirmed" model="ir.ui.menu">
         <field name="action" ref="purchase.purchase_form_action"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Compras</field>
-        <field name="parent_id" ref="menu_vehicle_dealership_purchase"/>
+        <field name="parent_id" ref="menu_outlet_purchase"/>
         <field name="sequence">20</field>
         <field name="web_icon" eval="False"/>
     </record>
 
-    <record id="menu_vehicle_dealership_supplier_invoice" model="ir.ui.menu">
+    <record id="menu_outlet_supplier_invoice" model="ir.ui.menu">
         <field name="action" ref="account.action_move_in_invoice_type"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Facturas</field>
-        <field name="parent_id" ref="menu_vehicle_dealership_purchase"/>
+        <field name="parent_id" ref="menu_outlet_purchase"/>
         <field name="sequence">30</field>
         <field name="web_icon" eval="False"/>
     </record>
