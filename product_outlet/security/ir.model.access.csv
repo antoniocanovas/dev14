@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_vehicle_estimation,product vehicle estimation user,model_product_outlet_estimation,base.group_user,1,1,1,1
+access_outlet_estimation,product vehicle estimation user,model_product_outlet_estimation,base.group_user,1,1,1,1
 fleet_vehicle_serie_access_right_user,fleet_vehicle_serie_access_right,model_fleet_vehicle_serie,fleet.fleet_group_user,1,0,0,0
 fleet_vehicle_serie_access_right,fleet_vehicle_serie_access_right,model_fleet_vehicle_serie,fleet.fleet_group_manager,1,1,1,1

@@ -87,7 +87,7 @@
                           Si alguno de los conceptos ya aparece en el apartado de líneas analíticas,
                           marca la línea como "facturada" y no será tenido en cuenta.
                       </p>
-                      <field name="vehicle_estimation_ids">
+                      <field name="outlet_estimation_ids">
                           <tree editable="bottom">
                               <field name="product_id"/>
                               <field name="date"/>

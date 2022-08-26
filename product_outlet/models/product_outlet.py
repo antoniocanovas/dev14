@@ -53,7 +53,7 @@ class ProductTemplate(models.Model):
     vehicle_chasis = fields.Char(string="Chasis")
     vehicle_description = fields.Text(string="Description")
 
-    vehicle_estimation_ids = fields.One2many('product.vehicle.estimation', 'product_outlet_id', string="Estimation")
+    outlet_estimation_ids = fields.One2many('product.outlet.estimation', 'product_outlet_id', string="Estimation")
     vehicle_serie_id = fields.Many2one('fleet.vehicle.serie')
     vehicle_price = fields.Float(string="Price", store=True)
     outlet_tax_type = fields.Selection(selection=TAX_TYPE, string='Tax Type')
@@ -64,11 +64,11 @@ class ProductTemplate(models.Model):
     vehicle_use = fields.Char(string="Uso anterior")
     vehicle_state = fields.Selection(selection=VEHICLE_STATE, string="Estado")
 
-    @api.depends('vehicle_estimation_ids')
+    @api.depends('outlet_estimation_ids')
     def get_total_estimations(self):
         for record in self:
             total = 0
-            for line in record.vehicle_estimation_ids:
+            for line in record.outlet_estimation_ids:
                 if not line.invoiced:
                     total += line.amount
             record.vehicle_subtotal_estimation = total
@@ -103,7 +103,7 @@ class ProductTemplate(models.Model):
                     for li in analytic.ids:
                         rebu_amount += analytic.amount
                 else:
-                    for li in record.vehicle_estimation_ids:
+                    for li in record.outlet_estimation_ids:
                         if (li.product_id.product_tmpl_id.id == record.id):
                             rebu_amount += li.amount
                 if (record.vehicle_price > -rebu_amount):
@@ -113,7 +113,7 @@ class ProductTemplate(models.Model):
             record.vehicle_rebu_iva = -tax
     vehicle_rebu_iva = fields.Float(string="REBU/IVA (€)", store=False, compute="get_vehicle_rebu_iva")
 
-    @api.depends('vehicle_estimation_ids', 'vehicle_price', 'outlet_tax_type')
+    @api.depends('outlet_estimation_ids', 'vehicle_price', 'outlet_tax_type')
     def get_vehicle_margin(self):
         for record in self:
             price = record.vehicle_price
