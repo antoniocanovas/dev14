@@ -5,8 +5,8 @@ _logger = logging.getLogger(__name__)
 
 
 class ProductVehicleEstimation(models.Model):
-    _name = 'product.vehicle.estimation'
-    _description = 'Vehicle Estimations'
+    _name = 'product.outlet.estimation'
+    _description = 'Outlet Estimations'
 
     product_outlet_id = fields.Many2one('product.template', string="Vehicle")
     product_id = fields.Many2one('product.product', string="Related Product", required=True)
