@@ -41,6 +41,7 @@
                 <field name="outlet_category_id"/>
                 <field name="outlet_state"/>
                 <field name="outlet_license"/>
+                <field name="chassis_pt"/>
             </field>
         </field>
     </record>

@@ -31,3 +31,4 @@ class ProductTemplate(models.Model):
             if (record.unbuild_type == 'refurbish'):
                 outlet = True
             record.outlet = outlet
+    outlet = fields.Boolean('Outlet', compute='get_refurbish_is_outlet', store=True, readonly=False)
