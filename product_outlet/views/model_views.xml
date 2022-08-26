@@ -1,18 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id="product_template_vehicle_tree" model="ir.ui.view">
+    <record id="product_template_outlet_tree" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <tree>
                 <field name="self"/>
-                <field name="vehicle_model_id"/>
                 <field name="default_code"/>
-                <field name="vehicle_category_id"/>
                 <field name="list_price"/>
-                <field name="vehicle_date"/>
-                <field name="vehicle_km"/>
-                <field name="vehicle_brand_id" optional="hidden"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
@@ -21,12 +16,12 @@
         <field name="key" eval="False"/>
         <field name="mode">primary</field>
         <field name="model">product.template</field>
-        <field name="name">product template vehicle tree</field>
+        <field name="name">product template outlet tree</field>
         <field name="priority">16</field>
         <field name="type">tree</field>
     </record>
 
-    <record id="product_template_vehicle" model="ir.ui.view">
+    <record id="product_template_outlet_form" model="ir.ui.view">
         <field name="name">product template vehicle</field>
         <field name="model">product.template</field>
         <field name="type">tree</field>
@@ -39,91 +34,22 @@
                 </div>
             </xpath>
             <xpath expr="//page[@name='general_information']" position="before">
-                <page name="Vehicle" string="Vehicle" attrs="{'invisible':[('outlet','=',False)]}">
+                <page name="Outlet" string="Outlet" attrs="{'invisible':[('outlet','=',False)]}">
                     <h3>Details:</h3>
                     <group>
                         <group>
-                            <field name="outlet_tax_type" attrs="{'required':[('outlet','=',True)]}"/>
                             <field name="default_code" string="Matrícula"/>
-                            <field name="vehicle_model_id"/>
-                            <field name="vehicle_serie_id" domain="[('model_id','=',vehicle_model_id)]"/>
-                            <field name="vehicle_date"/>
-                            <field name="vehicle_km"/>
-                            <field name="vehicle_color"/>
-                            <field name="vehicle_door"/>
-                            <field name="vehicle_brand_id" invisible="1"/>
-                            <field name="vehicle_state"/>
-                            <field name="vehicle_use"/>
                             <field name="vehicle_supplier_id"/>
                         </group>
                         <group>
-                            <field name="vehicle_code"/>
-                            <field name="vehicle_category_id"/>
-                            <field name="vehicle_energy"/>
-                            <field name="vehicle_gearbox"/>
-                            <field name="vehicle_power"/>
-                            <field name="vehicle_date2"/>
-                            <field name="vehicle_last_itv"/>
-                            <field name="vehicle_next_itv"/>
-                            <field name="vehicle_chasis"/>
                             <field name="vehicle_customer_id"/>
                             <field name="vehicle_legal_customer_id"/>
                         </group>
                     </group>
-                    <h2>Descripción del vehículo</h2>
-                    <field name="vehicle_description" widget="html"/>
-                </page>
-            </xpath>
-
-            <xpath expr="//page[@name='general_information']" position="before">
-                <page name="estimations" string="Estimations" attrs="{'invisible':[('outlet','=',False)]}">
-                    <group col="2">
-                        <field name="vehicle_id"/>
-                    </group>
-                    <div attrs="{'invisible':[('outlet_tax_type','=',False)]}">
-                      <h3>Estimation INFO:</h3>
-                      <p>Estimación inicial de costes para tras incluir margen proponer un PVP.
-                          NO incluyas estimación de venta.
-                          Si alguno de los conceptos ya aparece en el apartado de líneas analíticas,
-                          marca la línea como "facturada" y no será tenido en cuenta.
-                      </p>
-                      <field name="outlet_estimation_ids">
-                          <tree editable="bottom">
-                              <field name="product_id"/>
-                              <field name="date"/>
-                              <field name="invoiced"/>
-                              <field name="amount" widget="monetary" sum="Total estimation"/>
-                          </tree>
-                      </field>
-                      <h3>Analytic INFO:</h3>
-                      <p>Costes e ingresos en las cuentas analíticas del vehículo.</p>
-                      <field name="analytic_line_ids">
-                          <tree>
-                              <field name="name"/>
-                              <field name="invoice_id"/>
-                              <field name="date"/>
-                              <field name="amount" widget="monetary" sum="Total analytic"/>
-                          </tree>
-                      </field>
-                      <group name="note_group" col="6" class="mt-2 mt-md-0">
-                          <group class="oe_subtotal_footer oe_right" colspan="2" name="quotation_total">
-                              <field name="vehicle_price"/>
-                              <field name="vehicle_subtotal_estimation" widget="monetary"/>
-                              <field name="vehicle_subtotal_analytic" widget="monetary"/>
-                              <field name="vehicle_rebu_iva" force_save="1" widget="monetary"/>
-                              <div class="oe_subtotal_footer_separator oe_inline o_td_label">
-                                  <label for="vehicle_margin"/>
-                              </div>
-                              <field name="vehicle_margin" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                          </group>
-                          <div class="oe_clear"/>
-                      </group>
-                    </div>
                 </page>
             </xpath>
 
         </field>
     </record>
-
 
 </odoo>

@@ -18,7 +18,33 @@
         <field name="view_mode">kanban,tree,form</field>
         <field name="view_ids" eval="[(5, 0, 0),
         (0, 0, {'view_mode': 'kanban', 'view_id': ref('product.product_template_kanban_view')}),
-        (0, 0, {'view_mode': 'tree', 'view_id': ref('product_template_outlet_tree')}),]"/>
+        (0, 0, {'view_mode': 'tree', 'view_id': ref('product_template_vehicle_tree')}),]"/>
+    </record>
+
+    <record id="action_fleet_vehicle_serie" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="context">{}</field>
+        <field name="domain" eval="False"/>
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">Serie</field>
+        <field name="res_model">fleet.vehicle.serie</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="usage" eval="False"/>
+        <field name="view_id" eval="False"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="menu_fleet_vehicle_serie" model="ir.ui.menu">
+        <field name="action" ref="action_fleet_vehicle_serie"/>
+        <field name="active" eval="True"/>
+        <field name="name">Serie</field>
+        <field name="parent_id" ref="fleet.fleet_configuration"/>
+        <field name="sequence">3</field>
     </record>
 
     <menuitem
@@ -29,7 +55,7 @@
             web_icon="product_outlet,static/icon.png"
     />
 
-    <record id="menu_outlet_product" model="ir.ui.menu">
+    <record id="menu_outlet_vehicle" model="ir.ui.menu">
         <field name="action" ref="action_product_outlet"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
