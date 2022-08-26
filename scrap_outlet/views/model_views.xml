@@ -41,8 +41,7 @@
                 <field name="outlet_category_id"/>
                 <field name="outlet_state"/>
                 <field name="outlet_license"/>
-                <field name="chassis_pt" attrs="{'required':[('unbuild_type','in',['refurbish'])]}"/>
-                <field name="unbuild_type" invisible="1"/>
+                <field name="chassis_pt"/>
             </field>
         </field>
     </record>
