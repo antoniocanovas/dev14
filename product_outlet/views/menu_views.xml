@@ -4,9 +4,9 @@
     <record id="action_product_vehicle" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
-        <field name="domain" eval="[('is_vehicle', '=', 'True')]"/>
+        <field name="domain" eval="[('dealership', '=', 'True')]"/>
         <field name="context"
-               eval="{'search_default_filter_to_sell':1,'default_type':'product','default_is_vehicle': True}"/>
+               eval="{'search_default_filter_to_sell':1,'default_type':'product','default_outlet': True}"/>
         <field name="filter" eval="False"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="limit">80</field>
@@ -48,15 +48,15 @@
     </record>
 
     <menuitem
-            action="action_product_vehicle"
+            action="action_product_outlet"
             id="menu_vehicle_dealership"
             name="Vehicle dealership"
             sequence="10"
-            web_icon="product_vehicle,static/icon.png"
+            web_icon="product_outlet,static/icon.png"
     />
 
     <record id="menu_vehicle_dealership_vehicle" model="ir.ui.menu">
-        <field name="action" ref="action_product_vehicle"/>
+        <field name="action" ref="action_product_outlet"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="name">Vehículos</field>

@@ -30,7 +30,7 @@ VEHICLE_STATE = [
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    is_vehicle = fields.Boolean('Vehicle')
+    outlet = fields.Boolean('Outlet')
 
     vehicle_km = fields.Integer(string='KM')
     vehicle_code = fields.Char(string='Code')
@@ -53,10 +53,10 @@ class ProductTemplate(models.Model):
     vehicle_chasis = fields.Char(string="Chasis")
     vehicle_description = fields.Text(string="Description")
 
-    vehicle_estimation_ids = fields.One2many('product.vehicle.estimation', 'product_vehicle_id', string="Estimation")
+    vehicle_estimation_ids = fields.One2many('product.vehicle.estimation', 'product_outlet_id', string="Estimation")
     vehicle_serie_id = fields.Many2one('fleet.vehicle.serie')
     vehicle_price = fields.Float(string="Price", store=True)
-    vehicle_tax_type = fields.Selection(selection=TAX_TYPE, string='Tax Type')
+    outlet_tax_type = fields.Selection(selection=TAX_TYPE, string='Tax Type')
 
     vehicle_supplier_id = fields.Many2one('res.partner', string="Proveedor")
     vehicle_customer_id = fields.Many2one('res.partner', string="Comprador")
@@ -90,11 +90,11 @@ class ProductTemplate(models.Model):
             record.vehicle_subtotal_analytic = total
     vehicle_subtotal_analytic = fields.Float(string="Total Analytic", store=False, compute="get_total_analytic")
 
-    @api.depends('vehicle_price', 'vehicle_tax_type')
+    @api.depends('vehicle_price', 'outlet_tax_type')
     def get_vehicle_rebu_iva(self):
         for record in self:
             tax, rebu_amount = 0, 0
-            if (record.vehicle_tax_type == 'rebu'):
+            if (record.outlet_tax_type == 'rebu'):
                 analytic = self.env['account.analytic.line'].search(
                     [('account_id', '=', record.expense_analytic_account_id.id),
                      ('move_id.move_id.move_type', '=', 'in_invoice'),
@@ -108,12 +108,12 @@ class ProductTemplate(models.Model):
                             rebu_amount += li.amount
                 if (record.vehicle_price > -rebu_amount):
                     tax = (record.vehicle_price + rebu_amount) * (1- 1/1.21)
-            elif (record.vehicle_tax_type != 'rebu'):
+            elif (record.outlet_tax_type != 'rebu'):
                 tax = record.vehicle_price * (1- 1/1.21)
             record.vehicle_rebu_iva = -tax
     vehicle_rebu_iva = fields.Float(string="REBU/IVA (€)", store=False, compute="get_vehicle_rebu_iva")
 
-    @api.depends('vehicle_estimation_ids', 'vehicle_price', 'vehicle_tax_type')
+    @api.depends('vehicle_estimation_ids', 'vehicle_price', 'outlet_tax_type')
     def get_vehicle_margin(self):
         for record in self:
             price = record.vehicle_price
