@@ -44,6 +44,7 @@
                                   <label for="outlet_margin"/>
                               </div>
                               <field name="outlet_margin" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                              <field name="outlet_tax_type" invisible="1"/>
                           </group>
                           <div class="oe_clear"/>
                       </group>
