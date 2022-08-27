@@ -7,7 +7,7 @@
         <field name="type">tree</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
-            <field name="outlet_use" position="before">
+            <field name="default_code" position="before">
                 <field name="outlet_tax_type" attrs="{'required':[('outlet','=',True)]}"/>
             </field>
             <xpath expr="//page[@name='general_information']" position="before">
