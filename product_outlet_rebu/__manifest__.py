@@ -12,7 +12,6 @@ Estimation options for Outlet refurbished products
     'data': [
         'security/ir.model.access.csv',
         'views/model_views.xml',
-        'views/menu_views.xml',
     ],
     'installable': True,
 }
