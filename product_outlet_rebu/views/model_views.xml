@@ -7,53 +7,53 @@
         <field name="type">tree</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
-            <field name="outlet_use" position="before"/>
-            <field name="outlet_tax_type" attrs="{'required':[('outlet','=',True)]}"/>
-        </field>
-        <xpath expr="//page[@name='general_information']" position="before">
-            <page name="estimations" string="Estimations" attrs="{'invisible':[('outlet','=',False)]}">
-                <div attrs="{'invisible':[('outlet_tax_type','=',False)]}">
-                    <h3>Estimation INFO:</h3>
-                    <p>Estimación inicial de costes para tras incluir margen proponer un PVP.
-                        NO incluyas estimación de venta.
-                        Si alguno de los conceptos ya aparece en el apartado de líneas analíticas,
-                        marca la línea como "facturada" y no será tenido en cuenta.
-                    </p>
-                    <field name="outlet_estimation_ids">
-                        <tree editable="bottom">
-                            <field name="product_id"/>
-                            <field name="date"/>
-                            <field name="invoiced"/>
-                            <field name="amount" widget="monetary" sum="Total estimation"/>
-                        </tree>
-                    </field>
-                    <h3>Analytic INFO:</h3>
-                    <p>Costes e ingresos en las cuentas analíticas del vehículo.</p>
-                    <field name="analytic_line_ids">
-                        <tree>
-                            <field name="name"/>
-                            <field name="invoice_id"/>
-                            <field name="date"/>
-                            <field name="amount" widget="monetary" sum="Total analytic"/>
-                        </tree>
-                    </field>
-                    <group name="note_group" col="6" class="mt-2 mt-md-0">
-                        <group class="oe_subtotal_footer oe_right" colspan="2" name="quotation_total">
-                            <field name="outlet_price"/>
-                            <field name="outlet_subtotal_estimation" widget="monetary"/>
-                            <field name="outlet_subtotal_analytic" widget="monetary"/>
-                            <field name="outlet_rebu_iva" force_save="1" widget="monetary"/>
-                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
-                                <label for="outlet_margin"/>
-                            </div>
-                            <field name="outlet_margin" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            <field name="outlet_use" position="before">
+                <field name="outlet_tax_type" attrs="{'required':[('outlet','=',True)]}"/>
+            </field>
+            <xpath expr="//page[@name='general_information']" position="before">
+                <page name="estimations" string="Estimations" attrs="{'invisible':[('outlet','=',False)]}">
+                    <div attrs="{'invisible':[('outlet_tax_type','=',False)]}">
+                        <h3>Estimation INFO:</h3>
+                        <p>Estimación inicial de costes para tras incluir margen proponer un PVP.
+                            NO incluyas estimación de venta.
+                            Si alguno de los conceptos ya aparece en el apartado de líneas analíticas,
+                            marca la línea como "facturada" y no será tenido en cuenta.
+                        </p>
+                        <field name="outlet_estimation_ids">
+                            <tree editable="bottom">
+                                <field name="product_id"/>
+                                <field name="date"/>
+                                <field name="invoiced"/>
+                                <field name="amount" widget="monetary" sum="Total estimation"/>
+                            </tree>
+                        </field>
+                        <h3>Analytic INFO:</h3>
+                        <p>Costes e ingresos en las cuentas analíticas del vehículo.</p>
+                        <field name="analytic_line_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="invoice_id"/>
+                                <field name="date"/>
+                                <field name="amount" widget="monetary" sum="Total analytic"/>
+                            </tree>
+                        </field>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0">
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="quotation_total">
+                                <field name="outlet_price"/>
+                                <field name="outlet_subtotal_estimation" widget="monetary"/>
+                                <field name="outlet_subtotal_analytic" widget="monetary"/>
+                                <field name="outlet_rebu_iva" force_save="1" widget="monetary"/>
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="outlet_margin"/>
+                                </div>
+                                <field name="outlet_margin" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                            <div class="oe_clear"/>
                         </group>
-                        <div class="oe_clear"/>
-                    </group>
-                </div>
-            </page>
-        </xpath>
-    </field>
-</record>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
 
-        </odoo>
+</odoo>
