@@ -14,6 +14,6 @@ _logger = logging.getLogger(__name__)
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    scrap_warehouse_project_id = fields.Many2one('project.project', string='Warehouse Project')
-    scrap_warehouse_user_id = fields.Many2one('res.users', string='Warehouse Default User')
+    scrap_project_id = fields.Many2one('project.project', string='Warehouse Project')
+    scrap_user_id = fields.Many2one('res.users', string='Warehouse Default User')
 

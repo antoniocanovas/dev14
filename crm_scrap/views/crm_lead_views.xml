@@ -9,7 +9,7 @@
         <field name="priority">99</field>
         <field name="arch" type="xml">
             <field name="description" position="before">
-                <field name="task_ids">
+                <field name="task_ids" context="{'default_project_id':scrap_project_id, 'default_user_id':scrap_user_id}">
                     <tree editable="bottom">
                         <field name="name"/>
                         <field name="brand_id"/>
@@ -20,6 +20,8 @@
                         <field name="company_id" invisible="1"/>
                     </tree>
                 </field>
+                <field name="scrap_project_id" invisible="1"/>
+                <field name="scrap_user_id" invisible="1"/>
             </field>
         </field>
     </record>
