@@ -4,9 +4,7 @@ from odoo import _, api, fields, models
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
-    task_ids = fields.One2many('project.task',
-                               related='lead_id',
-                               store=True)
+    task_ids = fields.One2many('project.task', 'lead_id', store=True)
 
     @api.depends('create_date')
     def get_lead_self(self):
