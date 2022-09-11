@@ -6,3 +6,4 @@ class ProjectTask(models.Model):
 
     lead_id = fields.Many2one('crm.lead', string="Lead", store=True)
     brand_id = fields.Many2one('product.brand', string="Brand")
+    categ_id = fields.Many2one('scrap.category', string="Category")
