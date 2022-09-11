@@ -12,6 +12,7 @@
                 <field name="task_ids">
                     <tree editable="bottom">
                         <field name="name"/>
+                        <field name="brand_id"/>
                         <field name="user_id"/>
                         <field name="project_id"/>
                         <field name="tag_ids" widget="many2many_tags"/>
