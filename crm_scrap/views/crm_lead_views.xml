@@ -21,8 +21,10 @@
                         <field name="company_id" invisible="1"/>
                     </tree>
                 </field>
-                <field name="scrap_project_id" invisible="1"/>
-                <field name="scrap_user_id" invisible="1"/>
+                <group>
+                        <field name="scrap_project_id" invisible="1"/>
+                        <field name="scrap_user_id" invisible="1"/>
+                </group>
             </field>
         </field>
     </record>
