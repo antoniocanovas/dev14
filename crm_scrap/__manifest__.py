@@ -14,6 +14,7 @@ SCRAP demand integration in CRM
     'data': [
         'views/crm_lead_views.xml',
         'views/project_task_views.xml',
+        'views/res_company_views.xml',
     ],
     'installable': True,
 }
