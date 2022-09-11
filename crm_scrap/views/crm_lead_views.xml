@@ -9,7 +9,6 @@
         <field name="priority">99</field>
         <field name="arch" type="xml">
             <field name="description" position="before">
-                <page name="opportunities" string="Opportunities" attrs="{'invisible':[('id','=',False)]}">
                 <field name="task_ids">
                     <tree editable="bottom">
                         <field name="name"/>
