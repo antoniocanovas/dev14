@@ -16,7 +16,7 @@
                         <field name="categ_id"/>
                         <field name="user_id"/>
                         <field name="project_id"/>
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="tag_ids" widget="many2many_tags" string="Procesos"/>
                         <field name="stage_id" readonly="1"/>
                         <field name="company_id" invisible="1"/>
                     </tree>
