@@ -6,6 +6,7 @@ from odoo import fields, models, api
 class SaleOrder(models.Model):
     _inherit = 'sale.order',
 
+    active = fields.Boolean('Active', store=True, default=True)
     all_revision_ids = fields.Many2many('sale.order',
                                         string="Revisions",
                                         compute="get_all_revisions",
