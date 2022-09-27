@@ -22,7 +22,8 @@ class SaleOrder(models.Model):
                                          )
 
     def get_all_revisions(self):
-        revision = self.env['sale.order'].search([('unrevisioned_name', '=', self.unrevisioned_name),
+        unrevision_name = record.name.split(".")[0]
+        revision = self.env['sale.order'].search([('unrevisioned_name', '=', unrevision_name),
                                                   ('active','in',[True,False])])
         self.all_revision_ids = [(6, 0, revision.ids)]
 
@@ -48,4 +49,4 @@ class SaleOrder(models.Model):
                 versionchar = ".0" + str(version + 1)
             else:
                 versionchar = "." + str(version + 1)
-            newso = r.copy({'name': original + versionchar})
+            r.copy({'name': original + versionchar})
