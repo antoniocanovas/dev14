@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="priority">15</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page/field[@name='order_line']/.." position="after">
+                <page string="Revisions" name="revisions" attrs="{'invisible':[('all_revision_count','=',1)]}">
+                    <h3>Revisions: </h3>
+                    <field name="all_revision_ids"/>
+                    <field name="all_revision_count" invisible="1"/>
+                    <h3>All messages: </h3>
+                    <field name="all_mail_messages" mode="tree">
+                        <tree string="Messages" decoration-bf="needaction==True" decoration-danger="has_error==True"
+                              default_order="id desc" create='false' edit='false' delete='false'>
+                            <field name="revision_subject_display" string="Message"/>
+                            <field name="needaction" invisible="1"/>
+                            <field name="has_error" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
