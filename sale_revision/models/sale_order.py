@@ -24,7 +24,7 @@ class SaleOrder(models.Model):
 
     def get_all_revisions(self):
         unrevision_name = self.name.split(".")[0]
-        revision = self.env['sale.order'].search([('unrevisioned_name', '=', unrevision_name),
+        revision = self.env['sale.order'].search([('name', 'ilike', unrevision_name),
                                                   ('active','in',[True,False])])
         self.all_revision_ids = [(6, 0, revision.ids)]
 
