@@ -37,8 +37,8 @@ class SaleOrder(models.Model):
         self.all_mail_messages = [(6, 0, messages.ids)]
 
     def get_new_sale_order_revision(self):
-        for r in record:
-            original = r.name.split(".")[0]
+        for record in self:
+            original = record.name.split(".")[0]
             version = 0
             saleorders = env['sale.order'].search([('name', 'ilike', original)])
 
@@ -50,4 +50,4 @@ class SaleOrder(models.Model):
                 versionchar = ".0" + str(version + 1)
             else:
                 versionchar = "." + str(version + 1)
-            r.copy({'name': original + versionchar})
+            record.copy({'name': original + versionchar})
