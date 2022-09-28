@@ -39,7 +39,7 @@ class SaleOrder(models.Model):
     def get_new_sale_order_revision(self):
         for r in records:
             original = r.name.split(".")[0]
-            version = 1
+            version = 0
             saleorders = env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
