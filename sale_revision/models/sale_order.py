@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
     def get_new_sale_order_revision(self):
         for r in self:
             if r.revision0_id == False:
-                r.revision0_id = r.id
+                r['revision0_id'] = r.id
             version = 1
             for so in r.revision_ids:
                 version_name = so.name.split(".")
