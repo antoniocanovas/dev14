@@ -232,6 +232,7 @@ class MailMessage(models.Model):
                 elif li.field_type == 'text':
                     mensaje += " * " + li.field_desc + ": " + li.old_value_text + " => " + li.new_value_text + "\n"
 
+            print("DEBUG", mensaje)
             #plain_body = html2plaintext(mensaje)
             #if len(plain_body) > body_preview_length:
             #    plain_body = "".join((plain_body[:body_preview_length], "..."))

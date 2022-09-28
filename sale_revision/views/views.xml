@@ -1,39 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id="action_show_so_revisions" model="ir.actions.act_window">
-        <field name="binding_model_id" eval="False"/>
-        <field name="binding_type">action</field>
-        <field name="context">{'search_default_revision0_id': revision0_id,'default_revision0_id': revision0_id}</field>
-        <field name="domain">False</field>
-        <field name="groups_id" eval="[(6, 0, [])]"/>
-        <field name="help"><![CDATA[<p> Revisions </p>]]></field>
-        <field name="limit">80</field>
-        <field name="name">SO</field>
-        <field name="res_model">sale.order</field>
-        <field name="target">current</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="view_id" ref="sale.view_order_tree"/>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="sale_revision_order_form_inh" model="ir.ui.view">
-        <field name="name">Sale Revision IC form</field>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="priority">15</field>
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button class="oe_stat_button" icon="fa-info" type="action" name="%(action_show_so_revisions)d" groups="base.group_user">
-                    <field name="revision_count" string="Revisions" widget="statinfo"/>
-                </button>
-            </xpath>
-
             <xpath expr="//page/field[@name='order_line']/.." position="after">
-                <page string="Revisions" name="revisions" attrs="{'invisible':[('revision_count','=',1)]}">
+                <page string="Revisions" name="revisions" attrs="{'invisible':[('all_revision_count','=',1)]}">
                     <h3>Revisions: </h3>
-                    <field name="revision_ids"/>
-                    <field name="revision_count" invisible="1"/>
+                    <field name="all_revision_ids"/>
+                    <field name="all_revision_count" invisible="1"/>
                     <h3>All messages: </h3>
                     <field name="all_mail_messages" mode="tree">
                         <tree string="Messages" decoration-bf="needaction==True" decoration-danger="has_error==True"
