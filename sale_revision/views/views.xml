@@ -27,8 +27,6 @@
                 <button name="%(action_show_so_revisions)d" type="action" class="oe_highlight"  icon="fa-info">
                     <field name="all_revision_count" string="Versiones" widget="statinfo"/>
                 </button>
-                <!--<button name="action_post_invoices" string="Send" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', 'enviado')]}"/>-->
-<!--
             </xpath>
 -->
             <xpath expr="//page/field[@name='order_line']/.." position="after">
