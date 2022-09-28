@@ -30,10 +30,10 @@
             </xpath>
 -->
             <xpath expr="//page/field[@name='order_line']/.." position="after">
-                <page string="Revisions" name="revisions" attrs="{'invisible':[('all_revision_count','=',1)]}">
+                <page string="Revisions" name="revisions" attrs="{'invisible':[('revision_count','=',1)]}">
                     <h3>Revisions: </h3>
-                    <field name="all_revision_ids"/>
-                    <field name="all_revision_count" invisible="1"/>
+                    <field name="revision_ids"/>
+                    <field name="revision_count" invisible="1"/>
                     <h3>All messages: </h3>
                     <field name="all_mail_messages" mode="tree">
                         <tree string="Messages" decoration-bf="needaction==True" decoration-danger="has_error==True"
