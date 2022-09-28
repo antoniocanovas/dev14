@@ -42,4 +42,5 @@ class SaleOrder(models.Model):
                 versionchar = ".0" + str(version + 1)
             else:
                 versionchar = "." + str(version + 1)
-            r.copy({'name': r.revision0_id.name + versionchar,  'revision0_id':r.revision0_id.id})
+            newso = r.copy({'name': r.revision0_id.name + versionchar,  'revision0_id':r.revision0_id.id})
+            return newso
