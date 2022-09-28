@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id="view_order_form" model="ir.ui.view">
-        <field name="name">sale.order.form</field>
+    <record id="sale_revision_inh_form" model="ir.ui.view">
+        <field name="name">sale.revision.inh.form</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="priority">15</field>
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="get_new_sale_order_revision" string="Create Revision" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+
+                </button>
+            </xpath>
             <xpath expr="//page/field[@name='order_line']/.." position="after">
                 <page string="Revisions" name="revisions" attrs="{'invisible':[('all_revision_count','=',1)]}">
                     <h3>Revisions: </h3>

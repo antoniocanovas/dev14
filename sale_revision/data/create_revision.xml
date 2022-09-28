@@ -1,0 +1,13 @@
+<odoo>
+
+    <record id="create_sale_order_revision" model="ir.actions.server">
+            <field name="name">=> Crear Revisión</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">
+record.get_new_sale_order_revision()
+            </field>
+        </record>
+
+</odoo>

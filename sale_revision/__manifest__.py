@@ -14,6 +14,7 @@
     ],
     'data': [
         'views/views.xml',
+        #'data/create_revision.xml',
     ],
     'installable': True,
     'application': False,

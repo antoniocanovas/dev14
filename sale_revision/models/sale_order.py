@@ -50,4 +50,17 @@ class SaleOrder(models.Model):
                 versionchar = ".0" + str(version + 1)
             else:
                 versionchar = "." + str(version + 1)
-            record.copy({'name': original + versionchar})
+            new = record.copy({'name': original + versionchar})
+
+            view_id = self.env.ref('sale.view_order_form').id
+
+            return {
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'sale.order',
+                'type': 'ir.actions.act_window',
+                'view_id': view_id,
+                'context': dict(self.env.context),
+                'target': 'current',
+                'res_id': new.id,
+            }
