@@ -30,10 +30,11 @@ class SaleOrder(models.Model):
 
     def get_new_sale_order_revision(self):
         for r in self:
-            if r.revision0_id == False:
+            if r.revision0_id.id == False:
                 r['revision0_id'] = r.id
-            version = 1
-            for so in r.revision_ids:
+            version = 0
+            revisions = self.env['sale.order'].search([('active','in',[False,True]), ('revision0_id','=',r.revision0_id.id)])
+            for so in revisions:
                 version_name = so.name.split(".")
                 if (len(version_name) > 1) and (int(version_name[1]) > version):
                     version = int(version_name[1])
