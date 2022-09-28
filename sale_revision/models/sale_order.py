@@ -8,7 +8,7 @@ class SaleOrder(models.Model):
 
     active = fields.Boolean('Active', store=True, default=True)
     revision0_id = fields.Many2one('sale.order', string='First quotation', store=True)
-    revision_ids = fields.One2many('sale.order', 'revision0_id', string="Revisions", 'active_test':False)
+    revision_ids = fields.One2many('sale.order', 'revision0_id', string="Revisions")
     revision_count =  fields.Integer(string="Revisions",
                                         compute="get_revision_count",
                                         store=False
