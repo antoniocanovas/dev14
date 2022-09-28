@@ -24,7 +24,7 @@
         <field name="priority">15</field>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
-                <button class="oe_stat_button" icon="fa-info" type="object" name="%(action_show_so_revisions)d" groups="base.group_user">
+                <button class="oe_stat_button" icon="fa-info" type="action" name="%(action_show_so_revisions)d" groups="base.group_user">
                     <field name="revision_count" string="Revisions" widget="statinfo"/>
                 </button>
             </xpath>
