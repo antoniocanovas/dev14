@@ -37,10 +37,10 @@ class SaleOrder(models.Model):
         self.all_mail_messages = [(6, 0, messages.ids)]
 
     def get_new_sale_order_revision(self):
-        for r in records:
+        for r in self:
             original = r.name.split(".")[0]
             version = 1
-            saleorders = env['sale.order'].search([('name', 'ilike', original)])
+            saleorders = self.env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
                 name_version = so.name.split(".")
