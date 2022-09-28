@@ -10,7 +10,7 @@
     'category': 'Tools',
     'version': '14.0.1.0.0',
     'depends': [
-        'sale_management',
+        'sale_management', 'web_widget_open_tab',
     ],
     'data': [
         'views/views.xml',
