@@ -40,7 +40,7 @@ class SaleOrder(models.Model):
         for record in self:
             original = record.name.split(".")[0]
             version = 0
-            saleorders = env['sale.order'].search([('name', 'ilike', original)])
+            saleorders = self.env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
                 name_version = so.name.split(".")
