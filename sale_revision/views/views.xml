@@ -17,18 +17,11 @@
     </record>
 -->
     <record id="sale_revision_order_form_inh" model="ir.ui.view">
-        <field name="name">sale.order.form</field>
+        <field name="name">Sale Revision IC form</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="priority">15</field>
         <field name="arch" type="xml">
- <!--
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button name="%(action_show_so_revisions)d" type="action" class="oe_highlight"  icon="fa-info">
-                    <field name="all_revision_count" string="Versiones" widget="statinfo"/>
-                </button>
-            </xpath>
--->
             <xpath expr="//page/field[@name='order_line']/.." position="after">
                 <page string="Revisions" name="revisions" attrs="{'invisible':[('revision_count','=',1)]}">
                     <h3>Revisions: </h3>
