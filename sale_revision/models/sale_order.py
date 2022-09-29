@@ -11,10 +11,9 @@ class SaleOrder(models.Model):
                                         string="Revisions",
                                         relation='so_sorevision_rel',
                                         column1="so",
-                                        column2="sorevision",
-                                        compute="get_all_revisions",
-                                        store=False,
-#                                        store=True,
+                                        column2="so_revision",
+#                                        compute="get_all_revisions",
+                                        store=True,
                                         context={'active_test': False}
                                         )
     all_revision_count = fields.Integer(string="Revisions",
@@ -26,17 +25,17 @@ class SaleOrder(models.Model):
                                          compute="get_all_messages",
                                          store=False
                                          )
-#    revision0_id = fields.Many2one('sale.order', 'Original')
-#    revision0_ids = fields.One2may('sale.order', 'revision0_id', string="Revs. Original")
-#    revisionx_ids = fields.Many2many('sale.order', )
+    revision0_id = fields.Many2one('sale.order', 'Original')
+    revision0_ids = fields.One2may('sale.order', 'revision0_id', string="Revs. Original")
+    revisionx_ids = fields.Many2many('sale.order', related='revision0_id.revision0_ids', store=False)
 
 
-    def get_all_revisions(self):
-        if self.id:
-            unrevision_name = self.name.split(".")[0]
-            revision = self.env['sale.order'].search([('name', 'ilike', unrevision_name),
-                                                  ('active','in',[True,False])])
-            self.all_revision_ids = [(6, 0, revision.ids)]
+#    def get_all_revisions(self):
+#        if self.id:
+#            unrevision_name = self.name.split(".")[0]
+#            revision = self.env['sale.order'].search([('name', 'ilike', unrevision_name),
+#                                                  ('active','in',[True,False])])
+#            self.all_revision_ids = [(6, 0, revision.ids)]
 
     def get_all_revisions_count(self):
         self.all_revision_count = len(self.all_revision_ids.ids)
@@ -50,7 +49,7 @@ class SaleOrder(models.Model):
         for record in self:
             original = record.name.split(".")[0]
             version = 0
- #           v0 = self.env['sale.order'].search([('name','=', original),('active','in',[True,False])])
+            v0 = self.env['sale.order'].search([('name','=', original),('active','in',[True,False])])
             saleorders = self.env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
@@ -62,7 +61,9 @@ class SaleOrder(models.Model):
             else:
                 versionchar = "." + str(version + 1)
             new = record.copy({'name': original + versionchar})
-#            v0['all_revision_ids'] = [(4,0,new.id)]
+
+            for so in saleorders:
+                so['all_revision_ids'] = [(4,0,new.id)]
 
             view_id = self.env.ref('sale.view_order_form').id
 
