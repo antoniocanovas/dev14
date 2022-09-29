@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
     active = fields.Boolean('Active', store=True, default=True)
     all_revision_ids = fields.Many2many('sale.order',
                                         string="Revisions",
-                                        compute="get_all_revisions",
+#                                        compute="get_all_revisions",
 #                                        store=False,
                                         store=True,
                                         context={'active_test': False}
@@ -47,7 +47,7 @@ class SaleOrder(models.Model):
         for record in self:
             original = record.name.split(".")[0]
             version = 0
-            v0 = self.env['sale.order'].search([('name','=', original)])
+            v0 = self.env['sale.order'].search([('name','=', original),('active','in',[True,False])])
             saleorders = self.env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
