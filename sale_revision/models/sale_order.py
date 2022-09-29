@@ -49,7 +49,7 @@ class SaleOrder(models.Model):
         for record in self:
             original = record.name.split(".")[0]
             version = 0
-            v0 = self.env['sale.order'].search([('name','=', original),('active','in',[True,False])])
+            #v0 = self.env['sale.order'].search([('name','=', original),('active','in',[True,False])])
             saleorders = self.env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
@@ -62,8 +62,8 @@ class SaleOrder(models.Model):
                 versionchar = "." + str(version + 1)
             new = record.copy({'name': original + versionchar})
 
-            for so in saleorders:
-                so['all_revision_ids'] = [(4,0,new.id)]
+#            for so in saleorders:
+#                so['all_revision_ids'] = [(4,0,new.id)]
 
             view_id = self.env.ref('sale.view_order_form').id
 
