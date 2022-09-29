@@ -62,8 +62,8 @@ class SaleOrder(models.Model):
                 versionchar = "." + str(version + 1)
             new = record.copy({'name': original + versionchar})
 
-#            for so in saleorders:
-#                so['all_revision_ids'] = [(4,0,new.id)]
+            for so in saleorders:
+                so['all_revision_ids'] = [(4,new.id)]
 
             view_id = self.env.ref('sale.view_order_form').id
 
