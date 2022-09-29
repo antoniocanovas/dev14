@@ -12,9 +12,9 @@ class SaleOrder(models.Model):
                                         relation='so_sorevision_rel',
                                         column1="so",
                                         column2="sorevision",
-#                                        compute="get_all_revisions",
-#                                        store=False,
-                                        store=True,
+                                        compute="get_all_revisions",
+                                        store=False,
+#                                        store=True,
                                         context={'active_test': False}
                                         )
     all_revision_count = fields.Integer(string="Revisions",
@@ -50,7 +50,7 @@ class SaleOrder(models.Model):
         for record in self:
             original = record.name.split(".")[0]
             version = 0
-            v0 = self.env['sale.order'].search([('name','=', original),('active','in',[True,False])])
+ #           v0 = self.env['sale.order'].search([('name','=', original),('active','in',[True,False])])
             saleorders = self.env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
@@ -62,7 +62,7 @@ class SaleOrder(models.Model):
             else:
                 versionchar = "." + str(version + 1)
             new = record.copy({'name': original + versionchar})
-            v0['all_revision_ids'] = [(4,0,new.id)]
+#            v0['all_revision_ids'] = [(4,0,new.id)]
 
             view_id = self.env.ref('sale.view_order_form').id
 
