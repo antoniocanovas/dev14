@@ -26,7 +26,7 @@ class SaleOrder(models.Model):
                                          )
 
     def get_revisions_count(self):
-        self.all_revision_count = len(self.revision_ids.ids)
+        self.revision_count = len(self.revision_ids.ids)
 
     def get_revision_messages(self):
         messages = self.env['mail.message'].search([('model', '=', 'sale.order'),
