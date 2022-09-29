@@ -9,8 +9,9 @@ class SaleOrder(models.Model):
     active = fields.Boolean('Active', store=True, default=True)
     all_revision_ids = fields.Many2many('sale.order',
                                         string="Revisions",
- #                                       compute="get_all_revisions",
-                                        store=False,
+#                                        compute="get_all_revisions",
+#                                        store=False,
+                                        store=True,
                                         context={'active_test': False}
                                         )
     all_revision_count = fields.Integer(string="Revisions",
@@ -46,6 +47,7 @@ class SaleOrder(models.Model):
         for record in self:
             original = record.name.split(".")[0]
             version = 0
+            v0 = self.env['sale.order'].search([('name','=', original)])
             saleorders = self.env['sale.order'].search([('name', 'ilike', original)])
 
             for so in saleorders:
@@ -57,6 +59,7 @@ class SaleOrder(models.Model):
             else:
                 versionchar = "." + str(version + 1)
             new = record.copy({'name': original + versionchar})
+            v0['all_revision_ids'] = [(4,0,new.id)]
 
             view_id = self.env.ref('sale.view_order_form').id
 
