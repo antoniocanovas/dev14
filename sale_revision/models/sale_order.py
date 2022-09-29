@@ -60,10 +60,10 @@ class SaleOrder(models.Model):
             else:
                 versionchar = "." + str(version + 1)
             new = record.copy({'name': original + versionchar})
-            saleorders.append(new)
 
             for so in saleorders:
                 so.write({'all_revision_ids':[(4,new.id)]})
+            new.write({'all_revision_ids': [(4, new.id)]})
 
             view_id = self.env.ref('sale.view_order_form').id
 
