@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="sale_revision_inh_form" model="ir.ui.view">
+        <field name="name">sale.revision.inh.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="priority">15</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="get_new_sale_order_revision" string="Create Revision" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+
+                </button>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/.." position="after">
+                <page string="Revisions" name="revisions" attrs="{'invisible':[('all_revision_count','=',1)]}">
+                    <h3>Revisions: </h3>
+                    <field name="all_revision_ids">
+                        <tree>
+                            <field name="id" widget="open_tab"/>
+                            <field name="message_needaction" invisible="1"/>
+                            <field name="name" string="Number" readonly="1" decoration-bf="1"/>
+                            <field name="date_order" string="Order Date" widget="date" optional="show"/>
+                            <field name="commitment_date" optional="hide"/>
+                            <field name="expected_date" optional="hide"/>
+                            <field name="partner_id" readonly="1"/>
+                            <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                            <field name="activity_ids" widget="list_activity" optional="show"/>
+                            <field name="team_id" optional="hide"/>
+                            <field name="company_id" groups="base.group_multi_company" optional="show" readonly="1"/>
+                            <field name="amount_untaxed" sum="Total Tax Excluded" widget="monetary" optional="hide"/>
+                            <field name="amount_tax" sum="Tax Total" widget="monetary" optional="hide"/>
+                            <field name="amount_total" sum="Total Tax Included" widget="monetary" decoration-bf="1" optional="show"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="invoice_status" decoration-success="invoice_status == 'invoiced'" decoration-info="invoice_status == 'to invoice'" decoration-warning="invoice_status == 'upselling'" widget="badge" optional="show"/>
+                            <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="state" invisible="1"/>
+                        </tree>
+                    </field>
+                    <field name="all_revision_count" invisible="1"/>
+                    <h3>All messages: </h3>
+                    <field name="all_mail_messages" mode="tree">
+                        <tree string="Messages" decoration-bf="needaction==True" decoration-danger="has_error==True"
+                              default_order="id desc" create='false' edit='false' delete='false'>
+                            <field name="revision_subject_display" string="Message"/>
+                            <field name="needaction" invisible="1"/>
+                            <field name="has_error" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
