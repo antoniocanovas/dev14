@@ -9,8 +9,9 @@ class SaleOrder(models.Model):
     active = fields.Boolean('Active', store=True, default=True)
     all_revision_ids = fields.Many2many('sale.order',
                                         string="Revisions",
-                                        column1="so1",
-                                        column2="so2",
+                                        relation='so_sorevision_rel'
+                                        column1="so",
+                                        column2="sorevision",
 #                                        compute="get_all_revisions",
 #                                        store=False,
                                         store=True,
