@@ -11,7 +11,7 @@ class SaleOrder(models.Model):
                                         string="Revisions",
                                         relation='so_sorevision_rel',
                                         column1="so",
-                                        column2="so_revision",
+                                        column2="sorevision",
 #                                        compute="get_all_revisions",
                                         store=True,
                                         context={'active_test': False}
