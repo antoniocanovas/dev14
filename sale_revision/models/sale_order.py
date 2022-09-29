@@ -35,11 +35,12 @@ class SaleOrder(models.Model):
 
     def get_new_sale_order_revision(self):
         for record in self:
-            original = record.name.split(".")[0]
             version = 0
+            original = record.name.split(".")[0]
+
+            # Looking for last revision code, and create new revision with code +1:
             saleorders = self.env['sale.order'].search([('name', 'ilike', original),
                                                         ('active','in',[False,True])])
-
             for so in saleorders:
                 name_version = so.name.split(".")
                 if (len(name_version) > 1) and (int(name_version[1]) > version):
@@ -50,13 +51,14 @@ class SaleOrder(models.Model):
                 versionchar = "." + str(version + 1)
             new = record.copy({'name': original + versionchar})
 
+            # Updating revision_ids in related sales orders:
             saleorders = self.env['sale.order'].search([('name', 'ilike', original),
                                                         ('active','in',[False,True])])
             for so in saleorders:
                 so.write({'revision_ids':[(6,0,saleorders.ids)]})
 
+            # Refresh screen with new revision:
             view_id = self.env.ref('sale.view_order_form').id
-
             return {
                 'view_type': 'form',
                 'view_mode': 'form',
