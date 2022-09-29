@@ -25,9 +25,9 @@ class SaleOrder(models.Model):
                                          compute="get_all_messages",
                                          store=False
                                          )
-    revision0_id = fields.Many2one('sale.order', 'Original')
-    revision0_ids = fields.One2may('sale.order', 'revision0_id', string="Revs. Original")
-    revisionx_ids = fields.Many2many('sale.order', related='revision0_id.revision0_ids', store=False)
+#    revision0_id = fields.Many2one('sale.order', 'Original')
+#    revision0_ids = fields.One2may('sale.order', 'revision0_id', string="Revs. Original")
+#    revisionx_ids = fields.Many2many('sale.order', related='revision0_id.revision0_ids', store=False)
 
 
 #    def get_all_revisions(self):
