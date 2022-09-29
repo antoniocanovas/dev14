@@ -7,7 +7,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order',
 
     active = fields.Boolean('Active', store=True, default=True)
-    all_revision_ids = fields.Many2many('sale.order',
+    all_revision_ids = fields.Many2many(comodel_name='sale.order',
                                         string="Revisions",
                                         relation='so_sorevision_rel'
                                         column1="so",
