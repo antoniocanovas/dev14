@@ -7,7 +7,7 @@ Sell refubished products in Spain (special taxes)
 """,
     'author': 'Serincloud',
     'depends': [
-        'scrap_unbuild',
+        'purchase_donation',
         'product_outlet',
         'fleet_vehicle_category',
         'base_automation',
