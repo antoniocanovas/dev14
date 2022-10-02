@@ -11,4 +11,4 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     donation_set_id = fields.Many2one('donation.set', string='Donation Set')
-    donation_line_ids = fields.One2many('donation.line', 'product_id', string='Donation Lines')
+    donation_line_ids = fields.One2many('donation.line', 'purchase_id', string='Donation Lines')
