@@ -7,22 +7,21 @@
 from odoo import api, fields, models, _
 
 
-class UnbuildSetLine(models.Model):
-    _name = "unbuild.set.line"
-    _description = "Line for unbuilds"
+class DonationSetLine(models.Model):
+    _name = "donation.set.line"
+    _description = "Donation lines"
 
-
-    part_id = fields.Many2one(
-        'unbuild.part',
-        string='Part',
+    item_id = fields.Many2one(
+        'product.product',
+        string='Item',
     )
     set_id = fields.Many2one(
-        'unbuild.set',
+        'donation.set',
         string='Set',
     )
     qty = fields.Integer(string='Quantity')
 
     def get_set_name(self):
         for record in self:
-            record['name'] = str(record.qty) + 'x' + record.part_id.name
+            record['name'] = str(record.qty) + 'x' + record.item_id.name
     name = fields.Char(string='Name', store=True, compute='get_set_name')

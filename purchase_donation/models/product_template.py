@@ -7,13 +7,14 @@
 from odoo import api, fields, models, _
 
 
-class UnbuildPart(models.Model):
-    _name = "unbuild.part"
-    _description = "Parts of scrap product"
+class ProductTemplate(models.Model):
+    _inherit = "product.template"
 
-    name = fields.Char(string='Name')
-    category_id = fields.Many2one(
-        'product.category',
-        string='Category',
-        required=True,
+    donation_template = fields.Boolean('Donation template', store=True, default=False)
+
+    parent_id = fields.Many2one(
+        'product.template',
+        string='Parent',
+        domain=[('donation_template', '=', True)],
     )
+

@@ -7,13 +7,13 @@
 from odoo import api, fields, models, _
 
 
-class UnbuildSet(models.Model):
-    _name = "unbuild.set"
-    _description = "Set for unbuilds"
+class DonationSet(models.Model):
+    _name = "donation.set"
+    _description = "Set for donations"
 
     name = fields.Char(string='Name')
     line_ids = fields.One2many(
-        'unbuild.set.line',
+        'donation.set.line',
         'set_id',
-        string='Part',
+        string='Item',
     )
