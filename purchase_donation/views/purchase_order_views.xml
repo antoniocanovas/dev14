@@ -7,11 +7,7 @@
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='products']" position="after">
-                <page name="desguace" string="Desguace" attrs="{'invisible':[('unbuild_type','not in',['main','subproduct'])]}">
-                    <group>
-                        <field name="parent_id" domain="[('id','!=',active_id),('unbuild_type','=','main')]"
-                               attrs="{'invisible':[('unbuild_type','!=','subproduct')], 'readonly':[('parent_id','!=',False)]}"/>
-                    </group>
+                <page name="donation" string="Donations">
                     <group name="donation_set">
                         <field name="donation_set_id"/>
                     </group>
@@ -104,5 +100,11 @@
         <field name="type">tree</field>
     </record>
 
+<!-- Para meter en product.template:
+                        <group>
+                        <field name="parent_id" domain="[('id','!=',active_id),('unbuild_type','=','main')]"
+                               attrs="{'invisible':[('unbuild_type','!=','subproduct')], 'readonly':[('parent_id','!=',False)]}"/>
+                    </group>
+-->
 
 </odoo>
