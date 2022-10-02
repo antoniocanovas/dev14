@@ -1,42 +1,30 @@
 <odoo>
         <record id="donation_purchase_create" model="ir.actions.server">
             <field name="name">=> Donation purchase line creation</field>
-            <field ref="model_product_template" name="model_id" />
+            <field ref="model_purchase_order" name="model_id" />
             <field name="binding_model_id" ref="model_purchase_order"/>
             <field name="state">code</field>
             <field name="code">
-# Crea la CLASIFICACIÓN y desglose de productos en la ubicación del producto padre:
+# Crea las líneas de compra con nuevos productos seriados por el código de compra:
+
+# El producto es siempre nuevo, pero puede haber distintos en el set, poner otro sufijo
+# El control de si se ha de hacer o no la línea de compra es por línea de compra, NO POR plantilla de producto.
+
 for r in records:
-  newsi = False
-  rootcode = r.default_code[:6]
-  location = env['stock.location'].search([('name','=',rootcode)])
-  rootpt = env['product.template'].search([('default_code','=',rootcode)])
-  if not rootpt.id or not location.id:
-    raise Warning('Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; o la localizacón de almacén con este código.')
+  donation_code = r.name
 
-  for li in r.unbuild_product_line_ids:
+  for li in r.donation_line_ids:
     if not li.newproduct_id.id:
-      codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
-      newproduct = env['product.template'].create({'name':li.name,
-        # 'chassis_pt':r.chassis_pt,
-        'categ_id':li.part_id.category_id.id, 'unbuild_type':'subproduct',
-        'sale_ok':True, 'purchase_ok':False, 'type':'product', 'parent_id':rootpt.id, 'default_code':rootcode + codesub,
-        'income_analytic_account_id':rootpt.income_analytic_account_id.id , 'expense_analytic_account_id':rootpt.expense_analytic_account_id.id,
-        'unbuild_location_id':rootpt.unbuild_location_id.id})
-      rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
-      newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
+      new_product = env['product.template'].create({'name':li.name + " " + donation_code, 'categ_id':li.product_id.categ_id.id,
+      'sale_ok':True, 'purchase_ok':True, 'type':'product', 'parent_id':record.id})
 
-      if (newsi == False):
-        name = "Productos " + rootpt.default_code
-        newsi = env['stock.inventory'].create({'name':name})
-      newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
-        'product_qty':li.qty})
-      li['newproduct_id'] = newproduct.id
-  if (newsi != False):
-    newsi.action_start()
-    newsi.action_validate()
-  else:
-    raise Warning('No hay productos nuevos que crear en: ' + r.name)
+      new_productproduct = env['product.product'].search([('product_tmpl_id','=',new_product.id)])
+
+      new_pol = env['purchase.order.line'].create({'order_id':record.id, 'product_id':new_productproduct.id, 'product_qty': li.qty,
+        'product_uom':li.product_id.uom_po_id.id, 'price_unit':1})
+
+      li.write({'newproduct_id':new_product.id, 'purchase_line_id':new_pol.id})
+
             </field>
         </record>
 

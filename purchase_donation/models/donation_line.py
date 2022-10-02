@@ -19,10 +19,8 @@ class DonationLine(models.Model):
     qty = fields.Integer(string='Quantity')
     purchase_id = fields.Many2one('purchase.order', store=True, string='Purchase')
 
-    newproduct_id = fields.Many2one(
-        'product.template',
-        string='New product',
-    )
+    newproduct_id = fields.Many2one('product.template', string='New product')
+    purchase_linea_id = fields.Many2one('purchase.order.line', string='Purchase line')
 
     @api.depends('product_id')
     def get_part_name(self):
