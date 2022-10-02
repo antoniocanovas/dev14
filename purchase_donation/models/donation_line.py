@@ -11,9 +11,9 @@ class UnbuildProductLine(models.Model):
     _name = "unbuild.product.line"
     _description = "Unbuild Product Line"
 
-    product_tmpl_id = fields.Many2one(
-        'product.template',
-        string='Product template',
+    product_id = fields.Many2one(
+        'product.product',
+        string='Product',
     )
     part_id = fields.Many2one(
         'unbuild.part',
