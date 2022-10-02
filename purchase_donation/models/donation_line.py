@@ -17,7 +17,7 @@ class DonationLine(models.Model):
         required=True,
     )
     qty = fields.Integer(string='Quantity')
-    purchase_id = fields.Many2one('purchase.order', store=True, string=Purchase)
+    purchase_id = fields.Many2one('purchase.order', store=True, string='Purchase')
 
     newproduct_id = fields.Many2one(
         'product.template',
