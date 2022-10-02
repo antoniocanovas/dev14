@@ -14,7 +14,7 @@ for r in records:
   donation_code = r.name
 
   for li in r.donation_line_ids:
-    if not li.newproduct_id.id:
+    if not li.purchase_line_id.id:
       new_product = env['product.template'].create({'name':li.name + " " + donation_code, 'categ_id':li.product_id.categ_id.id,
       'sale_ok':True, 'purchase_ok':True, 'type':'product', 'parent_id':record.id})
 
