@@ -1,5 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_donation_item, Donation item,model_donation_item,base.group_user,1,1,1,1
-access_donation_item_line, Donation item Line,model_donation_item_line,base.group_user,1,1,1,1
+access_donation_line, Donation item Line,model_donation_line,base.group_user,1,1,1,1
 access_donation_set, Donation Set,model_donation_set,base.group_user,1,1,1,1
 access_donation_set_line, Donation Set Line,model_donation_set_line,base.group_user,1,1,1,1
