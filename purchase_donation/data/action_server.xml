@@ -48,7 +48,7 @@ for r in records:
 # CODE:
 record.donation_line_ids.unlink()
 for line in record.donation_set_id.line_ids:
-  newline = env['donation.line'].create({'product_id':line.product_id.id, 'qty':line.qty, 'name':line.product_id.name, 'product_tmpl_id':line.product_id.product_tmpl_id.id})
+  newline = env['donation.line'].create({'product_id':line.product_id.id, 'qty':line.qty, 'name':line.product_id.name, 'purchase_id':record.id})
 
             </field>
             <field name="trigger">on_change</field>
