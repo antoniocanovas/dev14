@@ -11,7 +11,7 @@ class DonationSetLine(models.Model):
     _name = "donation.set.line"
     _description = "Donation lines"
 
-    item_id = fields.Many2one(
+    product_id = fields.Many2one(
         'product.product',
         string='Item',
     )
@@ -23,5 +23,5 @@ class DonationSetLine(models.Model):
 
     def get_set_name(self):
         for record in self:
-            record['name'] = str(record.qty) + 'x' + record.item_id.name
+            record['name'] = str(record.qty) + 'x' + record.product_id.name
     name = fields.Char(string='Name', store=True, compute='get_set_name')
