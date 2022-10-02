@@ -23,7 +23,7 @@ class DonationLine(models.Model):
         string='New product',
     )
 
-    @api.depends('part_id')
+    @api.depends('product_id')
     def get_part_name(self):
         for record in self:
             record.name = record.product_id.name
