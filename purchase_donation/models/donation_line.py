@@ -7,29 +7,26 @@
 from odoo import api, fields, models, _
 
 
-class UnbuildProductLine(models.Model):
-    _name = "unbuild.product.line"
-    _description = "Unbuild Product Line"
+class DonationLine(models.Model):
+    _name = "donation.line"
+    _description = "Donation Line"
 
     product_id = fields.Many2one(
         'product.product',
         string='Product',
-    )
-    part_id = fields.Many2one(
-        'unbuild.part',
-        string='Part',
         required=True,
     )
+    qty = fields.Integer(string='Quantity')
+
     newproduct_id = fields.Many2one(
         'product.template',
         string='New product',
     )
-    qty = fields.Integer(string='Quantity')
 
     @api.depends('part_id')
     def get_part_name(self):
         for record in self:
-            record.name = record.part_id.name
+            record.name = record.product_id.name
     name = fields.Char(string='Name', compute='get_part_name', readonly=False, store=True)
 
 
