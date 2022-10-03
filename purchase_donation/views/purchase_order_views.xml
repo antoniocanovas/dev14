@@ -13,7 +13,7 @@
                     </group>
                     <field name="donation_line_ids">
                         <tree editable="bottom">
-                            <field name="product_id"/>
+                            <field name="product_id" domain="[('donation_template','=',True)]"/>
                             <field name="name"/>
                             <field name="qty"/>
                             <field name="newproduct_id" readonly="1" decoration-warning="1"/>
@@ -34,7 +34,7 @@
                         <field name="name" required="1"/>
                         <field name="line_ids" context="{'default_qty':1}">
                             <tree editable="bottom">
-                                <field name="product_id" required="1"/>
+                                <field name="product_id" required="1" domain="[('donation_template','=',True)]"/>
                                 <field name="qty" required="1"/>
                             </tree>
                         </field>
