@@ -15,6 +15,5 @@ class ProductTemplate(models.Model):
     parent_id = fields.Many2one(
         'product.template',
         string='Parent',
-        domain=[('donation_template', '=', True)],
     )
 
