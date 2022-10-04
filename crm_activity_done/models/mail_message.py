@@ -12,5 +12,5 @@ class MailMessage(models.Model):
                     (record.message_type == 'notification') \
                     and (record.subtype_id.id == 3):
                 lead = self.env['crm.lead'].search([('id', '=', record.res_id)]).id
-            record['x_lead_id'] = lead
+            record['lead_id'] = lead
     lead_id = fields.Many2one('crm.lead', string="Lead", store=True, compute='get_activity_lead')
