@@ -1,22 +1,17 @@
 {
-    'name': 'CRM SCRAP',
+    'name': 'CRM Activity done',
     'version': '14.0.1.0.0',
     'category': '',
     'description': u"""
-SCRAP demand integration in CRM
+CRM Activity done based on mail.messages
 """,
     'author': 'Serincloud',
     'depends': [
         'crm',
-        'project',
-        'product_brand',
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/crm_lead_views.xml',
         'views/mail_message_views.xml',
-        'views/res_company_views.xml',
-        'views/menu_views.xml',
     ],
     'installable': True,
 }

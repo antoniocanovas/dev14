@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="mail_message_lead_id" model="ir.ui.view">
+        <field name="name">Lead as M2O</field>
+        <field name="model">mail.message</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="mail.mail_message_view_form"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="lead_id" readonly="1" attrs="{'invisible':[('lead_id','=',False)]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
