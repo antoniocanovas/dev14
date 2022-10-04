@@ -13,4 +13,18 @@
         </field>
     </record>
 
+    <record id="activity_done_tree" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <tree string="Activity Done">
+                <field name="date"/>
+                <field name="body" widget="html"/>
+                <field name="model"/>
+
+            </tree>
+        </field>
+        <field name="model">mail.message</field>
+        <field name="name">Default tree view for activity done</field>
+        <field name="type">tree</field>
+    </record>
+
 </odoo>

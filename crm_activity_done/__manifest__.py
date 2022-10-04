@@ -11,6 +11,7 @@ CRM Activity done based on mail.messages
     ],
     'data': [
         'views/mail_message_views.xml',
+        'views/res_partner_view.xml',
     ],
     'installable': True,
 }
