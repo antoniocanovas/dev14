@@ -13,7 +13,7 @@ class MailMessage(models.Model):
     name = fields.Char('Name', compute='get_mail_message_name')
 
     @api.depends('create_date')
-        def get_activity_lead(self):
+    def get_activity_lead(self):
         for record in self:
             lead = False
             if (record.model == 'crm.lead') and \
