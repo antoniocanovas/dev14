@@ -10,4 +10,5 @@ class ResPartner(models.Model):
     def _compute_activity_done_count(self):
         self.activity_done_count = len(self.activity_done_ids)
 
-    activity_done_count = fields.Integer(string="'Activity's", compute=_compute_activity_done_count ,store=False)
+#    activity_done_count = fields.Integer(string="'Activity's", compute=_compute_activity_done_count ,store=False)
+    activity_done_count = fields.Integer(string="'Activity's",store=False)
