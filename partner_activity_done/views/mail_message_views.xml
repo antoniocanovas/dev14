@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id="mail_message_lead_id" model="ir.ui.view">
-        <field name="name">Lead as M2O</field>
+    <record id="mail_message_activity_done_name_id" model="ir.ui.view">
+        <field name="name">Name to done activities</field>
         <field name="model">mail.message</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="mail.mail_message_view_form"/>
