@@ -10,7 +10,6 @@ CRM Activity done based on mail.messages
         'crm',
     ],
     'data': [
-        'views/crm_lead_views.xml',
         'views/mail_message_views.xml',
     ],
     'installable': True,
