@@ -7,8 +7,8 @@ class MailMessage(models.Model):
     @api.depends('create_date')
     def get_mail_message_name(self):
         for record in self:
-            model_id = env['ir.model'].search([('model', '=', record.model)])
-            item_id = env[model].search([('id', '=', record.res_id)])
+            model_id = self.env['ir.model'].search([('model', '=', record.model)])
+            item_id = self.env[model].search([('id', '=', record.res_id)])
             record['name'] = model_id.name + " => " + item_id.name
     name = fields.Char('Name', compute='get_mail_message_name')
 
