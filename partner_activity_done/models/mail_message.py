@@ -14,4 +14,4 @@ class MailMessage(models.Model):
             if (model_id.name) and (item_id.name): name += " => "
             if (item_id.name) and (item_id.name): name += item_id.name
             record['name'] = name
-    name = fields.Char(string='Name', compute='get_mail_message_name', store=False)
+    name = fields.Char(string='Name', compute='get_mail_message_name', store=True)
