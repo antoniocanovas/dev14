@@ -12,4 +12,4 @@ class MailMessageMStage(models.Model):
     _description = "Mail message stage"
 
     name = fields.Char(string='Name')
-    sequence = fields.Integer(string="Sequence")
+    sequence = fields.Integer(string="Sequence", default=1)
