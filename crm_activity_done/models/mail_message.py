@@ -5,7 +5,7 @@ class MailMessage(models.Model):
     _inherit = 'mail.message'
 
     @api.depends('create_date')
-    #def get_mail_message_fields(self):
+    def get_mail_message_fields(self):
         for record in self:
             name, stage_name = "", ""
             model_id = self.env['ir.model'].search([('model', '=', record.model)])
@@ -13,11 +13,11 @@ class MailMessage(models.Model):
 
             if (model_id.name): name = model_id.name
             if (item_id.stage_id.id): stage_name = item_id.stage_id.name
-            item_id = self.env['mail.message.stage'].search([('name','=',stage_name)])
-            if not item_id.id: stage_id = self.env['mail.message.stage'].create({'name','=',item_name})
+            stage_id = self.env['mail.message.stage'].search([('name','=',stage_name)])
+            if not stage_id.id: stage_id = self.env['mail.message.stage'].create({'name','=',item_name})
 
             line = record.body.split("\n")[2]
             line = line.split("<span>")[1]
             line = line.split("</span>")[0]
 
-            record.write({'name':name, 'stage_id':stage_id.id,'type_done':line})
+            record.write({'name':name, 'stage_id':stage_id.id,'activity_type':line})
