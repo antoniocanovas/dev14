@@ -5,7 +5,7 @@ class MailMessage(models.Model):
     _inherit = 'mail.message'
 
     @api.depends('create_date')
-    def get_mail_message_fields(self):
+    #def get_mail_message_fields(self):
         for record in self:
             name, stage_name = "", ""
             model_id = self.env['ir.model'].search([('model', '=', record.model)])
