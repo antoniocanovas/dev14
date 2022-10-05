@@ -20,7 +20,7 @@
                 <field name="name" optional="show"/>
                 <field name="activity_type" optional="hide"/>
                 <field name="stage_id" optional="hide"/>
-                <field name="body" widget="html"/>
+                <field name="body" widget="html" optional="show"/>
             </tree>
         </field>
         <field name="model">mail.message</field>
