@@ -19,7 +19,6 @@
                 <field name="date"/>
                 <field name="name"/>
                 <field name="body" widget="html"/>
-                <field name="stage_id" optional="hide"/>
             </tree>
         </field>
         <field name="model">mail.message</field>
