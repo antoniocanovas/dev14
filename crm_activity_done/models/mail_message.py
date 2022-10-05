@@ -14,7 +14,7 @@ class MailMessage(models.Model):
             if (model_id.name): name = model_id.name
             if (item_id.stage_id.id): stage_name = item_id.stage_id.name
             stage_id = self.env['mail.message.stage'].search([('name','=',stage_name)])
-            if not stage_id.id: stage_id = self.env['mail.message.stage'].create({'name','=',item_name})
+            if not stage_id.id: stage_id = self.env['mail.message.stage'].create({'name','=',stage_name})
 
             line = record.body.split("\n")[2]
             line = line.split("<span>")[1]
