@@ -30,7 +30,7 @@
     <record id="activity_done_stage_tree" model="ir.ui.view">
         <field name="arch" type="xml">
             <tree string="Activity Done Stage">
-                <field name="stage_id" widget="handle"/>
+                <field name="sequence" widget="handle"/>
                 <field name="name"/>
             </tree>
         </field>
