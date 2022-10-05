@@ -8,7 +8,7 @@ class MailMessage(models.Model):
     def get_mail_message_name(self):
         for record in self:
             name = ""
-            if (record.subtype_id == 3) and (record.message_type in ['notification']):
+            if (record.subtype_id == 3):
                 model_id = self.env['ir.model'].search([('model', '=', record.model)])
                 item_id = self.env[record.model].search([('id', '=', record.res_id)])
                 if (model_id.name != ""): name += model_id.name
