@@ -18,6 +18,7 @@
             <tree string="Activity Done">
                 <field name="date"/>
                 <field name="name" optional="show"/>
+                <field name="activity_type" optional="hide"/>
                 <field name="stage_id" optional="hide"/>
                 <field name="body" widget="html"/>
             </tree>
