@@ -4,7 +4,7 @@ from odoo import _, api, fields, models
 class MailMessage(models.Model):
     _inherit = 'mail.message'
 
-    @api.depends('create_date')
+    @api.depends('write_date')
     def get_mail_message_fields(self):
         for record in self:
             name, stage_name = "", ""
