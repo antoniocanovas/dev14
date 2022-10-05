@@ -20,4 +20,6 @@ class MailMessage(models.Model):
             line = line.split("<span>")[1]
             line = line.split("</span>")[0]
 
-            record.write({'name':name, 'stage_id':stage_id.id,'activity_type':line})
+            record.name = name
+            record.stage_id = stage_id.id
+            record.activity_type = line
