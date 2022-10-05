@@ -14,7 +14,7 @@
         <field name="target">current</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_id" ref="activity_done_tree"/>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
     </record>
 
     <record id="res_partner_activity_done" model="ir.ui.view">

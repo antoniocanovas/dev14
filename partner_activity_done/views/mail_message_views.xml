@@ -17,9 +17,9 @@
         <field name="arch" type="xml">
             <tree string="Activity Done">
                 <field name="date"/>
-                <field name="name"/>
-                <field name="body" widget="html"/>
+                <field name="name" optional="show"/>
                 <field name="stage_id" optional="hide"/>
+                <field name="body" widget="html"/>
             </tree>
         </field>
         <field name="model">mail.message</field>
