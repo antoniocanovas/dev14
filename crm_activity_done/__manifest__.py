@@ -1,5 +1,5 @@
 {
-    'name': 'Partner Activity done',
+    'name': 'CRM Activity done',
     'version': '14.0.1.0.0',
     'category': '',
     'description': u"""
