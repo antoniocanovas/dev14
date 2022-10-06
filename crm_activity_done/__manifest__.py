@@ -8,6 +8,7 @@ CRM Activities done based on mail.messages
     'author': 'Serincloud',
     'depends': [
         'partner_activity_done',
+        'crm',
         'base_automation',
     ],
     'data': [
