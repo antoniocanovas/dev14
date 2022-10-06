@@ -1,3 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-mail_message_stage_group_user,Mail message stage user,model_mail_message_stage,base.group_user,1,1,1,0
-mail_message_stage_group_manager,Mail message stage manager,model_mail_message_stage,sales_team.group_sale_manager,1,1,1,1
+mail_message_stage_group,Mail message stage user,model_mail_message_stage,base.group_user,1,1,1,1
