@@ -16,11 +16,11 @@
     <record id="activity_done_tree" model="ir.ui.view">
         <field name="arch" type="xml">
             <tree string="Activity Done">
-                <field name="date"/>
-                <field name="name" optional="show"/>
                 <field name="activity_type" optional="hide"/>
+                <field name="name" optional="show"/>
                 <field name="stage_id" optional="hide"/>
                 <field name="body" widget="html" optional="show"/>
+                <field name="date"/>
             </tree>
         </field>
         <field name="model">mail.message</field>
