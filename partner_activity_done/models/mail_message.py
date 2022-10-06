@@ -6,4 +6,4 @@ class MailMessage(models.Model):
 
     name = fields.Char(string='Name', store=True)
     stage_id = fields.Many2one("mail.message.stage", "Stage")
-    activity_type = fields.Char(string='Type', store=True)
+    activity_type = fields.Char(string='Activity type', store=True)
