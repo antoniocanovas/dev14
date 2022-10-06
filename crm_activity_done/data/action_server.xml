@@ -15,8 +15,8 @@ stage_id = env['mail.message.stage'].search([('name','=',stage_name)])
 if not stage_id.id: stage_id = env['mail.message.stage'].create({'name':stage_name})
 
 line = record.body.split("\n")[2]
-line = line.split("&lt;span&gt;")[1]
-line = line.split("&lt;/span&gt;")[0]
+line = line.split('&lt;span&gt;')[1]
+line = line.split('&lt;/span&gt;')[0]
 
 record.write({'name':name, 'stage_id':stage_id.id, 'activity_type':line})
 
