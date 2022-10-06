@@ -10,6 +10,7 @@ Partner Activities done based on mail.messages
         'contacts',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/mail_message_views.xml',
         'views/res_partner_view.xml',
     ],
