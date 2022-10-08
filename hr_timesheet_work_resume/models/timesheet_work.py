@@ -8,7 +8,7 @@ class TimesheetWork(models.Model):
     _name = 'timesheet.work'
 
     sale_order_ids = fields.Many2many('sale.order', string='Sale Orders')
-    todo_ids = fields.One2many('timesheet.line.todo', 'work_id')
+#    todo_ids = fields.One2many('timesheet.line.do', 'work_id')
 
 #    @api.depends('todo_ids')
 #    def get_todo_count(self):
