@@ -38,7 +38,9 @@
                   decoration-success="active==True"
                   decoration-muted="active==False"
                   default_order="active asc">
-                <field name="sale_line_id" options="{'no_create': True, 'no_edit': True}"/>
+                <field name="sale_line_id"
+                       domain="[('state','in',['sale','done']),('order_id','in',sale_order_ids)]"
+                       options="{'no_create': True, 'no_edit': True}"/>
                 <field name="product_id"/>
                 <field name="uom_id"/>
                 <field name="active" widget="boolean_toggle"/>
