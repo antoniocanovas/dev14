@@ -28,7 +28,7 @@
             </xpath>
             <field name="type" position="after">
                 <field name="sale_order_ids" widget="many2many_tags"/>
-            </field>>
+            </field>
         </field>
     </record>
 
