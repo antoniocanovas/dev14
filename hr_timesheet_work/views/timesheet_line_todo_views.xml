@@ -43,6 +43,7 @@
                 <field name="uom_id"/>
                 <field name="active" widget="boolean_toggle"/>
                 <field name="work_id" invisible="1"/>
+                <field name="sale_order_ids" invisible="1"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
