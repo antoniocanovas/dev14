@@ -11,7 +11,7 @@ List of works to do, and done in timehseet_work.
     ],
     'data': [
         'security/ir.model.access.csv',
-        'views/model_views.xml',
+      #  'views/model_views.xml',
     ],
     'installable': True,
 }
