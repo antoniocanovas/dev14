@@ -23,6 +23,12 @@ class TimesheetWork(models.Model):
     sale_order_ids = fields.Many2many('sale.order', string='Sale Orders')
     todo_ids = fields.One2many('timesheet.line.todo', 'work_id')
 
+    @api.depends('name')
+    def get_todo_count(self):
+        for record in self:
+            record.description = record.name
+    description = fields.Char('Description', store=False, compute='get_task_name')
+
     @api.depends('todo_ids')
     def get_todo_count(self):
         for record in self:
