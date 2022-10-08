@@ -34,11 +34,11 @@
         <field name="name">Default timesheet line to-do tree view</field>
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-            <tree name="lines_todo"
+            <tree name="lines_todo" editable="bottom"
                   decoration-success="active==True"
                   decoration-muted="active==False"
                   default_order="active asc">
-                <field name="sale_line_id"/>
+                <field name="sale_line_id" options="{'no_create': True, 'no_edit': True}"/>
                 <field name="product_id"/>
                 <field name="uom_id"/>
                 <field name="active" widget="boolean_toggle"/>

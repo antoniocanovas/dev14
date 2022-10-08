@@ -14,6 +14,7 @@ class TimesheetLineTodo(models.Model):
     active = fields.Boolean('Active',default=True)
     work_id = fields.Many2one('timesheet.work', store=True, string='Work')
     sale_line_id = fields.Many2one('sale.order.line', store=True, string='Sale Line')
+    sale_id = fields.Many2one('sale.order', related='sale_line_id.order_id', store=True)
 
     @api.depends('sale_line_id')
     def get_todo_product(self):
