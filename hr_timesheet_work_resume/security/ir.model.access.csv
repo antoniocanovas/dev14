@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_todo_employee,timesheet to-do line user,hr_timesheet_work_resume.model_timesheet_line_todo,project.group_project_user,1,0,0,0
+access_todo_manager,timesheet to-do line manager,hr_timesheet_work_resume.model_timesheet_line_todo,project.group_project_manager,1,1,1,1
+access_done_user,timesheet done line user,hr_timesheet_work_resume.model_timesheet_line_done,project.group_project_user,1,1,1,1
