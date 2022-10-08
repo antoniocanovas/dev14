@@ -10,8 +10,8 @@ List of works to do, and done in timehseet_work.
         'hr_timesheet_work',
     ],
     'data': [
-        'security/ir.model.access.csv',
-        'views/model_views.xml',
+#        'security/ir.model.access.csv',
+#        'views/model_views.xml',
     ],
     'installable': True,
 }
