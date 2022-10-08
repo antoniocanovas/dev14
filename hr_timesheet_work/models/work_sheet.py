@@ -65,7 +65,7 @@ class TimeSheetWorkSheet(models.Model):
             name = "/"
             if record.name: name = record.name
             record.description = name
-    description = fields.Char('Description', store=False, readonly=False, compute='get_task_name')
+    description = fields.Char('Description', store=True, readonly=False, compute='get_task_name')
 
     @api.depends('picking_ids')
     def get_project_products(self):
