@@ -74,6 +74,17 @@
                                 </tree>
                             </field>
                         </page>
+
+                        <page name="work_sheet_line_done" string="Done" attrs="{'invisible':[('type','!=','project')]}">
+                            <field name="line_done_ids" attrs="{'readonly':[('project_id','=',False)]}">
+
+
+
+
+                            </field>
+                        </page>
+
+
                     </notebook>
 
                     <div name="signature">

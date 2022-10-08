@@ -32,6 +32,7 @@ class TimeSheetWorkSheet(models.Model):
     analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags',
                                         domain=[('timesheet_hidden', '=', False)]
                                         )
+    line_done_ids = fields.One2many('timesheet.line.done', 'work_sheet_id', store=True)
 
     set_start_stop = fields.Boolean(related='work_id.set_start_stop', string='Set start & stop time')
     partner_id = fields.Many2one('res.partner', string='Signed by')
