@@ -17,7 +17,7 @@ class TimesheetLineDone(models.Model):
         required=True,
     )
     qty = fields.Integer(string='Quantity')
-    uom_id = fields.Many2one('uom.uom', store=True, string='UOM', related='todo_id.uom_id')
+    uom_id = fields.Many2one('uom.uom', store=True, string='UOM', )
 
     @api.depends('todo_id')
     def get_done_name(self):
