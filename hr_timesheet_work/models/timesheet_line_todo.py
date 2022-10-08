@@ -32,5 +32,5 @@ class TimesheetLineTodo(models.Model):
     def get_todo_uom(self):
         for record in self:
             record.uom_id = record.product_id.uom_id.id
-    uom_id = fields.Many2one(string='UOM', compute='get_todo_uom', store=True)
+    uom_id = fields.Many2one('uom.uom', string='UOM', compute='get_todo_uom', store=True)
 
