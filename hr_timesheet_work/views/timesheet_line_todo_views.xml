@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="timesheet_line_todo_default_form" model="ir.ui.view">
+        <field name="name">Default timesheet line to-do form view</field>
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Timesheet line to-do">
+                    <h1>
+                        <field name="name" attrs="{'invisible':[('product_id','=',False)]}"/>
+                    </h1>
+                    <group>
+                        <field name="sale_line_id" attrs="{'domain':[('1','=','1')]}"/>
+                        <field name="product_id"/>
+                        <field name="uom_id"/>
+                        <field name="active" widget="boolean_toggle"/>
+                        <field name="work_id" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">timesheet.line.todo</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="timesheet_line_todo_default_tree" model="ir.ui.view">
+        <field name="name">Default timesheet line to-do tree view</field>
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree name="lines_todo"
+                  decoration-success="active==True"
+                  decoration-muted="active==False"
+                  default_order="active asc, priority asc">
+                <field name="sale_line_id"/>
+                <field name="product_id"/>
+                <field name="uom_id"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="work_id" invisible="1"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">project.roadmap</field>
+        <field name="name">Default project roadmap tree view</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+</odoo>
