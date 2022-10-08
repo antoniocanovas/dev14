@@ -16,7 +16,7 @@ class TimesheetLineDone(models.Model):
         string='Item',
         required=True,
     )
-    qty = fields.Integer(string='Quantity')
+    qty = fields.Integer(string='Quantity', required="1")
     uom_id = fields.Many2one('uom.uom', store=True, string='UOM', related='todo_id.uom_id')
     work_sheet_id = fields.Many2one('work.sheet', string='Sheet', store=True)
 
@@ -24,5 +24,5 @@ class TimesheetLineDone(models.Model):
     def get_done_name(self):
         for record in self:
             record.name = record.todo_id.name
-    name = fields.Char(string='Description', compute='get_done_name', readonly=False, store=True)
+    name = fields.Char(string='Description', compute='get_done_name', readonly=False, store=True, required="1")
 

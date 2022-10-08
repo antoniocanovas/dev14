@@ -23,6 +23,7 @@
                     </group></group>
 
                     <notebook name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
+
                         <page name="project_services" string="Services">
                             <group><group>
                                 <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'invisible':[('project_id','=',False)]}"/>
@@ -61,6 +62,7 @@
                                 </field>
                             </div>
                         </page>
+
                         <page name="work_sheet_project_products" string="Products" attrs="{'invisible':[('type','!=','project')]}">
                             <h3>Pickings:</h3>
                             <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
@@ -77,10 +79,13 @@
 
                         <page name="work_sheet_line_done" string="Done" attrs="{'invisible':[('type','!=','project')]}">
                             <field name="line_done_ids" attrs="{'readonly':[('project_id','=',False)]}">
-
-
-
-
+                                <tree editable="botton">
+                                    <field name="todo_id"/>
+                                    <field name="name"/>
+                                    <field name="qty"/>
+                                    <field name="uom_id"/>
+                                    <field name="work_sheet_id" invisible="1"/>
+                                </tree>
                             </field>
                         </page>
 
