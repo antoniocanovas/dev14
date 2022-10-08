@@ -171,7 +171,7 @@
                     <h1><field name="name"/></h1>
                     <group name="project">
                         <field name="type" widget="selection"/>
-                        <fiedl name="sale_order_ids" widget="many2many_tags"/>
+                        <field name="sale_order_ids" widget="many2many_tags"/>
                         <field name="partner_id"/>
                         <field name="project_id"/>
                         <field name="set_start_stop" string="Start/stop time" attrs="{'invisible':[('type','not in',['repair','project'])]}"/>
