@@ -1,11 +1,9 @@
-from odoo import _, api, fields, models
+# Copyright
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-import logging
+from odoo import fields, models, api
 
-_logger = logging.getLogger(__name__)
-
-
-class SaleOrderiSet(models.Model):
+class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    work_id = fields.Many2one('timesheet.work', 'Work')
+    work_id = fields.Many2one('timesheet.work', string='Work')
