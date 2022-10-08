@@ -14,7 +14,6 @@
         </field>
     </record>
 
-<!--
     <record id="ts_resume_work_form_inh" model="ir.ui.view">
         <field name="name">Resume work form inh</field>
         <field name="model">timesheet.work</field>
@@ -27,12 +26,11 @@
                     </button>
                 </div>
             </xpath>
-            <field name="project" position="after">
+            <field name="type" position="after">
                 <field name="sale_order_ids" widget="many2many_tags"/>
             </field>>
         </field>
     </record>
-            -->
 
 
 </odoo>
