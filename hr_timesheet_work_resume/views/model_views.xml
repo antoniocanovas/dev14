@@ -14,12 +14,12 @@
         </field>
     </record>
 
+<!--
     <record id="ts_resume_work_form_inh" model="ir.ui.view">
         <field name="name">Resume work form inh</field>
         <field name="model">timesheet.work</field>
         <field name="inherit_id" ref="hr_timesheet_work.timesheet_work_form"/>
         <field name="arch" type="xml">
-<!--
             <xpath expr="//form/sheet/h1" position="before">
                 <div class="oe_button_box" name="button_box">
                     <button class="oe_stat_button" type="action" name="%(hr_timesheet_work_extended.act_work_resume_2_todo)d" icon="fa-tasks">
@@ -30,8 +30,8 @@
             <field name="project" position="after">
                 <field name="sale_order_ids" widget="many2many_tags"/>
             </field>>
--->
         </field>
     </record>
+-->
 
 </odoo>
