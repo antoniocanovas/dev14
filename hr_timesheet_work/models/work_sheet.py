@@ -169,7 +169,7 @@ class TimeSheetWorkSheet(models.Model):
                     if not li.user_id:
                         raise ValidationError('Empleado sin usuario asignado, revisa su ficha de empleado')
                     new = self.env['account.analytic.line'].create(
-                        {'work_sheet_id': record.id, 'name': record.name, 'project_id': record.project_id.id,
+                        {'work_sheet_id': record.id, 'name': record.description, 'project_id': record.project_id.id,
                          'task_id': record.task_id.id, 'date': record.date, 'account_id': record.project_analytic_id.id,
                          'company_id': record.company_id.id, 'tag_ids': [(6,0,record.analytic_tag_ids.ids)],
                          'employee_id': li.id, 'unit_amount': duration, 'time_type_id': record.time_type_id.id,
@@ -185,7 +185,7 @@ class TimeSheetWorkSheet(models.Model):
                     if not li.user_id:
                         raise ValidationError('Empleado sin usuario asignado, revisa su ficha de empleado')
                     new = self.env['account.analytic.line'].create(
-                        {'work_sheet_id': record.id, 'name': record.name, 'project_id': record.project_id.id,
+                        {'work_sheet_id': record.id, 'name': record.description, 'project_id': record.project_id.id,
                          'task_id': record.task_id.id, 'date': record.date, 'account_id': record.project_analytic_id.id,
                          'company_id': record.company_id.id, 'tag_ids': [(6,0,record.analytic_tag_ids.ids)],
                          'employee_id': li.id, 'unit_amount': duration, 'time_type_id': record.time_type_id.id,
