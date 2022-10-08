@@ -26,10 +26,11 @@
                         <field string="To-do" name="todo_count" widget="statinfo"/>
                     </button>
                 </div>
-            </xpath>  -->
+            </xpath>
             <field name="project" position="after">
                 <field name="sale_order_ids" widget="many2many_tags"/>
             </field>>
+            -->
         </field>
     </record>
 
