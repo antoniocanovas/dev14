@@ -22,7 +22,7 @@
             <xpath expr="//form/sheet/h1" position="before">
                 <div class="oe_button_box" name="button_box">
                     <button class="oe_stat_button" type="action" name="%(hr_timesheet_work_resume.act_work_resume_2_todo)d" icon="fa-tasks">
-                        <field string="To-do" name="todo_count" widget="statinfo"/>
+       <!--                 <field string="To-do" name="todo_count" widget="statinfo"/> -->
                     </button>
                 </div>
             </xpath>
