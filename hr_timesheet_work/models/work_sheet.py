@@ -59,6 +59,13 @@ class TimeSheetWorkSheet(models.Model):
         string='Imputaciones'
     )
 
+    @api.depends('name')
+    def get_todo_count(self):
+        for record in self:
+            name = "/"
+            if record.name: name = record.name
+            record.description = name
+    description = fields.Char('Description', store=False, compute='get_task_name')
 
     @api.depends('picking_ids')
     def get_project_products(self):
