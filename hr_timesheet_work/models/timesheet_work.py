@@ -26,7 +26,9 @@ class TimesheetWork(models.Model):
     @api.depends('name')
     def get_todo_count(self):
         for record in self:
-            record.description = record.name
+            name = "/"
+            if record.name: name = record.name
+            record.description = name
     description = fields.Char('Description', store=False, compute='get_task_name')
 
     @api.depends('todo_ids')
