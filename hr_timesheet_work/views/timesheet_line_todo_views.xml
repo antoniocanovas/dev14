@@ -37,7 +37,7 @@
             <tree name="lines_todo"
                   decoration-success="active==True"
                   decoration-muted="active==False"
-                  default_order="active asc, priority asc">
+                  default_order="active asc">
                 <field name="sale_line_id"/>
                 <field name="product_id"/>
                 <field name="uom_id"/>
