@@ -8,7 +8,7 @@
             <form>
                 <sheet string="Timesheet line done">
                     <h1>
-                        <field name="name" attrs="{'invisible':[('product_id','=',False)]}"/>
+                        <field name="name"/>
                     </h1>
                     <group>
                         <field name="todo_id" readonly="1"/>
@@ -17,7 +17,6 @@
                         <field name="date"/>
                         <field name="sale_line_id" readonly="1"/>
                         <field name="work_sheet_id"/>
-                        <field name="product_id" invisible="1"/>
                     </group>
                 </sheet>
             </form>
