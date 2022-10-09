@@ -15,8 +15,8 @@ class SaleOrderLine(models.Model):
     def get_any_todo(self):
         for record in self:
             any_todo = False
-            #if record.timesheet_todo_ids.ids: any_todo = True
-            record.timesheet_done = any_todo
+            if record.timesheet_todo_ids.ids: any_todo = True
+            record.timesheet_todo = any_todo
     timesheet_todo = fields.Boolean(string='To-do', store=False, compute='get_any_todo')
 
 
