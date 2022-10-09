@@ -44,7 +44,7 @@
                                 <h2>Active projects:</h2>
                                 <field name="project_ids"/>
                             </div>
-                            <div attrs="{'invisible':['|',('project_id','=',False),('set_start_stop','=',False)]}">
+                            <div attrs="{'invisible':[('project_id','=',False)]}">
                                 <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id, 'default_task_id':task_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
                                     <tree editable="bottom" string="Timesheet Activities" default_order="date">
                                         <field name="task_id" options="{'no_create': True}"/>
@@ -53,26 +53,6 @@
                                         <field name="name" required="0" widget="text"/>
                                         <field name="time_start" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
                                         <field name="time_stop" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
-<!--
-                                        <field name="unit_amount" widget="timesheet_uom" decoration-danger="unit_amount &gt; 24"/>
--->
-                                        <field name="time_type_id"/>
-                                        <field name="project_id" invisible="1"/>
-                                        <field name="date"/>
-                                        <field name="tag_ids" widget="many2many_tags"/>
-                                        <field name="account_id" invisible="1"/>
-                                        <field name="company_id" invisible="1"/>
-                                        <field name="set_start_stop" invisible="1"/>
-                                    </tree>
-                                </field>
-                            </div>
-                            <div attrs="{'invisible':['|',('project_id','=',False),('set_start_stop','=',True)]}">
-                                <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id, 'default_task_id':task_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
-                                    <tree editable="bottom" string="Timesheet Activities" default_order="date">
-                                        <field name="task_id" options="{'no_create': True}"/>
-                                        <field name="user_id" invisible="1"/>
-                                        <field name="employee_id" required="1" widget="many2one_avatar_employee" options="{'no_create': True}"/>
-                                        <field name="name" required="0" widget="text"/>
                                         <field name="unit_amount" widget="timesheet_uom" decoration-danger="unit_amount &gt; 24"/>
                                         <field name="time_type_id"/>
                                         <field name="project_id" invisible="1"/>
