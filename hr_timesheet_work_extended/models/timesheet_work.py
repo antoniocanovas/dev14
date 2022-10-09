@@ -10,7 +10,7 @@ class WorkExtended(models.Model):
 
     user_id = fields.Many2one('res.users', string='Supervisor')
     saleperson_id = fields.Many2one('res.users', string='Salesman')
-    project_ids = fields.One2many('project.project', 'work_id')
+#    project_ids = fields.One2many('project.project', 'work_id')
     employee_line_ids = fields.One2many('work.employee', 'work_id', string="Employees")
     note = fields.Text('Note')
     protection_product_ids = fields.Many2many('product.product', string='Protection')
