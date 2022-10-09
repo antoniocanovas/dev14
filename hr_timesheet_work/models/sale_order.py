@@ -11,7 +11,7 @@ class SaleOrder(models.Model):
     timesheet_done_ids = fields.One2many('timesheet.line.done', 'sale_id')
 
     @api.depends('get_timesheet_line_done_count')
-    def get_timesheet_done_count(self):
+    def get_timesheet_line_done_count(self):
         for record in self:
             record.timesheet_done_count = len(record.timesheet_done_ids)
     timesheet_done_count = fields.Integer(string='Lines Done', store=False, compute='get_timesheet_line_done_count')
