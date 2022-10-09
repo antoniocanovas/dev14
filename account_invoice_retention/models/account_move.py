@@ -22,9 +22,9 @@ class AccountMove(models.Model):
         for record in self:
             retention = record.retention_amount
             if (record.retention_enable == True) and (record.retention_type == 'percent_net'):
-                retention = record.amount_untaxed * (1 - record.retention_percent/100)
+                retention = record.amount_untaxed * (record.retention_percent/100)
             elif (record.retention_enable == True) and (record.retention_type == 'percent_gross'):
-                retention = record.amount_total * (1 - record.retention_percent/100)
+                retention = record.amount_total * (record.retention_percent/100)
             record.retention_amount = retention
     retention_amount = fields.Monetary(string="Amount retained", store=True,
                                        readonly=False, compute=_get_retention_amount)
