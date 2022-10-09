@@ -7,10 +7,11 @@
         <field name="arch" type="xml">
             <tree name="lines_done" default_order="date asc" create="0" edit="0">
                 <field name="name" optional="show"/>
-                <field name="todo_id" optional="hide"/>
+                <field name="sale_line_id" optional="hide"/>
                 <field name="qty"/>
                 <field name="uom_id"/>
                 <field name="date"/>
+                <field name="todo_id" optional="hide"/>
                 <field name="work_sheet_id" optional="hide"/>
             </tree>
         </field>
