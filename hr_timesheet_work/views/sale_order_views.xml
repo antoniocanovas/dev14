@@ -23,17 +23,8 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr='//div[@name="button_box"]' position='inside'>
-                <button
-                    name="%(hr_timesheet_work.act_tswork_2_linedone)d"
-                    icon="fa-list-alt"
-                    class="oe_inline oe_stat_button"
-                    type="action"
-                >
-                    <field
-                        name="timesheet_done_count"
-                        widget="statinfo"
-                        string="Done"
-                    />
+                <button class="oe_stat_button" type="action" name="%(hr_timesheet_work.act_tswork_2_linedone)d" icon="fa-list-alt">
+                    <field string="Done" name="timesheet_done_count" widget="statinfo"/>
                 </button>
             </xpath>
 
