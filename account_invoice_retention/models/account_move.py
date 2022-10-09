@@ -12,9 +12,3 @@ class AccountMove(models.Model):
 
     retention_enable = fields.Boolean('Retention', default=False)
     retention_description = fields.Char('Description')
-    retention_type = fields.Selection([('fixed_net', 'Fixed net'),
-                                       ('fixed_gross', 'Fixed gross'),
-                                       ('percent_net', 'Percent net'),
-                                       ('percent_gross', 'Percent Gross')], string='Type')
-    retention_percent = fields.Float('Percent')
-
