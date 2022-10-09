@@ -33,4 +33,4 @@ class SaleOrderLine(models.Model):
     def get_timesheet_done_count(self):
         for record in self:
             record.timesheet_done_count = len(record.timesheet_done_ids)
-    timesheet_done_count = fields.Float(string='Done', store=False, compute='get_timesheet_done_count')
+    timesheet_done_count = fields.Ingeger(string='Lines Done', store=False, compute='get_timesheet_done_count')
