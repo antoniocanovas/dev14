@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-
+<!--
     <record id="act_we_2_project" model="ir.actions.act_window">
         <field name="name">Project</field>
         <field name="res_model">project.project</field>
@@ -13,7 +13,7 @@
             </p>
         </field>
     </record>
-
+-->
     <record id="ts_extended_work_form_inh" model="ir.ui.view">
         <field name="name">Extended work base inh</field>
         <field name="model">timesheet.work</field>
