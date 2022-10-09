@@ -28,3 +28,8 @@ class AccountMove(models.Model):
             record.retention_amount = retention
     retention_amount = fields.Monetary(string="Amount retained", store=True,
                                        readonly=False, compute=_get_retention_amount)
+
+    @api.depends('retention_enable', 'retention_amount', 'amount_untaxed','amount_total')
+    def _get_retention_excluded(self):
+        self.retention_excluded = record.amount_total - record.retention_amount
+    retention_excluded = fields.Monetary(string="Retention excluded", store=False, compute=_get_retention_excluded)
