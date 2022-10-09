@@ -28,9 +28,3 @@ class SaleOrderLine(models.Model):
                 total += li.qty
             record.timesheet_done = total
     timesheet_done = fields.Float(string='Done', store=False, compute='get_timesheet_done')
-
-    @api.depends('timesheet_done_ids')
-    def get_timesheet_done_count(self):
-        for record in self:
-            record.timesheet_done_count = len(record.timesheet_done_ids)
-    timesheet_done_count = fields.Ingeger(string='Lines Done', store=False, compute='get_timesheet_done_count')
