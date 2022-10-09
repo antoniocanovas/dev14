@@ -53,7 +53,7 @@
                                         <field name="name" required="0" widget="text"/>
                                         <field name="time_start" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
                                         <field name="time_stop" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
-                                        <field name="unit_amount" widget="timesheet_uom" decoration-danger="unit_amount &gt; 24"/>
+                                        <field name="unit_amount" widget="timesheet_uom" decoration-danger="unit_amount &gt; 24" attrs="{'invisible':[('set_start_stop','=',True)]}"/>
                                         <field name="time_type_id"/>
                                         <field name="project_id" invisible="1"/>
                                         <field name="date"/>
