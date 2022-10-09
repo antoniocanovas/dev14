@@ -21,6 +21,7 @@ class TimesheetLineDone(models.Model):
     work_sheet_id = fields.Many2one('work.sheet', string='Sheet', store=True)
     sale_line_id = fields.Many2one('sale.order.line', string='Sale line', store=True, related='todo_id.sale_line_id')
     sale_id = fields.Many2one('sale.order', string='Sale order', store=True, related='todo_id.sale_id')
+    date = fields.Date(string='Date', store=True, related='work_sheet_id.date' )
 
     @api.depends('todo_id')
     def get_done_name(self):

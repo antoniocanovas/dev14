@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="timesheet_line_done_default_tree" model="ir.ui.view">
+        <field name="name">Default timesheet line done tree view</field>
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree name="lines_done" default_order="date asc" create="0" edit="0">
+                <field name="todo_id" optional="hide"/>
+                <field name="name" optional="show"/>
+                <field name="qty"/>
+                <field name="uom_id"/>
+                <field name="date"/>
+                <field name="work_sheet_id" optional="hide"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">timesheet.line.todo</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+</odoo>

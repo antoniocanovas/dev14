@@ -32,7 +32,7 @@
                     <field
                         name="timesheet_done_count"
                         widget="statinfo"
-                        string="Done lines"
+                        string="Done"
                     />
                 </button>
             </xpath>
