@@ -30,4 +30,4 @@ class AccountMove(models.Model):
             elif (record.retention_enable == True) and (record.retention_type == 'percent_gross'):
                 retention = 1
             record.retention_amount = retention
-    retention_amount = fields.Monetary(string="Amount retained", stored=False, compute=_get_retention_amount)
+    retention_amount = fields.Monetary(string="Amount retained", store=False, compute=_get_retention_amount)
