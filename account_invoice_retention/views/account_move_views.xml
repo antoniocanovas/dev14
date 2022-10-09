@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <field name="payment_reference" position="after">
                 <field name="retention_enable" widget="boolean_toogle"
-                       attrs="{'invisible'[('move_type', 'not in',['in_invoice','out_invoice'])]}"/>
+                       attrs="{'invisible':[('move_type', 'not in',['in_invoice','out_invoice'])]}"/>
             </field>
             <xpath expr="//form/sheet/notebook/page[@name='other_info']" position="after">
                 <page string="Retention" name="invoice_retention" attrs="{'invisible':[('retention_enable','=',False)]}">

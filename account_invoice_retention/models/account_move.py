@@ -9,6 +9,7 @@ from odoo import api, fields, models, _
 
 class AccountMove(models.Model):
     _name = 'account.move'
+
     retention_enable = fields.Boolean('Retention', default=False)
     retention_description = fields.Char('Description')
     retention_type = fields.Selection([('fixed_net', 'Fixed net'),
