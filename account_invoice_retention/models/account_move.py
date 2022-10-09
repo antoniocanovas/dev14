@@ -12,23 +12,19 @@ class AccountMove(models.Model):
 
     retention_enable = fields.Boolean('Retention', default=False)
     retention_description = fields.Char('Description')
-    retention_type = fields.Selection([('fixed_net', 'Fixed net'),
-                                       ('fixed_gross', 'Fixed gross'),
+    retention_type = fields.Selection([('manual', 'Manual'),
                                        ('percent_net', 'Percent net'),
                                        ('percent_gross', 'Percent Gross')], string='Type')
     retention_percent = fields.Float('Percent')
 
-    @api.depends('retention_enable', 'retention_type', 'retention_percent')
+    @api.depends('retention_enable', 'retention_type', 'retention_percent', 'amount_untaxed','amount_total')
     def _get_retention_amount(self):
         for record in self:
-            retention = 0
-            if (record.retention_enable == True) and (record.retention_type == 'fixed_net'):
-                retention = 1
-            elif (record.retention_enable == True) and (record.retention_type == 'fixed_gross'):
-                retention = 1
-            elif (record.retention_enable == True) and (record.retention_type == 'percent_net'):
-                retention = 1
+            retention = record.retention_amount
+            if (record.retention_enable == True) and (record.retention_type == 'percent_net'):
+                retention = record.amount_untaxed * (1 - record.retention_percent/100)
             elif (record.retention_enable == True) and (record.retention_type == 'percent_gross'):
-                retention = 1
+                retention = record.amount_total * (1 - record.retention_percent/100)
             record.retention_amount = retention
-    retention_amount = fields.Monetary(string="Amount retained", store=False, compute=_get_retention_amount)
+    retention_amount = fields.Monetary(string="Amount retained", store=True,
+                                       readonly=False, compute=_get_retention_amount)
