@@ -9,7 +9,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     timesheet_todo_ids = fields.One2many('timesheet.line.todo', 'sale_line_id')
-    timesheet_done_ids = fields.One2many('timesheet.line.done', 'sale_Line_id')
+    timesheet_done_ids = fields.One2many('timesheet.line.done', 'sale_line_id')
 
     @api.depends('timesheet_todo_ids')
     def get_any_todo(self):
