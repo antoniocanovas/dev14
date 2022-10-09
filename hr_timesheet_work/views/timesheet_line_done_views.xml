@@ -19,7 +19,7 @@
         <field name="inherit_id" eval="False"/>
         <field name="key" eval="False"/>
         <field name="mode">primary</field>
-        <field name="model">timesheet.line.todo</field>
+        <field name="model">timesheet.line.done</field>
         <field name="priority">16</field>
         <field name="type">tree</field>
     </record>
