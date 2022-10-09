@@ -24,6 +24,7 @@
         'views/work_sheet_report.xml',
         'views/hr_employee.xml',
         'views/timesheet_line_todo_views.xml',
+        'views/sale_order_views.xml',
     ],
     'installable': True,
 }
