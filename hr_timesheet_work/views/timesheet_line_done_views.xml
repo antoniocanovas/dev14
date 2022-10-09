@@ -17,6 +17,7 @@
                         <field name="date"/>
                         <field name="sale_line_id" readonly="1"/>
                         <field name="work_sheet_id"/>
+                        <field name="product_id" invisible="1"/>
                     </group>
                 </sheet>
             </form>
