@@ -15,7 +15,7 @@ class WorkExtended(models.Model):
     note = fields.Text('Note')
     protection_product_ids = fields.Many2many('product.product', string='Protection')
     location_id = fields.Many2one('stock.location', string='Location')
-#    task_ids = fields.One2many('project.task', 'work_id', string='Task')
+    task_ids = fields.One2many('project.task', 'work_id', string='Task')
     tool_product_ids = fields.Many2many('product.product', 'rel_product_work', 'work_id', 'product_id', string='Tools')
 
 
