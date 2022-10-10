@@ -24,7 +24,7 @@ class TimesheetLineTodo(models.Model):
     def get_update_work_todo_line(self):
         for record in self:
             name, product = "", False
-            if (record.product_id.id) and:
+            if (record.product_id.id):
                 record.write({'product_id': record.product_id.id, 'name':record.product_id.name, 'uom_id': product.uom_id.id})
             if record.sale_line_id.id:
                 record.write({'product_id': record.sale_line_id.product_id.id, 'name':record.sale_line_id.name, 'uom_id': record.sale_line_id.uom_id.id})
