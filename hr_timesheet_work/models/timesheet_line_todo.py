@@ -16,16 +16,13 @@ class TimesheetLineTodo(models.Model):
     sale_line_id = fields.Many2one('sale.order.line', store=True, string='Sale Line')
     sale_id = fields.Many2one('sale.order', related='sale_line_id.order_id', store=True)
     sale_order_ids = fields.Many2many('sale.order',related='work_id.sale_order_ids', store=False)
+    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False)
 
     @api.depends('sale_line_id')
     def get_update_product(self):
         for record in self:
-            product = record.product_id
             if record.sale_line_id.id:
-                product = record.sale_line_id.product_id
-            record.product_id = product.id
-    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
-                                 compute='get_update_product')
+                record.product_id = record.sale_line_id.product_id
 
     @api.depends('product_id')
     def get_todo_name(self):
