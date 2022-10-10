@@ -81,12 +81,13 @@
                         <page name="work_sheet_line_done" string="Done" attrs="{'invisible':[('type','!=','project')]}">
                             <field name="line_done_ids" attrs="{'readonly':[('project_id','=',False)]}">
                                 <tree editable="botton">
-                                    <field name="todo_id"/>
+                                    <field name="todo_id" attrs="{'domain':[('work_id','=',work_id)]}"/>
                                     <field name="name"/>
                                     <field name="note" optional="show"/>
                                     <field name="qty"/>
                                     <field name="uom_id"/>
                                     <field name="work_sheet_id" invisible="1"/>
+                                    <field name="work_id" invisible="1"/>
                                 </tree>
                             </field>
                         </page>

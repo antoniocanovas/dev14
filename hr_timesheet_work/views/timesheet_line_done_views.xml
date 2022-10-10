@@ -16,6 +16,7 @@
                         <field name="uom_id"/>
                         <field name="date"/>
                         <fieldd name="note"/>
+                        <fieldd name="work_id"/>
                         <field name="sale_line_id" readonly="1"/>
                         <field name="work_sheet_id" readonly="1"/>
                     </group>
@@ -38,6 +39,7 @@
         <field name="arch" type="xml">
             <tree name="lines_done" default_order="date asc" create="0" edit="0">
                 <field name="name" optional="show"/>
+                <field name="work_id" optional="show"/>
                 <field name="sale_line_id" optional="hide"/>
                 <field name="qty"/>
                 <field name="uom_id"/>
