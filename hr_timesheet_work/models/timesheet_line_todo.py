@@ -26,7 +26,7 @@ class TimesheetLineTodo(models.Model):
     @api.depends('sale_line_id')
     def get_update_product(self):
         for record in self:
-            product = record.product_id.id
+            product = record.product_id
             if record.sale_line_id.id:
                 product = record.sale_line_id.product_id
             record.product_id = product.id
