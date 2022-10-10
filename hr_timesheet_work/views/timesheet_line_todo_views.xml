@@ -43,7 +43,7 @@
                        options="{'no_create': True, 'no_edit': True}"/>
                 <field name="product_id" force_save="1" attrs="{'readonly':[('sale_line_id','!=',False)]}"/>
                 <field name="name" required="1"/>
-                <field name="uom_id" readonly="1"/>
+                <field name="uom_id" force_save="1" readonly="1"/>
                 <field name="active" widget="boolean_toggle"/>
                 <field name="work_id" invisible="1"/>
                 <field name="sale_order_ids" invisible="1"/>
