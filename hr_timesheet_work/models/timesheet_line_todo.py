@@ -18,12 +18,11 @@ class TimesheetLineTodo(models.Model):
     sale_order_ids = fields.Many2many('sale.order',related='work_id.sale_order_ids', store=False)
 
     @api.depends('sale_line_id')
-    def get_todo_product(self):
+    def get_update_product(self):
         for record in self:
             if record.sale_line_id.id:
                 record.product_id = record.sale_line_id.product_id.id
-    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
-                                 compute='get_todo_product',)
+    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False)
 
     @api.depends('product_id')
     def get_todo_name(self):
