@@ -24,10 +24,13 @@ class TimesheetLineTodo(models.Model):
             if record.sale_line_id.id:
                 record.product_id = record.sale_line_id.product_id.id
 
-    @api.depends('product_id')
+    @api.depends('sale_line_id','product_id')
     def get_todo_name(self):
         for record in self:
-            record.name = record.product_id.name
+            if record.sale_line_id.id:
+                record.name = record.sale_line_id.name
+            else:
+                record.name = record.product_id.name
     name = fields.Char(string='Name', compute='get_todo_name', readonly=False, store=True)
 
     @api.depends('product_id')
