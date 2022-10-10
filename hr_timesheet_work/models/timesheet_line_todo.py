@@ -24,7 +24,7 @@ class TimesheetLineTodo(models.Model):
             if record.sale_line_id.id:
                 product = record.sale_line_id.product_id.id
             record.product_id = product.id
-    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False
+    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
                                  compute='get_update_product')
 
     @api.depends('product_id')
