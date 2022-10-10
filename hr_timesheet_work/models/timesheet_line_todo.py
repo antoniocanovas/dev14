@@ -20,7 +20,8 @@ class TimesheetLineTodo(models.Model):
     @api.depends('sale_line_id')
     def get_todo_product(self):
         for record in self:
-            record.product_id = record.sale_line_id.product_id.id
+            if record.sale_line_id.id:
+                record.product_id = record.sale_line_id.product_id.id
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
                                  compute='get_todo_product',)
 

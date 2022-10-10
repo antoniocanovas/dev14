@@ -28,4 +28,4 @@ class TimesheetLineDone(models.Model):
         for record in self:
             record.name = record.todo_id.name
     name = fields.Char(string='Description', compute='get_done_name', readonly=False, store=True, required="1")
-
+    note = fields.Char('Comment', store=True)

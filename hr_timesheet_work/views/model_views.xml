@@ -83,6 +83,7 @@
                                 <tree editable="botton">
                                     <field name="todo_id"/>
                                     <field name="name"/>
+                                    <field name="note" optional="show"/>
                                     <field name="qty"/>
                                     <field name="uom_id"/>
                                     <field name="work_sheet_id" invisible="1"/>
