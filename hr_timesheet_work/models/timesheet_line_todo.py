@@ -22,7 +22,7 @@ class TimesheetLineTodo(models.Model):
         for record in self:
             product = record.product_id
             if record.sale_line_id.id:
-                product = record.sale_line_id.product_id.id
+                product = record.sale_line_id.product_id
             record.product_id = product.id
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
                                  compute='get_update_product')
