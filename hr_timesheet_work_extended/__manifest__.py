@@ -13,7 +13,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-#        'views/model_views.xml',
+        'views/model_views.xml',
     ],
     'installable': True,
 }
