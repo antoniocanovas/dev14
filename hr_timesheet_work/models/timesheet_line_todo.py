@@ -23,14 +23,14 @@ class TimesheetLineTodo(models.Model):
             record.uom_id = record.product_id.uom_id.id
     uom_id = fields.Many2one('uom.uom', string='UOM', compute='get_todo_uom', store=True)
 
-    @api.depends('sale_line_id')
-    def get_update_product(self):
-        for record in self:
-            product = 3
-            if record.sale_line_id.id:
-                product = record.sale_line_id.product_id.id
-            record.product_id = product
-    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,)
+#    @api.depends('sale_line_id')
+#    def get_update_product(self):
+#        for record in self:
+#            product = 3
+#            if record.sale_line_id.id:
+#                product = record.sale_line_id.product_id.id
+#            record.product_id = product
+#    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,)
 #                                 compute='get_update_product')
 
     @api.depends('sale_line_id','product_id')
