@@ -28,7 +28,8 @@ class TimesheetLineTodo(models.Model):
         for record in self:
             if record.sale_line_id.id:
                 record.product_id = record.sale_line_id.product_id.id
-            else: pass
+            else:
+                record.product_id = record.product_id.id
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
                                  compute='get_update_product')
 
