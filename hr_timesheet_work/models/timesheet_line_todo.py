@@ -28,7 +28,8 @@ class TimesheetLineTodo(models.Model):
     def get_update_work_todo_product(self):
         for record in self:
             if record.sale_line_id.id:
-                record.product_id = record.sale_line_id.product_id.id
+                record.write({'product_id':record.sale_line_id.product_id.id, 'name':record.sale_line_id.name})
+    # - - - - - -
 
     @api.depends('sale_line_id','product_id')
     def get_todo_name(self):
