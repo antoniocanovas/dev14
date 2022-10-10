@@ -81,7 +81,7 @@
                         <page name="work_sheet_line_done" string="Done" attrs="{'invisible':[('type','!=','project')]}">
                             <field name="line_done_ids" attrs="{'readonly':[('project_id','=',False)]}">
                                 <tree editable="botton">
-                                    <field name="todo_id"/>
+                                    <field name="todo_id" domain="[('work_id','=',work_id)]"/>
                                     <field name="name"/>
                                     <field name="note" optional="show"/>
                                     <field name="qty"/>
