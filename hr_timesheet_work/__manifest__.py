@@ -18,6 +18,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/rules.xml',
+        'data/action_server.xml',
         'views/model_views.xml',
         'views/menu_views.xml',
         'views/templates.xml',
