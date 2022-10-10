@@ -9,7 +9,9 @@ record.get_update_work_todo_line()
 
             </field>
             <field name="trigger">on_change</field>
-            <field name="on_change_field_ids" eval="[(6,0, [ref('hr_timesheet_work.field_timesheet_line_todo__sale_line_id')])]"/>
+            <field name="on_change_field_ids"
+                   eval="[(6,0, [ref('hr_timesheet_work.field_timesheet_line_todo__sale_line_id'),
+                   ref('hr_timesheet_work.field_timesheet_line_todo__product_id'),])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
             <field name="active" eval="True"/>
