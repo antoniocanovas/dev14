@@ -27,7 +27,7 @@ class TimesheetLineTodo(models.Model):
             if (record.product_id.id):
                 record.write({'product_id': record.product_id.id,
                               'name':record.product_id.name,
-                              'uom_id':record.product.uom_id.id})
+                              'uom_id':record.product_id.uom_id.id})
             if record.sale_line_id.id:
                 record.write({'product_id': record.sale_line_id.product_id.id,
                               'name':record.sale_line_id.name,
