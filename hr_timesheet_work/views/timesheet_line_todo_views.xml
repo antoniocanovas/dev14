@@ -41,8 +41,8 @@
                 <field name="sale_line_id"
                        domain="[('state','in',['sale','done']),('order_id','in',sale_order_ids)]"
                        options="{'no_create': True, 'no_edit': True}"/>
-                <field name="product_id"/>
-                <field name="name"/>
+                <field name="product_id" attrs="{'readonly':[('sale_line_id','!=',False)]}"/>
+                <field name="name" required="1"/>
                 <field name="uom_id"/>
                 <field name="active" widget="boolean_toggle"/>
                 <field name="work_id" invisible="1"/>
