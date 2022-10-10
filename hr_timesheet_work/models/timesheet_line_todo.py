@@ -23,7 +23,7 @@ class TimesheetLineTodo(models.Model):
     # It will be executed from AA, it can't be compute because always null on save line:
     def get_update_work_todo_line(self):
         for record in self:
-            name = ""
+            name, product = "", False
             if record.product_id.id:
                 product = record.product_id
                 name = record.product_id.name
