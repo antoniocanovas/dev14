@@ -29,7 +29,8 @@ class TimesheetLineTodo(models.Model):
             if record.sale_line_id.id:
                 record.product_id = record.sale_line_id.product_id.id
             else: pass
-    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False)
+    product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
+                                 compute='get_update_product')
 
     @api.depends('sale_line_id','product_id')
     def get_todo_name(self):
