@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="hr_timesheet_line_tree_open_tab" model="ir.ui.view">
-        <field name="name">Hr timesheet self ID</field>
+        <field name="name">Hr timesheet open_tab ID</field>
         <field name="model">account.analytic.line</field>
         <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
         <field name="arch" type="xml">
