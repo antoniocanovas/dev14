@@ -85,6 +85,7 @@
                                     <field name="name"/>
                                     <field name="note" optional="show"/>
                                     <field name="qty"/>
+                                    <field name="time_elapsed" widget="timesheet_uom" optional="show"/>
                                     <field name="uom_id"/>
                                     <field name="work_sheet_id" invisible="1"/>
                                     <field name="work_id" invisible="1"/>

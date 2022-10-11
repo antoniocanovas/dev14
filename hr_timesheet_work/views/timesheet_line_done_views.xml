@@ -15,6 +15,7 @@
                         <field name="qty" readonly="1"/>
                         <field name="uom_id"/>
                         <field name="date"/>
+                        <field name="time_elapsed" widget="timesheeet_uom"/>
                         <fieldd name="note"/>
                         <fieldd name="work_id"/>
                         <field name="sale_line_id" readonly="1"/>
@@ -43,6 +44,7 @@
                 <field name="sale_line_id" optional="hide"/>
                 <field name="qty"/>
                 <field name="uom_id"/>
+                <field name="time_elapsed" widget="timesheeet_uom"/>
                 <field name="date"/>
                 <field name="todo_id" optional="hide"/>
                 <field name="work_sheet_id" optional="hide"/>
