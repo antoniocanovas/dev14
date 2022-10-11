@@ -14,7 +14,7 @@
         'hr_timesheet_time_type',
         'hr_timesheet_activity_begin_end',
         'analytic_line_tracking',
-        'web_widget_open_tab,
+        'web_widget_open_tab',
     ],
     'data': [
         'security/ir.model.access.csv',
