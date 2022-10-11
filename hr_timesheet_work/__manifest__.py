@@ -1,6 +1,6 @@
 {
     'name': 'Timesheet Work base',
-    'version': '14.0.7.0.0',
+    'version': '14.0.8.0.0',
     'category': '',
     'description': u"""
 
