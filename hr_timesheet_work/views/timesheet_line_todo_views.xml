@@ -59,4 +59,24 @@
         <field name="type">tree</field>
     </record>
 
+    <record id="timesheet_line_todo_search_view" model="ir.ui.view">
+        <field name="name">Default timesheet.line.todo.search</field>
+        <field name="model">timesheet.line.todo</field>
+        <field name="arch" type="xml">
+            <search string="Search Work To-Do">
+                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="product_id" filter_domain="[('product_id', 'ilike', self)]"/>
+                <separator/>
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="work" string="Work" domain="[]" context="{'group_by' : 'work_id'}"/>
+                    <filter name="product_id" string="Product" domain="[]" context="{'group_by' : 'product_id'}"/>
+                    <filter name="work_sheet_id" string="Sheet" context="{'group_by': 'work_sheet_id'}"/>
+                    <filter name="sale_line_id" string="Sale line" context="{'group_by': 'sale_line_id'}"/>
+                    <filter name="sale_id" string="Sale order" context="{'group_by': 'sale_id'}"/>
+                    <filter name="active" string="Active" context="{'group_by': 'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
 </odoo>
