@@ -1,30 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id="hr_timesheet_line_tree_self_id" model="ir.ui.view">
+    <record id="hr_timesheet_line_tree_open_tab" model="ir.ui.view">
         <field name="name">Hr timesheet self ID</field>
         <field name="model">account.analytic.line</field>
         <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
         <field name="arch" type="xml">
             <field name="date" position="before">
-                <field name="self_id" optional="hide" context="{'form_view_ref':'hr_timesheet.timesheet_view_form_user'}" groups="account.group_account_manager"/>
+                <field name="id" widget="open_tab""/>
             </field>
-        </field>
-    </record>
-
-    <record id="view_hr_timesheet_line_form_tracking" model="ir.ui.view">
-        <field name="name">hr.timesheet.line.form.tracking</field>
-        <field name="model">account.analytic.line</field>
-        <field name="type">form</field>
-        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="/form/sheet" position="after">
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" options="{'post_refresh':True}" groups="base.group_user"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
-            </xpath>
         </field>
     </record>
 
