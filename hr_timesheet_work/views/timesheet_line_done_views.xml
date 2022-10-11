@@ -44,7 +44,7 @@
                 <field name="sale_line_id" optional="hide"/>
                 <field name="qty"/>
                 <field name="uom_id"/>
-                <field name="time_elapsed" widget="timesheeet_uom"/>
+                <field name="time_elapsed" widget="timesheet_uom"/>
                 <field name="date"/>
                 <field name="todo_id" optional="hide"/>
                 <field name="work_sheet_id" optional="hide"/>
