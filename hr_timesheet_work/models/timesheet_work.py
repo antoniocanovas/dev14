@@ -22,9 +22,16 @@ class TimesheetWork(models.Model):
     set_start_stop = fields.Boolean('Set start & stop time')
     sale_order_ids = fields.Many2many('sale.order', string='Sale Orders')
     todo_ids = fields.One2many('timesheet.line.todo', 'work_id')
+    done_ids = fields.One2many('timesheet.line.done', 'work_id')
 
     @api.depends('todo_ids')
     def get_todo_count(self):
         for record in self:
             record.todo_count = len(record.todo_ids.ids)
     todo_count = fields.Integer(string='To-do', store=False, compute='get_todo_count',)
+
+    @api.depends('done_ids')
+    def get_done_count(self):
+        for record in self:
+            record.done_count = len(record.done_ids.ids)
+    done_count = fields.Integer(string='Done', store=False, compute='get_done_count',)
