@@ -70,7 +70,6 @@
                 <group expand="0" name="group_by" string="Group By">
                     <filter name="work" string="Work" domain="[]" context="{'group_by' : 'work_id'}"/>
                     <filter name="product_id" string="Product" domain="[]" context="{'group_by' : 'product_id'}"/>
-                    <filter name="work_sheet_id" string="Sheet" context="{'group_by': 'work_sheet_id'}"/>
                     <filter name="sale_line_id" string="Sale line" context="{'group_by': 'sale_line_id'}"/>
                     <filter name="sale_id" string="Sale order" context="{'group_by': 'sale_id'}"/>
                     <filter name="active" string="Active" context="{'group_by': 'active'}"/>
