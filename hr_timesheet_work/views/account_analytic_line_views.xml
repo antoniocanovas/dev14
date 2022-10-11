@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
         <field name="arch" type="xml">
             <field name="date" position="before">
-                <field name="id" widget="open_tab""/>
+                <field name="id" widget="open_tab"/>
             </field>
         </field>
     </record>
