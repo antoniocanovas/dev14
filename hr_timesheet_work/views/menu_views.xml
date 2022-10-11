@@ -88,7 +88,7 @@
         <field name="action" ref="hr_timesheet.timesheet_action_all"/>
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [ref('hr_timesheet.group_hr_timesheet_approver')])]"/>
-        <field name="name">Partes de Horas</field>
+        <field name="name">Timesheets</field>
         <field name="parent_id" ref="menu_hr_timesheet_work"/>
         <field name="sequence">4</field>
         <field name="web_icon" eval="False"/>
