@@ -23,7 +23,7 @@ class TimesheetLineDone(models.Model):
     sale_id = fields.Many2one('sale.order', string='Sale order', store=True, related='todo_id.sale_id')
     date = fields.Date(string='Date', store=True, related='work_sheet_id.date' )
     time_elapsed = fields.Float('Time')
-    work_id = fields.Many2one('timesheet.work', related='work_sheet_id.work_id')
+    work_id = fields.Many2one('timesheet.work', related='work_sheet_id.work_id', store=True)
 
     @api.depends('todo_id')
     def get_done_name(self):
