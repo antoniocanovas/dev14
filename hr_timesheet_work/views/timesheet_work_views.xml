@@ -67,7 +67,7 @@
                     </div>
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button" type="action" name="%(hr_timesheet_work.act_tswork_2_line_done)d" icon="fa-align-left">
-                            <field string="Done" name="todo_done" widget="statinfo"/>
+                            <field string="Done" name="done_count" widget="statinfo"/>
                         </button>
                     </div>
 
