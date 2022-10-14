@@ -7,6 +7,7 @@
 
 {
     "name": "Stock Move Line Partner",
+    "summary": "Add partner in SML. Go to Product=>Product moves"
     "version": "14.0.1.0.0",
     "category": "Stock",
     "author": "www.serincloud.com",
