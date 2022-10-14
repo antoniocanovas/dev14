@@ -10,7 +10,7 @@
                 <group name="worksheet_attachments" string="Anexos de partes" attrs="{'invisible':[('is_timesheet','=',False)]}">
                     <field name="worksheet_attachment_ids" widget="many2many_binary"/>
                 </group>
-                <field name="is_timesheet" invisible="1"
+                <field name="is_timesheet" invisible="1"/>
             </xpath>
         </field>
         <field name="priority">99</field>
