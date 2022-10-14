@@ -17,28 +17,37 @@ class TimesheetLineTodo(models.Model):
     sale_id = fields.Many2one('sale.order', related='sale_line_id.order_id', store=True)
     sale_order_ids = fields.Many2many('sale.order',related='work_id.sale_order_ids', store=False)
 
-    @api.depends('product_id')
-    def get_todo_uom(self):
-        for record in self:
-            record.uom_id = record.product_id.uom_id.id
-    uom_id = fields.Many2one('uom.uom', string='UOM', compute='get_todo_uom', store=True)
+    #@api.onchange('product_id')
+    #def get_todo_uom(self):
+    #    for record in self:
+    #        record.uom_id = record.product_id.uom_id.id
+    uom_id = fields.Many2one('uom.uom', string='UOM',  store=True)
 
-    @api.depends('sale_line_id')
+
+    #@api.onchange('sale_line_id','product_id')
+    #def get_todo_name(self):
+    #    for record in self:
+    #        print("record todo")
+    #        if record.sale_line_id.id:
+    #            record.name = record.sale_line_id.name
+    #        else:
+    #            record.name = record.product_id.name
+    name = fields.Char(string='Name', readonly=False, store=True)
+
+    @api.onchange('product_id')
     def get_update_product(self):
         for record in self:
+            print("DEBUG")
+            print("record",record.product_id)
             product = record.product_id.id
+            print("PRODUCT",product)
             if record.sale_line_id.id:
+                print("ENTRA IF")
                 product = record.sale_line_id.product_id.id
-        record.product_id = product
+                print("PRODUCT", product)
+
+            record.product_id = product
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=False,
                                  compute='get_update_product')
 
-    @api.depends('sale_line_id','product_id')
-    def get_todo_name(self):
-        for record in self:
-            if record.sale_line_id.id:
-                record.name = record.sale_line_id.name
-            else:
-                record.name = record.product_id.name
-    name = fields.Char(string='Name', compute='get_todo_name', readonly=False, store=True)
 

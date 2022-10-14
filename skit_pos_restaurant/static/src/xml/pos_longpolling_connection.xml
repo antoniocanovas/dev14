@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <!-- Extend the SynchNotificationWidget  -->
+    <t t-extend="SynchNotificationWidget">
+        <t t-jquery=".js_synch" t-operation="append">
+            <div class="js_poll_connected oe_icon serv_primary">
+                <t t-call="synch_icon"/>
+            </div>
+        </t>
+        <t t-jquery=".js_connected" t-operation='replace'>
+			<div class="js_connected oe_icon">
+	                <i class='fa fa-fw fa-wifi' role="img" aria-label="Synchronisation Connected" title="Synchronisation Connected"></i>
+	        </div>
+		</t>
+    </t>
+
+    <t t-name="synch_icon">
+        <i class='fa fa-fw fa-refresh'></i>
+    </t>
+
+</templates>

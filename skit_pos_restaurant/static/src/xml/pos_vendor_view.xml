@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<!-- Shop Cart Orders Widget -->
+	 <t t-name="SOOrderScreen" owl="1">
+		<div id="nonPrintable noPrint" class="pos_vendor_view screen">
+<!-- Class Added (trackstatus_back_btn) For Mobile View Style Changes -->
+			<div class="trackstatus_back_btn" t-if="((env.pos.config.cashier_view) || (env.pos.config.waiter_view))">
+				<button type="button" class="res_back_btn" t-on-click="trigger('res_Back_Button')"> Back </button>
+				<span style="font-size: 20px;">Date:<t t-esc="getCurrnetDate()"/> </span>
+				
+			</div>
+			<div class="vendor_view_header">
+				<t t-if="env.pos.config.supplier_view">
+					<table class="pos_status_table pos_display_none">
+						<tbody>
+							<tr>
+								<td><span class="pos_status_span">Status:</span></td>
+								<td>
+									<select class="pos_status_select" id="order_status" t-on-click="trigger('order_Status')">
+									  <option value="all">All</option>
+									  <option value="open">Open</option>
+									  <option value="sale">Order Confirm</option>
+									  <option value="preparing">Preparing</option>
+									  <option value="ready">Ready to Pickup</option>
+									</select>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</t>
+				<t t-if="((env.pos.config.cashier_view) || (env.pos.config.waiter_view))">
+					<div class="cashier_tabs">
+						<span id="payment_orders_span" t-on-click="trigger('payment_Orders')">Payment Orders</span>
+						<span id="inprogress_orders_span" t-on-click="trigger('inprogress_Orders')">Inprogress Orders</span>
+						<span id="completed_orders_span" t-on-click="trigger('completed_Orders')">Completed Orders</span>
+					</div>
+					<div class="comp_search wet_display_none">
+						<input class="comp_search_box" t-on-click="trigger('Comp_search_box')" type="text" placeholder="Search..."></input>
+						<i class="fa fa-search order_search" t-on-click="trigger('order_Search')"></i>
+					</div>
+				</t>
+				<span t-if="env.pos.config.supplier_view" class="vendor_view_text vendor-ml">Date:<t t-esc="getCurrnetDate()"/>  </span><!-- <t t-esc="moment().format('YYYY-MM-DD')"/> -->
+				<!-- <i id="zoom_in" class="fa fa-search-plus shop_zoom" aria-hidden="true"></i>
+				<i id="zoom_out" class="fa fa-search-minus shop_zoom" aria-hidden="true"></i> -->
+			</div>
+			<t t-set="track_oclass" t-value="'Orders_div k_orders_div'" />
+			<t t-if="((env.pos.config.cashier_view) || (env.pos.config.waiter_view))">
+				<t t-set="track_oclass" t-value="'Orders_div'" />
+			</t>
+             <div t-att-class="track_oclass">
+             	<div class="pos_order_div">
+             		<div class="pos_order_header double_head">
+             			<span class="header_span">Table / Takeaway Orders</span>
+             		</div>
+             		
+		            <!--  <button class="pos_order_head accordion active">POS Orders</button> -->
+		             <div class="all_pos_orders panel" style="display:inline-flex;">
+		             		<div class="restaurant_orders"></div>
+		             		<div class="cashier_orders"></div>
+		             </div>
+	             </div>
+	             <t t-set="restaurant_class" t-value="'all_checkout_orders shop_order_view'" />
+				 <t t-if="!env.pos.config.supplier_view">
+					<t t-set="restaurant_class" t-value="'all_checkout_orders shop_order_view pos_display_none'" />
+				 </t>
+	             <div id ="checkout_all_orders" t-att-class="restaurant_class">
+	             	<t t-set="h_class" t-value="'arrows acc-active-tab accordion active'" />
+					<t t-if="!env.pos.config.supplier_view">
+						<t t-set="h_class" t-value="'arrows'" />
+					</t>
+					<div class="so_order_header single_head">
+             			<span class="header_span">Delivery Orders</span>
+             		</div>
+					<t t-set="t_class" t-value="'all_so_panel panel'" />
+					<t t-if="!env.pos.config.supplier_view">
+						<t t-set="t_class" t-value="'all_so_panel'" />
+					</t>
+					<div t-att-class="t_class">
+		             	<div class="open_orders all_orders_div"></div>
+					    <div class="confirm_orders all_orders_div"></div>
+					    <div class="prepare_orders all_orders_div"></div>
+					    <div class="ready_orders all_orders_div"></div>
+				    </div>
+	             </div>
+	             <t t-set="online_class" t-value="'checkout_orders shop_order_view'" />
+				 <t t-if="env.pos.config.supplier_view">
+					<t t-set="online_class" t-value="'checkout_orders shop_order_view pos_display_none'" />
+				 </t>
+				 <div t-att-class="online_class">
+				 	<!-- <button t-if="!env.pos.config.supplier_view" class="sale_order_head accordion active">Online Orders</button> -->
+				 	<div class="so_order_header single_head">
+             			<span class="header_span">Delivery Orders</span>
+             		</div>
+
+				 	<t t-set="t_class" t-value="'all_so_panel'" />
+				 	<t t-if="!env.pos.config.supplier_view">
+				 		<t t-set="t_class" t-value="'all_so_panel panel'" />
+				 	</t>
+				 	<div t-att-class="t_class">
+						 	<div class="first_orders all_orders_div"></div>
+						    <div class="second_orders all_orders_div"></div>
+						    <div class="third_orders all_orders_div"></div>
+						    <div class="fourth_orders all_orders_div"></div>
+					</div>
+				 	
+	            </div>
+	             
+             </div>
+		</div>
+	</t> 
+	<!-- Display restaurant orders -->
+	<t t-name="RestaurantOrders">
+    	<div class="pos-kit-order">
+    		<!-- <t t-esc="widget.env.pos.config.supplier_view"/>
+    		<t t-esc="widget.env.pos.config.cashier_view"/> -->
+    		<!-- <t t-foreach="widget.env.pos.floors" t-as="floor">
+				<t t-foreach="floor.tables" t-as="table">
+					<t t-esc="table"/>
+				</t>
+			</t> -->
+    	<t t-if="widget.env.pos.config.supplier_view || widget.env.pos.config.cashier_view || widget.env.pos.config.waiter_view">
+			<!-- <t t-esc="orderlines.length"/>
+			<t t-esc="(order.table.is_take_away)"/> -->
+			<t t-if="orderlines.length > 0 ">
+			<t t-if="(order.table.is_take_away)">
+			<!-- <t t-esc="order.uid"/>
+			<t t-esc="order.view_order"/> -->
+			
+			<ul t-att-class='"pos-lines orderlines"+order.uid+" "+order.view_order+" "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "" : "") + ((slevel == 3) ? "pos_res_zoom_2" : "") + ((slevel == 4) ? "pos_res_zoom_3" : "")' t-att-data-uid="order.uid">
+					<!-- <ul t-attf-class="pos-lines  orderlines#{order.uid}" t-att-data-uid="order.uid"> -->
+						<li class="head_icon_li takeaway_bg_li pos-cart-bottom-left pos-cart-top-left">
+	    			   		<img class="head_icon_img" src="/skit_pos_restaurant/static/src/img/takeaway.png" alt="TakeAway"/>
+	    			   	</li>
+	                	<li t-att-class='"pos-cart-top-right takeaway_bg_li head_li_width pos-lines-header-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+	                    	<span class="pos-order-name li_order_num"><t t-esc="order.order_sequence_no" /></span>
+	                    </li>
+	                    <li t-att-class='"pos-cart-bottom-right takeaway_bg_li head_li_width pos-lines-header-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+	                    	
+	                    	<span class="pos_cus_name"><t t-esc="order.table.name"/></span>
+	                    	<span class="pos-table-time">Time : <t t-esc="moment(order.order_create_date).format('hh:mm')"/> </span>
+	                    </li>
+	                    <li t-att-class='"pos-line-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+	            			<!-- Change the class name to change the width of the header -->
+	            				<t t-if="widget.env.pos.config.priority_ids != undefined">
+	            					<span class="cart-list-header li_print cart-10">Print</span>
+			            			<span class="cart-list-header cart-30">Product</span>
+			            			<span class="cart-list-header cart-10">Qty</span>
+			            			<span class="cart-list-header cart-20">Priority</span>
+			            			<span class="cart-list-header cart-30">Status</span>
+	            				</t>
+	            				<t t-else="">
+	            					<span class="cart-list-header li_print cart-10">Print</span>
+			            			<span class="cart-list-header cart-45">Product</span>
+			            			<span class="cart-list-header cart-24">Qty</span>
+			            			<span class="cart-list-header cart-24">Status</span>
+	            				</t>
+	            				
+	            		</li>
+		            	<div class="pos_porderlines">
+			               	<t t-foreach="orderlines" t-as="line">
+			            		<li t-att-class='"pos-cart-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")' t-att-data-line-id="line.id">
+			            			<span t-att-line_id="line.id" t-att-order_uid="order.uid" class="restaurant_productqty  pos_orderline_print"><i class="fa fa-print" /></span>
+			            			<t t-if="widget.env.pos.config.priority_ids != undefined">
+				            			<span t-att-class='"restaurant_product "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+				            				<t t-esc="line.get_product().display_name"/><br></br>
+				            				<i t-if="line.get_note()" aria-label="Note" class="fa fa-tag" role="img" title="Note"></i><b><t t-esc="line.get_note()" /></b>
+				            				</span>
+			            			</t>
+			            			<t t-else="">
+			            				<span t-att-class='"restaurant_product restaurant_product_np "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+				            				<t t-esc="line.get_product().display_name"/><br></br>
+				            				<i t-if="line.get_note()" aria-label="Note" class="fa fa-tag" role="img" title="Note"></i><b><t t-esc="line.get_note()" /></b>
+				            				</span>
+			            			</t>
+			            			<span t-att-class='"restaurant_productqty "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}"><t t-esc="line.get_quantity()" /></span>
+			            			<!-- Show the priority value in the kitchen view -->
+			            			<span t-if="widget.env.pos.config.priority_ids != undefined" t-att-class='"restaurant_priority "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+				            				<t t-if="line.priority">
+				            			        <t t-esc="line.priority" />
+				            			    </t>
+				            			</span>
+			            			<div class="pos-kit-status-div">
+					        		<div class="pos-kit-status100">
+					        			<t t-set="so_kit_state" t-value="line.get_Kitchen_State()" />
+					        			<t t-if="line.get_Kitchen_State() == 'cancel'">
+					        			   <!-- change the button for status in takeaway order -->
+					        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward red-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+									         </t>
+								            
+								            <span class="kitchen_status pos-kit-status-name red-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Cancelled'"/>
+								            </span> -->
+								            <t t-if="widget.env.pos.config.supplier_view">
+								            	<span class="reverse_view_btn round-btn pos-kit-reverse red-bgcolor">
+									                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+									            </span>
+									        </t>
+									         <span class="kitchen_status pos-kit-status-name red-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Cancelled'"/>
+								            </span>
+								            <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward red-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+									         </t>
+							            </t>
+					        			<t t-elif="line.get_Kitchen_State() == 'preparing'">
+					        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+								            </t>
+								            
+								            <span class="kitchen_status pos-kit-status-name blue-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Preparing'"/>
+								            </span> -->
+								            
+								            <t t-if="widget.env.pos.config.supplier_view">
+								            	<span class="reverse_view_btn round-btn pos-kit-reverse blue-bgcolor">
+									                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+									            </span>
+									        </t>
+									         <span class="kitchen_status pos-kit-status-name blue-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Preparing'"/>
+								            </span>
+								            <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+								            </t>
+							            </t>
+							            
+							            <t t-elif="line.get_Kitchen_State() == 'ready'">
+							            	<!-- <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward yellow-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+								            </t>
+								            
+								            <span class="kitchen_status pos-kit-status-name yellow-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Ready to Pickup'"/>
+								            </span> -->
+								            
+								            <t t-if="widget.env.pos.config.supplier_view">
+								            	<span class="reverse_view_btn round-btn pos-kit-reverse yellow-bgcolor">
+									                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+									            </span>
+									        </t>
+									        <span class="kitchen_status pos-kit-status-name yellow-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Ready to Pickup'"/>
+								            </span>
+								            <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward yellow-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+								            </t>
+							            </t>
+							            <t t-elif="line.get_Kitchen_State() == 'delivered'">
+							            	<!-- <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward green-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+								            </t>
+								            
+								            <span class="kitchen_status pos-kit-status-name green-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Delivered'"/>
+								            </span> -->
+								            
+								            <t t-if="widget.env.pos.config.supplier_view">
+								            	<span class="reverse_view_btn round-btn pos-kit-reverse green-bgcolor">
+									                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+									            </span>
+									        </t>
+									         <span class="kitchen_status pos-kit-status-name green-color" t-att-data-state="so_kit_state">
+								                <t t-esc="'Delivered'"/>
+								            </span>
+								            <t t-if="widget.env.pos.config.supplier_view">
+									        	<span class="forward_view_btn round-btn pos-kit-forward green-bgcolor">
+									                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+									            </span>
+								            </t>
+							            </t>
+						            </div>
+					            </div>
+			            		</li>
+			           		</t>
+		           		</div>
+	                </ul>	
+	                </t>
+	                <t t-else="">
+	                	<ul t-att-class='"pos-lines orderlines"+order.uid+" "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "" : "") + ((slevel == 3) ? "pos_res_zoom_2" : "") + ((slevel == 4) ? "pos_res_zoom_3" : "")' t-att-data-uid="order.uid">
+		                	<li class="head_icon_li table_bg_li pos-cart-bottom-left pos-cart-top-left">
+		    			   		<img class="head_icon_img" src="/skit_pos_restaurant/static/src/img/table.png" alt="Table"/>
+		    			   	</li>
+		                	<li t-att-class='"pos-cart-top-right table_bg_li head_li_width pos-lines-header-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+		                    	<span class="pos-order-name li_order_num" style="font-size:16px;"><t t-esc="order.order_sequence_no" /></span>
+		                    	<span class="pos-table-time kitchen_float">Timer : <span t-attf-id="output#{order.uid}" class ="text-center"></span> </span>
+		                    </li>
+		                    <li t-att-class='"pos-cart-bottom-right table_bg_li head_li_width pos-lines-header-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+		                    	<span style="display:none" class="pos-table-no" t-att-data-flr-id="order.table.floor_id[0]" t-att-data-flr-name="order.table.floor_id[1]" t-att-data-tbl-id="order.table.id" t-att-data-tbl-name="order.table.name"></span>
+		                    	<span class="pos_cus_name">Table No :  <t t-esc="order.table.floor_id[1]"/> ( <t t-esc="order.table.name"/> )</span>
+		                    	<span class="pos-table-time">Time : <t t-esc="moment(order.order_create_date).format('hh:mm')"/> </span>
+		                    </li>
+		                    <li t-att-class='"pos-line-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+								<!-- Change the class name to change the width of the header -->
+		            			<t t-if="widget.env.pos.config.priority_ids != undefined">
+		            				<span class="cart-list-header li_print cart-10">Print</span>
+			            			<span class="cart-list-header cart-30">Product</span>
+			            			<span class="cart-list-header cart-10">Qty</span>
+			            			<span class="cart-list-header cart-20">Priority</span>
+			            			<span class="cart-list-header cart-30">Status</span>
+		            			</t>
+		            			<t t-else="">
+		            				<span class="cart-list-header li_print cart-10">Print</span>
+			            			<span class="cart-list-header cart-45">Product</span>
+			            			<span class="cart-list-header cart-24">Qty</span>
+			            			<span class="cart-list-header cart-24">Status</span>
+		            			</t>
+		            			
+		            		</li>
+			            	<div class="pos_porderlines">
+				               	<t t-foreach="orderlines" t-as="line">
+				            		<li t-att-class='"pos-cart-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")'  t-att-data-line-id="line.id">
+				            			<span t-att-line_id="line.id" t-att-order_uid="order.uid" class="restaurant_productqty  pos_orderline_print"><i class="fa fa-print" /></span>
+				            			<t t-if="widget.env.pos.config.priority_ids != undefined">
+				            				<span t-att-class='"restaurant_product "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+					            				<t t-esc="line.get_product().display_name"/><br></br>
+					            				<i t-if="line.get_note()" aria-label="Note" class="fa fa-tag" role="img" title="Note"></i><b><t t-esc="line.get_note()" /></b>
+					            			</span>
+				            			</t>
+				            			<t t-else="">
+				            				<span t-att-class='"restaurant_product restaurant_product_np "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+					            				<t t-esc="line.get_product().display_name"/><br></br>
+					            				<i t-if="line.get_note()" aria-label="Note" class="fa fa-tag" role="img" title="Note"></i><b><t t-esc="line.get_note()" /></b>
+					            			</span>
+				            			</t>
+				            			<span t-att-class='"restaurant_productqty "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}"><t t-esc="line.get_quantity()" /></span>
+				            			<span t-if="widget.env.pos.config.priority_ids != undefined" t-att-class='"restaurant_priority "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+				            				<t t-if="line.priority">
+				            			        <t t-esc="line.priority" />
+				            			    </t>
+				            			</span>
+				            			<div class="pos-kit-status-div">
+						        		<div class="pos-kit-status100">
+						        		<!-- <t t-esc="line.get_Kitchen_State()"/> -->
+						        			<t t-set="so_kit_state" t-value="line.get_Kitchen_State()" />
+						        			<t t-if="line.get_Kitchen_State() == 'cancel'">
+						        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward red-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t> -->
+									            
+									            <!-- <span class="kitchen_status pos-kit-status-name red-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Cancelled'"/>
+									            </span> -->
+									             <!-- change the button showed in the kitchen view -->
+									            
+									            <t t-if="widget.env.pos.config.supplier_view">
+									            	<span class="reverse_view_btn round-btn pos-kit-reverse red-bgcolor">
+										                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+										            </span>
+									            </t>
+									            <span class="kitchen_status pos-kit-status-name red-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Cancelled'"/>
+									            </span>
+									            <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward red-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t>
+								            </t>
+						        			<t t-elif="line.get_Kitchen_State() == 'preparing'">
+						        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t>
+									            
+									            <span class="kitchen_status pos-kit-status-name blue-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Preparing'"/>
+									            </span> -->
+									            
+									            <t t-if="widget.env.pos.config.supplier_view">
+									            	<span class="reverse_view_btn round-btn pos-kit-reverse blue-bgcolor">
+										                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+										            </span>
+									            </t>
+									             <span class="kitchen_status pos-kit-status-name blue-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Preparing'"/>
+									            </span>
+									            <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t>
+								            </t>
+								            
+								            <t t-elif="line.get_Kitchen_State() == 'ready'">
+								            	<!-- <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward yellow-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t> -->
+									            
+									            <!-- <span class="kitchen_status pos-kit-status-name yellow-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Ready to Pickup'"/>
+									            </span> -->
+									            
+									            <t t-if="widget.env.pos.config.supplier_view">
+									            	<span class="reverse_view_btn round-btn pos-kit-reverse yellow-bgcolor">
+										                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+										            </span>
+									            </t>
+									            <span class="kitchen_status pos-kit-status-name yellow-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Ready to Pickup'"/>
+									            </span>
+									            <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward yellow-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t>
+								            </t>
+								            <t t-elif="line.get_Kitchen_State() == 'delivered'">
+								            	<!-- <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward green-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t> -->
+									           <!--  
+									            <span class="kitchen_status pos-kit-status-name green-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Delivered'"/>
+									            </span> -->
+									            
+									            <t t-if="widget.env.pos.config.supplier_view">
+									            	<span class="reverse_view_btn round-btn pos-kit-reverse green-bgcolor">
+										                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+										            </span>
+									            </t>
+									              <span class="kitchen_status pos-kit-status-name green-color" t-att-data-state="so_kit_state">
+									                <t t-esc="'Delivered'"/>
+									            </span>
+									            <t t-if="widget.env.pos.config.supplier_view">
+										        	<span class="forward_view_btn round-btn pos-kit-forward green-bgcolor">
+										                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+										            </span>
+									            </t>
+								            </t>
+								            
+							            </div>
+						            </div>
+				            		</li>
+				           		</t>
+				           		
+			           		</div>
+		                </ul>
+	                </t>	
+				</t>
+			</t>
+		</div>
+    </t>
+    <!-- end code - Display restaurant orders -->
+    
+    	<!-- start code - Display restaurant delivered orders in cashier view -->
+    <t t-name="CashierOrders">
+	    <div class="pos-kit-order">
+	    	<t t-if="(widget.env.pos.config.cashier_view || widget.env.pos.config.waiter_view)">
+	    		<t t-if="orderlines.length > 0 ">
+	    		<t t-set="head_img_class" t-value="'head_icon_img'" />
+	    		<t t-set="head_li_class" t-value="'head_icon_li table_bg_li pos-cart-bottom-left pos-cart-top-left'" />
+				<t t-if="widget.env.pos.config.cashier_view">
+					<t t-set="head_img_class" t-value="'cashhead_icon_img'" />
+	    			<t t-set="head_li_class" t-value="'cashhead_icon_li table_bg_li pos-cart-bottom-left pos-cart-top-left'" />
+				</t>
+	    		<ul t-att-class='"pos-lines orderlines"+order.uid+" "+order.hide_order+" " + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "" : "") + ((slevel == 3) ? "pos_res_zoom_2" : "") + ((slevel == 4) ? "pos_res_zoom_3" : "")' t-att-data-uid="order.uid">
+	                	<li t-att-class="head_li_class">
+	    			   		<img t-att-class="head_img_class" src="/skit_pos_restaurant/static/src/img/table.png" alt="Table"/>
+	    			   	</li>
+	                	<li t-att-class='"pos-cart-top-right head_li_width pos-lines-header-li first_li_head "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+	                    	<span class="pos-order-name li_order_num" t-att-data-seq="order.sequence_number"><t t-esc="order.order_sequence_no" /></span>
+	                    	
+	                    	<t t-if="widget.env.pos.config.cashier_view">
+	                    		<div t-att-data-uid="order.uid" class="round_btn blue-bgcolor pos_payment_btn" style="min-width: auto !important;">
+	                    			<span>Payment</span>
+	                    		</div>
+	                    	</t>
+	                    </li>
+	                    <li t-att-class='"pos-cart-bottom-right head_li_width pos-lines-header-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+	                    	<span style="display:none" class="pos-table-no" t-att-data-flr-id="order.table.floor_id[0]" t-att-data-flr-name="order.table.floor_id[1]" t-att-data-tbl-id="order.table.id" t-att-data-tbl-name="order.table.name"></span>
+	                    	<span class="pos_cus_name">Table No :  <t t-esc="order.table.floor_id[1]"/> ( <t t-esc="order.table.name"/> )</span>
+	                    	<span class="pos-table-time">Time : <t t-esc="moment(order.order_create_date).format('hh:mm')"/> </span>
+	                    </li>
+	                    <li t-att-class='"pos-line-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+	            			<!-- Change class to change the width of the header  -->
+	            			<!-- <span class="li_print cart-10">Print</span> -->
+	            			<t t-if="widget.env.pos.config.priority_ids != undefined">
+	            				<span class="cart-list-header cart-30">Product</span>
+		            			<span class="cart-list-header cart-10">Qty</span>
+		            			<!-- Add priority in the cashier view delivery order -->
+		            			<span class="cart-list-header cart-20">Priority</span>
+		            			<span class="cart-list-header cart-30">Status</span>
+	            			</t>
+	            			<t t-else="">
+	            				<span class="cart-list-header cart-45">Product</span>
+		            			<span class="cart-list-header cart-24">Qty</span>
+		            			<span class="cart-list-header cart-30">Status</span>
+	            			</t>
+	            			
+	            		</li>
+	                    <div class="pos_porderlines">
+			               	<t t-foreach="orderlines" t-as="line">
+			            		<li t-att-class='"pos-cart-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")' t-att-data-line-id="line.id">
+			            			<t t-if="widget.env.pos.config.priority_ids != undefined">
+			            				<span t-att-class='"restaurant_product "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+				            				<t t-esc="line.get_product().display_name"/>
+				            			</span>
+			            			</t>
+			            			<t t-else="">
+			            				<span t-att-class='"restaurant_product restaurant_product_np "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+				            				<t t-esc="line.get_product().display_name"/>
+				            			</span>
+			            			</t>
+			            			<span t-att-class='"restaurant_productqty "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}"><t t-esc="line.get_quantity()" /></span>
+			            			<!-- Show the priority value in the cashier delivery view -->
+			            			<span t-if="widget.env.pos.config.priority_ids != undefined" t-att-class='"restaurant_priority "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")' t-attf-id="cartlist-#{order.uid}">
+				            				<t t-if="line.priority">
+				            			        <t t-esc="line.priority" />
+				            			    </t>
+				            			</span>
+			            			<div class="pos-kit-status-div">
+			            				<span class="restaurant_productstate" t-attf-id="cartlist-#{order.uid}">
+			            					<t t-if="line.get_Kitchen_State() == 'cancel'">
+												<t t-esc="'Cancelled'"/>
+											</t>
+											<t t-if="line.get_Kitchen_State() == 'delivered'">
+												<t t-esc="'Delivered'"/>
+											</t>
+			            				</span>
+			            			</div>
+			            		</li>
+			            	</t>
+			            </div>
+	    			</ul>
+	    		</t>
+	    	</t>
+	    </div>
+    </t>
+   
+        <t t-name="CashierCompOrders" >
+	    <div class="pos-kit-order">
+	    	<t t-if="(widget.env.pos.config.cashier_view || widget.env.pos.config.waiter_view)">
+	    		<ul class="pos-lines">
+	    			   <li t-att-class='"head_icon_li pos-cart-bottom-left pos-cart-top-left "+((data.table_name == "Take Away") ? "takeaway_bg_li ":"table_bg_li")'>
+	    			   		<t t-if="data.table_name == 'Take Away'">
+	    			   			<img class="head_icon_img" src="/skit_pos_restaurant/static/src/img/takeaway.png" alt="TakeAway"/>
+	    			   		</t>
+	    			   		<t t-else="">
+	    			   			<img class="head_icon_img" src="/skit_pos_restaurant/static/src/img/table.png" alt="Table"/>
+	    			   		</t>
+	    			   </li>
+		               <li t-att-class='"pos-cart-top-right head_li_width pos-lines-header-li "+((data.table_name == "Take Away") ? "takeaway_bg_li ":"table_bg_li") '>
+		                    	<span class="pos_cus_name">Customer Name : <t t-esc="data.customer_name"/></span>
+		               </li>
+		               <li t-att-class='"pos-cart-bottom-right head_li_width pos-lines-header-li " +((data.table_name == "Take Away") ? "takeaway_bg_li ":"table_bg_li")'>
+		                    	<span t-if="data.table_name != 'Take Away'" class="pos-table-no">Table No : <t t-esc="data.floor_name"/> ( <t t-esc="data.table_name"/> )</span>
+		                    	<span t-if="data.table_name == 'Take Away'" class="pos-table-no"><t t-esc="data.table_name"/></span>
+		                    	<span class="pos-table-time">Time : <t t-esc="moment(data.date).format('hh:mm')"/> </span>
+		                    	<span class="pos-order-name text-align_right_li li_order_num"><t t-esc="data.order_no"/></span>
+		                </li>
+	                    <li t-att-class='"pos-line-li "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+	            			<!-- Change the class name to change the width of the header -->
+	            			<!-- <span class="li_print cart-10">Print</span> -->
+	            			<t t-if="widget.env.pos.config.priority_ids != undefined">
+	            				<span class="cart-list-header cart-30">Product</span>
+		            			<span class="cart-list-header cart-10">Qty</span>
+		            			<!-- Add priority in the cashier complete order -->
+		            			<span class="cart-list-header cart-20">Priority</span>
+		            			<span class="cart-list-header cart-30">Status</span>
+	            			</t>
+	            			<t t-else="">
+	            				<span class="cart-list-header cart-45">Product</span>
+		            			<span class="cart-list-header cart-24">Qty</span>
+		            			<span class="cart-list-header cart-30">Status</span>
+	            			</t>
+	            			
+	            		</li>
+	                    <div class="pos_porderlines">
+	                    	
+			               	<t t-foreach="data['lines']" t-as="line">
+			            		<li class="pos-cart-li">
+			            			<t t-if="widget.env.pos.config.priority_ids != undefined">
+			            				<span class="restaurant_product" ><t t-esc="line.prod_name"/></span>
+			            			</t>
+			            			<t t-else="">
+			            				<span class="restaurant_product_np" ><t t-esc="line.prod_name"/></span>
+			            			</t>
+			            			<span class="restaurant_productqty" ><t t-esc="line.qty" /></span>
+			            			<!-- Show priority value in the complete orders -->
+			            			<span t-if="widget.env.pos.config.priority_ids != undefined" class="restaurant_priority" ><t t-esc="line.priority" /></span>
+			            			<div class="pos-kit-status-div">
+			            				<span class="restaurant_productstate" >
+			            					<t t-esc="line.status" />
+			            				</span>
+			            			</div>
+			            		</li>
+			            		
+			            	</t>
+			            </div>
+	    			</ul>
+	    	</t>
+	    </div>
+    </t>
+    <!-- end code - Display restaurant delivered orders in cashier view -->
+    <!-- Print the online order  -->
+    <t t-name="OnlineOrderPrintPopupWidget" owl="1">
+		<div >
+		<div class="modal-dialog">
+			 <div class="popup popup-alert">
+				<p class="title pos_o_title"><t t-esc="props.title" /></p>
+				<div>
+                    <div class="online-order-container">
+                   <div class="pos-sale-ticket" style="text-align: left;width: 300px;background-color: white;margin: 20px;padding: 15px;font-size: 14px;
+                                         padding-bottom: 30px;display: inline-block;font-family: &quot;Inconsolata&quot;;border: solid 1px rgb(220,220,220);border-radius: 3px;overflow: hidden;">
+				            <div class="pos-center-align" style="font-size: 19px;font-weight: bold;">Order No: <t t-esc="props.sorder.name"/></div>
+				            <br />
+				            <table class='receipt-orderlines'>
+				                <colgroup>
+				                    <col width='75%' />
+				                    <col width='25%' />
+				                </colgroup>
+				                <tr t-foreach="props.sorderlines" t-as="line">
+				                    <td>
+				                        <t t-esc="line.product_id[1]"/>
+				                    </td>
+				                    <td class="pos-right-align">
+				                        <t t-esc="line.product_uom_qty"/>
+				                    </td>
+				                </tr>
+				            </table>
+				        </div>
+                    </div>
+				</div>
+				<div class="footer pos_o_footer">
+			    	<div class="button cancel" t-on-click="trigger('Cancel')">
+			             Cancel
+			        </div>
+			        <div t-att-id="props.order_id" t-on-click="trigger('print-online-receipt')" class="button print_online_receipt">
+                        Print
+                    </div>
+		        </div>
+			</div>
+		</div>
+		</div>
+	</t>
+	<!-- Display the online order details in the popup -->
+	<t t-name="OnlineOrderTicket" owl="1">
+        <div class="pos-sale-ticket">
+            <div class="pos-center-align" style="font-size: 19px;font-weight: bold;">Order No: <t t-esc="order.name"/></div>
+            <br />
+            <table class='receipt-orderlines'>
+                <colgroup>
+                    <col width='75%' />
+                    <col width='25%' />
+                </colgroup>
+                <tr t-foreach="sorderlines" t-as="line">
+                    <td>
+                        <t t-esc="line.product_id[1]"/>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="line.product_uom_qty"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </t>
+    <!-- Display the Shop Cart Orders -->
+	<t t-name="ShopCartOrders">
+		<div>
+			<t t-if="sorderlines.length > 0 ">
+				<t t-if="((widget.env.pos.config.supplier_view) and (sorder.state != 'delivered'))">
+					<div t-attf-id="cart-#{sorder.id}" t-att-class='"pos-cart-slide "+ ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_zoom1" : "") + ((slevel == 3) ? "pos_zoom2" : "") + ((slevel == 4) ? "pos_zoom3" : "")'>
+						<ul t-attf-class="pos-cart" t-att-data-uid="sorder.id">
+			            	<li t-att-class='"head_icon_li delivery_icon pos-cart-bottom-left pos-cart-top-left " + ((sorder.state == "draft") or (sorder.state == "sent") or (sorder.state == "sale" and sorder.invoice_payment_status == "not_paid") ? "yellow_bgcolor ":"") + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+		    			   		<img class="head_icon_img" src="/skit_pos_restaurant/static/src/img/delivery.png" alt="Delivery"/>
+		    			   	</li>
+			                <t t-if="(sorder.state == 'draft') or (sorder.state == 'sent')">
+			                	<li t-attf-id="header-#{sorder.id}" t-att-class='"pos-cart-top-right pos-cart-bottom-right head_so_li_width pos-cart-header-li " + ((sorder.state == "draft") or (sorder.state == "sent") or (sorder.state == "sale" and sorder.invoice_payment_status == "not_paid") ? "yellow_bgcolor ":"") + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+				                	<span class="pos-open-order-no w41 li_order_num"><t t-esc="sorder.name"/> </span>
+				                </li>
+			                </t>
+			                <t t-else="">
+			                	<li t-attf-id="header-#{sorder.id}" t-att-class='"pos-cart-top-right pos-cart-bottom-right head_so_li_width pos-cart-header-li " + ((sorder.state == "draft") or (sorder.state == "sent") or (sorder.state == "sale" and sorder.invoice_payment_status == "not_paid") ? "yellow_bgcolor ":"") + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+				                	<span class="pos-order-no li_order_num"><t t-esc="sorder.name"/> </span>
+				                	
+					                <span t-if="(sorder.state != 'draft') and (sorder.state != 'sent')" 
+			                				class="pos-order-no li_order_num online_order_print" t-attf-data-order_id="#{sorder.id}"><i t-attf-data-order_id="#{sorder.id}" class="fa fa-print"/></span>
+				                	<span class="pos-order-date" style="display:none;">
+				                		<t t-if="(sorder.state != 'payment')">
+						                	<div t-att-class='((sorder.state == "sale" and sorder.invoice_payment_status == "not_paid") ? "disable_round_btn" : "round_btn green-btn-bgcolor order_btn")' t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}" t-attf-order_id="#{sorder.id}"  >
+						                		<t t-if="(sorder.state == 'draft') or (sorder.state == 'sent')">
+						                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Order Confirm</span>
+						                		</t>
+						                		<t t-elif="(sorder.state == 'sale')">
+						                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Preparing</span>
+						                		</t>
+						                		<t t-elif="(sorder.state == 'preparing')">
+						                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}" >Ready to Pickup</span>
+						                		</t>
+						                		<t t-elif="(sorder.state == 'ready')">
+						                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Delivered</span>
+						                		</t>
+						                		<t t-elif="(sorder.state == 'delivered')">
+						                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Payment</span>
+						                		</t>
+									        	
+									        </div>
+								        </t>
+				                	</span>
+				                	
+				                	<t t-if="(sorder.state == 'sale') and (sorder.invoice_payment_status == 'not_paid')">
+					                    <span class="pos-order-date"><div class="inv_pay_status_btn inv_not_paid"><span>Not Paid</span></div></span>
+					                </t>
+					                <t t-if="(sorder.state == 'sale') and (sorder.invoice_payment_status == 'paid')">
+					                   	<span class="pos-order-date"><div class="inv_pay_status_btn inv_paid"><span>Paid</span></div></span>
+					                </t>
+				                </li>
+			                </t>
+			                <li class="pos-line-li">
+			                	   <!--  <span class="cart-list-header cart-24">S.No</span> -->
+			            			<span class="cart-list-header cart-45 ">Product</span>
+			            			<span class="cart-list-header cart-24">Qty</span>
+			            			<span class="cart-list-header cart-24">Status</span>
+			            	</li>
+			            	<div class="pos_sorderlines">
+			            	<t t-if="sorderlines">
+				               	<t t-foreach="sorderlines" t-as="line">
+				            		<li class="pos-cart-li" t-att-data-line-id="line.id">
+				            			<span t-attf-id="cartlist-#{sorder.id}" t-att-class='"cart_list_span cart-45 " + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")'><t t-esc="line.product_id[1]"/></span>
+				            			<span t-attf-id="cartlist-#{sorder.id}" t-att-class='"cart_list_span " + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")'><t t-esc="line.product_uom_qty"/></span>
+				            			<div class="pos-kit-status-div">
+							        		<div class="pos-kit-status100">
+							        			<t t-set="so_kit_state" t-value="line.kitchen_state" />
+							        			<t t-if="line.kitchen_state == 'cancel'">
+							        			<!-- Change the button for status in online order -->
+							        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward red-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+											         </t>
+										            
+										            <span class="kitchen_status pos-kit-status-name red-color" >
+										                <t t-esc="'Cancelled'"/>
+										            </span> -->
+										            
+										            <t t-if="widget.env.pos.config.supplier_view">
+										            	<span class="reverse_view_btn round-btn pos-kit-reverse red-bgcolor">
+											                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+											            </span>
+											        </t>
+											        <span class="kitchen_status pos-kit-status-name red-color" t-att-data-state="so_kit_state">
+										                <t t-esc="'Cancelled'"/>
+										            </span>
+										            <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward red-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+											         </t>
+									            </t>
+									            <t t-elif="line.kitchen_state == 'open'">
+							        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+										            
+										            <span class="kitchen_status pos-kit-status-name blue-color" >
+										                <t t-esc="'Open'"/>
+										            </span> -->
+										            
+										            <t t-if="widget.env.pos.config.supplier_view">
+										            	<span class="reverse_view_btn round-btn pos-kit-reverse blue-bgcolor">
+											                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+											            </span>
+											        </t>
+											        <span class="kitchen_status pos-kit-status-name blue-color" t-att-data-state="so_kit_state">
+										                <t t-esc="'Open'"/>
+										            </span>
+										            <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+									            </t>
+									            <t t-elif="line.kitchen_state == 'confirm'">
+							        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+							        					<span t-att-class='(((sorder.state == "draft" or sorder.state == "sent" or sorder.state == "sale") and sorder.invoice_payment_status == "not_paid") ? "disable_confirm round-btn pos-kit-forward" : "forward_view_btn round-btn pos-kit-forward confirm_bgcolor")'>
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+										            
+										            <span class="kitchen_status pos-kit-status-name confirm_color" >
+										                <t t-esc="'Confirm'"/>
+										            </span> -->
+										            
+										            <t t-if="widget.env.pos.config.supplier_view">
+										            	<span t-att-class='(((sorder.state != "draft" or sorder.state != "sent") and line.kitchen_state == "confirm") ? "disable_confirm round-btn pos-kit-reverse" : "reverse_view_btn round-btn pos-kit-reverse confirm_bgcolor")'>
+											                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+											            </span>
+											        </t>
+											        <span class="kitchen_status pos-kit-status-name confirm_color" t-att-data-state="so_kit_state">
+										                <t t-esc="'Confirm'"/>
+										            </span>
+										            <t t-if="widget.env.pos.config.supplier_view">
+							        					<span t-att-class='(((sorder.state == "draft" or sorder.state == "sent" or sorder.state == "sale") and sorder.invoice_payment_status == "not_paid") ? "disable_confirm round-btn pos-kit-forward" : "forward_view_btn round-btn pos-kit-forward confirm_bgcolor")'>
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+									            </t>
+							        			<t t-elif="line.kitchen_state == 'preparing'">
+							        				<!-- <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+										            
+										            <span class="kitchen_status pos-kit-status-name blue-color" >
+										                <t t-esc="'Preparing'"/>
+										            </span> -->
+										            
+										            <t t-if="widget.env.pos.config.supplier_view">
+										            	<span t-att-class='(line.kitchen_state == "preparing" ? "disable_confirm round-btn pos-kit-reverse" : "reverse_view_btn round-btn pos-kit-reverse blue-bgcolor")'>
+											                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+											            </span>
+											        </t>
+											         <span class="kitchen_status pos-kit-status-name blue-color" t-att-data-state="so_kit_state">
+										                <t t-esc="'Preparing'"/>
+										            </span>
+										            <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+									            </t>
+									            
+									            <t t-elif="line.kitchen_state == 'ready'">
+									            	<!-- <t t-if="widget.env.pos.config.supplier_view">
+									            		<span t-att-class='((sorder.state != "ready") ? "disable_confirm round-btn pos-kit-forward" : "forward_view_btn round-btn pos-kit-forward yellow-bgcolor")'>
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+										            
+										            <span class="kitchen_status pos-kit-status-name yellow-color" >
+										                <t t-esc="'Ready to Pickup'"/>
+										            </span> -->
+										            
+										            <t t-if="widget.env.pos.config.supplier_view">
+										            	<span t-att-class='(line.kitchen_state == "ready" ? "disable_confirm round-btn pos-kit-reverse" : "reverse_view_btn round-btn pos-kit-reverse yellow-bgcolor")'>
+											                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+											            </span>
+											        </t>
+											        <span class="kitchen_status pos-kit-status-name yellow-color" t-att-data-state="so_kit_state">
+										                <t t-esc="'Ready to Pickup'"/>
+										            </span>
+										            <t t-if="widget.env.pos.config.supplier_view">
+									            		<span t-att-class='((sorder.state != "ready") ? "disable_confirm round-btn pos-kit-forward" : "forward_view_btn round-btn pos-kit-forward yellow-bgcolor")'>
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+									            </t>
+									            
+									            <t t-else="">
+									            	<!-- <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward green-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+										            
+										            <span class="kitchen_status pos-kit-status-name green-color" >
+										                <t t-esc="'Delivered'"/>
+										            </span> -->
+										            
+										            <t t-if="widget.env.pos.config.supplier_view">
+										            	<span class="reverse_view_btn round-btn pos-kit-reverse green-bgcolor">
+											                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+											            </span>
+											        </t>
+											        <span class="kitchen_status pos-kit-status-name green-color" t-att-data-state="so_kit_state">
+										                <t t-esc="'Delivered'"/>
+										            </span>
+										            <t t-if="widget.env.pos.config.supplier_view">
+											        	<span class="forward_view_btn round-btn pos-kit-forward green-bgcolor">
+											                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+											            </span>
+										            </t>
+										            
+									            </t>
+								            </div>
+							            </div>
+				            		</li>
+				           		</t>
+				           		</t>
+			           		</div>
+			            </ul>
+					</div>
+				</t>
+				<t t-if="widget.env.pos.config.cashier_view || widget.env.pos.config.waiter_view">
+					<div t-attf-id="cart-#{sorder.id}" t-att-class='"pos-cart-slide " + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_zoom1" : "") + ((slevel == 3) ? "pos_zoom2" : "") + ((slevel == 4) ? "pos_zoom3" : "")'>
+						<ul t-attf-class="pos-cart" t-att-data-uid="sorder.id">
+							<li t-att-class='"head_icon_li delivery_icon pos-cart-bottom-left pos-cart-top-left " + ((sorder.state == "draft") or (sorder.state == "sent") or (sorder.state == "sale" and sorder.invoice_payment_status == "not_paid") ? "yellow_bgcolor ":"") + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+		    			   		<img class="head_icon_img" src="/skit_pos_restaurant/static/src/img/delivery.png" alt="Delivery"/>
+		    			   	</li>
+			            	<li t-attf-id="header-#{sorder.id}" t-att-class='"pos-cart-top-right pos-cart-bottom-right head_so_li_width pos-cart-header-li " + ((sorder.state == "draft") or (sorder.state == "sent") or (sorder.state == "sale" and sorder.invoice_payment_status == "not_paid") ? "yellow_bgcolor ":"") + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_header_zoom1" : "") + ((slevel == 3) ? "pos_header_zoom2" : "") + ((slevel == 4) ? "pos_header_zoom3" : "")'>
+			                	<span class="pos-order-no li_order_num"><t t-esc="sorder.name"/> </span>
+			                   	<span t-if="(sorder.state != 'payment')" class="pos-order-state li_order_num">Status : 
+			                		<t t-if="(sorder.state == 'draft') or (sorder.state == 'sent')">
+			                			Open
+			                		</t>
+			                		<t t-elif="(sorder.state == 'sale')">
+			                			Order Confirm
+			                		</t>
+			                		<t t-elif="(sorder.state == 'preparing')">
+			                			Preparing
+			                		</t>
+			                		<t t-elif="(sorder.state == 'ready')">
+			                			Ready to Pickup
+			                		</t>
+			                		<t t-elif="(sorder.state == 'delivered')">
+			                			Delivered
+			                		</t>
+			                		<t t-else="">
+			                			Payment
+			                		</t>
+			                	</span>
+			                	
+			                	<span class="pos-order-state li_order_num" style="display:none;">
+			                		<t t-if="(sorder.state != 'payment')">
+					                	<div class="round_btn green-btn-bgcolor order_btn" t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}" t-attf-order_id="#{sorder.id}"  >
+					                		<t t-if="(sorder.state == 'draft') or (sorder.state == 'sent')">
+					                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Order Confirm</span>
+					                		</t>
+					                		<t t-elif="(sorder.state == 'sale')">
+					                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Preparing</span>
+					                		</t>
+					                		<t t-elif="(sorder.state == 'preparing')">
+					                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}" >Ready to Pickup</span>
+					                		</t>
+					                		<t t-elif="(sorder.state == 'ready')">
+					                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Delivered</span>
+					                		</t>
+					                		<t t-elif="(sorder.state == 'delivered')">
+					                			<span t-attf-data-item="#{sorder.id}" t-attf-id="#{sorder.id}">Payment</span>
+					                		</t>
+								        	
+								        </div>
+							        </t>
+			                	</span>
+			                </li>
+			                <li class="pos-line-li">
+			            			<span class="cart-list-header cart-45">Product</span>
+			            			<span class="cart-list-header cart-24">Qty</span>
+			            			<span class="cart-list-header cart-24">Status</span>
+			            	</li>
+			            	<div class="pos_sorderlines">
+				               	<t t-foreach="sorderlines" t-as="line">
+				            		<li class="pos-cart-li" t-att-data-line-id="line.id">
+				            			<span t-attf-id="cartlist-#{sorder.id}" t-att-class='"cart_list_span cart-45 " + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")'><t t-esc="line.product_id[1]"/></span>
+				            			<span t-attf-id="cartlist-#{sorder.id}" t-att-class='"cart_list_span " + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")'><t t-esc="line.product_uom_qty"/></span>
+				            			<span t-attf-id="cartlist-#{sorder.id}" t-att-class='"cart_list_span " + ((slevel == 1) ? "" : "") + ((slevel == 2) ? "pos_list_zoom1" : "") + ((slevel == 3) ? "pos_list_zoom2" : "") + ((slevel == 4) ? "pos_list_zoom3" : "")'><t t-esc="line.kitchen_state"/></span>
+				            		</li>
+				           		</t>
+			           		</div>
+			            </ul>
+					</div>
+				</t>
+			</t>
+		</div>
+	</t>
+	</templates>

@@ -1,0 +1,372 @@
+.oe-visible{
+	visibility: hidden !important;
+}
+
+.round-btn {
+	border-radius: 13px;
+	color: white;
+	font-size: 11px;
+	min-width: 15px;
+	line-height: 15px;
+	height: 15px;
+}
+
+.waiter-round-btn {
+	border-radius: 13px;
+	color: white;
+	font-size: 11px;
+	min-width: 15px;
+	line-height: 15px;
+	height: 15px;
+}
+.waiter-fa-icon {
+	top: 50%;
+    transform: translate(100%, 0%);
+}
+
+.pos-lines-header{
+	border: 1px solid black;
+	margin-top: 20px !important;
+	border-bottom: 0px !important;
+}
+
+ /* Tracking Screen Normal View */
+	.trackstatus_back_btn {
+		height: 10%;
+	    position: relative;	
+	}
+	.trackstatus_back_btn > .res_back_btn {
+	    left: 0%;
+	    position: absolute;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
+	.trackstatus_back_btn > span {
+	    font-size: 20px;
+	    position: absolute;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
+ .cashier_tabs{
+	float: left;
+	text-align: left;
+	display: inline-flex;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	top: 50%;
+    transform: translateY(-50%);
+}
+.cashier_tabs span{
+	padding-right: 8px;
+	cursor: pointer;
+	display: block;
+    padding: 12px 21px;
+    font-size: 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    color: #000000;
+    background: #4A83FD;
+    /* border-top-left-radius: 0px; */
+	border-top-right-radius: 30px;
+}
+
+.pos-lines{
+	/* border: 1px solid black; */
+/* 	margin-top: 20px !important;
+ */	box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+/* 	border-radius: 30px;
+ */	width: 30%;
+    float: left;
+    margin:0 1.5% 2% !important;    
+    background: #E2E2E2;
+    border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+.pos_porderlines{
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	background: white;
+}
+.pos_display_none{
+	display: none;
+}
+.pos_display_block{
+	display: block;
+}
+.pos-prod-name{
+	width: 45% !important;
+}
+.pos-prod-name65{
+	width: 55% !important;
+}
+
+.pos-kit-order{
+	max-width: 100% !important;
+    margin: 0 1%;
+    width: 98%;
+}
+
+.pos-table-no{
+	display: inline-block;
+	color: white !important;
+	width:90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.pos-table-time{
+	color: white;
+	width:40%;
+	display:inline-block;
+	text-align: right;
+	margin-right: 10%;
+	line-height: 25px;
+}
+.pos-order-name{
+	color: white !important;
+    width: 50%;
+    text-align: left;
+    display:block;
+    line-height: 25px;
+}
+/*change the width for the status div in kitchen view*/
+.pos-kit-status-div{
+	width:30%; 
+	height: 3em;
+} 
+/*Change the display as inline-flex for kitchen view*/
+.pos-kit-status100{
+	width: 100%;
+	display: inline-flex;
+} 
+
+.pos-kit-forward{
+	width: 10%;
+	display: inline-block;
+}
+.pos-kit-status-name{
+	font-weight: bold;
+	width: 90%;
+	display: inline-block;
+	text-align: center;
+} 
+.pos-status-name{
+	margin-left: 10px;
+	font-weight: bold; 
+	float: right;
+}
+.pos-kit-reverse{
+	width: 10%;
+	display: inline-block;
+}
+.pos-kit-price{
+	width:14%;
+}
+.pos-width100{
+	width:100% !important;
+	height:100% !important;
+}
+.red-color{
+	color: #dc7633 !important;
+}
+.blue-color{
+	color: #3498db !important;
+}
+.yellow-color{
+	color: #EEC808 !important;
+}
+.green-color{
+	color: #2ecc71 !important;
+}
+.red-bgcolor{
+	background: #dc7633 !important;
+}
+.blue-bgcolor{
+	background: #3498db !important;
+}
+.green-bgcolor{
+	background: #2ecc71 !important;
+}
+.yellow-bgcolor{
+	background: #EEC808 !important;
+}
+.pos-ms-name{
+	text-align: left !important;
+	font-size: 78% !important;
+}
+.pos-note{
+	width: 60% !important;
+	color: #2980b9 !important;
+}
+.pos-lines .orderline:nth-child(odd) { 
+	 background: #d1f2eb; 
+	 padding-bottom: 15px !important;
+     /* font-size: 36px; 
+     color:white;  */
+} 
+.pos-lines .orderline:nth-child(even) { 
+     background: #d6eaf8; 
+     padding-bottom: 15px !important;
+     /* font-size: 36px; 
+     color:yellow; */ 
+} 
+.table_ready{
+	position: absolute;
+    top: 0;
+    left: 82%;
+    background: black;
+    width: 20px;
+    margin-top: 1px;
+    margin-left: -10px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    z-index: 10;
+}
+@keyframes up-right {
+    0% {
+        transform: scale(1);
+        opacity: .25
+    }
+    50% {
+        transform: scale (1, 5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: .25;
+    }
+}
+.circle {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    opacity: .25;
+}
+.red {
+    background-color: red;
+    position: absolute;
+    /* top: 50%;
+    left: 50%; */
+    -webkit-animation: up-right 1s infinite;
+    -moz-animation: up-right 1s infinite;
+    -o-animation: up-right 1s infinite;
+    animation: up-right 1s infinite;
+}
+
+/* start code - kitchen view alignment(Module done by Bhuvaneswari)*/
+/* To change the number of table in each column */
+@media only screen and (min-width: 320px) and (max-width: 465px) {
+	.pos-kit-order > .pos-lines {
+		width: 100% !important;
+	}
+}
+
+@media only screen and (min-width: 320px) and (max-width: 992px) {
+	.pos-kit-order > .pos-lines {
+		width: 100%;
+		margin:2% 0% !important;	/* Here the number of table in each row will be One */
+	}
+}
+
+@media only screen and (min-width: 993px) and (max-width:1439px) { 
+	.pos-kit-order > .pos-lines {
+		width: 48%; /* Here the number of table in each row will be Two  */
+		margin:1% 1% !important;
+		background: #d6eaf8;		 
+	}
+} 
+
+  @media only screen and (min-width: 1440px){ 
+	.pos-kit-order > .pos-lines {
+    width: 31.33%;/* Here the number of table in each row will be Three */
+    margin: 1% 1% !important;}
+}
+/*To keep the close & other two button in same line */
+@media only screen and (min-width: 768px) and (max-width:1400px) {
+	.pos .oe_status .oe_icon {
+		margin: auto 2px;
+	}
+	/* .pos .pos-rightheader {
+		left: auto !important;
+	} */
+	.pos .oe_status {
+		display: inline-flex;
+	}
+}
+
+/* End code - kitchen view alignment */
+
+.pos_cus_name{
+	display: inline-block;
+	color:white !important;
+	width: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: left;
+	line-height: 25px;
+}
+
+@media only screen and (max-width: 767px) {
+/* 	.pos .actionpad .button.pay{
+	height:54px;
+	width: 20%;
+} */
+/* .pos .actionpad .button.pay .pay-circle{
+	line-height: 23px;
+	font-size: 17px;
+	width: 28px;
+	margin-bottom: 0px;
+} */
+/* .pos .actionpad .button.pay .pay-circle .fa{
+	top: -2px;
+    left: 2px;
+} */
+/*Invoice Paid and not paid button design*/
+.inv_pay_status_btn{
+	border-radius: 13px !important;
+    color: white !important;
+    min-width: 40% !important;
+    line-height: 26px !important;
+    height: 26px !important;
+    display: inline-block;
+    text-align: center;
+}
+.inv_not_paid{
+	background: #de4949;
+	font-size: 16px;
+}
+.pos-sale-ticket {
+	text-align: left;
+    width: 300px;
+    background-color: white;
+    margin: 20px;
+    padding: 15px;
+    font-size: 14px;
+    padding-bottom: 30px;
+    display: inline-block;
+    font-family: "Inconsolata";
+    border: solid 1px rgb(220,220,220);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+}
+
+/* Expiry date warning message align  */
+.pos .expiry_days {
+	font-size: 17px;
+	padding-top: 12px;
+    margin-right: 140px;
+    color: white;
+}
+.pos .pos-expiry-date {
+	font-size: 17px;
+	padding-top: 12px;
+	margin-right: 140px;
+	color: white;
+}

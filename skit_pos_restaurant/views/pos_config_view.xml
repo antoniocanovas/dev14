@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+        <record id="view_restaurant_pos_config_form" model="ir.ui.view">
+            <field name="name">pos.config.form.view.restaurant.inherit</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+            <field name="arch" type="xml">
+            <!-- <xpath expr="//field[@name='floor_ids']" position="replace">
+            	<field name="floor_ids" widget="many2many_tags"/>
+            </xpath> -->
+                <xpath expr="//h2[@name='order']" position="before">
+                    <h2 name="refunds">Restaurant</h2>
+                    <!-- Kitchen Checkbox -->
+                    <!-- <div class="row mt16 o_settings_container" id="pos_restaurant">
+                        <div id="is_kitchen" class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="is_kitchen"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="is_kitchen"/>
+                            </div>
+                        </div>
+                        
+                    </div> -->
+                    <!-- POS Category-->
+                    
+            		<group>
+	                    <div class="row mt16 o_settings_container">
+	                        <div class="col-12 col-lg-6 o_setting_box" id="pos_categ_ids">
+	                            <div class="o_setting_right_pane">
+	                                <span class="o_form_label">Kitchen POS Category</span>
+	                                
+	                                <div class="content-group mt16">
+	                                    <field name="pos_categ_ids" colspan="4" nolabel="1"  widget="many2many_tags" />
+	                                </div>
+	                                
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="row mt16 o_settings_container">
+	                        <div class="col-12 col-lg-8 o_setting_box" id="restaurant_view">
+	                            <div class="o_setting_right_pane">
+	                                <div class="content-group mt16">
+	                                    <field name="restaurant_view" colspan="4" nolabel="1"  widget="radio" />
+	                                </div>
+	                                
+	                            </div>
+	                        </div>
+	                    </div>
+		                 
+	                    <div class="row mt16 o_settings_container" id="pos_restaurant_supplier">
+	                    <group invisible="1">
+	                    <div id="waiter_view" class="col-xs-12 col-md-6 o_setting_box">
+	                    <div class="o_setting_left_pane">
+	                                <field name="waiter_view"/>
+	                            </div>
+	                            <div class="o_setting_right_pane">
+	                                <label for="waiter_view"/>
+	                            </div>	
+	                    </div>
+	                    </group>
+	                    <group invisible="1">
+	                        <div id="supplier_view" class="col-xs-12 col-md-6 o_setting_box">
+	                            <div class="o_setting_left_pane">
+	                                <field name="supplier_view"/>
+	                            </div>
+	                            <div class="o_setting_right_pane">
+	                                <label for="supplier_view"/>
+	                            </div>	                            
+	                        </div>
+	                       </group>
+	                       <group invisible="1">
+	                        <div id="cashier_view" class="col-xs-12 col-md-6 o_setting_box">
+	                            <div class="o_setting_left_pane">
+	                                <field name="cashier_view"/>
+	                            </div>
+	                            <div class="o_setting_right_pane">
+	                                <label for="cashier_view"/>
+	                            </div>
+	                        </div>
+	                       </group>
+	                       
+	                       <group>
+	                        <div id="show_take_away" class="col-xs-12 col-md-6 o_setting_box">
+	                            <div class="o_setting_left_pane">
+	                                <field name="show_take_away"/>
+	                            </div>
+	                            <div class="o_setting_right_pane">
+	                                <label for="show_take_away"/>
+	                            </div>
+	                        </div>
+	                       </group>
+	                       <group>
+	                        <div id="self_served_view" class="col-xs-12 col-md-6 o_setting_box">
+	                            <div class="o_setting_left_pane">
+	                                <field name="self_served_view"/>
+	                            </div>
+	                            <div class="o_setting_right_pane">
+	                                <label for="self_served_view"/>
+	                            </div>
+	                        </div>
+	                       </group>
+	                    </div>
+	                    
+                   </group>
+                   	<h2 name="refunds">Cushion Time</h2>
+                   	<group>
+	                	<div class="row mt16 o_settings_container">
+	                    	<div class="col-xs-12 col-md-6 o_setting_box">
+	                            <group>
+	                               <field name="cushion_time_before"/>
+	                            </group>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="row mt16 o_settings_container">
+	                    	<div class="col-xs-12 col-md-6 o_setting_box">
+	                            <group>
+	                               <field name="cushion_time_after"/>
+	                            </group>
+	                        </div>
+	                    </div>
+                   </group>
+		                                            
+                 
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Inherit restaurant table for add take away field -->
+		<record model="ir.ui.view" id="view_restaurant_table_form_inherit_form">
+	        <field name="name">restaurant.table.inherit.form</field>
+	        <field name="model">restaurant.table</field>
+	        <field name="inherit_id" ref="pos_restaurant.view_restaurant_table_form"></field>
+	        <field name="arch" type="xml">
+	            <field name="seats" position="after">
+	                <field name="is_take_away" />
+	            </field>
+	        </field>
+	    </record>
+	    
+	    <!-- Add Order Syncronization Fields in pos configuration setting -->
+        <record id="res_config_settings_wet_view_form" model="ir.ui.view">
+	        <field name="name">res.config.settings.wet.view.form.inherit</field>
+	        <field name="model">res.config.settings</field>
+	        <field name="priority" eval="50"/>
+	        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+	        <field name="arch" type="xml">
+	            <xpath expr="//div[@data-key='point_of_sale']" position="inside">
+	                <h2>Order Syncronization Fields</h2>
+	                <div class="row mt16 o_settings_container" id="customer_debts">
+	                    <div class="col-xs-12 col-md-12 o_setting_box">
+	                        <div>
+	                            <label for="sale_sync_field_ids"/>
+	                            <div class="content-group mt16">
+	                                <field name='sale_sync_field_ids' class="o_light_label"/>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </xpath>
+	        </field>
+	    </record>
+	
+	    
+</odoo>
