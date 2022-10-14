@@ -17,5 +17,5 @@ class AccountAnalyticLine(models.Model):
                                            column1='analytic_id',
                                            column2='attachment_id',
                                            store=False,
-                                           compute='get_work_attachment',
+                                           compute='get_worksheet_attachment',
                                            string='Archivos')
