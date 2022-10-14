@@ -10,7 +10,7 @@ class AccountAnalyticLine(models.Model):
     _inherit = "account.analytic.line"
 
     def get_worksheet_attachment(self):
-        data = self.env['ir.attachment'].search([('res_model', '=', 'work.sheet'), ('res_id', '=', self.id)])
+        data = self.env['ir.attachment'].search([('res_model', '=', 'work.sheet'), ('res_id', '=', work_sheet_id.id)])
         self.worksheet_attachment_ids = [(6, 0, data.ids)]
     worksheet_attachment_ids = fields.Many2many(comodel_name='ir.attachment',
                                            relation='work_sale_attachment_rel',
