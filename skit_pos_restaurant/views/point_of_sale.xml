@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="skit_hotel_management_assets" inherit_id="point_of_sale.assets">
+			
+			<xpath expr="." position="inside">
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/crosstab_bus.js"></script>
+			<!-- <script type="text/javascript" src="/skit_pos_restaurant/static/src/js/longpolling_bus.js"></script> -->
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/models.js"></script>
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/pos_models.js"></script>
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/pos_multi_session_restaurant.js"></script>
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/pos_multi_session.js"></script>
+			<!-- <script type="text/javascript" src="/skit_pos_restaurant/static/src/js/pos.js"></script>
+            <script type="text/javascript" src="/skit_pos_restaurant/static/src/js/sync_bus_service.js"></script> -->
+            
+	            	
+			<!-- <script type="text/javascript" src="/skit_pos_restaurant/static/src/js/kitchen_view.js"></script> -->
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/pos_db.js"></script>
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/pos_screen.js"></script> 
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/posline_printpopup.js"></script> 
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/so_orderscreen.js"></script> 
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/return_orderlist.js"></script>
+			<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/online_order_print.js"></script>
+			<link rel="stylesheet" type="text/css" href="/skit_pos_restaurant/static/src/css/pos_kitchen.css"></link>
+			<link rel="stylesheet" type="text/css" href="/skit_pos_restaurant/static/src/css/pos_return.css"></link>
+			<script type="text/javascript" src="/skit_pos_restaurant/static/lib/js/models.js"></script>
+                <script type="text/javascript" src="/skit_pos_restaurant/static/lib/js/screens.js"></script>
+                <script type="text/javascript" src="/skit_pos_restaurant/static/src/js/pos_sorder_sync.js"></script> 
+            	<!-- <link rel="stylesheet" href="/skit_pos_restaurant/static/src/css/pos_multi_session.css"/> -->	
+            	<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/Orderline.js"></script> 			
+			</xpath>
+		</template>
+       
+		<!-- Inherit pos.order for add delivered date -->
+		<record model="ir.ui.view" id="kitchen_view_pos_pos_form">
+            <field name="name">pos.order.form.view.kitchen.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='table_id']" position="after">
+            		<field name="date_order_take" />
+            		<field name="date_deliverd" />
+            	</xpath>
+            </field>
+        </record>
+	</data>
+</openerp>

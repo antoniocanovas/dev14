@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<!-- Extand pos_restaurant.FloorScreen and design the page-->   
+	<t t-inherit="pos_restaurant.FloorScreen" t-inherit-mode="extension">
+    	<xpath expr="//div[hasclass('create_reserv')]" position="inside">
+    		<button class="btn_track_status left-reserve-btn" t-on-click="trigger('button_Track_Status')" id="track_status">
+				<img class="left_track_icon" src="/skit_pos_floor_screen/static/src/img/track_status.png" alt="TrackStatus"/>
+				<span class="left_span_reserv"> Track Status</span>
+			</button>
+			<button t-if="env.pos.config.show_take_away" class="btn_take_away left-reserve-btn" t-on-click="trigger('button_Take_Away')"  id="takeaway">
+				<img class="left_icon_img" src="/skit_pos_floor_screen/static/src/img/takeaway.png" alt="TakeAwqy"/>
+				<span class="left_span_reserv"> Take Away</span>
+			</button>
+    	</xpath>
+    </t>
+    
+    <!--  created a confirm button to synchronize the order in the kitchen view -->
+    <t t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
+    <xpath expr="//div[hasclass('control-buttons')]" position="before">
+    	
+        <t t-if="orderConfirmed()">
+<!-- fa-collapse icon added - After Confirm Order -->
+	        <div class="order_confirm_collpase_div">
+		        <div class='control-button kitchenorder_confirmed'>
+		            <i class='fa fa-check'/> <span class="confirm_label">Confirmed</span>
+		        </div>
+		    	<div class="products_expand_collapse"><i class="fa fa-expand fa-lg order_confirm_fa_collapse" aria-hidden="true" t-on-click="trigger('products_expand_collapse')"/></div>
+			</div>
+        </t>
+        <t t-else="">
+<!-- fa-collapse icon added - Before Confirm Order -->
+			<div class="order_confirm_collpase_div">
+	           <div class='control-button kitchen_confirm_button' t-on-click="trigger('button_Confirm')">
+	            	<i class='fa fa-check'/><span class="confirm_label">Confirm Order</span>
+	           </div>
+	           <div class="products_expand_collapse"><i class="fa fa-expand fa-lg order_confirm_fa_collapse" aria-hidden="true" t-on-click="trigger('products_expand_collapse')"/></div>
+	        </div>
+        </t>
+       <!-- Remove the return button -->
+        <!-- <div class='control-button' t-on-click="trigger('button_Return')">
+            <i class='fa fa-rotate-left' /> Return
+        </div> -->
+        </xpath>
+    </t>
+    <!-- Extand pos_restaurant.FloorScreen and design the page-->   
+	<t t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+		<!-- <xpath expr="//ul[hasclass('info-list')]" position="replace">
+			<t t-if='env.pos.config.is_kitchen'>
+				<ul class="info-list">
+                <t t-if="props.line.get_quantity_str() !== '1' || props.line.selected ">
+                    <li class="info oe_hidden">
+                        <em>
+                            <t t-esc="props.line.get_quantity_str()" />
+                        </em>
+                        <span> </span><t t-esc="props.line.get_unit().name" />
+                        at
+                        <t t-if="props.line.display_discount_policy() == 'without_discount' and
+                            props.line.get_unit_display_price() != props.line.get_lst_price()">
+                            <s>
+                                <t t-esc="env.pos.format_currency(props.line.get_fixed_lst_price(),'Product Price')" />
+                            </s>
+                            <t t-esc="env.pos.format_currency(props.line.get_unit_display_price(),'Product Price')" />
+                        </t>
+                        <t t-else="">
+                            <t t-esc="env.pos.format_currency(props.line.get_unit_display_price(),'Product Price')" />
+                        </t>
+                        /
+                        <t t-esc="props.line.get_unit().name" />
+                    </li>
+                </t>
+                <t t-if="props.line.get_discount_str() !== '0'">
+                    <li class="info oe_hidden">
+                        With a
+                        <em>
+                            <t t-esc="props.line.get_discount_str()" />%
+                        </em>
+                        discount
+                    </li>
+                </t>
+            </ul>
+			</t>
+		</xpath> -->
+		
+ 		<xpath expr="//ul[hasclass('info-list')]" position="after">
+ 			<!-- <t t-esc="props.line.ms_info"/> -->
+ 			<!-- <t t-esc="props.line.ms_info.created"/> -->
+ 			<div t-if="props.line.ms_info" class="ms_info">
+ 			<!-- <h1>h</h1> -->
+                added by <t t-esc="props.line.ms_info.created.user.name"/> (<t t-esc="props.line.ms_info.created.pos.name"/>)
+                <t t-if="props.line.ms_info.changed and props.line.ms_info.changed.pos.id != props.line.ms_info.created.pos.id">
+                    , edited by <t t-esc="props.line.ms_info.changed.user.name"/>  (<t t-esc="props.line.ms_info.changed.pos.name"/>)
+                </t>
+            </div>
+ 		</xpath>
+ 		<xpath expr="//span[hasclass('product-name')]" position="replace">
+			<t t-if='env.pos.config.is_kitchen'>
+			    	<span t-attf-class="product-name pos-prod-name olid#{line.id}" >
+		                <t t-esc="props.line.get_full_product_name()"/>
+	                <span> </span>
+	                <t t-if="props.line.get_product().tracking!=='none'">
+	                    <t t-if="props.line.has_valid_product_lot()">
+	                        <i  t-on-click.stop="lotIconClicked"
+	                            class="oe_link_icon fa fa-list oe_icon line-lot-icon oe_green"
+	                            aria-label="Valid product lot"
+	                            role="img"
+	                            title="Valid product lot"
+	                        />
+	                    </t>
+	                    <t t-else="">
+	                        <i  t-on-click.stop="lotIconClicked"
+	                            class="oe_link_icon fa fa-list oe_icon line-lot-icon oe_red"
+	                            aria-label="Invalid product lot"
+	                            role="img"
+	                            title="Invalid product lot"
+	                        />
+	                    </t>
+	                </t>
+		            </span>
+	            </t>
+	            <t t-else="">
+	            	<span class="product-name pos-prod-name65" >
+		                <t t-esc="props.line.get_full_product_name()"/>
+	                <span> </span>
+	                <t t-if="props.line.get_product().tracking!=='none'">
+	                    <t t-if="props.line.has_valid_product_lot()">
+	                        <i  t-on-click.stop="lotIconClicked"
+	                            class="oe_link_icon fa fa-list oe_icon line-lot-icon oe_green"
+	                            aria-label="Valid product lot"
+	                            role="img"
+	                            title="Valid product lot"
+	                        />
+	                    </t>
+	                    <t t-else="">
+	                        <i  t-on-click.stop="lotIconClicked"
+	                            class="oe_link_icon fa fa-list oe_icon line-lot-icon oe_red"
+	                            aria-label="Invalid product lot"
+	                            role="img"
+	                            title="Invalid product lot"
+	                        />
+	                    </t>
+	                </t>
+		            </span>
+	            </t>
+		</xpath>
+	
+	
+    	<xpath expr="//span[hasclass('price')]" position="replace">
+    		 <t t-if='env.pos.config.is_kitchen'>
+	        	<div class="pos-kit-status-div">
+	        		<div class="pos-kit-status100">
+	        			<t t-if="props.line.get_Kitchen_State() === 'cancel'">
+				        	<span class="order-button square forward_view_btn round-btn pos-kit-forward red-bgcolor">
+				                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+				            </span>
+				            
+				            <span class="kitchen_status pos-kit-status-name red-color" >
+				                <t t-esc="'Cancelled'"/>
+				            </span>
+				            
+			            	<span class="order-button square reverse_view_btn round-btn pos-kit-reverse red-bgcolor">
+				                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+				            </span>
+			            </t>
+	        			<t t-elif="line.get_Kitchen_State() == 'preparing'">
+<!-- 				        	<span class="order-button square forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+				                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+				            </span>
+				            
+				            <span class="kitchen_status pos-kit-status-name blue-color" >
+				                <t t-esc="'Preparing'"/>
+				            </span> -->
+				            <!-- Change the left and right symbol for the status -->
+			            	<span class="order-button square reverse_view_btn round-btn pos-kit-reverse blue-bgcolor">
+				                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+				            </span>
+				            <span class="kitchen_status pos-kit-status-name blue-color" >
+				                <t t-esc="'Preparing'"/>
+				            </span>
+				        	<span class="order-button square forward_view_btn round-btn pos-kit-forward blue-bgcolor">
+				                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+				            </span>
+			            </t>
+			            
+			            <t t-elif="line.get_Kitchen_State() == 'ready'">
+				        	<span class="order-button square forward_view_btn round-btn pos-kit-forward yellow-bgcolor">
+				                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+				            </span>
+				            
+				            <span class="kitchen_status pos-kit-status-name yellow-color" >
+				                <t t-esc="'Ready'"/>
+				            </span>
+				            
+			            	<span class="order-button square reverse_view_btn round-btn pos-kit-reverse yellow-bgcolor">
+				                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+				            </span>
+			            </t>
+			            
+			            <t t-else="">
+				        	<span class="order-button square forward_view_btn round-btn pos-kit-forward green-bgcolor">
+				                <i class='fa fa-angle-right' role="img" aria-label="Delete order" title="Delete order"/>
+				            </span>
+				            
+				            <span class="kitchen_status pos-kit-status-name green-color" >
+				                <t t-esc="'Delivered'"/>
+				            </span>
+				            
+			            	<span class="order-button square reverse_view_btn round-btn pos-kit-reverse green-bgcolor">
+				                <i class='fa fa-angle-left' role="img" aria-label="New order" title="New order"/>
+				            </span>
+			            </t>
+			            
+		            </div>
+	            </div>
+	            <span class="price pos-kit-price" >
+	            	<t t-esc="line.get_quantity_str()" />
+
+	            </span>
+            </t>
+            <t t-else="">
+            	<span class="price" >
+	                 <t t-esc="env.pos.format_currency(props.line.get_display_price())"/>
+	            </span>
+            	<t t-if='env.pos.config.self_served_view'>
+	            	<t t-if="props.line.get_Kitchen_State() == 'cancel'">
+	            		<span class="kitchen_status pos-status-name red-color">
+	            			<div style="display: inline-flex;">
+		            			<span class="reverse_view_btn waiter-round-btn pos-kit-reverse red-bgcolor">
+									<i class='fa fa-angle-left waiter-fa-icon' role="img" aria-label="New order" title="New order"/>
+								</span>
+						    	<t t-esc="'Cancelled'"/>
+						    	<span class="forward_view_btn waiter-round-btn pos-kit-forward red-bgcolor" t-on-click="trigger('forward_btn')">
+									<i class='fa fa-angle-right waiter-fa-icon' role="img" aria-label="Delete order" title="Delete order"/>
+								</span>
+							</div>
+					    </span>
+	            	</t>
+	            	<t t-elif="props.line.get_Kitchen_State() == 'preparing'">
+	            		<span class="kitchen_status pos-status-name blue-color">
+		            		<div style="display: inline-flex;">
+			            		<span class="reverse_view_btn waiter-round-btn pos-kit-reverse blue-bgcolor" t-on-click="trigger('reverse_btn')">
+									<i class='fa fa-angle-left waiter-fa-icon' role="img" aria-label="New order" title="New order" />
+								</span>
+						    	<t t-esc="'Preparing'" />
+							    <span class="forward_view_btn waiter-round-btn pos-kit-forward blue-bgcolor" t-on-click="trigger('forward_btn')">
+									<i class='fa fa-angle-right waiter-fa-icon' role="img" aria-label="Delete order" title="Delete order" />
+								</span>
+							</div>
+					    </span>
+	            	</t>
+	            	<t t-elif="props.line.get_Kitchen_State() == 'ready'">
+	            		<span class="kitchen_status pos-status-name yellow-color">
+	            			<div style="display: inline-flex;">
+		            			<span class="reverse_view_btn waiter-round-btn pos-kit-reverse yellow-bgcolor" t-on-click="trigger('reverse_btn')">
+									<i class='fa fa-angle-left waiter-fa-icon' role="img" aria-label="New order" title="New order"/>
+								</span>
+						    	<t t-esc="'Ready'"/>
+						    	<span class="forward_view_btn waiter-round-btn pos-kit-forward yellow-bgcolor" t-on-click="trigger('forward_btn')">
+									<i class='fa fa-angle-right waiter-fa-icon' role="img" aria-label="Delete order" title="Delete order"/>
+								</span>
+							</div>
+					    </span>
+	            	</t>
+	            	<t t-elif="props.line.get_Kitchen_State() == 'delivered'">
+	            		<span class="kitchen_status pos-status-name green-color">
+	            			<div style="display: inline-flex;">
+		            			<span class="reverse_view_btn waiter-round-btn pos-kit-reverse green-bgcolor" t-on-click="trigger('reverse_btn')">
+									<i class='fa fa-angle-left waiter-fa-icon' role="img" aria-label="New order" title="New order"/>
+								</span>
+						    	<t t-esc="'Delivered'" t-if="(props.line.get_quantity_str()) > 0"/>
+						    	<span class="forward_view_btn waiter-round-btn pos-kit-forward green-bgcolor">
+									<i class='fa fa-angle-right waiter-fa-icon' role="img" aria-label="Delete order" title="Delete order"/>
+								</span>
+							</div>
+					    </span>
+	            	</t>
+	            	<t t-else="">
+	            		<span class="kitchen_status pos-status-name green-color">
+					    	<t t-esc="''" t-if="(props.line.get_quantity_str()) > 0"/>
+					    </span>
+	            	</t>
+            	</t>
+            	<t t-else="">
+            		<t t-if="props.line.get_Kitchen_State() == 'cancel'">
+	            		<span class="kitchen_status pos-status-name red-color">
+						    <t t-esc="'Cancelled'"/>
+					    </span>
+	            	</t>
+	            	<t t-elif="props.line.get_Kitchen_State() == 'preparing'">
+	            		<span class="kitchen_status pos-status-name blue-color">
+						    <t t-esc="'Preparing'" />
+					    </span>
+	            	</t>
+	            	<t t-elif="props.line.get_Kitchen_State() == 'ready'">
+	            		<span class="kitchen_status pos-status-name yellow-color">
+						    <t t-esc="'Ready'"/>
+					    </span>
+	            	</t>
+	            	<t t-elif="props.line.get_Kitchen_State() == 'delivered'">
+	            		<span class="kitchen_status pos-status-name green-color">
+						    <t t-esc="'Delivered'" t-if="(props.line.get_quantity_str()) > 0"/>
+					    </span>
+	            	</t>
+	            	<t t-else="">
+	            		<span class="kitchen_status pos-status-name green-color">
+					    	<t t-esc="''" t-if="(props.line.get_quantity_str()) > 0"/>
+					    </span>
+	            	</t>
+            	</t>
+            </t>
+    	</xpath>
+    </t>
+       
+     <!-- Extend the OrderWidget for hide some widget in Kitchen View -->
+     <t t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
+    	<xpath expr="//div[hasclass('order')]" position="replace">
+    		<t t-if='env.pos.config.is_kitchen'>
+    			<div class="order pos-kit-order" >
+                    <t t-if="orderlinesArray.length === 0" >
+                        <div class='order-empty'>
+                            <i class='fa fa-shopping-cart' role="img" aria-label="Shopping cart" title="Shopping cart"/>
+                            <h1>Your shopping cart is empty</h1>
+                        </div>
+                    </t>
+                    <t t-if="orderlinesArray.length > 0">
+                    	<t t-foreach="widget.pos.get_order_list()" t-as="order">
+                    		<t t-if="(order.table.is_take_away)">
+                    			<ul t-attf-class="pos-lines orderlines#{order.uid} #{order.view_order}" t-att-data-uid="order.uid">
+		                        	<li class="pos-lines-header-li">
+		                    			<span class="pos_cus_name">Customer Name : <t t-esc="order.get_client_name()"/></span>
+		                    			<span class="pos-table-time kitchen_float">Timer : <span t-attf-id="output#{order.uid}" class ="text-center"></span> </span>
+		                    		</li>
+		                        	<li class="pos-lines-header-li">
+		                    			<span class="pos-table-no">Table No : <t t-esc="order.floor.name"/> ( <t t-esc="order.table.name"/> )</span>
+		                    			<span class="pos-table-time">Time : <t t-esc="moment(order.creation_date).format('hh:mm')"/> </span>
+		                    			<span class="pos-table-time">Timer : <span t-attf-id="output#{order.uid}" class ="text-center"></span> </span>
+		                    			<span class="pos-order-name">Order No :<t t-esc="order.sequence_number" /></span>
+		                    		</li>
+		                        </ul>	
+                        	</t>
+                        	<t t-else="">
+                        		<ul t-attf-class="pos-lines  orderlines#{order.uid}" t-att-data-uid="order.uid">
+	                        		<li class="pos-lines-header-li">
+	                    				<span class="pos_cus_name">Customer Name : <t t-esc="order.get_client_name()"/></span>
+	                    				<span class="pos-table-time kitchen_float">Timer : <span t-attf-id="output#{order.uid}" class ="text-center"></span> </span>
+	                    			</li>
+	                        		<li class="pos-lines-header-li">
+	                    				<span class="pos-table-no">Table No : <t t-esc="order.floor.name"/> ( <t t-esc="order.table.name"/> )</span>
+	                    				<span class="pos-table-time">Time : <t t-esc="moment(order.creation_date).format('hh:mm')"/> </span>
+	                    				<span class="pos-table-time">Timer : <span t-attf-id="output#{order.uid}" class ="text-center"></span> </span>
+	                    				<span class="pos-order-name">Order No :<t t-esc="order.sequence_number" /></span>
+	                    			</li>
+	                        	</ul>		
+                        	</t>
+                        	
+                        </t>
+                        <div class="summary clearfix oe_hidden">
+                            <div class="line">
+                                <div class='entry total'>
+                                    <span class="badge">Total: </span> <span class="value">0.00 €</span>
+                                    <div class='subentry'>Taxes: <span class="value">0.00€</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+    		</t>
+    		<t t-else="">
+    			<div class="order">
+                    <t t-if="orderlinesArray.length === 0" >
+                        <div class='order-empty'>
+                            <i class='fa fa-shopping-cart' role="img" aria-label="Shopping cart" title="Shopping cart"/>
+                            <h1>Your shopping cart is empty</h1>
+                        </div>
+                    </t>
+                    <t t-if="orderlinesArray.length > 0">
+                        <ul class="orderlines">
+                        	<t t-foreach="orderlinesArray" t-as="orderline" t-key="orderline.id">
+                            <Orderline line="orderline" />
+                        </t>
+                        </ul>
+                        <OrderSummary total="state.total" tax="state.tax" />
+                        <!-- <div class="summary clearfix">
+                            <div class="line">
+                                <div class='entry total'>
+                                    <span class="badge">Total: </span> <span class="value">0.00 €</span>
+                                    <div class='subentry'>Taxes: <span class="value">0.00€</span></div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </t>
+                </div>
+    		</t>
+    	<!-- </t>
+    	</t> -->
+    	</xpath>
+    </t>
+<!--     <t t-inherit="point_of_sale.NumpadWidget" t-inherit-mode="extension">
+    	<xpath expr="//div[hasclass('numpad')]" position="replace">
+    		<div class="numpad">
+            <button class="input-button number-char" t-on-click="sendInput('1')">1</button>
+            <button class="input-button number-char" t-on-click="sendInput('2')">2</button>
+            <button class="input-button number-char" t-on-click="sendInput('3')">3</button>
+            <button class="mode-button" t-att-class="{'selected-mode': props.activeMode === 'quantity'}"
+                    t-on-click="changeMode('quantity')">Qty</button>
+            <br />
+            <button class="input-button number-char" t-on-click="sendInput('4')">4</button>
+            <button class="input-button number-char" t-on-click="sendInput('5')">5</button>
+            <button class="input-button number-char" t-on-click="sendInput('6')">6</button>
+            <button class="mode-button" t-att-class="{
+                        'selected-mode': props.activeMode === 'discount',
+                        'disabled-mode': !hasManualDiscount
+                    }"
+                    t-att-disabled="!hasManualDiscount"
+                    t-on-click="changeMode('discount')">Disc</button>
+            <br />
+            <button class="input-button number-char" t-on-click="sendInput('7')">7</button>
+            <button class="input-button number-char" t-on-click="sendInput('8')">8</button>
+            <button class="input-button number-char" t-on-click="sendInput('9')">9</button>
+            <button class="mode-button" t-att-class="{
+                    'selected-mode': props.activeMode === 'price',
+                    'disabled-mode': !hasPriceControlRights
+                }" t-att-disabled="!hasPriceControlRights"
+                    t-on-click="changeMode('price')">Price</button>
+            <br />
+            <button class="input-button numpad-minus" t-on-click="sendInput('-')">+/-</button>
+            <button class="input-button number-char" t-on-click="sendInput('0')">0</button>
+            <button class="input-button number-char" t-on-click="sendInput(decimalSeparator)">
+                <t t-esc="decimalSeparator" />
+            </button>
+            <button class="input-button numpad-backspace" t-on-click="sendInput('Backspace')">
+                <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png"
+                     width="24" height="21" alt="Backspace" />
+            </button>
+        </div>
+    	</xpath>
+    </t> -->
+    
+    <!-- Extend the ActionpadWidget for change the payment button class
+	name for disable the pay button while paid orders. -->
+   <!-- <t t-inherit="point_of_sale.ActionpadWidget" t-inherit-mode="extension">
+    	<xpath expr="//button[hasclass('pay')]" position="replace">
+                <button class="button orderpay" t-on-click="trigger('click-pay')">
+                <div class="pay-circle">
+                    <i class="fa fa-chevron-right" role="img" aria-label="Pay" title="Pay" />
+                </div>
+                Payment
+            </button>
+            </xpath>
+    </t> -->
+    <!-- POSLinePrintPopupWidget template to print the Pos orders -->
+    <t t-name="POSLinePrintPopupWidget" owl="1" >
+		<div >
+		<div class="modal-dialog">
+			 <div class="popup popup-alert">
+				<p class="title pos_o_title"><t t-esc=" props.title" /></p>
+				<div>
+                    <div class="pos-receipt-container"/>
+				</div>
+				<div class="footer pos_o_footer">
+			    	<div class="button cancel" t-on-click="trigger('button_close')">
+			             Cancel
+			        </div>
+			        <div t-att-id="props.line_id" class="button  print_pos_line_receipt" t-on-click="trigger('button_print')">
+                        Print
+                    </div>
+		        </div>
+			</div>
+		</div>
+		</div>
+	</t>
+	<!-- PosOrderLineTicket show the product details inside the popup -->
+    <t t-name="PosOrderLineTicket" >
+        <div class="pos-sale-ticket" id="output" t-attf-id="printThis#{widget.props.line_id}">
+            <t t-if='order.table'>
+				<div style="width:100%;text-align: center;font-size: 20px;">
+            		Table No: <t t-esc="order.table.name" />
+            	</div>
+            </t>
+            <br />
+            <div style="width:100%;text-align: center;">
+            	Order No: <t t-esc="order.sequence_number" />
+            </div>
+            <br /><br />
+            <table class='receipt-orderlines'>
+                <colgroup>
+                    <col width='75%' />
+                    <col width='25%' />
+                </colgroup>
+                <tr>
+                    <td>
+                        <t t-esc="orderline.get_product().display_name"/>
+                         <t t-if="orderline.get_discount() > 0">
+                            <div class="pos-disc-font">
+                                With a <t t-esc="orderline.get_discount()"/>% discount
+                            </div>
+                        </t><br/>
+			            <i t-if="orderline.get_note()" aria-label="Note" class="fa fa-tag" role="img" title="Note"></i><b><t t-esc="orderline.get_note()" /></b>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="orderline.get_quantity_str_with_unit()"/>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+    </t>
+</templates>

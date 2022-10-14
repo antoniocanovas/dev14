@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<templates id="template" xml:space="preserve">
+	 <!--  extension for showing expiry date warning count -->
+	   <t t-name="Chrome" t-inherit="point_of_sale.Chrome" t-inherit-mode="extension" owl="1">
+	        <xpath expr="//CashierName" position="before">
+	            <div class="expiry_days">This database will Expiry in <span class="count">text</span> days.
+	            <i class="fa fa-warning" style="color:red"></i></div>
+	            <div class="pos-expiry-date"><span>This database Expiry On Today.</span>
+	            <i class="fa fa-warning" style="color:red"></i>
+	            </div>
+	        </xpath>
+	    </t>
+	   
+	</templates>

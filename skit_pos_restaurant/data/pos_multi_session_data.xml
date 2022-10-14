@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo noupdate="1">
+    <!-- Set default multi session as false -->
+    <record id="default_multi_session" model="pos.multi_session">
+        <field name="name">Default Multi Session</field>
+        <field name="multi_session_active">False</field>
+    </record>
+   <!-- Set the multi session id based on the default multi session in pos configuration setting -->
+    <record id="point_of_sale.pos_config_main" model="pos.config">
+        <field name="multi_session_id" ref="default_multi_session"/>
+    </record>
+
+   <!--  Default multi session for exist POSes -->
+    <function model="pos.multi_session" name="action_set_default_multi_session" eval="[[ref('default_multi_session')]]"/>
+	<!-- <record model="pos.config" id="pos_config_restaurant">
+            <field name="name">Bar1</field>
+            <field name="barcode_nomenclature_id" ref="barcodes.default_barcode_nomenclature"/>
+            <field name="module_pos_restaurant">True</field>
+            <field name="is_table_management">True</field>
+            <field name="iface_splitbill">True</field>
+            <field name="iface_printbill">True</field>
+            <field name="iface_orderline_notes">True</field>
+            <field name="printer_ids" eval="[(6, 0, [ref('pos_restaurant.kitchen_printer')])]" />
+            <field name="iface_start_categ_id" ref="drinks"/>
+            <field name="start_category">True</field>
+        </record> -->
+    <!-- Create multiple pos session -->
+	<!-- <record id="demo_multi_session" model="pos.multi_session">
+            <field name="name">multi session demo</field>
+             <field name="floor_ids" eval="[(5,0,[ref('pos_restaurant.floor_main')])]"/>
+        </record>
+        <record id="demo_multi_pos_config_one" model="pos.config">
+            <field name="name">POS1</field>
+            <field name="multi_session_id" ref="demo_multi_session"/>
+            <field name="floor_ids" eval="[(5,0,[ref('pos_restaurant.floor_patio')])]"/>
+        </record>
+        <record id="demo_multi_pos_config_two" model="pos.config">
+            <field name="name">POS2</field>
+            <field name="multi_session_id" ref="demo_multi_session"/>
+            <field name="floor_ids" eval="[(5,0,[ref('pos_restaurant.floor_patio')])]"/>
+        </record>
+        <record id="demo_multi_pos_config_three" model="pos.config">
+            <field name="name">POS3</field>
+            <field name="floor_ids" eval="[(5,0,[ref('pos_restaurant.floor_patio')])]"/>
+        </record>
+        <record id="point_of_sale.pos_config_main" model="pos.config">
+            <field name="multi_session_id" ref="demo_multi_session"/>
+            <field name="floor_ids" eval="[(5,0,[ref('pos_restaurant.floor_patio')])]"/>
+        </record> -->
+
+        <!-- <record model="pos.config" id="pos_config_restaurant1">
+            <field name="name">multi session demo</field>
+            <field name="barcode_nomenclature_id" ref="barcodes.default_barcode_nomenclature"/>
+            <field name="module_pos_restaurant">True</field>
+            <field name="is_table_management">True</field>
+            <field name="iface_splitbill">True</field>
+            <field name="iface_printbill">True</field>
+            <field name="iface_orderline_notes">True</field>
+             <field name="waiter_view">True</field>
+            <field name="floor_ids" eval="[(4,0,[ref('pos_restaurant.floor_main')])]"/>
+            <field name="printer_ids" eval="[(6, 0, [ref('pos_restaurant.kitchen_printer')])]" />
+            <field name="iface_start_categ_id" ref="drinks"/>
+            <field name="start_category">True</field>
+        </record>
+	<record model="pos.config" id="pos_config_restaurant11">
+            <field name="name">Cashier</field>
+            <field name="barcode_nomenclature_id" ref="barcodes.default_barcode_nomenclature"/>
+            <field name="module_pos_restaurant">True</field>
+            <field name="is_table_management">True</field>
+            <field name="iface_splitbill">True</field>
+            <field name="iface_printbill">True</field>
+            <field name="iface_orderline_notes">True</field>
+            <field name="cashier_view">True</field>
+            <field name="floor_ids" eval="[(6,0,[ref('pos_restaurant.floor_patio')])]"/>
+            <field name="floor_ids" eval="[(5,0,[ref('pos_restaurant.floor_patio')])]" />
+            <field name="iface_start_categ_id" ref="drinks"/>
+            <field name="start_category">True</field>
+        </record> -->
+</odoo>

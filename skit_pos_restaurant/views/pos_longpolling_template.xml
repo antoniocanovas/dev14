@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="skit_pos_restaurant pos_longpolling backend_assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/skit_pos_restaurant/static/src/js/test_longpoll_pos.js"></script>
+     		<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/test_pos_multi_session.js"></script>
+          	<script type="text/javascript" src="/skit_pos_restaurant/static/src/js/test_pos_ms_r.js"></script>
+        </xpath>
+    </template>
+</odoo>
