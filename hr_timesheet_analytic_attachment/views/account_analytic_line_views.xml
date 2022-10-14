@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="worksheet_attachment_in_analytic_line_inh_view" model="ir.ui.view">
+        <field name="name">Worksheet attachment in AAL</field>
+        <field name="model">account.analytic.line</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet" position="inside">
+                <group name="worksheet_attachments" string="Anexos de partes" attrs="{'invisible':[('is_timesheet','=',False)]}">
+                    <field name="worksheet_attachment_ids" widget="many2many_binary"/>
+                </group>
+            </xpath>
+        </field>
+        <field name="priority">99</field>
+    </record>
+
+</odoo>

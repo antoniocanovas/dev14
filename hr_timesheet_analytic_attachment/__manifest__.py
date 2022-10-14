@@ -6,7 +6,7 @@
 ##############################################################################
 
 {
-    "name": "Sale attachment in Invoice",
+    "name": "Hr timesheet attachment in Analytic line",
     "version": "14.0.1.0.0",
     "category": "Account",
     "author": "www.serincloud.com",
@@ -14,11 +14,10 @@
     "website": "www.serincloud.com",
     "license": "AGPL-3",
     "depends": [
-        'account',
-        'sale_management',
+        'hr_timesheet_work',
     ],
     "data": [
-        'views/stock_move_line_views.xml'
+        'views/account_analytic_line_views.xml'
     ],
     "installable": True,
 }
