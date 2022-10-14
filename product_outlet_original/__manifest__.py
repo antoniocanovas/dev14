@@ -21,7 +21,7 @@ Sell refubished products in Spain (special taxes)
         'security/ir.model.access.csv',
         'data/action_server.xml',
         'data/sequence.xml',
-        'views/model_views.xml',
+        'views/timesheet_work_views.xml',
         'views/menu_views.xml',
     ],
     'installable': False,

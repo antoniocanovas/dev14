@@ -14,7 +14,7 @@ Sell refubished products in Spain (special taxes)
     ],
     'data': [
         'data/action_server.xml',
-        'views/model_views.xml',
+        'views/timesheet_work_views.xml',
     ],
     'installable': True,
 }
