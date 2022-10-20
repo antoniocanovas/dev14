@@ -14,7 +14,7 @@ if record.wup_line_ids.ids:
     # Create a line note from wup template description:
     if not (record.order_id.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
         new_note = env['sale.order.line'].create({'sequence':record.sequence, 'name':record.wup_template_id.description, 'display_type':'line_note', 'order_id':record.order_id.id})
-        record.order_id.write({'wup_line_note_id':new_note.id})
+        record.write({'wup_line_note_id':new_note.id})
 
             </field>
             <field name="trigger">on_write</field>
