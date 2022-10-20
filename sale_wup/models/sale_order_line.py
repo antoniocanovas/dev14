@@ -6,9 +6,9 @@ _logger = logging.getLogger(__name__)
 class WupSaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    #name = fields.Text(string='Name')
     wup_template_id = fields.Many2one('wup.template', string='wup Template', copy=True)
     wup_line_ids = fields.One2many('wup.line', 'sale_line_id', string='wup Line', copy=True)
+    wup_line_note_id = fields.Many2one('sale.order.line')
 
     @api.depends('wup_line_ids','wup_line_ids.price_unit_cost')
     def get_wup_cost_amount(self):
