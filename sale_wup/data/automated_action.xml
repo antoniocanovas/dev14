@@ -12,7 +12,7 @@ if record.wup_line_ids.ids:
     record.write({'price_unit':wup_price_unit, 'purchase_price':record.wup_cost_amount})
 
     if not (record.wup_line_note.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
-        new_note = env['sale.order.line'].create({'sequence':li.sequence, 'name':li.wup_template_id.description, 'display_type':'line_note', 'order_id':record.id})
+        new_note = env['sale.order.line'].create({'sequence':record.sequence, 'name':record.wup_template_id.description, 'display_type':'line_note', 'order_id':record.id})
         record['wup_line_note'] = new_note.id
 
             </field>
