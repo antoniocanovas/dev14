@@ -98,13 +98,14 @@ class WupSaleOrderLine(models.Model):
                          'price_unit_cost': li.product_id.standard_price, 'lst_price': li.product_id.lst_price,
                          'price_unit': (1 - record.discount / 100) * li.product_id.list_price
                          })
+                view_id = self.env.ref('sale_wup.sale_order_line_wup_form').read()[0]
                 return {
                     'context': self.env.context,
                     'view_type': 'form',
                     'view_mode': 'form',
                     'res_model': 'sale.order.line',
                     'res_id': self.id,
-                    'view_id': 'sale_order_line_wup_form',
+                    'view_id':  view_id,
                     'type': 'ir.actions.act_window',
                     'target': 'new',
                 }
