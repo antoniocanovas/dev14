@@ -98,5 +98,8 @@ class WupSaleOrderLine(models.Model):
                          'price_unit_cost': li.product_id.standard_price, 'lst_price': li.product_id.lst_price,
                          'price_unit': (1 - record.discount / 100) * li.product_id.list_price
                          })
+                return{
+                    "type":"ir.actions.do_nothing",
+                }
 #            else:
 #                raise Warning('Remove wups not allowed, you can do it manually.')
