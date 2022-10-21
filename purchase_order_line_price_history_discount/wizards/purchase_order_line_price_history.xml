@@ -14,7 +14,7 @@
             </xpath>
             <xpath expr="//form/group/field/tree/field[@name='price_unit']" position="after">
                 <field name="discount"/>
-                <field name="price_net" widget="monetary"/>
+                <field name="price_net"/>
             </xpath>
         </field>
     </record>
