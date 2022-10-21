@@ -86,3 +86,17 @@ class WupSaleOrderLine(models.Model):
             'target': 'new',
             'res_id': self.id,
         }
+
+    def wup_lines_from_wup_template(self):
+        for record in self:
+            price_unit = 0
+            if record.wup_qty > 0:
+                for li in record.wup_template_id.line_ids:
+                    newline = self.env['wup.line'].create(
+                        {'sale_line_id': record.id, 'product_id': li.product_id.id, 'name': li.name,
+                         'product_uom_qty': li.product_uom_qty * record.wup_qty, 'product_uom': li.product_uom,
+                         'price_unit_cost': li.product_id.standard_price, 'lst_price': li.product_id.lst_price,
+                         'price_unit': (1 - record.discount / 100) * li.product_id.list_price
+                         })
+#            else:
+#                raise Warning('Remove wups not allowed, you can do it manually.')
