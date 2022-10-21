@@ -104,7 +104,7 @@ class WupSaleOrderLine(models.Model):
                     'view_mode': 'form',
                     'res_model': 'sale.order.line',
                     'res_id': self.id,
-                    'view_id': False,
+                    'view_id': 'sale_order_line_wup_form',
                     'type': 'ir.actions.act_window',
                     'target': 'new',
                 }
