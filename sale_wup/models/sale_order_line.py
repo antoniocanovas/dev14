@@ -98,16 +98,17 @@ class WupSaleOrderLine(models.Model):
                          'price_unit_cost': li.product_id.standard_price, 'lst_price': li.product_id.lst_price,
                          'price_unit': (1 - record.discount / 100) * li.product_id.list_price
                          })
-                view_id = self.env['ir.model.data'].search([('complete_name','=','sale_wup.sale_order_line_wup_form')])[0].res_id
                 return {
-                    'context': self.env.context,
-                    'view_type': 'form',
+                    'name': _('SOL'),
+                    'view_type': 'tree',
                     'view_mode': 'form',
                     'res_model': 'sale.order.line',
-                    'res_id': self.id,
-                    'view_id':  view_id,
                     'type': 'ir.actions.act_window',
+                    'view_id':
+                        self.env.ref('sale_wup.sale_order_line_wup_form').id,
+                    'context': dict(self.env.context),
                     'target': 'new',
+                    'res_id': self.id,
                 }
 #            else:
 #                raise Warning('Remove wups not allowed, you can do it manually.')
