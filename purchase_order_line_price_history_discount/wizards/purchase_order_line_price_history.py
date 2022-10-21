@@ -6,7 +6,7 @@ class PurchaseOrderLinePriceHistoryLine(models.TransientModel):
     _inherit = "purchase.order.line.price.history.line"
 
     discount = fields.Float(
-        string='Disc.',
+        string='Discount',
         related='purchase_order_line_id.discount'
     )
 
