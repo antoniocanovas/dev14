@@ -98,6 +98,8 @@ class WupSaleOrderLine(models.Model):
                          'price_unit_cost': li.product_id.standard_price, 'lst_price': li.product_id.lst_price,
                          'price_unit': (1 - record.discount / 100) * li.product_id.list_price
                          })
+                    price_unit += newline.product_uom_qty * newline.price_unit
+                record['price_unit'] = price_unit
                 return {
                     'name': _('SOL'),
                     'view_type': 'tree',

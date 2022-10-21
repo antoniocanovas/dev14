@@ -24,26 +24,6 @@ if record.wup_line_ids.ids:
             <field name="active" eval="True"/>
         </record>
 
-    <!-- Quitado 5/09/22, aparentemente ya no hace falta tras otras automatizaciones y permitir descuentos
-    <record id="update_sol_from_wup" model="base.automation">
-            <field name="name">=> Update SOL from wup_line</field>
-            <field name="model_id" ref="sale_wup.model_wup_line"/>
-            <field name="state">code</field>
-            <field name="code">
-# Compute price unit of sale_order_line from wup_line when updated:
-price_unit, subtotal, discount, cost = 0,0,0,0
-for li in record.sale_line_id.wup_line_ids:
-  subtotal += li.price_unit * li.product_uom_qty
-record.sale_line_id.write({'price_unit': subtotal, 'discount':0})
-
-            </field>
-            <field name="trigger">on_create_or_write</field>
-            <field name="filter_pre_domain"></field>
-            <field name="filter_domain"></field>
-            <field name="active" eval="True"/>
-        </record>
-        -->
-
         <record id="so_wup_tasks" model="base.automation">
             <field name="name">=>SO WUP Tasks</field>
             <field name="model_id" ref="sale.model_sale_order"/>
