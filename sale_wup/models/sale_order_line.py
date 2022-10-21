@@ -110,5 +110,3 @@ class WupSaleOrderLine(models.Model):
                     'target': 'new',
                     'res_id': self.id,
                 }
-#            else:
-#                raise Warning('Remove wups not allowed, you can do it manually.')
