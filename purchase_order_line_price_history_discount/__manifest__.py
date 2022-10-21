@@ -7,7 +7,7 @@
     "author": "Serincloud, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/purchase-workflow",
     "license": "AGPL-3",
-    "depends": ["purchase.order.line.price.history"],
+    "depends": ["purchase_order_line_price_history"],
     "data": [
         "wizards/purchase_order_line_price_history.xml",
     ],
