@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 
-class MailMessage(models.Model):
+class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
     @api.depends('price_unit', 'price_subtotal')
