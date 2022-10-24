@@ -12,7 +12,13 @@ class PurchaseOrderLinePriceHistoryLine(models.TransientModel):
     )
 
     price_net = fields.Float(
-        string='Net price',
-        store=False,
+        string = 'Net price',
+        store = False,
         related = 'purchase_order_line_id.price_net'
+    )
+
+    product_oum = fields.Char(
+        string = 'UOM',
+        store = False,
+        related = 'purchase_order_line.product_uom.name'
     )
