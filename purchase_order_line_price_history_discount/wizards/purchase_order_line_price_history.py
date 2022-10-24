@@ -20,5 +20,5 @@ class PurchaseOrderLinePriceHistoryLine(models.TransientModel):
     product_oum = fields.Char(
         string = 'UOM',
         store = False,
-        related = 'purchase_order_line.product_uom.name'
+        related = 'purchase_order_line_id.product_uom.name'
     )
