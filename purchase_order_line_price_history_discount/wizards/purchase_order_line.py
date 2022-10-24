@@ -12,7 +12,7 @@ class PurchaseOrderLine(models.Model):
             monetary_precision = self.env['decimal.precision'].sudo().search([('id', '=', 1)]).digits
             if record.price_unit != 0:
                 price = round(record.price_subtotal / record.product_qty, monetary_precision)
-        record.write.price_net = price
+            record['price_net'] = price
     price_net = fields.Float(
         string='Net price',
         store=True,
