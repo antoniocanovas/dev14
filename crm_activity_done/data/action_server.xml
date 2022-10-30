@@ -22,8 +22,11 @@ if (record.subtype_id.id == subtype.res_id):
   line = record.body.split("\n")[2]
   line = line.split('&lt;span&gt;')[1]
   line = line.split('&lt;/span&gt;')[0]
+  subject = record.body.split("\n")[4]
+  subject = subject.split('&lt;/span&gt;')[2]
+  subject = subject.split('&lt;/span&gt;')[0]
 
-  record.write({'name':name, 'activity_type':line})
+  record.write({'name':subject, 'activity_type':line})
 
             </field>
             <field name="trigger">on_create</field>
