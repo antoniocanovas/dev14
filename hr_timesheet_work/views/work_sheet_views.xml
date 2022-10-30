@@ -15,7 +15,7 @@
         <field name="search_view_id" eval="False"/>
         <field name="target">current</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <!-- hr_expense window action o2m buttom in Work Sheet FORM:   -->
@@ -32,7 +32,7 @@
         <field name="search_view_id" eval="False"/>
         <field name="target">current</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="work_sheet_form" model="ir.ui.view">
