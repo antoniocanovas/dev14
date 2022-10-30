@@ -71,7 +71,7 @@ class TimeSheetWorkSheet(models.Model):
                                                          ('state', 'not in', ['done', 'cancel']),
                                                          ('work_sheet_id', '=', False)])
             record['order_picking_ids'] = pickings.ids
-    order_picking_ids = fields.Many2many('hr.expense', compute=get_pending_order_pickings, store=False)
+    order_picking_ids = fields.Many2many('stock.picking', compute=get_pending_order_pickings, store=False)
 
     @api.depends('name')
     def get_task_name(self):
