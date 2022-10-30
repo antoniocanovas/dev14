@@ -71,6 +71,11 @@
                         <field name="work_readonly" invisible="1"/>
                     </group></group>
 
+                    <!-- DEV TO MOVE  -->
+                    <field name="order_picking_ids"/>
+                    <field name="reinvoice_expense_ids"/>
+
+
                     <notebook name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <page name="project_services" string="Hours">
                             <group><group>

@@ -29,7 +29,8 @@ class TimeSheetWorkSheet(models.Model):
     task_id = fields.Many2one('project.task')
     time_type_id = fields.Many2one('project.time.type', 'Schedule')
     picking_ids = fields.One2many('stock.picking', 'work_sheet_id', string='Pickings')
-    reinvoice_expense_ids = fields.One2many('hr.expense', 'work_sheet_id', string='Expenses', store=True,
+    reinvoice_expense_ids = fields.One2many('hr.expense', 'work_sheet_id', string='Expenses',
+                                            store=True, readonly=True,
                                             domain=[('sale_order_id','!=',False)]
                                             )
     analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags',
