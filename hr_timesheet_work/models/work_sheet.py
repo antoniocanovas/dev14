@@ -29,6 +29,9 @@ class TimeSheetWorkSheet(models.Model):
     task_id = fields.Many2one('project.task')
     time_type_id = fields.Many2one('project.time.type', 'Schedule')
     picking_ids = fields.One2many('stock.picking', 'work_sheet_id', string='Pickings')
+    reinvoice_expense_ids = fields.One2many('hr.expense', 'work_sheet_id', string='Expenses', store=True,
+                                            domain=[('sale_order_id','!=',False)]
+                                            )
     analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags',
                                         domain=[('timesheet_hidden', '=', False)]
                                         )
@@ -59,6 +62,16 @@ class TimeSheetWorkSheet(models.Model):
         store=True,
         string='Imputaciones'
     )
+
+    # SO pickings not used yet:
+    @api.depends('work_id.sale_order_ids', 'picking_ids')
+    def get_pending_order_pickings(self):
+        for record in self:
+            pickings = self.env['stock.picking'].search([('sale_id', 'in', record.work_id.sale_order_ids.ids),
+                                                         ('state', 'not in', ['done', 'cancel']),
+                                                         ('work_sheet_id', '=', False)])
+            record['order_picking_ids'] = pickings.ids
+    order_picking_ids = fields.Many2many('hr.expense', compute=get_pending_order_pickings, store=False)
 
     @api.depends('name')
     def get_task_name(self):
