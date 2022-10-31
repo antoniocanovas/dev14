@@ -11,3 +11,4 @@ access_todo_manager,timesheet to-do line manager,hr_timesheet_work.model_timeshe
 access_done_user,timesheet done line user,hr_timesheet_work.model_timesheet_line_done,project.group_project_user,1,1,1,1
 
 access_picking_wizard_user,timesheet work picking wizard user,hr_timesheet_work.model_work_picking_wizard,stock.group_stock_user,1,1,1,1
+access_timesheet_wizard_user,timesheet work timesheet wizard user,hr_timesheet_work.model_work_timesheet_wizard,project.group_project_manager,1,1,1,1
