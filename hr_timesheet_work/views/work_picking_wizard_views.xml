@@ -7,10 +7,8 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Work picking wizard">
-                    <group>
-                        <field name="picking_ids"/>
-                        <field name="work_sheet_id" invisible="1"/>
-                    </group>
+                    <field name="picking_ids"/>
+                    <field name="work_sheet_id" invisible="1"/>
                 </sheet>
             </form>
         </field>
