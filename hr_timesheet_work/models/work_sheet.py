@@ -64,7 +64,7 @@ class TimeSheetWorkSheet(models.Model):
         string='Imputaciones'
     )
 
-    # SO pickings not used yet:
+    # SO pickings available to add:
     @api.depends('work_id.sale_order_ids', 'picking_ids')
     def get_pending_order_pickings(self):
         for record in self:

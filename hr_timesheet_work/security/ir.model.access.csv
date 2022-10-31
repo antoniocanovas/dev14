@@ -9,3 +9,5 @@ access_account_analytic_tag_user,Analytic Tag User,hr_timesheet_work.model_accou
 access_todo_employee,timesheet to-do line user,hr_timesheet_work.model_timesheet_line_todo,project.group_project_user,1,0,0,0
 access_todo_manager,timesheet to-do line manager,hr_timesheet_work.model_timesheet_line_todo,project.group_project_manager,1,1,1,1
 access_done_user,timesheet done line user,hr_timesheet_work.model_timesheet_line_done,project.group_project_user,1,1,1,1
+
+access_picking_wizard_user,timesheet work picking wizard user,hr_timesheet_work.model_work_picking_wizard,stock.group_stock_user,1,1,1,1
