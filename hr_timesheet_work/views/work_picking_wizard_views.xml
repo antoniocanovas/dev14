@@ -30,7 +30,7 @@
                         </tree>
                     </field>
                     <group>
-                        <field name="picking_selected" domain="[('id','in',record.picking.ids)]" widget="many2many_tags"/>
+                        <field name="picking_selection_ids" domain="[('id','in',record.picking.ids)]" widget="many2many_tags"/>
                     </group>
                     <field name="work_sheet_id" invisible="1"/>
                 </sheet>
