@@ -17,7 +17,7 @@ class WorkTimesheetWizard(models.TransientModel):
     project_id = fields.Many2one('project.project', string='Project', store=True)
     task_id = fields.Many2one('project.task', string='Task', store=True)
     time_type_id = fields.Many2one('project.time.type', string='Schedule')
-    employee_ids = fields.Many2one('hr.employee', string='Employees')
+    employee_ids = fields.Many2many('hr.employee', string='Employees')
     start = fields.Float('Start')
     stop = fields.Float('Stop')
     duration = fields.Float('Duration', store=True)
