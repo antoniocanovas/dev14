@@ -40,7 +40,7 @@
         <field name="name">Default timesheet line done tree view</field>
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
-            <tree name="lines_done" default_order="date asc" create="0" editable="top">
+            <tree name="lines_done" default_order="date asc" editable="top">
                 <field name="todo_id" optional="show" readonly="1"/>
                 <field name="name" optional="show"/>
                 <field name="product_id" optional="hide"/>
