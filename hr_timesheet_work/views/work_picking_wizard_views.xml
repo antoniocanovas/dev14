@@ -29,6 +29,9 @@
                             <button name="assign_work_sheet" string="" type="object" icon="fa-share-square-o"/>
                         </tree>
                     </field>
+                    <group>
+                        <field name="picking_selected" domain="[('id','in',record.picking.ids)]" widget="many2many_tags"/>
+                    </group>
                     <field name="work_sheet_id" invisible="1"/>
                 </sheet>
             </form>
