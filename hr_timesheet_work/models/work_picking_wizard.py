@@ -16,5 +16,5 @@ class WorkPickingWizard(models.TransientModel):
     picking_selection_ids = fields.Many2many('stock.picking', string="Selecteds")
 
     def assign_work_sheet(self):
-        for sp in record.picking_selection_ids:
-            sp['work_sheet_id'] = record.work_sheet_id.id
+        for sp in self.picking_selection_ids:
+            sp['work_sheet_id'] = self.work_sheet_id.id
