@@ -71,7 +71,7 @@
     </record>
 
     <!-- TIMESHEET WIZARD window action in Work Sheet FORM:   -->
-    <record id="hr_work_sheet_add_timesheet_wizard" model="ir.actions.act_window">
+    <record id="work_sheet_add_timesheet_wizard" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
         <field name="domain" eval="False"/>
@@ -84,7 +84,7 @@
         <field name="search_view_id" eval="False"/>
         <field name="target">new</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_id" ref="hr_timesheet_work.work_timesheet_wizard_default_form" />
+        <field name="view_id" ref="hr_timesheet_work.hr_work_sheet_timesheet_wizard" />
         <field name="view_mode">form</field>
     </record>
 
