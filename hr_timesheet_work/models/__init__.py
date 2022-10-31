@@ -9,5 +9,6 @@ from . import sale_order_line
 from . import sale_order
 from . import hr_expense
 from . import work_picking_wizard
+from . import work_timesheet_wizard
 
 
