@@ -35,6 +35,23 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Outputs window action o2m buttom in Work Sheet FORM:   -->
+    <record id="hr_work_sheet_output_button" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="domain">[('work_sheet_id','=',active_id)]</field>
+        <field name="context">{'default_work_sheet_id':active_id}</field>
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">HR Output Work Sheet button view</field>
+        <field name="res_model">timesheet.line.done</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <record id="work_sheet_form" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
@@ -55,6 +72,11 @@
                         <button name="hr_timesheet_work.hr_work_sheet_expense_button" context="{'default_analytic_account_id':project_id}" class="oe_stat_button" icon="fa-dollar" type="action" help="List expense operations">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Expenses</span>
+                            </div>
+                        </button>
+                        <button name="hr_timesheet_work.hr_work_sheet_output_button" class="oe_stat_button" icon="fa-tasks" type="action" help="List output operations">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Outputs</span>
                             </div>
                         </button>
                     </div>
@@ -132,6 +154,7 @@
                             </field>
                         </page>
 
+                        <!-- PASADO A O2M EL 31/10/22
                         <page name="work_sheet_line_done" string="Output" attrs="{'invisible':[('type','!=','project')]}">
                             <field name="line_done_ids" attrs="{'readonly':[('project_id','=',False)]}">
                                 <tree editable="botton">
@@ -147,6 +170,7 @@
                                 </tree>
                             </field>
                         </page>
+                        -->
                     </notebook>
 
                     <div name="signature">
