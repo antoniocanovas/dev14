@@ -10,6 +10,7 @@
         'base_automation',
         'purchase',
         'stock',
+        'account',
         'hr_expense',
         'sale_timesheet',
         'hr_timesheet_time_type',
