@@ -11,7 +11,7 @@
                         <field name="name"/>
                     </h1>
                     <group>
-                        <field name="todo_id" readonly="1"/>
+                        <field name="todo_id"/>
                         <field name="name" optional="show"/>
                         <field name="qty" readonly="1"/>
                         <field name="uom_id"/>
@@ -20,8 +20,8 @@
                         <field name="employee_ids" widget="many2many_tags" optional="hide"/>
                         <fieldd name="performance"/>
                         <fieldd name="work_id"/>
-                        <field name="sale_line_id" readonly="1"/>
-                        <field name="work_sheet_id" readonly="1"/>
+                        <field name="sale_line_id"/>
+                        <field name="work_sheet_id"/>
                     </group>
                 </sheet>
             </form>
