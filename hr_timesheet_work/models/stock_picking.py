@@ -9,6 +9,6 @@ class StockPicking(models.Model):
 
     work_sheet_id = fields.Many2one('work.sheet', store=True, string='Work Sheet')
 
-    def assign_work_sheet(self, work_sheet):
-
-        self.work_sheet_id = work_sheet.id
+    def assign_work_sheet(self):
+        for sp in record.picking_selection_ids:
+            sp['work_sheet_id'] = record.work_sheet_id.id
