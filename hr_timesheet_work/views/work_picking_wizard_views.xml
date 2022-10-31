@@ -9,14 +9,17 @@
                 <sheet string="Work picking wizard">
                     <field name="picking_ids"/>
                     <group>
-                        <field name="picking_selection_ids" domain="[('id','in',picking_ids)]" widget="many2many_tags"/>
+                        <field name="picking_selection_ids"
+                               domain="[('id','in',picking_ids)]"
+                               options="{'create':False}"
+                               widget="many2many_tags"/>
                     </group>
                     <field name="work_sheet_id" invisible="1"/>
                 </sheet>
                 <footer>
                     <button
                             name="assign_work_sheet"
-                            string="Set this Work Sheet"
+                            string="Set Work Sheet"
                             type="object"
                             class="oe_highlight"
                     />
