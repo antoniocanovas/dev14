@@ -93,10 +93,8 @@
                         <field name="work_readonly" invisible="1"/>
                     </group></group>
 
-                    <!-- DEV TO MOVE  -->
-                    <field name="order_picking_ids"/>
 
-
+                    <!-- WORK AND TASK ESTABLISMNET: -->
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
                             <h2>Timesheets</h2>
@@ -152,6 +150,7 @@
                                     <field name="product_uom_qty"/>
                                     <field name="product_uom"/>
                                     <field name="state"/>
+                                    <field name="order_picking_ids" invisible="1"/>
                                 </tree>
                             </field>
                         </div>
@@ -181,14 +180,14 @@
                             -->
                             <h2>Expenses:</h2>
                             <field name="reinvoice_expense_ids">
-                      <!--
-                                <tree>
-                                    <field name="product_id"/>
-                                    <field name="product_uom_qty"/>
-                                    <field name="product_uom"/>
-                                    <field name="state"/>
-                                </tree>
-                      -->
+                                <!--
+                                          <tree>
+                                              <field name="product_id"/>
+                                              <field name="product_uom_qty"/>
+                                              <field name="product_uom"/>
+                                              <field name="state"/>
+                                          </tree>
+                                -->
                             </field>
                         </div>
 
