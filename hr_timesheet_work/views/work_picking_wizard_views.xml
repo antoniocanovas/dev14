@@ -7,7 +7,28 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Work picking wizard">
-                    <field name="picking_ids"/>
+                    <field name="picking_ids">
+                        <tree string="Picking list" multi_edit="1" sample="1">
+                            <field name="priority" optional="show" widget="priority" nolabel="1"/>
+                            <field name="name" decoration-bf="1"/>
+                            <field name="location_id" options="{'no_create': True}" string="From" groups="stock.group_stock_multi_locations" optional="show"/>
+                            <field name="location_dest_id" options="{'no_create': True}" string="To" groups="stock.group_stock_multi_locations" optional="show"/>
+                            <field name="partner_id" optional="show"/>
+                            <field name="signature" string="Signed" optional="hide" groups="stock.group_stock_sign_delivery"/>
+                            <field name="user_id" optional="hide" widget="many2one_avatar_user"/>
+                            <field name="scheduled_date" optional="show" widget="remaining_days" attrs="{'invisible':[('state', 'in', ('done', 'cancel'))]}"/>
+                            <field name="date_deadline" optional="hide" widget="remaining_days" attrs="{'invisible':[('state', 'in', ('done', 'cancel'))]}"/>
+                            <field name="origin" optional="show"/>
+                            <field name="group_id" invisible="1"/>
+                            <field name="backorder_id" optional="hide"/>
+                            <field name="picking_type_id" optional="hide"/>
+                            <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                            <field name="state" optional="show" widget="badge" decoration-success="state == 'done'" decoration-info="state not in ('done', 'cancel')"/>
+                            <field name="activity_exception_decoration" widget="activity_exception"/>
+                            <field name="json_popover" nolabel="1" widget="stock_rescheduling_popover" attrs="{'invisible': [('json_popover', '=', False)]}"/>
+                            <button name="assign_work_sheet" string="" type="object" icon="fa-share-square-o"/>
+                        </tree>
+                    </field>
                     <field name="work_sheet_id" invisible="1"/>
                 </sheet>
             </form>
