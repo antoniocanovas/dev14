@@ -70,6 +70,24 @@
         <field name="view_mode">form</field>
     </record>
 
+    <!-- TIMESHEET WIZARD window action in Work Sheet FORM:   -->
+    <record id="hr_work_sheet_add_timesheet_wizard" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="domain" eval="False"/>
+        <!--    <field name="context" eval="False"/> -->
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">Work Sheet Add Timesheet wizard view</field>
+        <field name="res_model">work.timesheet.wizard</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">new</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="hr_timesheet_work.work_timesheet_wizard_default_form" />
+        <field name="view_mode">form</field>
+    </record>
+
     <!-- WORK SHEET MAIN FORM:   -->
     <record id="work_sheet_form" model="ir.ui.view">
         <field name="active" eval="True"/>
@@ -80,6 +98,7 @@
                     <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
                     <!--<field name="signature_status" widget="statusbar" />-->
                     <button name="hr_timesheet_work.hr_work_sheet_add_picking_wizard" context="{'default_work_sheet_id':active_id}" string="Add SO Pickings" type="action" class="btn-primary"/>
+                    <button name="hr_timesheet_work.hr_work_sheet_timesheet_wizard" context="{'default_work_sheet_id':active_id}" string="Add Timesheet Lot" type="action" class="btn-primary"/>
                 </header>
                 <sheet>
                     <!-- O2M Buttons:  -->
