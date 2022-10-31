@@ -95,12 +95,11 @@
 
                     <!-- DEV TO MOVE  -->
                     <field name="order_picking_ids"/>
-                    <field name="reinvoice_expense_ids"/>
 
 
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
-                            <h3>Timesheets</h3>
+                            <h2>Timesheets</h2>
                             <group><group>
                                 <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'invisible':[('project_id','=',False)]}"/>
                                 <field name="employee_ids" widget="many2many_tags" groups="hr_timesheet.group_hr_timesheet_approver"/>
@@ -142,11 +141,11 @@
                         </div>
 
                         <div name="work_sheet_project_products" string="Products" attrs="{'invisible':[('type','!=','project')]}">
-                 <!-- 30/10/2022 pasado a botón o2m:
-                            <h3>Pickings:</h3>
-                            <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
-                 -->
-                            <h3>Products:</h3>
+                            <!-- 30/10/2022 pasado a botón o2m:
+                                       <h3>Pickings:</h3>
+                                       <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
+                            -->
+                            <h2>Products:</h2>
                             <field name="project_product_ids">
                                 <tree>
                                     <field name="product_id"/>
@@ -174,6 +173,27 @@
                             </field>
                         </page>
                         -->
+
+                        <div name="work_sheet_expenses" string="Expenses" attrs="{'invisible':[('type','!=','project')]}">
+                            <!-- 30/10/2022 pasado a botón o2m:
+                                       <h3>Pickings:</h3>
+                                       <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
+                            -->
+                            <h2>Expenses:</h2>
+                            <field name="reinvoice_expense_ids">
+                      <!--
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="state"/>
+                                </tree>
+                      -->
+                            </field>
+                        </div>
+
+
+
                     </div>
 
                     <div name="signature">
