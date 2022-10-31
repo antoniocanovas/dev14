@@ -150,9 +150,9 @@
                                     <field name="product_uom_qty"/>
                                     <field name="product_uom"/>
                                     <field name="state"/>
-                                    <field name="order_picking_ids" invisible="1"/>
                                 </tree>
                             </field>
+                            <field name="order_picking_ids" invisible="1"/>
                         </div>
 
                         <!-- PASADO A O2M EL 31/10/22
