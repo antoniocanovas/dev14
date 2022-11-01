@@ -33,10 +33,9 @@
                             <button string="Salir" special="cancel" class="btn btn-secondary" />
                         </div>
                         <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">
-                            <button class="oe_highlight oe_edit_only" type="object"
+                            <button class="oe_highlight" type="object"
                                     name="create_lot_worksheet_services"
-                                    string="Create Timesheets"
-                            />
+                                    string="Create Timesheets"/>
                         </div>
 
                         <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
