@@ -101,7 +101,7 @@
                             string="Add SO Pickings" type="action" class="btn-primary"/>
                     <button name="hr_timesheet_work.hr_work_sheet_timesheet_wizard"
                             context="{'default_work_sheet_id':active_id, 'default_name':name, 'default_project_id':project_id}"
-                            string="Add Timesheet Lot" type="action" class="btn-primary"
+                            string="Timesheet Lots" type="action" class="btn-primary"
                             attrs="{'invisible':[('project_id','=',False)]}"/>
                 </header>
                 <sheet>
