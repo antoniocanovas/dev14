@@ -30,7 +30,8 @@ class WorkTimesheetWizard(models.TransientModel):
     @api.depends('work_sheet_id.project_service_ids')
     def get_work_sheet_timesheets(self):
         self.timesheet_ids = [(6,0,self.work_sheet_id.project_service_ids.ids)]
-    timesheet_ids = fields.Many2many('account.analytic.line', store=True, compute="get_work_sheet_timesheets")
+    timesheet_ids = fields.Many2many('account.analytic.line', store=True, editable=True,
+                                     compute="get_work_sheet_timesheets")
 
     def create_lot_worksheet_services(self):
         # Check required fields:
