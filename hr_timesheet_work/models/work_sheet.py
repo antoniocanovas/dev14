@@ -19,23 +19,20 @@ class TimeSheetWorkSheet(models.Model):
 
     name = fields.Char('Name', required=True)
     date = fields.Date('Date', required=True)
-    start = fields.Float('Start')
-    stop = fields.Float('Stop')
-    duration = fields.Float('Duration', store=True)
     work_id = fields.Many2one('timesheet.work')
     type = fields.Selection(string='Type', related='work_id.type')
-    employee_ids = fields.Many2many('hr.employee', string='Employees')
+#    employee_ids = fields.Many2many('hr.employee', string='Employees')
     project_id = fields.Many2one('project.project')
-    task_id = fields.Many2one('project.task')
-    time_type_id = fields.Many2one('project.time.type', 'Schedule')
+#    task_id = fields.Many2one('project.task')
+#    time_type_id = fields.Many2one('project.time.type', 'Schedule')
     picking_ids = fields.One2many('stock.picking', 'work_sheet_id', string='Pickings')
     reinvoice_expense_ids = fields.One2many('hr.expense', 'work_sheet_id', string='Expenses',
                                             store=True, readonly=True,
                                             domain=[('sale_order_id','!=',False)]
                                             )
-    analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags',
-                                        domain=[('timesheet_hidden', '=', False)]
-                                        )
+ #   analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags',
+ #                                       domain=[('timesheet_hidden', '=', False)]
+ #                                       )
     line_done_ids = fields.One2many('timesheet.line.done', 'work_sheet_id', store=True)
 
     set_start_stop = fields.Boolean(related='work_id.set_start_stop', string='Set start & stop time')

@@ -131,7 +131,9 @@
                         <field name="work_id" force_save="1" widget="selection" attrs="{'readonly':[('work_readonly','=',True)]}"/>
                         <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('work_id','!=',False)]}"/>
                     </group><group>
+              <!--
                         <field name="analytic_tag_ids" widget="many2many_tags"/>
+               -->
                         <field name="partner_id"/>
                         <field name="work_readonly" invisible="1"/>
                     </group></group>
@@ -140,21 +142,21 @@
                     <!-- WORK AND TASK ESTABLISMENT: -->
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
+                                <!--
                             <h2>Timesheets</h2>
                             <group><group>
                                 <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'invisible':[('project_id','=',False)]}"/>
                                 <field name="employee_ids" widget="many2many_tags" groups="hr_timesheet.group_hr_timesheet_approver"/>
                                 <field name="description" attrs="{'required':[('task_id','!=',False)]}"/>
                             </group><group>
-                                <!--
                                 <field name="start" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
                                 <field name="stop" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
-                                -->
                                 <field name="start" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
                                 <field name="stop" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
                                 <field name="duration" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',True)]}"/>
                                 <field name="time_type_id" widget="selection"/>
                             </group></group>
+                                -->
                             <div attrs="{'invisible':[('project_id','!=',False)]}">
                                 <h2>Active projects:</h2>
                                 <field name="project_ids"/>
