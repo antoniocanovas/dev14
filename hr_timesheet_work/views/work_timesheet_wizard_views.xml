@@ -35,8 +35,7 @@
                         <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">
                             <button class="oe_highlight oe_edit_only" type="object"
                                     name="create_lot_worksheet_services"
-                                    string="Add Timesheets"
-                            <!--        attrs="{'invisible':[('timesheet_ids','=',False)]}" -->
+                                    string="Create Timesheets"
                             />
                         </div>
 
