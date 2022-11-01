@@ -68,3 +68,4 @@ class WorkTimesheetWizard(models.TransientModel):
                     if (record.set_start_stop == True):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
+                    record['timesheet_ids'] = [(4,new.id)]
