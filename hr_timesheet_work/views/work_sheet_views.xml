@@ -304,7 +304,6 @@
                 <separator/>
                 <group expand="0" name="group_by" string="Group By">
                     <filter name="schedule" string="Schedule" domain="[]" context="{'group_by' : 'time_type_id'}" />
-                    <filter name="work_type" string="Work" context="{'group_by': 'work_id'}"/>
                     <filter name="date" string="Date" context="{'group_by': 'date'}"/>
                 </group>
             </search>
