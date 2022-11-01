@@ -128,19 +128,17 @@
 
                     <!-- MAIN Form:  -->
                     <h1><field name="name" widget="text"/></h1>
-                    <group name="work_sheet_main">
+                    <group name="work_sheet_main"><group>
                         <field name="date"/>
                         <field name="work_id" force_save="1" widget="selection" attrs="{'readonly':[('work_readonly','=',True)]}"/>
+                    </group><group>
                         <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('work_id','!=',False)]}"/>
-              <!--
-                        <field name="analytic_tag_ids" widget="many2many_tags"/>
-               -->
                         <field name="partner_id"/>
                         <field name="work_readonly" invisible="1"/>
                     </group>
 
 
-                    <!-- WORK AND TASK ESTABLISMENT: -->
+                              <!-- WORK AND TASK ESTABLISMENT: -->
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
                                 <!--
