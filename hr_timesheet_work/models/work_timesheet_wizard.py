@@ -27,7 +27,8 @@ class WorkTimesheetWizard(models.TransientModel):
                                         domain=[('timesheet_hidden', '=', False)]
                                         )
 
-    timesheet_ids = fields.One2many('account.analytic.line', 'timesheet_lot_id')
+    timesheet_ids = fields.Many2many('account.analytic.line', store=False,
+                                     related='work_sheet_id.project_service_ids')
 
     def create_lot_worksheet_services(self):
         # Check required fields:
