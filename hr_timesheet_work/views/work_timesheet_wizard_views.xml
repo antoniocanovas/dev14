@@ -37,7 +37,7 @@
                                     name="wup_lines_from_wup_template"
                                     string="Add Timesheets"
                                     attrs="{'invisible':[('state','!=','draft')]}"/>
-                        </did>
+                        </div>
 
                         <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
                             <button
