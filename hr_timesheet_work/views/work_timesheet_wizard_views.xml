@@ -36,7 +36,7 @@
                             <button class="oe_highlight oe_edit_only" type="object"
                                     name="create_lot_worksheet_services"
                                     string="Add Timesheets"
-                                    attrs="{'invisible':[('state','!=','draft')]}"/>
+                                    attrs="{'invisible':[('timesheet_ids','=',False)]}"/>
                         </div>
 
                         <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
