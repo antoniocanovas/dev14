@@ -165,7 +165,7 @@
 <!--
                                 <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id, 'default_task_id':task_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
 -->
-                                <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
+                                <field name="project_service_ids" context="{'default_project_id':project_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
                                     <tree editable="bottom" string="Timesheet Activities" default_order="date">
                                         <field name="task_id" options="{'no_create': True}"/>
                                         <field name="user_id" invisible="1"/>
