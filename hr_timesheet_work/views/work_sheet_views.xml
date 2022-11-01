@@ -93,7 +93,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+<!--
                     <button name="create_lot_worksheet_services" string="Create lot services" type="object" class="btn-primary"/>
+-->
                     <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
                     <!--<field name="signature_status" widget="statusbar" />-->
                     <button name="hr_timesheet_work.hr_work_sheet_add_picking_wizard"
@@ -101,7 +103,7 @@
                             string="Add SO Pickings" type="action" class="btn-primary"/>
                     <button name="hr_timesheet_work.hr_work_sheet_timesheet_wizard"
                             context="{'default_work_sheet_id':active_id, 'default_name':name, 'default_project_id':project_id}"
-                            string="Timesheet Lots" type="action" class="btn-primary"
+                            string="Create service lots" type="action" class="btn-primary"
                             attrs="{'invisible':[('project_id','=',False)]}"/>
                 </header>
                 <sheet>
