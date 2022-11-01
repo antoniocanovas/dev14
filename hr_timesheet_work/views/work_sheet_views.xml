@@ -135,7 +135,7 @@
                         <field name="project_id" options="{'no_create': True}" domain="[('id','in',project_ids)]" attrs="{'required':[('work_id','!=',False)]}"/>
                         <field name="partner_id"/>
                         <field name="work_readonly" invisible="1"/>
-                    </group>
+                    </group></group>
 
 
                               <!-- WORK AND TASK ESTABLISMENT: -->
