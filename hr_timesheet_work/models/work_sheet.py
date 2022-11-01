@@ -23,7 +23,7 @@ class TimeSheetWorkSheet(models.Model):
     type = fields.Selection(string='Type', related='work_id.type')
 #    employee_ids = fields.Many2many('hr.employee', string='Employees')
     project_id = fields.Many2one('project.project')
-    task_id = fields.Many2one('project.task')
+#    task_id = fields.Many2one('project.task')
 #    time_type_id = fields.Many2one('project.time.type', 'Schedule')
     picking_ids = fields.One2many('stock.picking', 'work_sheet_id', string='Pickings')
     reinvoice_expense_ids = fields.One2many('hr.expense', 'work_sheet_id', string='Expenses',
