@@ -32,6 +32,13 @@
                             </button>
                             <button string="Salir" special="cancel" class="btn btn-secondary" />
                         </div>
+                        <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">
+                            <button class="oe_highlight oe_edit_only" type="object"
+                                    name="wup_lines_from_wup_template"
+                                    string="Add Timesheets"
+                                    attrs="{'invisible':[('state','!=','draft')]}"/>
+                        </did>
+
                         <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
                             <button
                                     class="btn btn-primary o_form_button_save" accesskey="s">
