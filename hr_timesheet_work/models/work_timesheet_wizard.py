@@ -49,7 +49,7 @@ class WorkTimesheetWizard(models.TransientModel):
                 employee_ids = [self.env.user.employee_id]
 
             # CASE PROJECT:
-            if (record.work_id.type == "project") and (record.project_id.id):
+            if (record.work_sheet_id.work_id.type == "project") and (record.project_id.id):
                 for li in employee_ids:
                     if not li.user_id:
                         raise ValidationError('Empleado sin usuario asignado, revisa su ficha de empleado')
