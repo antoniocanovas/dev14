@@ -5,6 +5,7 @@
 #    Serincloud SL
 ##############################################################################
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class WorkTimesheetWizard(models.TransientModel):
