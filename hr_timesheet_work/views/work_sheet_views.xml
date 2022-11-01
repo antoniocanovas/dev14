@@ -303,7 +303,6 @@
                 <filter string="Projects" name="type_project" domain="[('type', '=', 'project')]"/>
                 <separator/>
                 <group expand="0" name="group_by" string="Group By">
-                    <filter name="schedule" string="Schedule" domain="[]" context="{'group_by' : 'time_type_id'}" />
                     <filter name="date" string="Date" context="{'group_by': 'date'}"/>
                 </group>
             </search>
