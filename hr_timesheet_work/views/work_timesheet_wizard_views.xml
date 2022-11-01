@@ -25,6 +25,26 @@
                     </group>
                     <field name="timesheet_ids"/>
                     <field name="work_sheet_id" invisible="1"/>
+                    <footer>
+                        <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">
+                            <button t-if="widget.is_action_enabled('edit')" class="btn btn-primary o_form_button_edit" accesskey="a">
+                                Editar
+                            </button>
+                            <button string="Salir" special="cancel" class="btn btn-secondary" />
+                        </div>
+                        <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
+                            <button
+                                    class="btn btn-primary o_form_button_save" accesskey="s">
+                                Guardar
+                            </button>
+                            <button
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Descartar
+                            </button>
+                            <button string="Guardar y Salir" special="save" class="btn btn-primary" />
+                        </div>
+                    </footer>
+
                 </sheet>
             </form>
         </field>
