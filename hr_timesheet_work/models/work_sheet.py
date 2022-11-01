@@ -139,6 +139,7 @@ class TimeSheetWorkSheet(models.Model):
 
     signature_status = fields.Boolean(string='Signed & Approved',  compute=get_signed_report, store=True)
 
+    # ESTA ACCIÓN YA NO SE USA (31/10/2022), ahora está en el wizard:
     def create_lot_worksheet_services(self):
         # Check required fields:
         for record in self:
