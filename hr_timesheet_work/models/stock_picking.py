@@ -8,4 +8,3 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     work_sheet_id = fields.Many2one('work.sheet', store=True, string='Work Sheet')
-

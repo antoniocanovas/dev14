@@ -1,9 +1,10 @@
 {
-    'name': 'Timesheet Work base',
+    'name': 'Timesheet Work',
     'version': '14.0.8.0.0',
     'category': '',
     'description': u"""
-
+Work sheet resume with time, products and expenses.
+Printed format as receipt to customer.
 """,
     'author': 'Serincloud',
     'depends': [

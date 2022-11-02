@@ -137,29 +137,11 @@
                               <!-- WORK AND TASK ESTABLISMENT: -->
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
-                                <!--
-                            <h2>Timesheets</h2>
-                            <group><group>
-                                <field name="task_id" options="{'no_create': True}" domain="[('project_id','=',project_id)]" attrs="{'invisible':[('project_id','=',False)]}"/>
-                                <field name="employee_ids" widget="many2many_tags" groups="hr_timesheet.group_hr_timesheet_approver"/>
-                                <field name="description" attrs="{'required':[('task_id','!=',False)]}"/>
-                            </group><group>
-                                <field name="start" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
-                                <field name="stop" widget="timesheet_uom" attrs="{'invisible':['|',('type','=','production'),('set_start_stop','=',False),('type','!=','production')]}"/>
-                                <field name="start" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
-                                <field name="stop" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
-                                <field name="duration" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',True)]}"/>
-                                <field name="time_type_id" widget="selection"/>
-                            </group></group>
-                                -->
                             <div attrs="{'invisible':[('project_id','!=',False)]}">
                                 <h2>Active projects:</h2>
                                 <field name="project_ids"/>
                             </div>
                             <div attrs="{'invisible':[('project_id','=',False)]}">
-<!--
-                                <field name="project_service_ids" attrs="{'readonly':[('task_id','=',False)]}" context="{'default_project_id':project_id, 'default_task_id':task_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
--->
                                 <field name="project_service_ids" context="{'default_project_id':project_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
                                     <tree editable="bottom" string="Timesheet Activities" default_order="date">
                                         <field name="task_id" options="{'no_create': True}"/>
@@ -182,10 +164,6 @@
                         </div>
 
                         <div name="work_sheet_project_products" string="Products" attrs="{'invisible':[('type','!=','project')]}">
-                            <!-- 30/10/2022 pasado a botón o2m:
-                                       <h3>Pickings:</h3>
-                                       <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
-                            -->
                             <h2>Products:</h2>
                             <field name="project_product_ids">
                                 <tree>
@@ -198,43 +176,10 @@
                             <field name="order_picking_ids" invisible="1"/>
                         </div>
 
-                        <!-- PASADO A O2M EL 31/10/22
-                        <page name="work_sheet_line_done" string="Output" attrs="{'invisible':[('type','!=','project')]}">
-                            <field name="line_done_ids" attrs="{'readonly':[('project_id','=',False)]}">
-                                <tree editable="botton">
-                                    <field name="todo_id" domain="[('work_id','=',work_id)]" context="{'default_work_id':work_id}"/>
-                                    <field name="name"/>
-                                    <field name="qty"/>
-                                    <field name="uom_id"/>
-                                    <field name="time_elapsed" widget="timesheet_uom" optional="show"/>
-                                    <field name="employee_ids" widget="many2many_tags" optional="show"/>
-                                    <field name="performance" optional="hide"/>
-                                    <field name="work_sheet_id" invisible="1"/>
-                                    <field name="work_id" invisible="1"/>
-                                </tree>
-                            </field>
-                        </page>
-                        -->
-
                         <div name="work_sheet_expenses" string="Expenses" attrs="{'invisible':[('type','!=','project')]}">
-                            <!-- 30/10/2022 pasado a botón o2m:
-                                       <h3>Pickings:</h3>
-                                       <field name="picking_ids" attrs="{'readonly':[('project_id','=',False)]}" context="{'default_company_id': company_id}"/>
-                            -->
                             <h2>Expenses:</h2>
-                            <field name="reinvoice_expense_ids">
-                                <!--
-                                          <tree>
-                                              <field name="product_id"/>
-                                              <field name="product_uom_qty"/>
-                                              <field name="product_uom"/>
-                                              <field name="state"/>
-                                          </tree>
-                                -->
-                            </field>
+                            <field name="reinvoice_expense_ids"/>
                         </div>
-
-
 
                     </div>
 

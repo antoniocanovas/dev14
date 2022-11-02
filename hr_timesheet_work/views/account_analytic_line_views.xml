@@ -1,17 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-    <!-- Funciona en community pero no en enterprise por vista grid que mete el campo id heredado fallando open_tab:
-    <record id="hr_timesheet_line_tree_open_tab" model="ir.ui.view">
-        <field name="name">Hr timesheet open_tab ID</field>
-        <field name="model">account.analytic.line</field>
-        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
-        <field name="arch" type="xml">
-            <field name="date" position="before">
-                <field name="id" widget="open_tab" nolabel="1"/>
-            </field>
-        </field>
-    </record>
-    -->
 
     <record id="hr_timesheet_tree_open_tab" model="ir.ui.view">
         <field name="name">Open tab in new analytic line</field>
