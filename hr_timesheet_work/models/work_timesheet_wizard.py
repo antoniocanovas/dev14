@@ -15,6 +15,7 @@ class WorkTimesheetWizard(models.TransientModel):
 
     name = fields.Char('Name', store=True, readonly=False)
     work_sheet_id = fields.Many2one('work.sheet', string='Sheet', store=True)
+    date = fields.Date('Date')
     project_id = fields.Many2one('project.project', string='Project', store=True)
     task_id = fields.Many2one('project.task', string='Task', store=True)
     time_type_id = fields.Many2one('project.time.type', string='Schedule')
@@ -65,7 +66,7 @@ class WorkTimesheetWizard(models.TransientModel):
                     new = self.env['account.analytic.line'].create(
                         {'work_sheet_id': record.work_sheet_id.id, 'name': record.name,
                          'project_id': record.project_id.id,
-                         'task_id': record.task_id.id, 'date': record.work_sheet_id.date,
+                         'task_id': record.task_id.id, 'date': record.date,
                          'account_id': record.work_sheet_id.project_analytic_id.id,
                          'company_id': record.work_sheet_id.company_id.id,
                          'tag_ids': [(6,0,record.analytic_tag_ids.ids)],
