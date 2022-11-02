@@ -7,8 +7,8 @@
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">hr_timesheet_work.work_sheet_report_document</field>
             <field name="report_file">hr_timesheet_work.work_sheet_report_document</field>
-            <field name="print_report_name">((str(object.time_type_id.name) or ''))</field>
-            <field name="attachment">((str(object.time_type_id.name) or '')+'.pdf')</field>
+            <field name="print_report_name">((str(object.name) or ''))</field>
+            <field name="attachment">((str(object.name) or '')+'.pdf')</field>
             <field name="binding_model_id" ref="model_work_sheet"/>
             <field name="binding_type">report</field>
         </record>

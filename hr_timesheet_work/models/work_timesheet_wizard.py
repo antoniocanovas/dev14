@@ -75,3 +75,17 @@ class WorkTimesheetWizard(models.TransientModel):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
                     #record['timesheet_ids'] = [(4,new.id)]
+        return {
+            'name': 'Work Sheet Add Timesheet wizard view',
+            'view_type': 'tree',
+            'view_mode': 'form',
+            'res_model': 'work.timesheet.wizard',
+            'type': 'ir.actions.act_window',
+            'view_id':
+                self.env.ref('hr_timesheet_work.work_timesheet_wizard_default_form').id,
+            'context': dict(self.env.context),
+            'target': 'new',
+            'res_id': self.id,
+        }
+
+

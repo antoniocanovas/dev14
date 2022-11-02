@@ -33,13 +33,11 @@
                             </button>
                             <button string="Salir" special="cancel" class="btn btn-secondary" />
                         </div>
-                        <div class="btn btn-primary" role="toolbar" aria-label="Main actions">
-                            <button class="oe_highlight" type="object"
-                                    name="create_lot_worksheet_services"
-                                    string="Create Timesheets"/>
-                        </div>
 
                         <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
+                             <button class="oe_highlight oe_right" type="object"
+                                    name="create_lot_worksheet_services"
+                                    string="Create Timesheets"/>
                             <button
                                     class="btn btn-primary o_form_button_save" accesskey="s">
                                 Guardar
