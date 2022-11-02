@@ -22,12 +22,13 @@ class WorkTimesheetWizard(models.TransientModel):
     start = fields.Float('Start')
     stop = fields.Float('Stop')
     duration = fields.Float('Duration', store=True)
+    version = fields.Integer('Version', default=0)
     set_start_stop = fields.Boolean(related='work_sheet_id.work_id.set_start_stop', string='Set start & stop time')
     analytic_tag_ids = fields.Many2many('account.analytic.tag', store=True, string='Tags',
                                         domain=[('timesheet_hidden', '=', False)]
                                         )
 
-    @api.depends('work_sheet_id.project_service_ids')
+    @api.depends('version')
     def get_work_sheet_timesheets(self):
         self.timesheet_ids = [(6,0,self.work_sheet_id.project_service_ids.ids)]
     timesheet_ids = fields.Many2many('account.analytic.line', store=True, readonly=False,
@@ -74,7 +75,7 @@ class WorkTimesheetWizard(models.TransientModel):
                     if (record.set_start_stop == True):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
-                    #record['timesheet_ids'] = [(4,new.id)]
+                    record['version'] = record.version + 1
         return {
             'name': 'Work Sheet Add Timesheet wizard view',
             'view_type': 'tree',
