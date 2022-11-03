@@ -109,29 +109,34 @@ class WupSaleOrder(models.Model):
                         li['discount'] = 0
 
                     # Line is NOT WUP:
-                    if (len(li.wup_line_ids.ids) == 0) and (li.product_uom_qty > 0):
-                        if li.product_uom.uom_type == 'reference':
-                            qty_uom = 1
+                    ratio = 1
+                    if li.product_uom.id != li.product_id.uom_id.id:
+                        # uom_type: bigger, reference, smaller
+                        if li.product_id.uom_id.uom_type == 'smaller':
+                            ratio = ratio / li.product_id.uom_po_id.factor
+                        elif li.product_id.uom_id.uom_type == 'bigger':
+                            ratio = ratio * li.product_id.uom_po_id.factor_inv
+                        if li.product_uom.uom_type == 'smaller':
+                            ratio = ratio * li.product_uom.factor
                         elif li.product_uom.uom_type == 'bigger':
-                            qty_uom = li.product_uom.factor_inv
-                        elif li.product_uom.uom_type == 'smaller':
-                            qty_uom = 1 / li.product_uom.factor
+                            ratio = ratio / li.product_uom.factor_inv
+
 
                         # Case 'services' and 'fixed_service_price':
                         if (li.product_id.product_tmpl_id.our_service == True) and (
                                 record.discount_type == 'fixed_service_margin_over_cost'):
-                            li.write({'price_unit': record.price_our_service * qty_uom,
-                                      'lst_price': li.product_id.lst_price * qty_uom})
+                            li.write({'price_unit': round(record.price_our_service * ratio, monetary_precision),
+                                      'lst_price': round(li.product_id.lst_price * ratio, monetary_precision)})
                         # ... others products in NO WUP LINE:
                         else:
                             if (record.margin_wup_percent < 100):
                                 li.write(
-                                    {'price_unit': (li.product_id.standard_price / (1 - record.margin_wup_percent / 100) * qty_uom),
-                                     'lst_price': li.product_id.lst_price * qty_uom})
+                                    {'price_unit': round(li.product_id.standard_price / (1 - record.margin_wup_percent / 100) * ratio, monetary_precision),
+                                     'lst_price': round(li.product_id.lst_price * ratio, monetary_precision)})
                             else:
                                 li.write(
-                                    {'price_unit': (li.product_id.standard_price * (1 + record.margin_wup_percent / 100) * qty_uom),
-                                     'lst_price': li.product_id.lst_price * qty_uom})
+                                    {'price_unit': round(li.product_id.standard_price * (1 + record.margin_wup_percent / 100) * ratio, monetary_precision),
+                                     'lst_price': round(li.product_id.lst_price * ratio, monetary_precision)})
 
                     # Case Line IS WUP':
                     elif (len(li.wup_line_ids.ids) > 0):
