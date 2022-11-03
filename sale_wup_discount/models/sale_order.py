@@ -109,17 +109,18 @@ class WupSaleOrder(models.Model):
                         li['discount'] = 0
 
                     # Line is NOT WUP:
-                    ratio = 1
-                    if li.product_uom.id != li.product_id.uom_id.id:
-                        # uom_type: bigger, reference, smaller
-                        if li.product_id.uom_id.uom_type == 'smaller':
-                            ratio = ratio / li.product_id.uom_po_id.factor
-                        elif li.product_id.uom_id.uom_type == 'bigger':
-                            ratio = ratio * li.product_id.uom_po_id.factor_inv
-                        if li.product_uom.uom_type == 'smaller':
-                            ratio = ratio * li.product_uom.factor
-                        elif li.product_uom.uom_type == 'bigger':
-                            ratio = ratio / li.product_uom.factor_inv
+                    if (len(li.wup_line_ids.ids) == 0) and (li.product_uom_qty > 0):
+                        ratio = 1
+                        if li.product_uom.id != li.product_id.uom_id.id:
+                            # uom_type: bigger, reference, smaller
+                            if li.product_id.uom_id.uom_type == 'smaller':
+                                ratio = ratio / li.product_id.uom_po_id.factor
+                            elif li.product_id.uom_id.uom_type == 'bigger':
+                                ratio = ratio * li.product_id.uom_po_id.factor_inv
+                            if li.product_uom.uom_type == 'smaller':
+                                ratio = ratio * li.product_uom.factor
+                            elif li.product_uom.uom_type == 'bigger':
+                                ratio = ratio / li.product_uom.factor_inv
 
 
                         # Case 'services' and 'fixed_service_price':
