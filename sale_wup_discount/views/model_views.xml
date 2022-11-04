@@ -12,8 +12,8 @@
                     <group>
                         <field name="discount_type"/>
                         <field name="margin_wup_percent" attrs="{'invisible':[('discount_type','not in',['fixed_service_margin_over_cost','margin_over_cost'])]}"/>
-                        <field name="price_our_service" attrs="{'invisible':[('discount_type','not in',['fixed_service_margin_over_cost'])]}"/>
-                        <field name="target_price" attrs="{'invisible':[('discount_type','not in',['target_price'])]}"/>
+                        <field name="price_our_service" attrs="{'invisible':[('discount_type','not in',['fixed_service_margin_over_cost','target_price_with_fixed_services'])]}"/>
+                        <field name="target_price" attrs="{'invisible':[('discount_type','not in',['target_price', 'target_price_with_fixed_services'])]}"/>
                     </group>
                     <group>
                         <button class="oe_highlight oe_edit_only"
