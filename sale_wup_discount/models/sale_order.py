@@ -8,6 +8,7 @@ VALUES = [
     ('fixed_service_margin_over_cost', 'Fixed price for "our services", and margin over cost for others.'),
     ('margin_over_cost', 'Margin over cost.'),
     ('target_price', 'Target price.'),
+    ('target_price_with_fixed_services', 'Target price with fixed services (overwrite locked sale price in wups)')
     ('wup_pricing_reset', 'Reset WUPs (prices & fixeds).'),
 ]
 
@@ -87,6 +88,7 @@ class WupSaleOrder(models.Model):
                                     if (review == True):
                                         wupline.write({'price_unit': wupline.price_unit + diference})
                                         review = False
+            # END CASE "TARGET_PRICE" !!
 
             # CASE WUP_PRICING_RESET:
             elif record.discount_type == 'wup_pricing_reset':
@@ -99,6 +101,55 @@ class WupSaleOrder(models.Model):
                                       'price_unit_cost': wul.product_id.standard_price,
                                       'fix_price_unit_cost': False, 'fix_price_unit_sale': False})
                         li.write({'price_unit':sol_price_unit_from_wup, 'discount':0})
+            # END CASE WUP_PRICING_RESET !!
+
+            # CASE FIX OUR SERVICES AND GLOBAL TARGET PRICE:
+            elif record.discount_type == 'target_price_with_fixed_services':
+                # Our service subtotal and writting:
+                fixed_qty, prev_other_subtotal, ratio, fixed = 0, 0, 1, record.price_our_service
+
+                # ESTIMATIONS AND RATIO:
+                for li in record.order_line:
+                    # Lines NOT WUP and our_service True:
+                    if (li.product_id.id) and not (li.wup_line_ids.ids) and (li.product_uom_qty > 0) and (
+                            li.product_id.our_service == True):
+                        fixed_qty += li.product_uom_qty
+                    # Lines NOT WUP and our_service False:
+                    elif (li.product_id.id) and not (li.wup_line_ids.ids) and (li.product_uom_qty > 0) and (
+                            li.product_id.our_service == False):
+                        prev_other_subtotal += li.price_unit * li.product_uom_qty
+                    # WUP Lines:
+                    elif (li.product_id.id) and (len(li.wup_line_ids.ids) != 0):
+                        for wup in li.wup_line_ids:
+                            if (wup.product_id.our_service == True):
+                                fixed_qty += wup.product_uom_qty
+                            else:
+                                prev_other_subtotal += wup.subtotal
+
+                if prev_other_subtotal != 0:
+                    ratio = (record.target_price - fixed_qty * fixed) / prev_other_subtotal
+
+                # Writing new values:
+                for li in record.order_line:
+                    # Lines NOT WUP and our_services True:
+                    if (li.product_id.id) and not (li.wup_line_ids.ids) and (li.product_uom_qty > 0) and (
+                            li.product_id.our_service == True):
+                        li.write({'price_unit': fixed, 'discount': 0, 'price_subtotal': li.product_uom_qty * fixed})
+                    # Lines NOT WUP and our_services False:
+                    elif (li.product_id.id) and not (li.wup_line_ids.ids) and (li.product_uom_qty > 0) and (
+                            li.product_id.our_service == False):
+                        price_unit = li.price_unit * ratio
+                        li.write({'price_unit': price_unit, 'discount': 0})
+                    # WUP Lines:
+                    elif (li.product_id.id) and (len(li.wup_line_ids.ids) != 0):
+                        li.write({'discount': 0})
+                        for wup in li.wup_line_ids:
+                            if (wup.product_id.our_service == True):
+                                wup.write({'price_unit': fixed, 'subtotal': fixed * wup.product_uom_qty})
+                            else:
+                                price_unit = wup.price_unit * ratio / li.product_uom_qty
+                                wup.write({'price_unit': price_unit, 'subtotal': price_unit * wup.product_uom_qty})
+            # END CASE fixed_services_and_target_price !!
 
 
             # CASES FIX_OUR_SERVICES (or not) AND MARGIN_OVER_COST:
@@ -169,3 +220,4 @@ class WupSaleOrder(models.Model):
                             sol_price_unit_from_wup += price_unit * liwup.product_uom_qty
                             liwup.write({'price_unit': price_unit, 'price_unit_cost': price_unit_cost})
                         li.write({'price_unit':sol_price_unit_from_wup, 'discount':0})
+            # END CASE FIX_OUR_SERVICES (or not) AND MARGIN_OVER_COST !!
