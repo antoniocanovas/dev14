@@ -26,7 +26,7 @@ class WupSolWizard(models.TransientModel):
 
     def create_sale_order_lines(self):
         picking = 0
-        for aal in record.product_consumed_ids:
+        for aal in self.sale_id.product_consumed_ids:
             svl = env['stock.valuation.layer'].search([('analytic_id', '=', aal.id)])
             sm = svl.stock_move_id
             if (svl.id) and not (sm.sale_line_id.id):
