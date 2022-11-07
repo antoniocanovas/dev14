@@ -31,7 +31,7 @@ class WupSolWizard(models.TransientModel):
             sm = svl.stock_move_id
             if (svl.id) and not (sm.sale_line_id.id):
                 newsol = self.env['sale.order.line'].create({
-                    'order_id': self.id,
+                    'order_id': self.sale_id.id,
                     'product_id': sm.product_id.id,
                     'product_uom_qty': sm.quantity_done,
                 })
