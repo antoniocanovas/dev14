@@ -22,7 +22,7 @@ class WupSolWizard(models.TransientModel):
 #    def get_work_sheet_timesheets(self):
 #        self.timesheet_ids = [(6,0,self.work_sheet_id.project_service_ids.ids)]
 #    timesheet_ids = fields.Many2many('account.analytic.line', store=True, readonly=False,
-                                     compute="get_work_sheet_timesheets")
+#                                     compute="get_work_sheet_timesheets")
 
     def create_sale_order_lines(self):
         picking = 0
