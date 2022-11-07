@@ -83,41 +83,6 @@
     </record>
 
 
-    <record id="sale_order_wup_form_view" model="ir.ui.view">
-        <field name="name">sale.order.form</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
-                <button name="action_open_sol" icon="fa-tasks" class="oe_stat_button" type="object"/>
-            </xpath>
-            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
-                <field name="lst_price" optional="hide"/>
-                <field name="lst_price_discount" optional="hide"/>
-                <field name="wup_cost_amount" optional="hide"/>
-            </xpath>
-            <xpath expr="//page/field[@name='order_line']/.." position="after">
-                <page string="Extra Products" name="extra_products" attrs="{'invisible': ['|',('analytic_account_id','=',False),('state', 'in', ['draft'])]}">
-                    <field name="product_consumed_ids" readonly="1">
-                        <tree>
-                            <field name="date"/>
-                            <field name="product_id"/>
-                            <field name="name"/>
-                            <field name="unit_amount"/>
-                            <field name="product_uom_id"/>
-                            <field name="amount"/>
-                        </tree>
-                    </field>
-                    <group col="4">
-                        <button class="oe_highlight" type="action" name="sale_wup.sale_order_from_aal" string="Create quotation from consumed products and works"/>
-                        <field name="new_sale_id" readonly="1"/>
-                    </group>
-                </page>
-            </xpath>
-        </field>
-    </record>
-
     <!-- CREATE NEW ORDER LINES FROM ANALYTIC ADDTIONAL PRODUCTS:   -->
     <record id="additional_analytic_products_wizard" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
@@ -156,30 +121,62 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <record id="view_so_wups_form" model="ir.ui.view">
-        <field name="name">WUs line sale order</field>
+
+    <!-- MAIN SALE ORDER UPDATE: -->
+    <record id="sale_order_wup_form_view" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
         <field name="model">sale.order</field>
-        <field name="type">form</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
         <field name="arch" type="xml">
+
             <xpath expr="//form/header" position="inside">
                     <button name="sale_wup.additional_analytic_products_wizard"
                             context="{'default_sale_id':active_id}"
                             string="Addtional products" type="action" class="btn-primary"
                             attrs="{'invisible':[('product_consumed_ids','=',False)]}"/>
             </xpath>
+
             <xpath expr="//sheet/div[@name='button_box']" position="inside">
                 <button class="oe_stat_button oe_read_only" icon="fa-shopping-cart" type="object" name="action_view_wup_line">
                     <field string="WUs" widget="statinfo" name="wup_line_count" />
                 </button>
             </xpath>
+
             <xpath expr="//sheet/notebook/page[@name='order_lines']/field/tree" position="inside">
                 <field name="wup_line_ids" invisible="1"/>
             </xpath>
             <xpath expr="//sheet/notebook/page[@name='order_lines']/field/tree" position="attributes">
                 <attribute name="decoration-primary">wup_line_ids</attribute>
             </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+                <button name="action_open_sol" icon="fa-tasks" class="oe_stat_button" type="object"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="lst_price" optional="hide"/>
+                <field name="lst_price_discount" optional="hide"/>
+                <field name="wup_cost_amount" optional="hide"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/.." position="after">
+                <page string="Extra Products" name="extra_products" attrs="{'invisible': ['|',('analytic_account_id','=',False),('state', 'in', ['draft'])]}">
+                    <field name="product_consumed_ids" readonly="1">
+                        <tree>
+                            <field name="date"/>
+                            <field name="product_id"/>
+                            <field name="name"/>
+                            <field name="unit_amount"/>
+                            <field name="product_uom_id"/>
+                            <field name="amount"/>
+                        </tree>
+                    </field>
+                    <group col="4">
+                        <button class="oe_highlight" type="action" name="sale_wup.sale_order_from_aal" string="Create quotation from consumed products and works"/>
+                        <field name="new_sale_id" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
         </field>
     </record>
+
 
 </odoo>
