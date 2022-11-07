@@ -10,7 +10,7 @@
                     <field name="analytic_line_ids"/>
                     <group>
                         <field name="analytic_line_selection_ids"
-                               domain="[('id','in',analytic_line_ids),('sale_line_id','=',False)]"
+                               domain="[('id','in',analytic_line_ids)]"
                                options="{'create':False}"
                                widget="many2many_tags"/>
                     </group>
