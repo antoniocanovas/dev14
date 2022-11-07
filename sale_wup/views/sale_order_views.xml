@@ -118,6 +118,24 @@
         </field>
     </record>
 
+    <!-- CREATE NEW ORDER LINES FROM ANALYTIC ADDTIONAL PRODUCTS:   -->
+    <record id="addtional_analytic_products_wizard" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="domain" eval="False"/>
+        <!--    <field name="context" eval="False"/> -->
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">Addtional analytic products to SOL wizard view</field>
+        <field name="res_model">wup.saleline.wizard</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">new</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+    </record>
+    <!--   FIN  WIZARD -->
+
 
     <record id="action_view_wups" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
@@ -144,8 +162,11 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//form/header" position="inside">
+                <button name="addtional_analytic_products_wizard" string="Additional products" type="object"
+                        class="oe_highlight"/>
+            </xpath>
             <xpath expr="//sheet/div[@name='button_box']" position="inside">
-
                 <button class="oe_stat_button oe_read_only" icon="fa-shopping-cart" type="object" name="action_view_wup_line">
                     <field string="WUs" widget="statinfo" name="wup_line_count" />
                 </button>
