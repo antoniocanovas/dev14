@@ -23,6 +23,7 @@
         'views/sale_order_views.xml',
         'views/product_views.xml',
         'views/project_task.xml',
+        'views/wup_saleline_wizard_views.xml',
     ],
     'installable': True,
 }
