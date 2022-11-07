@@ -9,7 +9,7 @@ from odoo.exceptions import ValidationError
 
 
 class WupSolWizard(models.TransientModel):
-    _name = "wup.sol.wizard"
+    _name = "wup.saleline.wizard"
     _description = "WUP New Sale Order Line add Wizard"
 
     sale_id = fields.Many2one('sale.order')

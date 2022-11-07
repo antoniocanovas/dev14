@@ -10,7 +10,7 @@ from . import wup_line
 from . import product_template
 from . import project_task
 from . import account_analytic_line
-from . import wup_sol_wizard
+from . import wup_saleline_wizard
 
 
 
