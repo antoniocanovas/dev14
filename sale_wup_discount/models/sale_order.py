@@ -8,7 +8,7 @@ VALUES = [
     ('fixed_service_margin_over_cost', 'Fixed price for "our services", and margin over cost for others.'),
     ('margin_over_cost', 'Margin over cost.'),
     ('target_price', 'Target price.'),
-#    ('target_price_with_fixed_services', 'Target price with fixed services (overwrite locked sale price in wups)'),
+    ('target_price_with_fixed_services', 'Target price with fixed services (overwrite locked sale price in wups)'),
     ('wup_pricing_reset', 'Reset WUPs (prices & fixeds).'),
 ]
 
