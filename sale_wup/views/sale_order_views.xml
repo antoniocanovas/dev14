@@ -134,7 +134,7 @@
                     <button name="sale_wup.additional_analytic_products_wizard"
                             context="{'default_sale_id':active_id}"
                             string="Addtional products" type="action" class="btn-primary"
-                            attrs="{'invisible':['!',('product_consumed_ids','=',[]),('state','not in',['sale'])]}"/>
+                            attrs="{'invisible':['|',('product_consumed_ids','=',[]),('state','not in',['sale'])]}"/>
             </xpath>
 
             <xpath expr="//sheet/div[@name='button_box']" position="inside">
