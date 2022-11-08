@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Wup Saleline wizard">
-                    <field name="analytic_line_ids" domain="[('id','in',sale_id.product_consumed_ids)]">
+                    <field name="analytic_line_ids" domain="[('id','in',product_consumed_ids)]">
                             <tree create="0">
                                 <field name="date"/>
                                 <field name="name"/>
