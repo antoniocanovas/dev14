@@ -24,7 +24,7 @@ class SaleOrderWup(models.Model):
             if record.analytic_account_id.id:
                 aal_ids = self.env['account.analytic.line'].search([
                     ('account_id','=',record.analytic_account_id.id),
-                    ('product_id.type','in',['product','consu'])]).ids
+                    ('product_id.type','in',['product','consu'])])
                 for aal in aal_ids:
                     svl = self.env['stock.valuation.layer'].search([('analytic_id', '=', aal.id)])
                     sm = svl.stock_move_id
