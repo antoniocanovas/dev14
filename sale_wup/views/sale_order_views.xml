@@ -171,10 +171,6 @@
                             <field name="amount"/>
                         </tree>
                     </field>
-                    <group col="4">
-                        <button class="oe_highlight" type="action" name="sale_wup.sale_order_from_aal" string="Create quotation from consumed products and works"/>
-                        <field name="new_sale_id" readonly="1"/>
-                    </group>
                 </page>
             </xpath>
         </field>
