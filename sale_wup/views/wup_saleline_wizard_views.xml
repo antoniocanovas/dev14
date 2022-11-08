@@ -15,14 +15,6 @@
                                 <field name="product_uom_id"/>
                             </tree>
                     </field>
-<!--
-                    <group>
-                        <field name="analytic_line_selection_ids"
-                               domain="[('id','in',analytic_line_ids)]"
-                               options="{'create':False}"
-                               widget="many2many_tags"/>
-                    </group>
--->
                     <field name="sale_id" invisible="1"/>
                     <field name="product_consumed_ids" invisible="1"/>
                 </sheet>

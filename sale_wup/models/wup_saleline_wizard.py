@@ -15,7 +15,6 @@ class WupSolWizard(models.TransientModel):
     sale_id = fields.Many2one('sale.order')
     analytic_line_ids = fields.Many2many('account.analytic.line', store=True)
     product_consumed_ids = fields.Many2many('account.analytic.line', related='sale_id.product_consumed_ids')
-#    analytic_line_selection_ids = fields.Many2many('account.analytic.line', string="Selecteds")
 
     def create_sale_order_lines(self):
         picking = 0
