@@ -134,7 +134,7 @@
                     <button name="sale_wup.additional_analytic_products_wizard"
                             context="{'default_sale_id':active_id}"
                             string="Addtional products" type="action" class="btn-primary"
-                            attrs="{'invisible':[('product_consumed_ids','=',False)]}"/>
+                            attrs="{'invisible':['!',('product_consumed_ids','=',[]),('state','not in',['sale'])]}"/>
             </xpath>
 
             <xpath expr="//sheet/div[@name='button_box']" position="inside">
@@ -158,7 +158,9 @@
                 <field name="wup_cost_amount" optional="hide"/>
             </xpath>
             <xpath expr="//page/field[@name='order_line']/.." position="after">
-                <page string="Extra Products" name="extra_products" attrs="{'invisible': ['|',('analytic_account_id','=',False),('state', 'in', ['draft'])]}">
+                <page string="Extra Products" name="extra_products"
+                      attrs="{'invisible': ['|',('state', 'not in', ['sale']),
+                                                ('product_consumed_ids','=',[])]}">
                     <field name="product_consumed_ids" readonly="1">
                         <tree>
                             <field name="date"/>
