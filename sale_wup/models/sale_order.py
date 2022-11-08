@@ -20,12 +20,17 @@ class SaleOrderWup(models.Model):
 
     def get_worksheets_products(self):
         for record in self:
-            aal = []
+            extra = []
             if record.analytic_account_id.id:
-                aal = self.env['account.analytic.line'].search([
+                aal_ids = self.env['account.analytic.line'].search([
                     ('account_id','=',record.analytic_account_id.id),
                     ('product_id.type','in',['product','consu'])]).ids
-            record.product_consumed_ids = [(6, 0, aal)]
+                for aal in aal_ids:
+                    svl = self.env['stock.valuation.layer'].search([('analytic_id', '=', aal.id)])
+                    sm = svl.stock_move_id
+                    if (svl.id) and not (sm.sale_line_id.id):
+                        extra.append(aal.id)
+            record.product_consumed_ids = [(6, 0, extra)]
     product_consumed_ids = fields.Many2many('account.analytic.line', compute=get_worksheets_products, store=False)
     new_sale_id = fields.Many2one('sale.order', string='New quotation')
 

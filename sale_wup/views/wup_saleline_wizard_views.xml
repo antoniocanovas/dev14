@@ -7,7 +7,14 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Wup Saleline wizard">
-                    <field name="analytic_line_ids"/>
+                    <field name="analytic_line_ids">
+                            <tree decoration-muted="so_line == False">
+                                <field name="date"/>
+                                <field name="name"/>
+                                <field name="unit_amount"/>
+                                <field name="product_uom_id"/>
+                            </tree>
+                    </field>
                     <group>
                         <field name="analytic_line_selection_ids"
                                domain="[('id','in',analytic_line_ids)]"
