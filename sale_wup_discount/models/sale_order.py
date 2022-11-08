@@ -43,8 +43,8 @@ class WupSaleOrder(models.Model):
                 # CASE SALE UNDER COST, NOT ALLOWED:
                 if (record.target_price < cost_amount):
                     message_under_cost = "Target under real cost (Purchase = " + str(
-                        round(cost_amount, 2)) + ", List price = " + str(
-                        round(price_amount, 2)) + "), not allowed. You can do it manually."
+                        round(cost_amount, monetary_precision)) + ", List price = " + str(
+                        round(price_amount, monetary_precision)) + "), not allowed. You can do it manually."
                     raise ValidationError(message_under_cost)
 
                 # CASE: TARGET UNDER PVP => Let's work with discounts:
@@ -75,7 +75,7 @@ class WupSaleOrder(models.Model):
                             li.write({'price_unit':sol_price_unit_from_wup, 'discount':0})
 
                 # ROUNDING Method on the first line with units = 1:
-                diference = round(record.target_price - record.amount_untaxed, 2)
+                diference = round(record.target_price - record.amount_untaxed, monetary_precision)
                 if diference != 0:
                     review = True
                     for li in record.order_line:
@@ -149,6 +149,21 @@ class WupSaleOrder(models.Model):
                             else:
                                 price_unit = wup.price_unit * ratio / li.product_uom_qty
                                 wup.write({'price_unit': price_unit, 'subtotal': price_unit * wup.product_uom_qty})
+
+                # ROUNDING Method on the first line with units = 1:
+                diference = round(record.target_price - record.amount_untaxed, monetary_precision)
+                if diference != 0:
+                    review = True
+                    for li in record.order_line:
+                        if (li.product_uom_qty == 1) and (review == True):
+                            if (len(li.wup_line_ids.ids) == 0) and (li.product_uom_qty > 0):
+                                li.write({'price_unit': li.price_unit + diference})
+                                review = False
+                            elif (len(li.wup_line_ids.ids) > 0) and (li.product_uom_qty > 0):
+                                for wupline in li.wup_line_ids:
+                                    if (review == True):
+                                        wupline.write({'price_unit': wupline.price_unit + diference})
+                                        review = False
             # END CASE fixed_services_and_target_price !!
 
 
