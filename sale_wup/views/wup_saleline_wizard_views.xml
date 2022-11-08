@@ -24,6 +24,7 @@
                     </group>
 -->
                     <field name="sale_id" invisible="1"/>
+                    <field name="product_consumed_ids" invisible="1"/>
                 </sheet>
                 <footer>
                     <button
