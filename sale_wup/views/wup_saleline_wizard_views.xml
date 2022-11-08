@@ -8,7 +8,7 @@
             <form>
                 <sheet string="Wup Saleline wizard">
                     <field name="analytic_line_ids">
-                            <tree decoration-muted="so_line == False">
+                            <tree>
                                 <field name="date"/>
                                 <field name="name"/>
                                 <field name="unit_amount"/>
