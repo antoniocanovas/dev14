@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Wup Saleline wizard">
-                    <field name="analytic_line_ids">
+                    <field name="analytic_line_ids" domain="[('id','in',sale_id.product_consumed_ids.ids)]">
                             <tree>
                                 <field name="date"/>
                                 <field name="name"/>
@@ -15,12 +15,14 @@
                                 <field name="product_uom_id"/>
                             </tree>
                     </field>
+<!--
                     <group>
                         <field name="analytic_line_selection_ids"
                                domain="[('id','in',analytic_line_ids)]"
                                options="{'create':False}"
                                widget="many2many_tags"/>
                     </group>
+-->
                     <field name="sale_id" invisible="1"/>
                 </sheet>
                 <footer>
