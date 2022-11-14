@@ -17,7 +17,7 @@
         <field name="mode">extension</field>
         <field name="model">project.project</field>
         <field name="name">Project Roadmap Search Inherit</field>
-        <field name="priority">99</field>
+        <field name="Starred">99</field>
         <field name="type">search</field>
     </record>
 
