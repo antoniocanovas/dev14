@@ -175,7 +175,7 @@
                 <field name="project_id"/>
                 <field name="partner_id"/>
                 <field name="user_id" string="Responsible"/>
-                <filter string="Supervise" name="my_phases" domain="[('user_id', '=', uid)]"/>
+                <filter string="Supervising" name="my_phases" domain="[('user_id', '=', uid)]"/>
                 <filter string="Starred" name="starred" domain="[('is_favorite', '=', True)]"/>
                 <separator/>
                 <filter string="Archived too" name="active" domain="[('active', 'in', [True,False])]"/>
