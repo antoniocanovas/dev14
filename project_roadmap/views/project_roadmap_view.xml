@@ -63,7 +63,7 @@
                   default_order="active asc, sequence asc">
                 <field name="is_favorite" widget="boolean_favorite" nolabel="1"/>
                 <field name="display_name"/>
-                <field name="priority" invisible="1"/>
+                <field name="sequence" invisible="1"/>
                 <field name="type" invisible="1"/>
                 <field name="user_id" widget="many2one_avatar_user"/>
                 <field name="activity_ids" widget="list_activity" optional="show"/>
