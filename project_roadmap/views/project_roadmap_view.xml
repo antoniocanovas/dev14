@@ -18,7 +18,7 @@
                         <field name="invoice_id" attrs="{'invisible':['|',('type','!=','invoice'),('invoice_id','=',False)]}"/>
                     </h4>
                     <group>
-                        <field name="priority"/>
+                        <field name="sequence"/>
                         <field name="type"/>
                         <field name="lead_id" attrs="{'invisible':['|',('type','!=','lead'),('lead_id','!=',False)]}"/>
                         <field name="sale_id" attrs="{'invisible':['|',('type','!=','sale'),('sale_id','!=',False)]}"/>
