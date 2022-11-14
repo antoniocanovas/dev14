@@ -179,9 +179,9 @@
                 <field name="name" string="Name"/>
                 <field name="project_id"/>
                 <field name="partner_id"/>
-                <field name="user_id" string="Assigned to"/>
+                <field name="user_id" string="User"/>
                 <field name="manager_id" string="Manager"/>
-                <filter string="Supervising" name="my_phases" domain="[('user_id', '=', uid)]"/>
+                <filter string="My phases" name="my_phases" domain="[('user_id', '=', uid)]"/>
                 <filter string="Starred" name="starred" domain="[('is_favorite', '=', True)]"/>
                 <separator/>
                 <filter string="Archived too" name="active" domain="[('active', 'in', [True,False])]"/>
@@ -197,10 +197,10 @@
                 -->
 
                 <group expand="0" string="Group By">
-                    <filter string="Project" name="project" context="{'group_by': 'project_id'}"/>
-                    <filter string="Responsible" name="user" context="{'group_by': 'user_id'}"/>
-                    <filter string="Manager" name="manager" context="{'group_by': 'manager_id'}"/>
-                    <filter string="Date limit" name="date_limit" context="{'group_by': 'date_limit'}"/>
+                    <filter string="Project" name="group_by_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="User" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Manager" name="group_by_manager" context="{'group_by': 'manager_id'}"/>
+                    <filter string="Date limit" name="group_by_date_limit" context="{'group_by': 'date_limit'}"/>
                 </group>
             </data>
         </field>
