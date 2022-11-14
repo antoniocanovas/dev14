@@ -175,7 +175,7 @@
                 <field name="project_id"/>
                 <field name="partner_id"/>
                 <field name="user_id" string="Responsible"/>
-                <filter string="My phases" name="my_phases" domain="[('user_id', '=', uid)]"/>
+                <filter string="Supervise" name="my_phases" domain="[('user_id', '=', uid)]"/>
                 <filter string="Starred" name="starred" domain="[('is_favorite', '=', True)]"/>
                 <separator/>
                 <filter string="Archived too" name="active" domain="[('active', 'in', [True,False])]"/>
@@ -228,7 +228,7 @@
     <record id="action_view_project_roadmap" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
-        <field name="context">{'search_default_project':1}</field>
+        <field name="context">{'search_default_my_phases':1}</field>
         <field name="domain">[]</field>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="help"></field>
@@ -262,7 +262,7 @@
         <field name="view_ids" eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('project_roadmap_group_by_project_tree')}),]"/>
     </record>
-
+<!--
     <record id="action_view_project_roadmap_mine" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
@@ -281,7 +281,7 @@
         <field name="view_ids" eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('project_roadmap_my_phases_tree')}),]"/>
     </record>
-
+-->
     <record id="roadmap_kanban_project_act_window" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
