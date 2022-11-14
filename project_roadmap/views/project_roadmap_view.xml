@@ -181,6 +181,7 @@
                 <field name="partner_id"/>
                 <field name="user_id" string="User"/>
                 <field name="manager_id" string="Manager"/>
+                <field name="type" string="Type"/>
                 <filter string="My phases" name="my_phases" domain="[('user_id', '=', uid)]"/>
                 <separator/>
                 <filter string="Starred" name="starred" domain="[('is_favorite', '=', True)]"/>
@@ -201,6 +202,7 @@
                     <filter string="Project" name="group_by_project" context="{'group_by': 'project_id'}"/>
                     <filter string="User" name="group_by_user" context="{'group_by': 'user_id'}"/>
                     <filter string="Manager" name="group_by_manager" context="{'group_by': 'manager_id'}"/>
+                    <filter string="Type" name="group_by_type" context="{'group_by': 'type'}"/>
                     <filter string="Date limit" name="group_by_date_limit" context="{'group_by': 'date_limit'}"/>
                 </group>
             </data>

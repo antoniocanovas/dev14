@@ -22,7 +22,7 @@
         'security/ir.model.access.csv',
         'security/ir_rule.xml',
         'views/project_roadmap_view.xml',
-        'views/project_view.xml',
+        'views/project_project_view.xml',
         'views/project_task_view.xml',
         'views/sale_order_view.xml',
         'views/purchase_order_view.xml',
