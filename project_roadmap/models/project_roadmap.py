@@ -50,7 +50,7 @@ class ProjectRoadmap(models.Model):
             elif (record.type == 'project') and (record.project_id.id):
                 state = "Finalizado"
                 if record.project_id.task_ids.ids:
-                    tasks = self.env['project.task'].search([('project_id','=',record.project_id.id), ('is_closed','!=',True)])
+                    tasks = record.env['project.task'].search([('project_id','=',record.project_id.id), ('is_closed','!=',True)])
                     recs_sorted = tasks.sorted(key=lambda r: r.stage_id.sequence)
                 if tasks.ids:
                     state = recs_sorted[0].stage_id.name
