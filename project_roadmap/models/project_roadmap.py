@@ -52,8 +52,8 @@ class ProjectRoadmap(models.Model):
                 if record.project_id.task_ids.ids:
                     tasks = record.env['project.task'].search([('project_id','=',record.project_id.id), ('is_closed','!=',True)])
                     recs_sorted = tasks.sorted(key=lambda r: r.stage_id.sequence)
-                if tasks.ids:
-                    state = recs_sorted[0].stage_id.name
+                    if tasks.ids:
+                        state = recs_sorted[0].stage_id.name
             elif (record.type == 'picking') and (record.picking_id.id):
                 state = record.picking_id.state
             elif (record.type == 'invoice') and (record.invoice_id.id) and (record.invoice_id.state != 'posted'):
