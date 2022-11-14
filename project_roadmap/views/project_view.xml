@@ -55,7 +55,7 @@
                 <a class="o_project_kanban_box" name="%(project_roadmap.action_view_project_2_roadmap)d" type="action">
                     <div>
                         <span class="o_value"><t t-esc="record.roadmap_count.value"/></span>
-                        <span class="o_label">Roadmap(s)</span>
+                        <span class="o_label">Phase(s)</span>
                     </div>
                 </a>
             </xpath>
