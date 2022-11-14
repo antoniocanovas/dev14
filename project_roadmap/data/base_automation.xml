@@ -1,0 +1,20 @@
+<odoo>
+    <record id="roadmap_check_for_managers" model="base.automation">
+            <field name="name">=> Roadmap Archive control only by Managers</field>
+            <field name="model_id" ref="project_roadmap.model_project_roadmap"/>
+            <field name="state">code</field>
+            <field name="code">
+# Only Managers can change field state (Archive to disable this option):
+group_manager_external_id = env['ir.model.data'].search([('name','=','group_roadmap_manager')])
+roadmap_manager = env['res.groups'].search([('id','=',group_manager_external_id.res_id)])
+if (user not in roadmap_manager.users) and (user != record.project_id.user_id):
+  raise Warning('Sorry, only Roadmap Managers and this project manager can change this option.')
+            </field>
+            <field name="trigger">on_change</field>
+            <field name="on_change_field_ids" eval="[(6,0, [ref('project_roadmap.field_project_roadmap__active')])]"/>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+        </record>
+
+</odoo>
