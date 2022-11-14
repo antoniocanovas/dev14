@@ -179,7 +179,8 @@
                 <field name="name" string="Name"/>
                 <field name="project_id"/>
                 <field name="partner_id"/>
-                <field name="user_id" string="Responsible"/>
+                <field name="user_id" string="Assigned to"/>
+                <field name="manager_id" string="Manager"/>
                 <filter string="Supervising" name="my_phases" domain="[('user_id', '=', uid)]"/>
                 <filter string="Starred" name="starred" domain="[('is_favorite', '=', True)]"/>
                 <separator/>
