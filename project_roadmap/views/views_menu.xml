@@ -21,11 +21,11 @@
 
   roadmap_kanban_project_view
 
-  <record id="menu_project_roadmap" model="ir.ui.menu">
+  <record id="menu_project_roadmap_phases" model="ir.ui.menu">
     <field name="action" ref="action_view_project_roadmap"/>
     <field name="active" eval="True"/>
     <field name="groups_id" eval="[(6, 0, [])]"/>
-    <field name="name">Roadmap</field>
+    <field name="name">Phases</field>
     <field name="parent_id" ref="roadmap_main"/>
     <field name="sequence">20</field>
     <field name="web_icon" eval="False"/>

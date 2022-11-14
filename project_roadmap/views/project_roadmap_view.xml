@@ -33,6 +33,7 @@
                         <field name="state"/>
                         <field name="active" widget="boolean_toggle"/>
                         <field name="project_id" required="1"/>
+                        <field name="manager_id"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -70,6 +71,7 @@
                 <field name="state"/>
                 <field name="active" string="Active" widget="boolean_toggle"/>
                 <field name="project_id" invisible="1"/>
+                <field name="manager_id" optional="hide"/>
             </tree>
         </field>
         <field name="field_parent" eval="False"/>
@@ -90,6 +92,7 @@
                 <field name="user_id" avatar_field="image_128" filters="1"/>
                 <field name="date_limit"/>
                 <field name="project_id"/>
+                <field name="manager_id"/>
                 <field name="type"/>
             </calendar>
         </field>
@@ -113,6 +116,7 @@
                   default_order="active asc, priority asc">
                 <field name="is_favorite" widget="boolean_favorite" nolabel="1"/>
                 <field name="project_id" optional="show"/>
+                <field name="manager_id" optional="hide"/>
                 <field name="display_name"/>
                 <field name="priority" optional="hide"/>
                 <field name="type" invisible="1"/>
@@ -145,6 +149,7 @@
                 <field name="is_favorite" widget="boolean_favorite" nolabel="1"/>
                 <field name="display_name"/>
                 <field name="project_id" optional="hide"/>
+                <field name="manager_id" optional="hide"/>
                 <field name="priority" invisible="1"/>
                 <field name="type" invisible="1"/>
                 <field name="user_id" widget="many2one_avatar_user"/>
@@ -193,6 +198,7 @@
                 <group expand="0" string="Group By">
                     <filter string="Project" name="project" context="{'group_by': 'project_id'}"/>
                     <filter string="Responsible" name="user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Manager" name="manager" context="{'group_by': 'manager_id'}"/>
                     <filter string="Date limit" name="date_limit" context="{'group_by': 'date_limit'}"/>
                 </group>
             </data>

@@ -15,6 +15,7 @@ class ProjectRoadmap(models.Model):
     user_id = fields.Many2one('res.users', string='Responsable', required=True, store=True, copy=True, tracking=True)
     date_limit = fields.Date(string='Fecha límite', copy=False, tracking=True)
     project_id = fields.Many2one('project.project', string='Proyecto', copy=True)
+    manager_id = fields.Many2one('res.users', related='project_id.user_id', store=True)
     partner_id = fields.Many2one(related='project_id.partner_id', string="Cliente", copy=True, tracking=True)
     type = fields.Selection([('lead','Oportunidad'), ('sale','Venta'), ('purchase','Compra'), ('task','Tarea'),
                              ('project','Proyecto'),('picking','Albarán'),('invoice','Factura')], required=True)
