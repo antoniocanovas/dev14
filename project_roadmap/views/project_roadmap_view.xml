@@ -183,7 +183,7 @@
                 <field name="manager_id" string="Manager"/>
                 <filter string="My phases" name="my_phases" domain="[('user_id', '=', uid)]"/>
                 <separator/>
-                <filter string="Priority" name="starred" domain="[('is_favorite', '=', True)]"/>
+                <filter string="Starred" name="starred" domain="[('is_favorite', '=', True)]"/>
                 <separator/>
                 <filter string="Archived too" name="active" domain="[('active', 'in', [True,False])]"/>
                 <separator/>
