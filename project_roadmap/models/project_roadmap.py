@@ -10,7 +10,7 @@ class ProjectRoadmap(models.Model):
 
     name = fields.Char(string='Nombre', required=True, copy=True, tracking=True)
     display_name = fields.Char(string='Nombre mostrado', store=False, compute="_name_get")
-    priority = fields.Integer(string='Prioridad', default="1", copy=True)
+    sequence = fields.Integer(string='Sequence', default="1", copy=True)
     is_favorite = fields.Boolean('Is favorite', copy=False)
     user_id = fields.Many2one('res.users', string='Responsable', required=True, store=True, copy=True, tracking=True)
     date_limit = fields.Date(string='Fecha límite', copy=False, tracking=True)
@@ -32,7 +32,7 @@ class ProjectRoadmap(models.Model):
                  'invoice_id.state')
     def _name_get(self):
         for record in self:
-            name = "[" + str(record.priority) + "] " + record.type +  ": " + " " + record.name
+            name = "[" + str(record.sequence) + "] " + record.type +  ": " + " " + record.name
             record['display_name'] = name
 
     @api.depends('lead_id.stage_id', 'sale_id.state', 'purchase_id.state', 'task_id.stage_id', 'picking_id.state',
