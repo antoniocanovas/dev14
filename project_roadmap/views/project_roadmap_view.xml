@@ -249,7 +249,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="view_id" ref="project_roadmap_group_by_project_tree"/>
         <field name="usage" eval="False"/>
-        <field name="view_mode">tree,kanban,calendar,graph,pivot,form,activity</field>
+        <field name="view_mode">kanban,tree,calendar,graph,pivot,form,activity</field>
         <field name="view_ids" eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('project_roadmap_group_by_project_tree')}),]"/>
     </record>
