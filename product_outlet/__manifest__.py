@@ -14,7 +14,7 @@ Sell refubished products in Spain (special taxes)
         'crm_product',
     ],
     'data': [
-        'views/timesheet_work_views.xml',
+        'views/model_views.xml',
         'views/menu_views.xml',
     ],
     'installable': True,
