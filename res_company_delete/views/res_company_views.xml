@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_delete_button" model="ir.ui.view">
+        <field name="name">Company Delete Button</field>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="after">
+                <page name="delete" string="Delete">
+                    <group>
+                        <button name="company_save_delete" string="Delete Companies" type="object" class="oe_highlight oe_read_only"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
