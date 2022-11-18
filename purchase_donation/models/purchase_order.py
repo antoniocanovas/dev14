@@ -43,7 +43,7 @@ class PurchaseOrder(models.Model):
     def update_donation_set_lines(self):
         self.donation_line_ids.unlink()
         for line in self.donation_set_id.line_ids:
-            newline = self.env['donation.line'].create({'product_id': line.product_id.id,
-                                                        'qty': line.qty,
-                                                        'name': line.product_id.name,
-                                                        'purchase_id': record.id})
+            self.env['donation.line'].create({'product_id': line.product_id.id,
+                                              'qty': line.qty,
+                                              'name': line.product_id.name,
+                                              'purchase_id': self.id})
