@@ -19,7 +19,7 @@
                             <field name="newproduct_id" readonly="1" decoration-warning="1"/>
                         </tree>
                     </field>
-                    <button name="update_donation_set_lines" string="Create purchase lines from donations" type="object" class="oe_highlight oe_read_only"/>
+                    <button name="create_purchase_order_line_from_donation_lines" string="Create purchase lines from donations" type="object" class="oe_highlight oe_read_only"/>
                 </page>
             </xpath>
         </field>
