@@ -1,0 +1,59 @@
+<odoo>
+
+    <record id="delete_company" model="ir.actions.server">
+            <field name="name">=> Delete company</field>
+            <field name="model_id" ref="model_res_company"/>
+            <field name="state">code</field>
+            <field name="code">
+for r in records:
+  pickings = env['stock.picking'].search([('company_id','=',r.id)])
+  for pi in pickings:
+    for sm in pi.move_ids_without_package:
+      for sml in sm.move_line_ids:
+        sml['state'] = 'draft'
+        sml.unlink()
+      sm['state'] = 'draft'
+      sm.unlink()
+    pi['state'] = 'draft'
+    pi.unlink()
+
+  saleorders = env['sale.order'].search([('company_id','=',r.id)])
+  for so in saleorders:
+    so['state'] = 'draft'
+    so.unlink()
+
+  invoices = env['account.move'].search([('move_type','in',['out_invoice','in_invoice','out_refund','in_refund']),('company_id','=','r.id')])
+  for fa in invoices:
+    fa.button_draft()
+    fa.button_cancel()
+  for fa in invoices:
+    fa.unlink()
+
+  purchaseorders = env['purchase.order'].search([('company_id','=',r.id)])
+  for po in purchaseorders:
+    po.button_cancel()
+    po['state'] = 'cancel'
+    po.unlink()
+
+  fiscalposition = env['account.fiscal.position'].search([('company_id','=',r.id)])
+  for fp in fiscalposition: fp.unlink()
+
+  journals = env['account.journal'].search([('company_id','=',r.id)])
+  for jo in journals: jo.unlink()
+
+
+  taxs = env['account.tax'].search([('company_id','=',r.id)])
+  for tax in fiscalposition: tax.unlink()
+
+  accounts = env['account.account'].search([('company_id','=',r.id)])
+  for aa in accounts: aa.unlink()
+
+  config = env['res.config.settings'].search([('company_id','=',r.id)])
+  config.write({'chart_template_id':False, 'sale_tax_id':False, 'purchase_tax_id':False})
+
+# r.unlink()
+
+            </field>
+        </record>
+
+</odoo>
