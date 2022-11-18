@@ -15,27 +15,26 @@ class PurchaseOrder(models.Model):
 
     # Crea las líneas de compra con nuevos productos seriados por el código de compra:
     def create_purchase_order_line_from_donation_lines(self):
-        for r in records:
-            for li in r.donation_line_ids:
-                donation_code = r.name
-                if not li.purchase_line_id.id:
-                    similar_product = env['purchase.order.line'].search(
-                        [('product_id.parent_id', '=', li.product_id.product_tmpl_id.id), ('order_id', '=', record.id)])
-                    if similar_product.ids:
-                        donation_code += "_" + str(len(similar_product))
+        for li in self.donation_line_ids:
+            donation_code = self.name
+            if not li.purchase_line_id.id:
+                similar_product = env['purchase.order.line'].search(
+                    [('product_id.parent_id', '=', li.product_id.product_tmpl_id.id), ('order_id', '=', self.id)])
+                if similar_product.ids:
+                    donation_code += "_" + str(len(similar_product))
 
-                    new_product = env['product.template'].create(
-                        {'name': li.name + " " + donation_code, 'categ_id': li.product_id.categ_id.id,
-                         'sale_ok': True, 'purchase_ok': True, 'type': 'product',
-                         'parent_id': li.product_id.product_tmpl_id.id})
+                new_product = env['product.template'].create(
+                    {'name': li.name + " " + donation_code, 'categ_id': li.product_id.categ_id.id,
+                     'sale_ok': True, 'purchase_ok': True, 'type': 'product',
+                     'parent_id': li.product_id.product_tmpl_id.id})
 
-                    new_productproduct = env['product.product'].search([('product_tmpl_id', '=', new_product.id)])
+                new_productproduct = env['product.product'].search([('product_tmpl_id', '=', new_product.id)])
 
-                    new_pol = env['purchase.order.line'].create(
-                        {'order_id': record.id, 'product_id': new_productproduct.id, 'product_qty': li.qty,
-                         'product_uom': li.product_id.uom_po_id.id, 'price_unit': 1})
+                new_pol = env['purchase.order.line'].create(
+                    {'order_id': self.id, 'product_id': new_productproduct.id, 'product_qty': li.qty,
+                     'product_uom': li.product_id.uom_po_id.id, 'price_unit': 1})
 
-                    li.write({'newproduct_id': new_product.id, 'purchase_line_id': new_pol.id})
+                li.write({'newproduct_id': new_product.id, 'purchase_line_id': new_pol.id})
 
 
     # Actualizar líneas de donaciones, al cambiar el SET:
