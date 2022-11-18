@@ -39,7 +39,7 @@ class PurchaseOrder(models.Model):
 
 
     # Actualizar líneas de donaciones, al cambiar el SET:
-    @api.depends('donation_set_id')
+    @api.onchange('donation_set_id')
     def update_donation_set_lines(self):
         self.donation_line_ids.unlink()
         for line in self.donation_set_id.line_ids:
