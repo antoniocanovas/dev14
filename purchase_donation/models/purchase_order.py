@@ -18,17 +18,17 @@ class PurchaseOrder(models.Model):
         for li in self.donation_line_ids:
             donation_code = self.name
             if not li.purchase_line_id.id:
-                similar_product = env['purchase.order.line'].search(
+                similar_product = self.env['purchase.order.line'].search(
                     [('product_id.parent_id', '=', li.product_id.product_tmpl_id.id), ('order_id', '=', self.id)])
                 if similar_product.ids:
                     donation_code += "_" + str(len(similar_product))
 
-                new_product = env['product.template'].create(
+                new_product = self.env['product.template'].create(
                     {'name': li.name + " " + donation_code, 'categ_id': li.product_id.categ_id.id,
                      'sale_ok': True, 'purchase_ok': True, 'type': 'product',
                      'parent_id': li.product_id.product_tmpl_id.id})
 
-                new_productproduct = env['product.product'].search([('product_tmpl_id', '=', new_product.id)])
+                new_productproduct = self.env['product.product'].search([('product_tmpl_id', '=', new_product.id)])
 
                 new_pol = env['purchase.order.line'].create(
                     {'order_id': self.id, 'product_id': new_productproduct.id, 'product_qty': li.qty,
