@@ -24,7 +24,6 @@
         "views/purchase_order_views.xml",
         "views/product_template_views.xml",
         "views/menu_views.xml",
-        "data/action_server.xml",
         "security/ir.model.access.csv",
     ],
     "installable": True,
