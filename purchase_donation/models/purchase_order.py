@@ -30,7 +30,7 @@ class PurchaseOrder(models.Model):
 
                 new_productproduct = self.env['product.product'].search([('product_tmpl_id', '=', new_product.id)])
 
-                new_pol = env['purchase.order.line'].create(
+                new_pol = self.env['purchase.order.line'].create(
                     {'order_id': self.id, 'product_id': new_productproduct.id, 'product_qty': li.qty,
                      'product_uom': li.product_id.uom_po_id.id, 'price_unit': 1})
 
