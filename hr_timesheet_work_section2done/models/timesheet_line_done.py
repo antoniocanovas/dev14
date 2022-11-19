@@ -9,4 +9,4 @@ from odoo import api, fields, models, _
 class TimesheetLineDone(models.Model):
     _inherit = "timesheet.line.done"
 
-    section_id = fields.Many2one('sale.order.line', string='Section', store=True, related=sale_line_id.section_id)
+    section_id = fields.Many2one('sale.order.line', string='Section', store=True, related='sale_line_id.section_id')
