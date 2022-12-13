@@ -27,6 +27,7 @@ for r in records:
         'standard_price':li.standard_price})
       rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
       newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
+        # New product stock value, and record decreasing value:
       stock_value = record.standard_price - li.qty * li.standard_price
       if stock_value &lt; 0: stock_value = 0
       record['standard_price'] = stock_value
