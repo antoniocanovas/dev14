@@ -33,4 +33,4 @@ class UnbuildProductLine(models.Model):
     name = fields.Char(string='Name', compute='get_part_name', readonly=False, store=True)
 
     # Inventory valuation field:
-    standard_price = fields.Float(string='Stock value')
+    standard_price = fields.Float(string='Unit stock value')

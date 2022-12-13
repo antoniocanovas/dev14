@@ -23,9 +23,14 @@ for r in records:
         'categ_id':li.part_id.category_id.id, 'unbuild_type':'subproduct',
         'sale_ok':True, 'purchase_ok':False, 'type':'product', 'parent_id':rootpt.id, 'default_code':rootcode + codesub,
         'income_analytic_account_id':rootpt.income_analytic_account_id.id , 'expense_analytic_account_id':rootpt.expense_analytic_account_id.id,
-        'unbuild_location_id':rootpt.unbuild_location_id.id})
+        'unbuild_location_id':rootpt.unbuild_location_id.id,
+        'standard_price':li.standard_price})
       rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
       newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
+      stock_value = record.standard_price - li.qty * li.standard_price
+      if stock_value &lt; 0: stock_value = 0
+      record['standard_price'] = stock_value
+
 
       if (newsi == False):
         name = "Productos " + rootpt.default_code
