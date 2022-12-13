@@ -1,0 +1,214 @@
+<odoo>
+        <record id="ir_unbuild_scrap_products" model="ir.actions.server">
+            <field name="name">=> Crear productos del despiece</field>
+            <field ref="model_product_template" name="model_id" />
+            <!--<field name="user_id" ref="base.user_root" />-->
+            <field name="binding_model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">
+# Crea la CLASIFICACIÓN y desglose de productos en la ubicación del producto padre:
+for r in records:
+  newsi = False
+  rootcode = r.default_code[:6]
+  location = env['stock.location'].search([('name','=',rootcode)])
+  rootpt = env['product.template'].search([('default_code','=',rootcode)])
+  if not rootpt.id or not location.id:
+    raise Warning('Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; o la localizacón de almacén con este código.')
+
+  for li in r.unbuild_product_line_ids:
+    if not li.newproduct_id.id:
+      codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
+      newproduct = env['product.template'].create({'name':li.name,
+        # 'chassis_pt':r.chassis_pt,
+        'categ_id':li.part_id.category_id.id, 'unbuild_type':'subproduct',
+        'sale_ok':True, 'purchase_ok':False, 'type':'product', 'parent_id':rootpt.id, 'default_code':rootcode + codesub,
+        'income_analytic_account_id':rootpt.income_analytic_account_id.id , 'expense_analytic_account_id':rootpt.expense_analytic_account_id.id,
+        'unbuild_location_id':rootpt.unbuild_location_id.id})
+      rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
+      newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
+
+      if (newsi == False):
+        name = "Productos " + rootpt.default_code
+        newsi = env['stock.inventory'].create({'name':name})
+      newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
+        'product_qty':li.qty})
+      li['newproduct_id'] = newproduct.id
+  if (newsi != False):
+    newsi.action_start()
+    newsi.action_validate()
+  else:
+    raise Warning('No hay productos nuevos que crear en: ' + r.name)
+            </field>
+        </record>
+
+    <record id="change_unbuild_set_parts_producttemplate" model="base.automation">
+            <field name="name">=> Change SET unbuild parts on scrap products</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">
+# CODE:
+record.unbuild_product_line_ids.unlink()
+for part in record.unbuild_set_id.line_ids:
+  newline = env['unbuild.product.line'].create({'part_id':part.part_id.id, 'qty':part.qty, 'name':part.part_id.name, 'product_tmpl_id':record.id})
+
+            </field>
+            <field name="trigger">on_change</field>
+            <field name="on_change_field_ids" eval="[(6,0, [ref('scrap_unbuild.field_product_template__unbuild_set_id')])]"/>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
+    <record id="assign_standard_code_to_scrap_product_templates" model="base.automation">
+            <field name="name">=> Assign standard_code and Analytic account to scrap products</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">
+
+# Asigna código en base a secuencia si el producto es para desguace y no tiene padre.
+# Asigna código de pieza si tiene producto padre, en base a secuencia interna de producto padre.
+# Asigna código de pieza si tiene producto padre y este está anidado con otros, en base al producto principal.
+# Asigna código de otra secuencia, si el tipo de producto es "otro"; este será editable después si interesa cambiarlo.
+# Asigna analíticas.
+  # SCRAP Code if MAIN:
+if (record.unbuild_type in ['main']) and not (record.parent_id.id) and not (record.default_code):
+  rootcode = env['ir.sequence'].next_by_code('scrap.unbuild')
+  record['default_code'] = rootcode
+  # USED PRODUCT Code if REFURBISH:
+elif (record.unbuild_type in ['refurbish']) and not (record.default_code):
+  rootcode = env['ir.sequence'].next_by_code('scrap.unbuild.standard')
+  record['default_code'] = rootcode
+elif (record.unbuild_type in ['other']) and not (record.default_code):
+  rootcode = env['ir.sequence'].next_by_code('scrap.unbuild.other')
+  record['default_code'] = rootcode
+
+if (record.unbuild_type in ['subproduct']) and (record.parent_id.id) and not (record.default_code):
+  rootcode = record.parent_id.default_code[:6]
+  rootpt = env['product.template'].search([('default_code','=',rootcode)])
+  if not rootpt.id: raise Warning('Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos.')
+  else:
+    codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
+    record['default_code'] = rootcode + codesub
+    rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
+
+
+  # Naming AA control and creation:
+if (record.unbuild_type in ['main','refurbish']) or (record.parent_id.id):
+  rootcode = record.default_code[:6]
+  if (record.unbuild_type == 'subproduct'): rootcode = record.parent_id.default_code
+  if (record.unbuild_type != False) and not (record.income_analytic_account_id.id):
+    aa = env['account.analytic.account'].search([('name','=',rootcode)])
+    if not aa.id:
+      aa = env['account.analytic.account'].create({'name':rootcode})
+    record['income_analytic_account_id'] = aa.id
+    if not record.expense_analytic_account_id.id:
+      record['expense_analytic_account_id'] = aa.id
+
+    # Rootcode or chassis renamed:
+  if (record.unbuild_type in ['main']) and (record.income_analytic_account_id.id) and (record.income_analytic_account_id.name != record.default_code):
+    record.income_analytic_account_id['name'] = record.default_code[:6]
+  elif (record.unbuild_type in ['refurbish']) and (record.income_analytic_account_id.id) and (record.chassis_pt) and (record.income_analytic_account_id.name != record.chassis_pt):
+    record.income_analytic_account_id['name'] =  "[" + record.default_code + "] " + record.chassis_pt
+
+  # PROJECT for MAIN and REFURBISHED:
+  project = env['project.project'].search([('analytic_account_id','=', record.income_analytic_account_id.id)])
+  if not project.id:
+    manager = env.company.unbuild_manager_id
+    name = record.name + " [" + record.default_code +"]"
+    project = env['project.project'].create({'name':name, 'analytic_account_id':record.income_analytic_account_id.id,
+      'allow_timesheets':True, 'user_id':manager.id, 'allow_billable':True
+    })
+  record['unbuild_project_id'] = project.id
+
+  # Default Location and project:
+  if (record.unbuild_type in ['main','subproduct']):
+    rootlocation = env.company.unbuild_location_id
+    if not rootlocation.id:
+      raise Warning('Parametriza la ubicación por defecto de la compañía para productos a desguazar')
+    location = env['stock.location'].search([('name','=',rootcode)])
+    if not location.id:
+      location = env['stock.location'].create({'name':rootcode, 'usage':'internal', 'location_id':rootlocation.id})
+    record['unbuild_location_id'] = location.id
+  elif (record.unbuild_type in ['refurbish']):
+    refurbishlocation = env.company.refurbish_location_id
+    if not refurbishlocation.id:
+      raise Warning('Parametriza la ubicación por defecto para los vehículos de compra/venta.')
+    if (refurbishlocation.id != record.unbuild_location_id.id):
+      record['unbuild_location_id'] = refurbishlocation.id
+
+  # Chassis inherance:
+if (record.parent_id.id) and (record.chassis_pt != record.parent_id.chassis_pt):
+  record['chassis_pt'] = record.parent_id.chassis_pt
+            </field>
+            <field name="trigger">on_change</field>
+            <field name="on_change_field_ids" eval="[(6,0, [ref('scrap_unbuild.field_product_template__parent_id'),
+                                ref('scrap_unbuild.field_product_template__unbuild_type'),
+                                ref('product_chassis.field_product_template__chassis_pt')])]"/>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
+    <record id="scrap_unbuild_update_main_products_location_to_unbuild" model="base.automation">
+            <field name="name">=> Update trucks and tools location to unbuild</field>
+            <field name="model_id" ref="sale_stock.model_stock_picking"/>
+            <field name="state">code</field>
+            <field name="code">
+# Cada SM a su localización, por si son varios SM tractores:
+for li in record.move_ids_without_package:
+  location = li.product_id.product_tmpl_id.unbuild_location_id
+  if (li.product_id.product_tmpl_id.unbuild_type in ['main','refurbish']) and (record.purchase_id.id) and (location.id != li.location_dest_id.id):
+    li['location_dest_id'] = location.id
+
+            </field>
+            <field name="trigger">on_create_or_write</field>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
+    <record id="task_to_unbuild_product_template" model="ir.actions.server">
+        <field name="name">=> Crear tarea de desmontaje y suministro a almacén</field>
+        <field ref="model_product_template" name="model_id" />
+        <!--<field name="user_id" ref="base.user_root" />-->
+        <field name="binding_model_id" ref="model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">
+# Desde PT, chequea si existe proyecto para la cuenta analítica del producto raíz, si no la crea.
+manager = env.company.unbuild_manager_id
+for r in records:
+  if (r.unbuild_task_id.id):
+    raise Warning(r.display_name + ": " + 'Esta pieza o piezas ya tienen una tarea, si quieres crear otra haz de hacerlo a mano en PROYECTOS.')
+  rootcode = r.default_code[:6]
+  rootpt = env['product.template'].search([('default_code','=',rootcode)])
+  if (rootpt.unbuild_type in ['main','subproduct']):
+    project = env['project.project'].search([('analytic_account_id','=',rootpt.income_analytic_account_id.id)])
+    if not project.id:
+      project = env['project.project'].create({'name':rootpt.display_name, 'analytic_account_id':rootpt.income_analytic_account_id.id,
+        'allow_timesheets':True, 'user_id':manager.id
+      })
+    description = "Solicitud de pieza en stock de almacén principal."
+    newtask = env['project.task'].create({'name':r.display_name, 'project_id':project.id, 'description':description, 'user_id':manager.id})
+    r['unbuild_task_id'] = newtask.id
+        </field>
+    </record>
+
+    <record id="scrap_assign_subproduct_code" model="ir.actions.server">
+        <field name="name">=> Crear código a subproducto sin vehículo origen definido.</field>
+        <field ref="model_product_template" name="model_id" />
+        <field name="binding_model_id" ref="model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">
+# Desde PT, crea código desde secuencia específica para estos subproductos.
+if (record.unbuild_type != 'subproduct'):
+  raise Warning('Opción exclusiva para subproductos.')
+
+if (record.default_code != False):
+  raise Warning('Este subproducto ya tiene código.')
+
+if not (record.default_code) and (record.unbuild_type == 'subproduct'):
+  record['default_code'] = env['ir.sequence'].next_by_code('scrap.unbuild.subproduct')
+        </field>
+    </record>
+
+</odoo>
