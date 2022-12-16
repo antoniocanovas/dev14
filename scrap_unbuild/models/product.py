@@ -12,7 +12,7 @@ class ProductTemplate(models.Model):
 
     unbuild_type = fields.Selection(
         [('main', 'Vehículo o Parte para desguace'),
-         ('subproduct', 'Subproducto (desguazable si tiene asignado un Vehículo o Parte PADRE)'),
+         ('subproduct', 'Subproducto'),
          ('refurbish','Para compra/venta'),
          ('other','Otros finales desguazados')],
         string='Scrap Type')
