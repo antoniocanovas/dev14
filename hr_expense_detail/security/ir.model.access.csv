@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-hr_expense_line_user, Expense line detail User,model_hr_expense_line,base.group_user,1,1,1,1
-hr_expense_type_user,Expense type detail user,model_hr_expense_type,base.group_user,1,0,0,0
-hr_expense_type_admin,Expense type detail admin,model_hr_expense_type,hr_expense.group_hr_expense_manager,1,1,1,1
