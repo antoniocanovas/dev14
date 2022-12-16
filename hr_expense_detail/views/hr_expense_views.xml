@@ -17,8 +17,8 @@
                             <field name="amount"/>
                             <field name="expense_id" invisible="1"/>
                         </tree>
-                        <field name="line_amount"/>
                     </field>
+                    <field name="line_amount"/>
                 </group>
             </field>
         </field>
