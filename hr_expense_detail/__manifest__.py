@@ -12,6 +12,7 @@ Hr Expense several tickets in one expense form
     'data': [
         'security/ir.model.access.csv',
         'views/hr_expense_views.xml',
+        'views/hr_expense_line_views.xml',
         'views/menu_views.xml',
     ],
     'installable': True,

@@ -20,7 +20,7 @@
         <field name="active" eval="True"/>
         <field name="groups_id" eval="[(6, 0, [ref('hr_expense.group_hr_expense_manager')])]"/>
         <field name="name">Expense detail lines</field>
-        <field name="parent_id" ref="hr_expense.menu_hr_expense_report"/>
+        <field name="parent_id" ref="hr_expense.menu_hr_expense_reports"/>
         <field name="sequence">50</field>
     </record>
 

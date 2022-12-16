@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="hr_expense_detail_line_tree" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <tree string="Expense detail lines">
+                <field name="name" modifiers="{}"/>
+                <field name="type_id"/>
+                <field name="employee_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="amount"/>
+                <field name="date"/>
+            </tree>
+        </field>
+        <field name="model">hr.expense.detail.line.tree</field>
+        <field name="name">Default tree view for expense detail lines</field>
+        <field name="type">tree</field>
+    </record>
+
+</odoo>

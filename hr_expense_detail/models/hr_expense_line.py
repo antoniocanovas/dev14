@@ -11,6 +11,8 @@ class HrExpeseLine(models.Model):
     type_id = fields.Many2one('hr.expense.type', string="Type")
     amount = fields.Float('Amount')
     expense_id = fields.Many2one('hr.expense', string='Expense', store=True, required=True)
+    date = fields.Date('Expense date', store=True, related='expense_id.date')
+    employee_id = fields.Many2one('hr.employee', store=True, related='expense_id.employee_id')
 
     @api.depends('type_id')
     def get_name_from_type(self):
