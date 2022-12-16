@@ -32,7 +32,7 @@ class ProductTemplate(models.Model):
         string='Parts task',
     )
 
-    unbuild_sequence = fields.Integer(string='Secuencia de piezas')
+    unbuild_sequence = fields.Integer(string='Sequencia de piezas')
 
     unbuild_set_id = fields.Many2one('unbuild.set', string='Unbuild Set')
 
