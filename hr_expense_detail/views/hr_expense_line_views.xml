@@ -11,7 +11,7 @@
                 <field name="date"/>
             </tree>
         </field>
-        <field name="model">hr.expense.detail.line</field>
+        <field name="model">hr.expense.line</field>
         <field name="name">Default tree view for expense detail lines</field>
         <field name="type">tree</field>
     </record>
