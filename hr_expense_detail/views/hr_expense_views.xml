@@ -19,6 +19,7 @@
                         </tree>
                     </field>
                     <field name="line_amount"/>
+                    <field name="market_amount"/>
                 </group>
             </field>
         </field>
