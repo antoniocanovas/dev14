@@ -8,7 +8,7 @@ class HrExpeseLine(models.Model):
     _name = 'hr.expense.line'
     _description = 'Hr expense detail line'
 
-    type_id = fields.Many2one('hr.expense.line', string="Type")
+    type_id = fields.Many2one('hr.expense.type', string="Type")
     amount = fields.Float('Amount')
     expense_id = fields.Many2one('hr.expense', string='Expense', store=True, required=True)
 

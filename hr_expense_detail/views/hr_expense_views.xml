@@ -18,6 +18,9 @@
                     </tree>
                 </field>
             </field>
+            <field name="payment_mode" position="after">
+                <field name="line_amount"/>
+            </field>
         </field>
     </record>
 
