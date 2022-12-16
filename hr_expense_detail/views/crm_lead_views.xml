@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="crm_lead_scrap_inh" model="ir.ui.view">
+        <field name="name">SCRAP CRM Inherit Form View</field>
+        <field name="model">crm.lead</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <field name="description" position="before">
+                <field name="task_ids" context="{'default_project_id':scrap_project_id, 'default_user_id':scrap_user_id}">
+                    <tree editable="bottom">
+                        <field name="name"/>
+                        <field name="brand_id"/>
+                        <field name="categ_id"/>
+                        <field name="user_id"/>
+                        <field name="project_id"/>
+                        <field name="tag_ids" widget="many2many_tags" string="Procesos"/>
+                        <field name="stage_id" readonly="1"/>
+                        <field name="company_id" invisible="1"/>
+                    </tree>
+                </field>
+                <group>
+                        <field name="scrap_project_id" invisible="1"/>
+                        <field name="scrap_user_id" invisible="1"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+</odoo>
