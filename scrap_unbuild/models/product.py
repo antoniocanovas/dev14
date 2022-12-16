@@ -11,7 +11,10 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     unbuild_type = fields.Selection(
-        [('main', 'Vehículo o apero para desguace'), ('subproduct', 'Subproducto'), ('refurbish','Para compra/venta'),('other','Otros desguazados')],
+        [('main', 'Vehículo o Parte para desguace'),
+         ('subproduct', 'Subproducto (desguazable si tiene asignado un Vehículo o Parte PADRE)'),
+         ('refurbish','Para compra/venta'),
+         ('other','Otros finales desguazados')],
         string='Scrap Type')
 
     parent_id = fields.Many2one(

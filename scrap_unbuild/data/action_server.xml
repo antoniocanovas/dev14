@@ -91,10 +91,10 @@ elif (record.unbuild_type in ['other']) and not (record.default_code):
 if (record.unbuild_type in ['subproduct']) and (record.parent_id.id) and not (record.default_code):
   rootcode = record.parent_id.default_code[:6]
   rootpt = env['product.template'].search([('default_code','=',rootcode)])
-  if not rootpt.id: raise Warning('Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos.')
+  if not rootpt.id: raise Warning('Asigna un producto padre antes de desguazar un subproducto.')
   else:
     codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
-    record['default_code'] = rootcode + codesub
+    record.write({'default_code': rootcode + codesub, 'parent_id':record.parent_id.id})
     rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
 
 
