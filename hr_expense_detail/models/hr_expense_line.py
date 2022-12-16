@@ -18,4 +18,4 @@ class HrExpeseLine(models.Model):
         if self.type_id.name:
             name = self.type_id.name
         self.name = name
-    name = fields.Char('Description', compute='get_name_from_type')
+    name = fields.Char('Description', compute='get_name_from_type', readonly=False)
