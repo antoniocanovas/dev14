@@ -9,17 +9,17 @@
         <field name="priority">99</field>
         <field name="arch" type="xml">
             <field name="description" position="before">
-                <field name="line_ids">
-                    <tree editable="bottom">
-                        <field name="type_id"/>
-                        <field name="name"/>
-                        <field name="amount"/>
-                        <field name="expense_id" invisible="1"/>
-                    </tree>
-                </field>
-            </field>
-            <field name="payment_mode" position="after">
-                <field name="line_amount"/>
+                <group>
+                    <field name="line_ids">
+                        <tree editable="bottom">
+                            <field name="type_id"/>
+                            <field name="name"/>
+                            <field name="amount"/>
+                            <field name="expense_id" invisible="1"/>
+                        </tree>
+                        <field name="line_amount"/>
+                    </field>
+                </group>
             </field>
         </field>
     </record>
