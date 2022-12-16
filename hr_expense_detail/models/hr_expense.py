@@ -23,4 +23,4 @@ class HrExpense(models.Model):
             else:
                 total += li.amount
         self.market_amount = total
-    market_amount = fields.Float('Detail market', store=False, compute='get_lines_amount_estimation')
+    market_amount = fields.Float('Market estimation', store=False, compute='get_lines_amount_estimation')
