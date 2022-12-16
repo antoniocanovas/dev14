@@ -12,4 +12,4 @@ class HrExpense(models.Model):
         for li in self.line_ids:
             total += li.amount
         self.line_amount = total
-    line_amount = fields.float('Detail total', store=True, compute='get_lines_amount')
+    line_amount = fields.Float('Detail total', store=True, compute='get_lines_amount')
