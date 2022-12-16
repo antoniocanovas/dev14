@@ -6,7 +6,7 @@
             <tree string="Expense detail lines">
                 <field name="name" modifiers="{}"/>
                 <field name="type_id"/>
-                <field name="employee_id" widget="many2one_avatar_employee" optional="show"/>
+                <field name="employee_id" optional="show"/>
                 <field name="amount"/>
                 <field name="date"/>
             </tree>
