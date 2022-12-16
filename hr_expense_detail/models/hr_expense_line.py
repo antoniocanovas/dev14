@@ -14,8 +14,9 @@ class HrExpeseLine(models.Model):
 
     @api.depends('type_id')
     def get_name_from_type(self):
-        name = self.name
-        if self.type_id.name:
-            name = self.type_id.name
-        self.name = name
+        for record in self:
+            name = record.name
+            if record.type_id.name:
+                name = record.type_id.name
+            record.name = name
     name = fields.Char('Description', compute='get_name_from_type', readonly=False)
