@@ -5,7 +5,7 @@ _logger = logging.getLogger(__name__)
 
 
 class PartnerStatus(models.Model):
-    _name = 'partner.status'
+    _name = 'partner.plan'
     _description = 'Partner Status'
 
     name = fields.Char('Name')
