@@ -22,7 +22,7 @@ class ResPartner(models.Model):
                                           column2='pc_respuesta',
                                           domain=[('type','=','competencia')])
 
-    pc_potencialanual_id = fields.Many2one('partner.plan', string='Actividad', domain=[('type','=','potencialanual')])
+    pc_potencialanual_id = fields.Many2one('partner.plan', string='Potencial anual', domain=[('type','=','potencialanual')])
     pc_actividad_id    = fields.Many2one('partner.plan', string='Actividad', domain=[('type','=','actividad')])
     pc_negociacion_id  = fields.Many2one('partner.plan', string='Negociación', domain=[('type','=','negociacion')])
 
