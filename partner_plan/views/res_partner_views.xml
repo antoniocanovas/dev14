@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="partner_plan_form_inh_view" model="ir.ui.view">
-        <field name="name">Partner Status</field>
+        <field name="name">Partner Plan</field>
         <field name="model">res.partner</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="base.view_partner_form"/>

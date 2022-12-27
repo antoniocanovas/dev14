@@ -4,9 +4,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class PartnerStatus(models.Model):
+class PartnerPlan(models.Model):
     _name = 'partner.plan'
-    _description = 'Partner Status'
+    _description = 'Partner Plan'
 
     name = fields.Char('Name')
     type = fields.Selection(
