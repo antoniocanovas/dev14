@@ -25,10 +25,34 @@ class ResPartner(models.Model):
     pc_potencialanual_id = fields.Many2one('partner.plan', string='Actividad', domain=[('type','=','potencialanual')])
     pc_actividad_id    = fields.Many2one('partner.plan', string='Actividad', domain=[('type','=','actividad')])
     pc_negociacion_id  = fields.Many2one('partner.plan', string='Negociación', domain=[('type','=','negociacion')])
-    pc_catalogo_ids    = fields.Many2many('partner.plan', string='Catálogo', domain=[('type','=','catalogo')])
+
+    pc_catalogo_ids    = fields.Many2many(comodel_name='partner.plan',
+                                          string='Catálogos',
+                                          relation='pc_catalogo_rel',
+                                          column1='partner_id',
+                                          column2='pc_respuesta',
+                                          domain=[('type','=','catalogo')])
+
     pc_nlocal_id       = fields.Many2one('partner.plan', string='Número locales', domain=[('type','=','nlocales')])
     pc_zonainfluencia_id = fields.Many2one('partner.plan', string='Zona de influencia', domain=[('type','=','zonainfluencia')])
     pc_situacionfinanciera_id = fields.Many2one('partner.plan', string='Situación financiera', domain=[('type','=','situacionfinanciera')])
-    pc_valorado_id     = fields.Many2one('partner.plan', string='Lo más valorado', domain=[('type','=','valorado')])
-    pc_externaliza_ids = fields.Many2many('partner.plan', string='Externaliza', domain=[('type','=','externaliza')])
-    pc_negocio_ids     = fields.Many2one('partner.plan', string='Uds. de negocio', domain=[('type','=','negocio')])
+    pc_valorado_id     = fields.Many2one(comodel_name='partner.plan',
+                                         string='Lo más valorado',
+                                         relation='pc_valorado_rel',
+                                         column1='partner_id',
+                                         column2='pc_respuesta',
+                                         domain=[('type','=','valorado')])
+
+    pc_externaliza_ids = fields.Many2many(comodel_name='partner.plan',
+                                          string='Externaliza',
+                                          relation='pc_externaliza_rel',
+                                          column1='partner_id',
+                                          column2='pc_respuesta',
+                                          domain=[('type','=','externaliza')])
+
+    pc_negocio_ids     = fields.Many2one(comodel_name='partner.plan',
+                                         string='Uds. Negocio',
+                                         relation='pc_negocio_rel',
+                                         column1='partner_id',
+                                         column2='pc_respuesta',
+                                         domain=[('type','=','negocio')])
