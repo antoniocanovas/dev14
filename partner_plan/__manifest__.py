@@ -12,6 +12,7 @@ Partner Plan in contacts
     'data': [
         'security/ir.model.access.csv',
         'views/res_partner_views.xml',
+        'views/partner_plan_views.xml',
         'views/menu_views.xml',
     ],
     'installable': True,
