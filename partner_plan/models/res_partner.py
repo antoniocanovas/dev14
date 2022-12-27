@@ -44,7 +44,7 @@ class ResPartner(models.Model):
                                           column2='pc_respuesta',
                                           domain=[('type','=','externaliza')])
 
-    pc_negocio_ids     = fields.Many2one(comodel_name='partner.plan',
+    pc_negocio_ids     = fields.Many2many(comodel_name='partner.plan',
                                          string='Uds. Negocio',
                                          relation='pc_negocio_rel',
                                          column1='partner_id',
