@@ -36,13 +36,7 @@ class ResPartner(models.Model):
     pc_nlocal_id       = fields.Many2one('partner.plan', string='Número locales', domain=[('type','=','nlocales')])
     pc_zonainfluencia_id = fields.Many2one('partner.plan', string='Zona de influencia', domain=[('type','=','zonainfluencia')])
     pc_situacionfinanciera_id = fields.Many2one('partner.plan', string='Situación financiera', domain=[('type','=','situacionfinanciera')])
-    pc_valorado_id     = fields.Many2one(comodel_name='partner.plan',
-                                         string='Lo más valorado',
-                                         relation='pc_valorado_rel',
-                                         column1='partner_id',
-                                         column2='pc_respuesta',
-                                         domain=[('type','=','valorado')])
-
+    pc_valorado_id     = fields.Many2one('partner.plan', string='Lo más valorado', domain=[('type','=','valorado')])
     pc_externaliza_ids = fields.Many2many(comodel_name='partner.plan',
                                           string='Externaliza',
                                           relation='pc_externaliza_rel',
