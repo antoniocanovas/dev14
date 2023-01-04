@@ -28,7 +28,7 @@ for li in record.line_ids:
     newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
       # New product stock value, and record decreasing value:
     stock_value = record.product_tmpl_id.standard_price - li.qty * li.standard_price
-    if stock_value < 0: stock_value = 0
+    if stock_value &lt; 0: stock_value = 0
     record.product_tmpl_id.write({'standard_price':stock_value})
 
 
