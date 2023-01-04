@@ -26,7 +26,7 @@ for part in record.unbuild_set_id.line_ids:
 
             </field>
             <field name="trigger">on_change</field>
-            <field name="on_change_field_ids" eval="[(6,0, [ref('scrap_unbuild.field_product_template__unbuild_set_id')])]"/>
+            <field name="on_change_field_ids" eval="[(6,0, [ref('scrap_unbuild.field_scrap_unbuild_wizard__unbuild_set_id')])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
             <field name="active" eval="True"/>
