@@ -21,10 +21,6 @@ class UnbuildProductLineWizard(models.TransientModel):
         string='Part',
         required=True,
     )
-    newproduct_id = fields.Many2one(
-        'product.template',
-        string='New product',
-    )
     qty = fields.Integer(string='Quantity')
 
     @api.depends('part_id')

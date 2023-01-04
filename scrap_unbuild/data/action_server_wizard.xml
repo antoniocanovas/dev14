@@ -38,6 +38,23 @@ for li in record.line_ids:
     newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
       'product_qty':li.qty})
     li['newproduct_id'] = newproduct.id
+
+
+
+
+  # Si no se crea producto nuevo hay que añadir al quant existente o crear uno:
+  if not (li.newproduct_id.id) and (li.part_id.product_id.id) and (li.qty > 0):
+    sq = env['stock.quant'].search([('product_id','=',li.part_id.product_id.id),('location_id','=',location.id)])
+    if sq.id:
+      # Crear SIL con cantidad incrementada:
+#      newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
+      raise Warning('stock: ' + str(sq.quantity) + " en location: " + location.name)
+    else:
+      raise Warning('sin sq')
+
+
+
+
 if (newsi != False):
   newsi.action_start()
   newsi.action_validate()
