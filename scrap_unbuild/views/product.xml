@@ -70,6 +70,7 @@
                     </h1>
                     <group>
                         <field name="category_id" required="1"/>
+                        <field name="product_tmpl_id"/>
                     </group>
                 </sheet>
             </form>
