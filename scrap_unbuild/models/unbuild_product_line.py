@@ -15,10 +15,6 @@ class UnbuildProductLine(models.Model):
         'product.template',
         string='Product template',
     )
-    unbuild_wizard_id = fields.Many2one(
-        'scrap.unbuild.wizard',
-        string='Wizard'
-    )
     part_id = fields.Many2one(
         'unbuild.part',
         string='Part',
