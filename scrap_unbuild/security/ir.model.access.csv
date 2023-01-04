@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_unbuild_part, Unbuild Part,model_unbuild_part,base.group_user,1,1,1,1
+access_unbuild_product_line, Unbuild Product Line,model_unbuild_product_line,base.group_user,1,1,1,1
+access_unbuild_set, Unbuild Set,model_unbuild_set,base.group_user,1,1,1,1
+access_unbuild_set_line, Unbuild Set Line,model_unbuild_set_line,base.group_user,1,1,1,1
+access_scrap_unbuild_wizard,Scrap Unbuild Wizard,model_scrap_unbuild_wizard,base.group_user,1,1,1,1
