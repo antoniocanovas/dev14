@@ -34,7 +34,6 @@
         "data/sequence.xml",
         "security/ir.model.access.csv",
         'views/scrap_unbuild_wizard.xml',
-        'views/product_template_views.xml',
     ],
     "installable": True,
 }
