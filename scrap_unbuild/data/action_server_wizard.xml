@@ -20,7 +20,7 @@ units = 0
 for li in record.line_ids: units += li.qty
 if units &gt; 0:
   name = record.name + " " + rootpt.default_code
-  newsi = env['stock.inventory'].create({'name':name})
+  newsi = env['stock.inventory'].create({'name':name, 'scrap_product_tmpl_id':record.product_tmpl_id.id})
 else:
   raise Warning('No hay productos nuevos que crear en: ' + record.name)
 
