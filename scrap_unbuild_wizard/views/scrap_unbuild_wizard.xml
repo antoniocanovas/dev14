@@ -2,36 +2,27 @@
 <odoo>
 
 
-    <record model="ir.actions.act_window" id="action_wizard_multisection_discount" >
-        <field name="name">Discount</field>
-        <field name="res_model">saleorder.multisection.discount.wizard</field>
+    <record model="ir.actions.act_window" id="action_scrap_unbuild_wizard" >
+        <field name="name">Unbuild Wizard</field>
+        <field name="res_model">scrap.unbuild.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
 
-    <record id="sale_order_wizard_multisection_discount" model="ir.ui.view">
-        <field name="name">Wizard Multisection Discount</field>
-        <field name="model">saleorder.multisection.discount.wizard</field>
+    <record id="scrap_unbuild_wizard_form" model="ir.ui.view">
+        <field name="name">Scrap Unbuild Wizard</field>
+        <field name="model">scrap.unbuild.wizard</field>
         <field name="arch" type="xml">
             <form>
-                <sheet string="Discounts">
-                    <group col="2">
-                        <field name="type"/>
-                        <field name="discount" attrs="{'invisible':[('type','!=','discount')]}"/>
-                        <field name="price" attrs="{'invisible':[('type','!=','services')]}"/>
-                        <field name="name" invisible="1"/>
-                    </group>
-                    <group col="4">
-                        <field name="services" attrs="{'invisible':[('type','!=','discount')]}"/>
-                        <field name="products" attrs="{'invisible':[('type','!=','discount')]}"/>
-                        <field name="childs"/>
-                        <field name="all_quotation"/>
-                        <field name="section_id" invisible="1"/>
-                        <field name="sale_id" invisible="1"/>
-                        <separator/>
+                <sheet string="Unbuild Wizard">
+                    <group>
+                        <field name="name"/>
+                        <field name="unbuild_set_id"/>
+                        <field name="inventory_id"/>
+                        <field name="product_tmpl_id" invisible="1"/>
                     </group>
                     <footer>
-                        <button name="%(multisection_discount_wizard_action)d" string="Apply" type="action" class="oe_highlight"/>
+                        <button name="%(scrap_unbuild_wizard_action)d" string="Apply" type="action" class="oe_highlight"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>

@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="multisection_discount_wizard_action" model="ir.actions.server">
+        <record id="scrap_unbuild_wizard_action" model="ir.actions.server">
             <field name="name">=>Multisection Discount</field>
-            <field name="model_id" ref="model_saleorder_multisection_discount_wizard"/>
+            <field name="model_id" ref="model_scrap_unbuild_wizard"/>
             <field name="state">code</field>
             <field name="code">
 # Actualizar descuentos en un paso, para pptos que hemos de bajar:

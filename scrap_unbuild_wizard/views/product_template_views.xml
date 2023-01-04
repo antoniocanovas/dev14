@@ -3,15 +3,15 @@
 
 
 
-    <record id="view_multisection_discount_button" model="ir.ui.view">
-        <field name="name">Multisection Discount Button</field>
-        <field name="model">sale.order.line</field>
+    <record id="view_scrap_unbuild_wizard_button" model="ir.ui.view">
+        <field name="name">Scrap Unbuild Wizard Button</field>
+        <field name="model">product.template</field>
         <field name="type">form</field>
-        <field name="inherit_id" ref="sale_order_multisection.sol_sections_form"/>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="before">
                 <header>
-                    <button class="oe_highlight" type="action" name="%(action_wizard_multisection_discount)d" string="Discounts" context="{'default_section_id':id,'default_name':section, 'default_sale_id':order_id}"/>
+                    <button class="oe_highlight" type="action" name="%(scrap_unbuild_wizard_action)d" string="Unbuild" context="{'default_product_tmpl_id':id}"/>
                 </header>
             </xpath>
         </field>

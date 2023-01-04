@@ -1,29 +1,18 @@
 from odoo import _, api, fields, models
 
-TYPE = [
-    ('services', 'Final price applying discounts on services'),
-    ('discount', 'Discount'),
-]
-
-
 class ScrapUnbuildWizard(models.TransientModel):
     _name = 'scrap.unbuild.wizard'
     _description = 'Scrap Unbuild Wizard'
 
-#VOY POR AQUÍ:
+    @api.depends('product_tmpl_id', 'unbuild_set_id', 'create_date')
+    def get_unbuild_wizard_name(self):
+        name = ""
+        if self.create_date: name += str(self.create_date)
+        if self.product_tmpl_id.id: name += " " + self.product_tmpl_id.name
+        if self.unbuild_set_id.id: name += " " + self.unbuild_set_id.name
+        self.name = name
 
-    #Campos con duda
-    name = fields.Char('Name')
-    #Campos
-    discount = fields.Float('Discount')
-    childs = fields.Boolean('Childs')
-    products = fields.Boolean('Products')
-    services = fields.Boolean('Services')
-    all_quotation = fields.Boolean('All Quotation')
-    price = fields.Float('Price')
-    sale_id = fields.Many2one('sale.order')
-    type = fields.Selection(selection=TYPE, string="Type")
-    section_id = fields.Many2one('sale.order.line', string='Section')
-
-
-
+    name = fields.Char('Name', compute='get_unbuild_wizard_name', readonly=True)
+    product_tmpl_id = fields.Many2one('product.template', string='Product')
+    unbuild_set_id = fields.Many2one('unbuild.set', string='SET')
+    inventory_id = fields.Many2one('stock.inventory', string='Inventory', readonly=True)
