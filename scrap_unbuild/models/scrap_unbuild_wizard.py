@@ -1,4 +1,5 @@
 from odoo import _, api, fields, models
+from datetime import datetime,date
 
 class ScrapUnbuildWizard(models.TransientModel):
     _name = 'scrap.unbuild.wizard'
