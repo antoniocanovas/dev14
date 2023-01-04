@@ -23,7 +23,7 @@
 record.line_ids.unlink()
 for part in record.unbuild_set_id.line_ids:
   newline = env['unbuild.product.line'].create({'part_id':part.part_id.id, 'qty':part.qty, 'name':part.part_id.name, 'product_tmpl_id':record.product_tmpl_id.id})
-
+  record['line_ids'] = [(4,newline_id.id)]
             </field>
             <field name="trigger">on_change</field>
             <field name="on_change_field_ids" eval="[(6,0, [ref('scrap_unbuild.field_scrap_unbuild_wizard__unbuild_set_id')])]"/>
