@@ -41,6 +41,12 @@ class ProductTemplate(models.Model):
 
     unbuild_product_line_ids = fields.One2many('unbuild.product.line', 'product_tmpl_id', string='Un.Prod Lines')
 
+    def get_inventory_line_ids(self):
+        si = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
+        sil = self.env['stock.inventory.line'].search([('inventory_id', 'in', si.ids)])
+        self.inventory_line_ids = [(6, 0, sil.ids)]
+    inventory_line_ids = fields.Many2many('stock.inventory.line', compute='get_inventory_line_ids', store=False)
+
     @api.depends('unbuild_product_line_ids')
     def get_unbuild_subproducts(self):
         for record in self:
