@@ -16,4 +16,5 @@ class ScrapUnbuildWizard(models.TransientModel):
     product_tmpl_id = fields.Many2one('product.template', string='Product')
     unbuild_set_id = fields.Many2one('unbuild.set', string='SET')
     inventory_id = fields.Many2one('stock.inventory', string='Inventory', readonly=True)
+    autovalidate = fields.Boolean('Autovalidate')
     line_ids = fields.One2many('unbuild.product.line.wizard', 'unbuild_wizard_id', string='Parts')

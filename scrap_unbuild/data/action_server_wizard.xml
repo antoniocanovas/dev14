@@ -7,6 +7,7 @@
             <field name="model_id" ref="model_scrap_unbuild_wizard"/>
             <field name="state">code</field>
             <field name="code">
+
 # Crea la CLASIFICACIÓN y desglose de productos en la ubicación del producto padre:
 newsi = False
 rootcode = record.product_tmpl_id.default_code[:6]
@@ -15,9 +16,22 @@ rootpt = env['product.template'].search([('default_code','=',rootcode)])
 if not rootpt.id or not location.id:
   raise Warning('Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; o la localizacón de almacén con este código.')
 
+# STOCK INVENTORY Creation:
+units = 0
+for li in record.line_ids: units += li.qty
+if units > 0:
+  name = record.name + " " + rootpt.default_code
+  newsi = env['stock.inventory'].create({'name':name})
+else:
+  raise Warning('No hay productos nuevos que crear en: ' + record.name)
+
+
+# NEW PRODUCTS AND STOCK INVENTORY LINES CREATION:
 for li in record.line_ids:
-  if not (li.newproduct_id.id) and not (li.part_id.product_id.id):
-    codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
+  codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
+
+  # PARA NUEVOS PRODUCTOS:
+  if not (li.qty > 0) and not (li.part_id.product_id.id):
     newproduct = env['product.template'].create({'name':li.name,
       'categ_id':li.part_id.category_id.id, 'unbuild_type':'subproduct',
       'sale_ok':True, 'purchase_ok':False, 'type':'product', 'parent_id':rootpt.id, 'default_code':rootcode + codesub,
@@ -25,41 +39,29 @@ for li in record.line_ids:
       'unbuild_location_id':rootpt.unbuild_location_id.id,
       'standard_price':li.standard_price})
     rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
-    newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
-      # New product stock value, and record decreasing value:
+
+    newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
+      'product_qty':li.qty})
+
+  # PARA PRODUCTOS GENÉRICOS:
+  elif not (li.qty > 0) and not (li.part_id.product_id.id):
+    qty = li.qty
+    sq = env['stock.quant'].search([('product_id','=',li.part_id.product_id.id),('location_id','=',location.id)])
+    if sq.id: qty += sq.quantity
+    newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':li.part_id.product_id.id,
+        'product_qty':qty})
+
+
+
+      # STOCK VALUE, and decreasing record value:
     stock_value = record.product_tmpl_id.standard_price - li.qty * li.standard_price
-    if stock_value &lt; 0: stock_value = 0
+    if stock_value < 0: stock_value = 0
     record.product_tmpl_id.write({'standard_price':stock_value})
 
 
-    if (newsi == False):
-      name = record.name + " " + rootpt.default_code
-      newsi = env['stock.inventory'].create({'name':name})
-    newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
-      'product_qty':li.qty})
-    li['newproduct_id'] = newproduct.id
-
-
-
-
-  # Si no se crea producto nuevo hay que añadir al quant existente o crear uno:
-  if not (li.newproduct_id.id) and (li.part_id.product_id.id) and (li.qty > 0):
-    sq = env['stock.quant'].search([('product_id','=',li.part_id.product_id.id),('location_id','=',location.id)])
-    if sq.id:
-      # Crear SIL con cantidad incrementada:
-#      newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
-      raise Warning('stock: ' + str(sq.quantity) + " en location: " + location.name)
-    else:
-      raise Warning('sin sq')
-
-
-
-
-if (newsi != False):
+if (record.autovalidate == True):
   newsi.action_start()
   newsi.action_validate()
-else:
-  raise Warning('No hay productos nuevos que crear en: ' + record.name)
 
             </field>
         </record>
