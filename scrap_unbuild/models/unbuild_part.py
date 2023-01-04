@@ -17,6 +17,6 @@ class UnbuildPart(models.Model):
         string='Category',
         required=True,
     )
-    product_tmpl_id = fields.Many2one('product.template',string='Product',
+    product_id = fields.Many2one('product.product',string='Product',
                                       help='Si asignas un producto, al despiezar se añadirá la cantidad al stock.'
                                            'Se utilizarán sus fotos y precio de este producto sin distinción con otras piezas similares.')

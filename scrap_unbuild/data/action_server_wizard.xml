@@ -16,7 +16,7 @@ if not rootpt.id or not location.id:
   raise Warning('Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; o la localizacón de almacén con este código.')
 
 for li in record.line_ids:
-  if not li.newproduct_id.id:
+  if not (li.newproduct_id.id) and not (li.part_id.product_id.id):
     codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
     newproduct = env['product.template'].create({'name':li.name,
       'categ_id':li.part_id.category_id.id, 'unbuild_type':'subproduct',
