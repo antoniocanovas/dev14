@@ -10,6 +10,7 @@ from odoo import api, fields, models, _
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    scrap_product_tmpl_id = fields.Many2one(
+    unbuild_product_tmpl_id = fields.Many2one(
         'product.template',
+        string='Unbuild Product',
     )
