@@ -11,7 +11,9 @@
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="before">
                 <header>
-                    <button class="oe_highlight" type="action" name="%(action_scrap_unbuild_wizard)d" string="Unbuild" context="{'default_product_tmpl_id':id}"/>
+                    <button class="oe_highlight" type="action" name="%(action_scrap_unbuild_wizard)d"
+                            attrs="{'invisible':[('unbuild_type','not in',['main','subproduct'])]}"
+                            string="Unbuild" context="{'default_product_tmpl_id':id}"/>
                 </header>
             </xpath>
         </field>
