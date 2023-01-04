@@ -33,6 +33,7 @@
                                 <field name="name"/>
                                 <field name="qty"/>
                                 <field name="standard_price"/>
+                                <field name="newproduct_id" readonly="1" decoration-warning="1"/>
                             </tree>
                         </field>
                         <group col="4">
