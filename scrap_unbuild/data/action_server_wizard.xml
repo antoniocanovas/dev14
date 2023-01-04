@@ -13,4 +13,23 @@
 
     </data>
 
+
+    <record id="change_unbuild_set_parts_wizard" model="base.automation">
+            <field name="name">=> Change SET unbuild parts on scrap wizard</field>
+            <field name="model_id" ref="model_scrap_unbuild_wizard"/>
+            <field name="state">code</field>
+            <field name="code">
+# CODE:
+record.line_ids.unlink()
+for part in record.unbuild_set_id.line_ids:
+  newline = env['unbuild.product.line'].create({'part_id':part.part_id.id, 'qty':part.qty, 'name':part.part_id.name, 'product_tmpl_id':record.product_tmpl_id.id})
+
+            </field>
+            <field name="trigger">on_change</field>
+            <field name="on_change_field_ids" eval="[(6,0, [ref('scrap_unbuild.field_product_template__unbuild_set_id')])]"/>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
 </odoo>
