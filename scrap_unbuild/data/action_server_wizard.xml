@@ -19,7 +19,7 @@ if not rootpt.id or not location.id:
 # STOCK INVENTORY Creation:
 units = 0
 for li in record.line_ids: units += li.qty
-if units > 0:
+if units &gt; 0:
   name = record.name + " " + rootpt.default_code
   newsi = env['stock.inventory'].create({'name':name})
 else:
@@ -44,7 +44,7 @@ for li in record.line_ids:
       'product_qty':li.qty})
 
   # PARA PRODUCTOS GENÉRICOS:
-  elif not (li.qty > 0) and not (li.part_id.product_id.id):
+  elif not (li.qty &gt; 0) and not (li.part_id.product_id.id):
     qty = li.qty
     sq = env['stock.quant'].search([('product_id','=',li.part_id.product_id.id),('location_id','=',location.id)])
     if sq.id: qty += sq.quantity
@@ -55,7 +55,7 @@ for li in record.line_ids:
 
       # STOCK VALUE, and decreasing record value:
     stock_value = record.product_tmpl_id.standard_price - li.qty * li.standard_price
-    if stock_value < 0: stock_value = 0
+    if stock_value &lt; 0: stock_value = 0
     record.product_tmpl_id.write({'standard_price':stock_value})
 
 
