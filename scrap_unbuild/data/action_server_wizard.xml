@@ -7,7 +7,6 @@
             <field name="model_id" ref="model_scrap_unbuild_wizard"/>
             <field name="state">code</field>
             <field name="code">
-
 # Crea la CLASIFICACIÓN y desglose de productos en la ubicación del producto padre:
 newsi = False
 rootcode = record.product_tmpl_id.default_code[:6]
@@ -31,7 +30,7 @@ for li in record.line_ids:
   codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
 
   # PARA NUEVOS PRODUCTOS:
-  if not (li.qty > 0) and not (li.part_id.product_id.id):
+  if (li.qty > 0) and not (li.part_id.product_id.id):
     newproduct = env['product.template'].create({'name':li.name,
       'categ_id':li.part_id.category_id.id, 'unbuild_type':'subproduct',
       'sale_ok':True, 'purchase_ok':False, 'type':'product', 'parent_id':rootpt.id, 'default_code':rootcode + codesub,
@@ -39,12 +38,13 @@ for li in record.line_ids:
       'unbuild_location_id':rootpt.unbuild_location_id.id,
       'standard_price':li.standard_price})
     rootpt['unbuild_sequence'] = rootpt.unbuild_sequence +1
+    newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
 
     newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
       'product_qty':li.qty})
 
   # PARA PRODUCTOS GENÉRICOS:
-  elif not (li.qty &gt; 0) and not (li.part_id.product_id.id):
+  elif (li.qty &gt; 0) and (li.part_id.product_id.id):
     qty = li.qty
     sq = env['stock.quant'].search([('product_id','=',li.part_id.product_id.id),('location_id','=',location.id)])
     if sq.id: qty += sq.quantity
@@ -58,9 +58,8 @@ for li in record.line_ids:
     if stock_value &lt; 0: stock_value = 0
     record.product_tmpl_id.write({'standard_price':stock_value})
 
-
+newsi.action_start()
 if (record.autovalidate == True):
-  newsi.action_start()
   newsi.action_validate()
 
             </field>
