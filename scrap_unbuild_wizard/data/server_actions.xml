@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id="scrap_unbuild_wizard_action" model="ir.actions.server">
+        <record id="scrap_set_unbuild" model="ir.actions.server">
             <field name="name">=>Multisection Discount</field>
             <field name="model_id" ref="model_scrap_unbuild_wizard"/>
             <field name="state">code</field>

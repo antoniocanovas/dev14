@@ -22,7 +22,7 @@
                         <field name="product_tmpl_id" invisible="1"/>
                     </group>
                     <footer>
-                        <button name="%(scrap_unbuild_wizard_action)d" string="Apply" type="action" class="oe_highlight"/>
+                        <button name="%(scrap_set_unbuild)d" string="Apply" type="action" class="oe_highlight"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
