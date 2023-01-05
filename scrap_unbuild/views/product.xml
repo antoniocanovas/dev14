@@ -42,6 +42,7 @@
                                 <field name="product_uom_id"/>
                                 <field name="unbuild_unit_value"/>
                                 <field name="state"/>
+                                <field name="inventory_id" optional="hide"/>
                             </tree>
                         </field>
 
