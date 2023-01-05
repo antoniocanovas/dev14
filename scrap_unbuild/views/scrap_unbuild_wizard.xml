@@ -32,7 +32,7 @@
                     </field>
 
                     <footer>
-                        <button name="%(scrap_unbuild_action)d" string="Apply" type="action" class="oe_highlight"/>
+                        <button name="%(scrap_unbuild_wizard.scrap_unbuild_action)d" string="Apply" type="action" class="oe_highlight"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
