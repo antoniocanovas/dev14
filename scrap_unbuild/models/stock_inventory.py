@@ -22,8 +22,8 @@ class StockInventory(models.Model):
             total = 0
             for li in self.line_ids:
                 total += self.unbuild_product_tmpl_id.standard_price - li.difference_qty * li.unbuild_unit_value
-            if stock_value < 0: stock_value = 0
-            self.unbuild_product_tmpl_id.write({'standard_price':stock_value})
+            if total < 0: total = 0
+            self.unbuild_product_tmpl_id.write({'standard_price':total})
 
 
 class StockInventoryLine(models.Model):
