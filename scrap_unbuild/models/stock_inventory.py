@@ -28,5 +28,5 @@ class StockInventory(models.Model):
 
 class StockInventoryLine(models.Model):
     _inherit = "stock.inventory.line"
-    unbuild_unit_value = fields.float('Unit value')
+    unbuild_unit_value = fields.Float('Unit value')
 
