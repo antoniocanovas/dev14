@@ -18,3 +18,61 @@ class ScrapUnbuildWizard(models.TransientModel):
     inventory_id = fields.Many2one('stock.inventory', string='Inventory', readonly=True)
     autovalidate = fields.Boolean('Autovalidate')
     line_ids = fields.One2many('unbuild.product.line.wizard', 'unbuild_wizard_id', string='Parts')
+
+
+    # Crea la creación de productos, inventariado y valoración en la ubicación del producto padre:
+    def scrap_unbuild_action(self):
+        rootcode = self.product_tmpl_id.default_code[:6]
+        location = env['stock.location'].search([('name', '=', rootcode)])
+        rootpt = env['product.template'].search([('default_code', '=', rootcode)])
+        if not rootpt.id or not location.id:
+            raise Warning(
+                'Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; o la localizacón de almacén con este código.')
+
+        # STOCK INVENTORY Creation:
+        units = 0
+        for li in self.line_ids: units += li.qty
+        if units & gt; 0:
+            name = self.name + " " + rootpt.default_code
+            newsi = env['stock.inventory'].create({'name': name, 'unbuild_product_tmpl_id': self.product_tmpl_id.id})
+        else:
+            raise Warning('No hay productos nuevos que crear en: ' + self.name)
+
+        # NEW PRODUCTS AND STOCK INVENTORY LINES CREATION:
+        for li in self.line_ids:
+            codesub = str(rootpt.unbuild_sequence + 1001)[-3:]
+
+            # PARA NUEVOS PRODUCTOS:
+            if (li.qty > 0) and not (li.part_id.product_id.id):
+                newproduct = env['product.template'].create({'name': li.name,
+                                                             'categ_id': li.part_id.category_id.id,
+                                                             'unbuild_type': 'subproduct',
+                                                             'sale_ok': True, 'purchase_ok': False, 'type': 'product',
+                                                             'parent_id': rootpt.id, 'default_code': rootcode + codesub,
+                                                             'income_analytic_account_id': rootpt.income_analytic_account_id.id,
+                                                             'expense_analytic_account_id': rootpt.expense_analytic_account_id.id,
+                                                             'unbuild_location_id': rootpt.unbuild_location_id.id,
+                                                             'standard_price': li.standard_price})
+                rootpt['unbuild_sequence'] = rootpt.unbuild_sequence + 1
+                newproductproduct = env['product.product'].search([('product_tmpl_id', '=', newproduct.id)])
+
+                newsil = env['stock.inventory.line'].create(
+                    {'inventory_id': newsi.id, 'location_id': location.id, 'product_id': newproductproduct.id,
+                    'product_qty': li.qty, 'unbuild_unit_value': li.standard_price})
+
+            # PARA PRODUCTOS GENÉRICOS:
+            elif (li.qty & gt; 0) and (li.part_id.product_id.id):
+                qty = li.qty
+                sq = env['stock.quant'].search(
+                    [('product_id', '=', li.part_id.product_id.id), ('location_id', '=', location.id)])
+                if sq.id: qty += sq.quantity
+                newsil = env['stock.inventory.line'].create(
+                    {'inventory_id': newsi.id, 'location_id': location.id, 'product_id': li.part_id.product_id.id,
+                     'product_qty': qty, 'unbuild_unit_value': li.standard_price})
+
+        # Iniciar y validar si procede el registro stock.inventory:
+        newsi.action_start()
+        if (record.autovalidate == True):
+            newsi.action_validate()
+
+
