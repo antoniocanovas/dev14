@@ -65,7 +65,7 @@ if (record.autovalidate == True):
             <field name="model_id" ref="model_stock_inventory"/>
             <field name="state">code</field>
             <field name="code">
-record.update_unbuild_parent_product_value()
+model.update_unbuild_parent_product_value()
             </field>
             <field name="trigger">on_change</field>
             <field name="on_change_field_ids" eval="[(6,0, [ref('stock.field_stock_inventory__state')])]"/>
