@@ -40,6 +40,7 @@
                                 <field name="location_id"/>
                                 <field name="difference_qty"/>
                                 <field name="product_uom_id"/>
+                                <field name="state"/>
                             </tree>
                         </field>
 
