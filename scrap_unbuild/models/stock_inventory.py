@@ -18,7 +18,15 @@ class StockInventory(models.Model):
     # STOCK VALUE decreasing when unbuild:
     @api.depends('state')
     def update_unbuild_parent_product_value(self):
-        if (self.product_tmpl_id.id) and (self.state == 'done'):
-            stock_value = self.product_tmpl_id.standard_price - li.qty * li.standard_price
+        if (self.unbuild_product_tmpl_id.id) and (self.state == 'done'):
+            total = 0
+            for li in self.line_ids:
+                total += self.unbuild_product_tmpl_id.standard_price - li.difference_qty * li.unbuild_unit_value
             if stock_value < 0: stock_value = 0
-            self.product_tmpl_id.write({'standard_price':stock_value})
+            self.unbuild_product_tmpl_id.write({'standard_price':stock_value})
+
+
+class StockInventoryLine(models.Model):
+    _inherit = "stock.inventory.line"
+    unbuild_unit_value = fields.float('Unit value')
+

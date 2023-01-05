@@ -41,7 +41,7 @@ for li in record.line_ids:
     newproductproduct = env['product.product'].search([('product_tmpl_id','=',newproduct.id)])
 
     newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':newproductproduct.id,
-      'product_qty':li.qty})
+      'product_qty':li.qty, 'unbuild_unit_value':li.standard_price})
 
   # PARA PRODUCTOS GENÉRICOS:
   elif (li.qty &gt; 0) and (li.part_id.product_id.id):
@@ -49,7 +49,7 @@ for li in record.line_ids:
     sq = env['stock.quant'].search([('product_id','=',li.part_id.product_id.id),('location_id','=',location.id)])
     if sq.id: qty += sq.quantity
     newsil = env['stock.inventory.line'].create({'inventory_id':newsi.id, 'location_id':location.id, 'product_id':li.part_id.product_id.id,
-        'product_qty':qty})
+        'product_qty':qty, 'unbuild_unit_value':li.standard_price})
 
 newsi.action_start()
 if (record.autovalidate == True):
