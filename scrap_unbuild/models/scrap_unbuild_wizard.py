@@ -32,7 +32,7 @@ class ScrapUnbuildWizard(models.TransientModel):
         # STOCK INVENTORY Creation:
         units = 0
         for li in self.line_ids: units += li.qty
-        if units & gt; 0:
+        if units > 0:
             name = self.name + " " + rootpt.default_code
             newsi = env['stock.inventory'].create({'name': name, 'unbuild_product_tmpl_id': self.product_tmpl_id.id})
         else:
@@ -61,7 +61,7 @@ class ScrapUnbuildWizard(models.TransientModel):
                     'product_qty': li.qty, 'unbuild_unit_value': li.standard_price})
 
             # PARA PRODUCTOS GENÉRICOS:
-            elif (li.qty & gt; 0) and (li.part_id.product_id.id):
+            elif (li.qty > 0) and (li.part_id.product_id.id):
                 qty = li.qty
                 sq = env['stock.quant'].search(
                     [('product_id', '=', li.part_id.product_id.id), ('location_id', '=', location.id)])
