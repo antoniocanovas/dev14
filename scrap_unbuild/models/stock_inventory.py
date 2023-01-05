@@ -16,7 +16,6 @@ class StockInventory(models.Model):
     )
 
     # STOCK VALUE decreasing when unbuild:
-    @api.depends('write_date')
     def update_unbuild_parent_product_value(self):
         if (self.unbuild_product_tmpl_id.id) and (self.state in ['done']):
             total = 0

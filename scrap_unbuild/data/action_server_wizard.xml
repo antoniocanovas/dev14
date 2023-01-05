@@ -60,6 +60,21 @@ if (record.autovalidate == True):
 
     </data>
 
+    <record id="update_unbuild_parent_product_value_aa" model="base.automation">
+            <field name="name">=> Update unbuild parent product value</field>
+            <field name="model_id" ref="model_stock_inventory"/>
+            <field name="state">code</field>
+            <field name="code">
+record.update_unbuild_parent_product_value()
+            </field>
+            <field name="trigger">on_change</field>
+            <field name="on_change_field_ids" eval="[(6,0, [ref('stock.field_stock_inventory__state')])]"/>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
+
 
     <record id="change_unbuild_set_parts_wizard" model="base.automation">
             <field name="name">=> Change SET unbuild parts on scrap wizard</field>
