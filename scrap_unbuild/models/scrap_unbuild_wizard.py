@@ -21,7 +21,7 @@ class ScrapUnbuildWizard(models.TransientModel):
 
 
     # Crea la creación de productos, inventariado y valoración en la ubicación del producto padre:
-    def scrap_unbuild_action(self):
+    def get_scrap_unbuild_action(self):
         rootcode = self.product_tmpl_id.default_code[:6]
         location = env['stock.location'].search([('name', '=', rootcode)])
         rootpt = env['product.template'].search([('default_code', '=', rootcode)])
