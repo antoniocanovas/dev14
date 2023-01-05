@@ -26,6 +26,7 @@
         'product_chassis',
     ],
     "data": [
+        "views/scrap_unbuild_wizard.xml",
         "views/product.xml",
         "views/menu_views.xml",
         "views/res_company.xml",
@@ -33,7 +34,6 @@
         "data/action_server_wizard.xml",
         "data/sequence.xml",
         "security/ir.model.access.csv",
-        'views/scrap_unbuild_wizard.xml',
     ],
     "installable": True,
 }
