@@ -1,5 +1,6 @@
 from odoo import _, api, fields, models
 from datetime import date
+from time import sleep
 
 class ScrapUnbuildWizard(models.TransientModel):
     _name = 'scrap.unbuild.wizard'
@@ -73,6 +74,7 @@ class ScrapUnbuildWizard(models.TransientModel):
         # Iniciar y validar si procede el registro stock.inventory:
         newsi.action_start()
         if (self.autovalidate == True):
+            sleep(2)
             newsi.action_validate()
 
 
