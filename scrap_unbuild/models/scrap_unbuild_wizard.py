@@ -44,7 +44,7 @@ class ScrapUnbuildWizard(models.TransientModel):
 
             # PARA NUEVOS PRODUCTOS:
             if (li.qty > 0) and not (li.part_id.product_id.id):
-                newproduct = env['product.template'].create({'name': li.name,
+                newproduct = self.env['product.template'].create({'name': li.name,
                                                              'categ_id': li.part_id.category_id.id,
                                                              'unbuild_type': 'subproduct',
                                                              'sale_ok': True, 'purchase_ok': False, 'type': 'product',
