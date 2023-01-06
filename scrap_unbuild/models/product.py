@@ -37,16 +37,19 @@ class ProductTemplate(models.Model):
 
     unbuild_sequence = fields.Integer(string='Sequencia de piezas')
 
+## PARA ELIMINAR:
     unbuild_set_id = fields.Many2one('unbuild.set', string='Unbuild Set')
-
     unbuild_product_line_ids = fields.One2many('unbuild.product.line', 'product_tmpl_id', string='Un.Prod Lines')
 
     def get_inventory_line_ids(self):
+### MODIFICAR PARA: a) buscar productos por código desguazados, b) todos los SI de estos, c) todos los SIL de SIs
+### Considerar sólo los directos para subproductos, y todos para el principal tal como hace get_unbuild_subproducts.
         si = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
         sil = self.env['stock.inventory.line'].search([('inventory_id', 'in', si.ids)])
         self.inventory_line_ids = [(6, 0, sil.ids)]
     inventory_line_ids = fields.Many2many('stock.inventory.line', compute='get_inventory_line_ids', store=False)
 
+## Pendiente eliminar:
     @api.depends('unbuild_product_line_ids')
     def get_unbuild_subproducts(self):
         for record in self:
