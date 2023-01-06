@@ -23,8 +23,8 @@ class ScrapUnbuildWizard(models.TransientModel):
     # Crea la creación de productos, inventariado y valoración en la ubicación del producto padre:
     def get_scrap_unbuild_action(self):
         rootcode = self.product_tmpl_id.default_code[:6]
-        location = env['stock.location'].search([('name', '=', rootcode)])
-        rootpt = env['product.template'].search([('default_code', '=', rootcode)])
+        location = self.env['stock.location'].search([('name', '=', rootcode)])
+        rootpt = self.env['product.template'].search([('default_code', '=', rootcode)])
         if not rootpt.id or not location.id:
             raise Warning(
                 'Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; o la localizacón de almacén con este código.')
@@ -34,7 +34,7 @@ class ScrapUnbuildWizard(models.TransientModel):
         for li in self.line_ids: units += li.qty
         if units > 0:
             name = self.name + " " + rootpt.default_code
-            newsi = env['stock.inventory'].create({'name': name, 'unbuild_product_tmpl_id': self.product_tmpl_id.id})
+            newsi = self.env['stock.inventory'].create({'name': name, 'unbuild_product_tmpl_id': self.product_tmpl_id.id})
         else:
             raise Warning('No hay productos nuevos que crear en: ' + self.name)
 
@@ -44,7 +44,7 @@ class ScrapUnbuildWizard(models.TransientModel):
 
             # PARA NUEVOS PRODUCTOS:
             if (li.qty > 0) and not (li.part_id.product_id.id):
-                newproduct = env['product.template'].create({'name': li.name,
+                newproduct = self.env['product.template'].create({'name': li.name,
                                                              'categ_id': li.part_id.category_id.id,
                                                              'unbuild_type': 'subproduct',
                                                              'sale_ok': True, 'purchase_ok': False, 'type': 'product',
@@ -54,19 +54,19 @@ class ScrapUnbuildWizard(models.TransientModel):
                                                              'unbuild_location_id': rootpt.unbuild_location_id.id,
                                                              'standard_price': li.standard_price})
                 rootpt['unbuild_sequence'] = rootpt.unbuild_sequence + 1
-                newproductproduct = env['product.product'].search([('product_tmpl_id', '=', newproduct.id)])
+                newproductproduct = self.env['product.product'].search([('product_tmpl_id', '=', newproduct.id)])
 
-                newsil = env['stock.inventory.line'].create(
+                newsil = self.env['stock.inventory.line'].create(
                     {'inventory_id': newsi.id, 'location_id': location.id, 'product_id': newproductproduct.id,
                     'product_qty': li.qty, 'unbuild_unit_value': li.standard_price})
 
             # PARA PRODUCTOS GENÉRICOS:
             elif (li.qty > 0) and (li.part_id.product_id.id):
                 qty = li.qty
-                sq = env['stock.quant'].search(
+                sq = self.env['stock.quant'].search(
                     [('product_id', '=', li.part_id.product_id.id), ('location_id', '=', location.id)])
                 if sq.id: qty += sq.quantity
-                newsil = env['stock.inventory.line'].create(
+                newsil = self.env['stock.inventory.line'].create(
                     {'inventory_id': newsi.id, 'location_id': location.id, 'product_id': li.part_id.product_id.id,
                      'product_qty': qty, 'unbuild_unit_value': li.standard_price})
 

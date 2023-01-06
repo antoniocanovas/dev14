@@ -15,12 +15,10 @@
     "license": "AGPL-3",
     "depends": [
         'purchase',
-        'sale_management',
+        'sale_timesheet',
         'stock',
         'account',
         'analytic',
-        'project',
-        'hr_timesheet',
         'base_automation',
         'product_analytic',
         'product_chassis',
