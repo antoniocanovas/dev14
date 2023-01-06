@@ -54,9 +54,9 @@ class ScrapUnbuildWizard(models.TransientModel):
                                                              'unbuild_location_id': rootpt.unbuild_location_id.id,
                                                              'standard_price': li.standard_price})
                 rootpt['unbuild_sequence'] = rootpt.unbuild_sequence + 1
-                newproductproduct = env['product.product'].search([('product_tmpl_id', '=', newproduct.id)])
+                newproductproduct = self.env['product.product'].search([('product_tmpl_id', '=', newproduct.id)])
 
-                newsil = env['stock.inventory.line'].create(
+                newsil = self.env['stock.inventory.line'].create(
                     {'inventory_id': newsi.id, 'location_id': location.id, 'product_id': newproductproduct.id,
                     'product_qty': li.qty, 'unbuild_unit_value': li.standard_price})
 
@@ -72,7 +72,7 @@ class ScrapUnbuildWizard(models.TransientModel):
 
         # Iniciar y validar si procede el registro stock.inventory:
         newsi.action_start()
-        if (self.autovalidate == True):
-            newsi.action_validate()
+        #if (self.autovalidate == True):
+        newsi.action_validate()
 
 
