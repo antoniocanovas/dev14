@@ -71,8 +71,8 @@ class ScrapUnbuildWizard(models.TransientModel):
                      'product_qty': qty, 'unbuild_unit_value': li.standard_price})
 
         # Iniciar y validar si procede el registro stock.inventory:
-        newsi.action_start().action_validate()
+        a = newsi.action_start()
         if (self.autovalidate == True):
-            newsi.action_validate()
+            a = newsi.action_validate()
 
 
