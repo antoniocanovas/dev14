@@ -72,7 +72,7 @@ class ScrapUnbuildWizard(models.TransientModel):
 
         # Iniciar y validar si procede el registro stock.inventory:
         newsi.action_start()
-        if (record.autovalidate == True):
+        if (self.autovalidate == True):
             newsi.action_validate()
 
 
