@@ -66,8 +66,8 @@
 
                             <!-- Eliminado 01/23, ahora se hace desde wizard
                         <h4>Subproducts:</h4>
-                        <field name="subproduct_ids"/>
-                        <field name="unbuild_type_readonly" invisible="1"/>    -->
+                        <field name="subproduct_ids"/>     -->
+                        <field name="unbuild_type_readonly" invisible="1"/>
                     </div>
                 </page>
             </xpath>
