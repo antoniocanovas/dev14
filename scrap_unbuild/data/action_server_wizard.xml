@@ -10,7 +10,7 @@
 # Crea la CLASIFICACIÓN y desglose de productos en la ubicación del producto padre:
 record.get_scrap_unbuild_action()
 record.inventory_id.action_start()
-if (record.inventory_id.autovalidate == True):
+if (record.autovalidate == True):
   record.inventory_id.action_validate()
 
             </field>
