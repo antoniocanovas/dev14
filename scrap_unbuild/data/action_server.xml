@@ -1,8 +1,9 @@
 <odoo>
+    <!--
+    ## Eliminado 01/23 al hacerse desde wizard
         <record id="ir_unbuild_scrap_products" model="ir.actions.server">
             <field name="name">=> Crear productos del despiece</field>
             <field ref="model_product_template" name="model_id" />
-            <!--<field name="user_id" ref="base.user_root" />-->
             <field name="binding_model_id" ref="model_product_template"/>
             <field name="state">code</field>
             <field name="code">
@@ -45,7 +46,7 @@ for r in records:
   else:
     raise Warning('No hay productos nuevos que crear en: ' + r.name)
             </field>
-        </record>
+        </record>   -->
 
     <record id="change_unbuild_set_parts_producttemplate" model="base.automation">
             <field name="name">=> Change SET unbuild parts on scrap products</field>
