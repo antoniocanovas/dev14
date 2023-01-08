@@ -35,6 +35,7 @@ class ScrapUnbuildWizard(models.TransientModel):
         if units > 0:
             name = self.name + " " + rootpt.default_code
             newsi = self.env['stock.inventory'].create({'name': name, 'unbuild_product_tmpl_id': self.product_tmpl_id.id})
+            self.inventory_id = newsi.id
         else:
             raise Warning('No hay productos nuevos que crear en: ' + self.name)
 
