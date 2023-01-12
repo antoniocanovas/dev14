@@ -42,9 +42,8 @@ class ProductTemplate(models.Model):
     unbuild_set_id = fields.Many2one('unbuild.set', string='Unbuild Set')
     unbuild_product_line_ids = fields.One2many('unbuild.product.line', 'product_tmpl_id', string='Un.Prod Lines')
 
+## PARA ELIMINAR:
     def get_inventory_line_ids(self):
-### MODIFICAR PARA: a) buscar productos por código desguazados, b) todos los SI de estos, c) todos los SIL de SIs
-### Considerar sólo los directos para subproductos, y todos para el principal tal como hace get_unbuild_subproducts.
         si_ids = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
         sil_ids = self.env['stock.inventory.line'].search([('inventory_id', 'in', si_ids.ids)])
         sil = []
@@ -54,8 +53,7 @@ class ProductTemplate(models.Model):
         self.inventory_line_ids = [(6, 0, sil)]
     inventory_line_ids = fields.Many2many('stock.inventory.line', compute='get_inventory_line_ids', store=False)
 
-## Sustituirá a las líneas de inventario (el anterior):
-# Pendiente asignar el unbuild_product_tmpl_id al inventario que se hace a mano ... ????
+## Sustituirán a las líneas de inventario (el anterior):
     def get_stock_move_ids(self):
         si_ids = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
         sm_ids = self.env['stock.move'].search([('inventory_id', 'in', si_ids.ids)])

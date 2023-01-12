@@ -63,9 +63,10 @@
                             </tree>
                         </field> -->
 
+                        <h4>Unbuilds:</h4>
+                        <field name="inventory_ids"/>
                         <h4>Subproducts:</h4>
-                            <field name="stock_move_ids"/>
-                            <field name="inventory_ids"/>
+                        <field name="stock_move_ids"/>
        <!--                 <field name="subproduct_ids"/>     -->
                         <field name="unbuild_type_readonly" invisible="1"/>
                     </div>
