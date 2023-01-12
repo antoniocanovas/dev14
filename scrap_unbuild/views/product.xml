@@ -49,7 +49,7 @@
                                 <field name="inventory_id" optional="hide"/>
                             </tree>
                         </field>
-
+-->
 
                             <!-- Eliminado 01/23, ahora se hace desde wizard
 
