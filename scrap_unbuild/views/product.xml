@@ -61,10 +61,11 @@
                                 <field name="standard_price"/>
                                 <field name="newproduct_id" readonly="1" decoration-warning="1"/>
                             </tree>
-                        </field>
+                        </field> -->
 
                         <h4>Subproducts:</h4>
-                        <field name="subproduct_ids"/>     -->
+                            <field name="stock_move_ids"/>
+       <!--                 <field name="subproduct_ids"/>     -->
                         <field name="unbuild_type_readonly" invisible="1"/>
                     </div>
                 </page>

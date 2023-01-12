@@ -13,3 +13,4 @@ from . import unbuild_part
 from . import scrap_unbuild_wizard
 from . import unbuild_product_line_wizard
 from . import stock_inventory
+from . import stock_move

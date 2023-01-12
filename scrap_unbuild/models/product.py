@@ -36,6 +36,7 @@ class ProductTemplate(models.Model):
     )
 
     unbuild_sequence = fields.Integer(string='Sequencia de piezas')
+    stock_move_ids = fields.One2many('stock.move','unbuild_product_tmpl_id', string='Subproducts', store=True)
 
 ## PARA ELIMINAR:
     unbuild_set_id = fields.Many2one('unbuild.set', string='Unbuild Set')
