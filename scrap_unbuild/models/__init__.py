@@ -4,6 +4,7 @@
 #    Copyright (C) 2021 Serincloud S.L. All Rights Reserved
 #    PedroGuirao pedro@serincloud.com
 ##############################################################################
+from . import stock_move
 from . import product
 from . import res_company
 from . import unbuild_product_line
@@ -13,4 +14,3 @@ from . import unbuild_part
 from . import scrap_unbuild_wizard
 from . import unbuild_product_line_wizard
 from . import stock_inventory
-from . import stock_move
