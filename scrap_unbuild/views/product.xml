@@ -37,7 +37,7 @@
                             <field name="unbuild_project_id" force_save="1" readonly="1"/>
                             <field name="unbuild_task_id"/>
                         </group>
-
+<!-- Eliminado 12/01, ahora desde stock.move
                         <field name="inventory_line_ids">
                             <tree>
                                 <field name="product_id"/>
