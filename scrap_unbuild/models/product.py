@@ -62,6 +62,7 @@ class ProductTemplate(models.Model):
         self.unbuild_sm_ids = [(6,0,sm_ids.ids)]
     unbuild_sm_ids = fields.Many2many('stock.move', compute='get_stock_move_ids', store=False)
 
+    inventory_ids = fields.One2many('stock.inventory', 'unbuild_product_tmpl_id', store=True, readonly=True)
 
 
 ## Pendiente eliminar cuando tengamos ok las sil o los sm anteriores:
