@@ -12,15 +12,10 @@ class StockMove(models.Model):
 
     @api.depends('product_id.product_tmpl_id.parent_id', 'inventory_id.unbuild_product_tmpl_id')
     def get_unbuild_product_tmpl_id(self):
-        parent = 0
         if self.inventory_id.unbuild_product_tmpl_id.id:
-            parent = self.inventory_id.unbuild_product_tmpl_id.id
-        elif (not self.inventory_id.unbuild_product_tmpl_id.id) and (self.product_id.product_tmpl_id.parent_id.id):
-            parent = self.product_id.product_tmpl_id.parent_id.id
-        self.unbuild_product_tmpl_id = parent
-    unbuild_product_tmpl_id = fields.Many2one(
-        'product.template',
-        string='Unbuild Parent',
-        store=True, readonly=True,
-        compute='get_unbuild_product_tmpl_id',
-    )
+            parent = self.inventory_id.unbuild_product_tmpl_id
+        else:
+           parent = self.product_id.product_tmpl_id.parent_id
+        self.unbuild_product_tmpl_id = parent.id
+    unbuild_product_tmpl_id = fields.Many2one('product.template', string='Unbuild Parent', store=True, readonly=True,
+           compute='get_unbuild_product_tmpl_id')
