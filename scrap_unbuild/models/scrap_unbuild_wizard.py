@@ -1,5 +1,6 @@
 from odoo import _, api, fields, models
 from datetime import date
+from odoo.exceptions import UserError
 
 class ScrapUnbuildWizard(models.TransientModel):
     _name = 'scrap.unbuild.wizard'
@@ -26,9 +27,9 @@ class ScrapUnbuildWizard(models.TransientModel):
         location = self.env['stock.location'].search([('name', '=', rootcode)])
         rootpt = self.env['product.template'].search([('default_code', '=', rootcode)])
         if not rootpt.id or not location.id:
-            raise Warning(
-                'Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; o la localizacón de almacén con este código.')
-
+            raise UserError(
+                _("Revisa los códigos de los productos padre anidados, no encuentro el raiz con los 6 primeros dígitos; "
+                  "o la localizacón de almacén con este código."))
         # STOCK INVENTORY Creation:
         units = 0
         for li in self.line_ids: units += li.qty
@@ -37,7 +38,8 @@ class ScrapUnbuildWizard(models.TransientModel):
             newsi = self.env['stock.inventory'].create({'name': name, 'unbuild_product_tmpl_id': self.product_tmpl_id.id})
             self.inventory_id = newsi.id
         else:
-            raise Warning('No hay productos nuevos que crear en: ' + self.name)
+            raise UserError(
+                _("No hay productos nuevos que crear en: " + self.name))
 
         # NEW PRODUCTS AND STOCK INVENTORY LINES CREATION:
         for li in self.line_ids:

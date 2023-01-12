@@ -44,12 +44,26 @@ class ProductTemplate(models.Model):
     def get_inventory_line_ids(self):
 ### MODIFICAR PARA: a) buscar productos por código desguazados, b) todos los SI de estos, c) todos los SIL de SIs
 ### Considerar sólo los directos para subproductos, y todos para el principal tal como hace get_unbuild_subproducts.
-        si = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
-        sil = self.env['stock.inventory.line'].search([('inventory_id', 'in', si.ids)])
-        self.inventory_line_ids = [(6, 0, sil.ids)]
+        si_ids = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
+        sil_ids = self.env['stock.inventory.line'].search([('inventory_id', 'in', si_ids.ids)])
+        sil = []
+        for li in sil_ids:
+            if li.product_qty != li.theoretical_qty:
+                sil.append(li.id)
+        self.inventory_line_ids = [(6, 0, sil)]
     inventory_line_ids = fields.Many2many('stock.inventory.line', compute='get_inventory_line_ids', store=False)
 
-## Pendiente eliminar:
+## Sustituirá a las líneas de inventario (el anterior):
+# Pendiente asignar el unbuild_product_tmpl_id al inventario que se hace a mano ... ????
+    def get_stock_move_ids(self):
+        si_ids = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
+        sm_ids = self.env['stock.move'].search([('inventory_id', 'in', si_ids.ids)])
+        self.unbuild_sm_ids = [(6,0,sm_ids.ids)]
+    unbuild_sm_ids = fields.Many2many('stock.move', compute='get_stock_move_ids', store=False)
+
+
+
+## Pendiente eliminar cuando tengamos ok las sil o los sm anteriores:
     @api.depends('unbuild_product_line_ids')
     def get_unbuild_subproducts(self):
         for record in self:
