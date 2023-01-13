@@ -66,17 +66,16 @@
                         <h4>Unbuilds:</h4>
                         <field name="inventory_ids"/>
                         <h4>Subproducts:</h4>
-                        <field name="stock_move_ids"/>
-<!--
+                        <field name="stock_move_ids">
                             <tree>
                                 <field name="product_id"/>
                                 <field name="product_uom_qty"/>
                                 <field name="product_uom"/>
                                 <field name="create_date" optional="show"/>
                                 <field name="unbuild_product_tmpl_id" optional="hide"/>
+                                <field name="state" optional="hide"/>
                             </tree>
                         </field>
-    -->
                         <!--                 <field name="subproduct_ids"/>     -->
                         <field name="unbuild_type_readonly" invisible="1"/>
                     </div>
