@@ -24,6 +24,7 @@
                         <field name="autovalidate"/>
                         <field name="finished"/>
                         <field name="product_tmpl_id" invisible="1"/>
+                        <field name="attribute_line_ids" invisible="1"/>
                     </group>
                     <field name="line_ids">
                         <tree editable="bottom">
