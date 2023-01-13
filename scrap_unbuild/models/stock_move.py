@@ -10,9 +10,9 @@ from odoo import api, fields, models, _
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.depends('write_date')
+    @api.depends('create_date')
     def get_unbuild_product_tmpl_id(self):
-        if self.inventory_id.id:
+        if (self.inventory_id.id) or (self.location_id.usage == 'inventory'):
             self.unbuild_product_tmpl_id = self.product_id.product_tmpl_id.parent_id.id
     unbuild_product_tmpl_id = fields.Many2one('product.template', string='Unbuild Parent', store=True, readonly=True,
                                                          compute='get_unbuild_product_tmpl_id'
