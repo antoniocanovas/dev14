@@ -20,7 +20,7 @@ class ScrapUnbuildWizard(models.TransientModel):
     autovalidate = fields.Boolean('Autovalidate')
     finished = fields.Boolean('Fully diassembled')
     line_ids = fields.One2many('unbuild.product.line.wizard', 'unbuild_wizard_id', string='Parts')
-    attribute_line_ids = fields.Many2one('product.template.attribute.line', store=False,
+    attribute_line_ids = fields.One2many('product.template.attribute.line', store=False,
                                          related='product_tmpl_id.attribute_line_ids')
 
 
