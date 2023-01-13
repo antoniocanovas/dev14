@@ -22,7 +22,7 @@
                         <field name="unbuild_set_id"/>
                         <field name="inventory_id"/>
                         <field name="autovalidate"/>
-                        <field name="finished" attrs="{'readonly':[('attribute_line_ids','!=',False)]}"/>
+                        <field name="finished" attrs="{'readonly':[('attribute_line_ids','!=',[])]}"/>
                         <field name="product_tmpl_id" invisible="1"/>
                         <field name="attribute_line_ids" invisible="1"/>
                     </group>
