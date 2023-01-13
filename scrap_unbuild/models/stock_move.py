@@ -10,10 +10,20 @@ from odoo import api, fields, models, _
 class StockMove(models.Model):
     _inherit = "stock.move"
 
+    ## Versión que asigna subproductos a subproductos en caso de inventario (no ajuste):
     @api.depends('create_date')
     def get_unbuild_product_tmpl_id(self):
-        if (self.inventory_id.id) or (self.location_id.usage == 'inventory'):
+        if (self.inventory_id.id):
+            self.unbuild_product_tmpl_id = self.inventory_id.product_tmpl_id.id
+        elif (not self.inventory_id.id) and (self.location_id.usage == 'inventory'):
             self.unbuild_product_tmpl_id = self.product_id.product_tmpl_id.parent_id.id
     unbuild_product_tmpl_id = fields.Many2one('product.template', string='Unbuild Parent', store=True, readonly=True,
-                                                         compute='get_unbuild_product_tmpl_id'
-                                              )
+                                              compute='get_unbuild_product_tmpl_id')
+
+    ## Versión que pone siempre el vehículo principal, los subproductos no tienen hijos:
+#    @api.depends('create_date')
+#    def get_unbuild_product_tmpl_id(self):
+#        if (self.inventory_id.id) or (self.location_id.usage == 'inventory'):
+#            self.unbuild_product_tmpl_id = self.product_id.product_tmpl_id.parent_id.id
+#    unbuild_product_tmpl_id = fields.Many2one('product.template', string='Unbuild Parent', store=True, readonly=True,
+#                                                         compute='get_unbuild_product_tmpl_id')
