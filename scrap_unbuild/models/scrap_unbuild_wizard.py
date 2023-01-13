@@ -18,7 +18,9 @@ class ScrapUnbuildWizard(models.TransientModel):
     unbuild_set_id = fields.Many2one('unbuild.set', string='SET')
     inventory_id = fields.Many2one('stock.inventory', string='Inventory', readonly=True)
     autovalidate = fields.Boolean('Autovalidate')
+    finished = fields.Boolean('Fully diassembled')
     line_ids = fields.One2many('unbuild.product.line.wizard', 'unbuild_wizard_id', string='Parts')
+
 
 
     # Crea la creación de productos, inventariado y valoración en la ubicación del producto padre:

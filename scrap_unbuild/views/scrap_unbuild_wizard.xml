@@ -15,11 +15,14 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Unbuild Wizard">
-                    <group>
+                    <h2>
                         <field name="name"/>
+                    </h2>
+                    <group>
                         <field name="unbuild_set_id"/>
                         <field name="inventory_id"/>
                         <field name="autovalidate"/>
+                        <field name="finnished"/>
                         <field name="product_tmpl_id" invisible="1"/>
                     </group>
                     <field name="line_ids">
