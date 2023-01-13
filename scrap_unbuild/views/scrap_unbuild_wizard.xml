@@ -16,7 +16,7 @@
             <form>
                 <sheet string="Unbuild Wizard">
                     <h2>
-                        <field name="name"/>
+                        <field name="name" required="1" attrs="{'readonly':[('attribute_line_ids','!=',[])]}"/>
                     </h2>
                     <group>
                         <field name="unbuild_set_id"/>

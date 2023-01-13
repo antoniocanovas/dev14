@@ -76,6 +76,12 @@ class ScrapUnbuildWizard(models.TransientModel):
                     {'inventory_id': newsi.id, 'location_id': location.id, 'product_id': li.part_id.product_id.id,
                      'product_qty': qty, 'unbuild_unit_value': li.standard_price})
 
+        if (self.finished == True):
+            productproduct = self.env['product.product'].search([('product_tmpl_id','=',self.product_tmpl_id.id)])[0]
+            newsil = self.env['stock.inventory.line'].create(
+                    {'inventory_id': newsi.id, 'location_id': location.id, 'product_id': productproduct.id,
+                     'product_qty': 0})
+
         # Iniciar y validar si procede el registro stock.inventory (no funciona desde aquí la 2ª AS, ver con Pedro):
 #        newsi.action_start()
 #        if (self.autovalidate == True):
