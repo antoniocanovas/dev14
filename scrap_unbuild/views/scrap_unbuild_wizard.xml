@@ -16,13 +16,13 @@
             <form>
                 <sheet string="Unbuild Wizard">
                     <h2>
-                        <field name="name" required="1" attrs="{'readonly':[('attribute_line_ids','!=',False)]}"/>
+                        <field name="name" required="1"/>
                     </h2>
                     <group>
                         <field name="unbuild_set_id"/>
                         <field name="inventory_id"/>
                         <field name="autovalidate"/>
-                        <field name="finished"/>
+                        <field name="finished" attrs="{'readonly':[('attribute_line_ids','!=',False)]}"/>
                         <field name="product_tmpl_id" invisible="1"/>
                         <field name="attribute_line_ids" invisible="1"/>
                     </group>
