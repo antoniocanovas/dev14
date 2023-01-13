@@ -18,7 +18,7 @@ class ScrapUnbuildWizard(models.TransientModel):
     unbuild_set_id = fields.Many2one('unbuild.set', string='SET')
     inventory_id = fields.Many2one('stock.inventory', string='Inventory', readonly=True)
     autovalidate = fields.Boolean('Autovalidate')
-    finished = fields.Boolean('Fully diassembled')
+    finished = fields.Boolean('Fully diassembled', help='Disponible sólo para productos desguazados sin variantes.')
     line_ids = fields.One2many('unbuild.product.line.wizard', 'unbuild_wizard_id', string='Parts')
     attribute_line_ids = fields.One2many('product.template.attribute.line', store=False,
                                          related='product_tmpl_id.attribute_line_ids')
