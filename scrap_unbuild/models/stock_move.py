@@ -10,7 +10,7 @@ from odoo import api, fields, models, _
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.depends('create_date')
+    @api.depends('write_date')
     def get_unbuild_product_tmpl_id(self):
         if self.inventory_id.id:
             self.unbuild_product_tmpl_id = self.product_id.product_tmpl_id.parent_id.id
