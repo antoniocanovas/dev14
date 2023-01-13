@@ -52,6 +52,7 @@ class ScrapUnbuildWizard(models.TransientModel):
                                                              'unbuild_type': 'subproduct',
                                                              'sale_ok': True, 'purchase_ok': False, 'type': 'product',
                                                              'parent_id': rootpt.id, 'default_code': rootcode + codesub,
+                                                             'subparent_id': self.product_tmpl_id,
                                                              'income_analytic_account_id': rootpt.income_analytic_account_id.id,
                                                              'expense_analytic_account_id': rootpt.expense_analytic_account_id.id,
                                                              'unbuild_location_id': rootpt.unbuild_location_id.id,

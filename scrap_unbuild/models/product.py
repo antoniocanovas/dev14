@@ -22,6 +22,13 @@ class ProductTemplate(models.Model):
         string='Vehicle',
         domain=[('unbuild_type', '=', 'main')],
     )
+
+    subparent_id = fields.Many2one(
+        'product.template',
+        string='Child',
+        domain=[('unbuild_type', 'in', ['main','subproduct'])],
+    )
+
     unbuild_location_id = fields.Many2one(
         'stock.location',
         string='Parts location',
@@ -57,6 +64,9 @@ class ProductTemplate(models.Model):
     def get_stock_move_ids(self):
         si_ids = self.env['stock.inventory'].search([('unbuild_product_tmpl_id', '=', self.id)])
         sm_ids = self.env['stock.move'].search([('inventory_id', 'in', si_ids.ids)])
+# para estudiar cambio:        sm_ids = self.env['stock.move'].search([
+#            ('inventory_id','=',False),('location_id.usage','=','inventory'),('product_id.product_tmpl_id','=',self.unbuild_product_id.id),
+#            '|', ('inventory_id', 'in', si_ids.ids)])
         self.unbuild_sm_ids = [(6,0,sm_ids.ids)]
     unbuild_sm_ids = fields.Many2many('stock.move', compute='get_stock_move_ids', store=False)
 
