@@ -22,7 +22,8 @@ class StockMove(models.Model):
             unbuild_product = self.product_id.product_tmpl_id.subparent_id.id
         self.unbuild_product_tmpl_id = unbuild_product
     unbuild_product_tmpl_id = fields.Many2one('product.template', string='Unbuild Parent', store=True, readonly=True,
-                                              compute='get_unbuild_product_tmpl_id')
+#                                              compute='get_unbuild_product_tmpl_id'
+                                              )
 
     ## Versión que pone siempre el vehículo principal, los subproductos no tienen hijos:
 #    @api.depends('create_date')
