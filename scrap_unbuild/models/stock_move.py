@@ -11,17 +11,13 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     ## Versión que asigna subproductos a subproductos en caso de inventario (no ajuste):
-    @api.depends('create_date')
+    @api.depends('location_id')
     def get_unbuild_product_tmpl_id(self):
         unbuild_product = False
-        if (self.inventory_id.id) and (self.inventory_id.unbuild_product_tmpl_id.id) and (self.location_id.id):
+        if (self.inventory_id.id):
             unbuild_product = self.inventory_id.unbuild_product_tmpl_id.id
-        elif (not self.inventory_id.id) and (self.location_id.usage == 'inventory') \
-                and (self.product_id.product_tmpl_id.subparent_id.id) and (self.location_id.id):
-            print(self.location_id.name)
+        elif (not self.inventory_id.id) and (self.location_id.id) and (self.location_id.usage == 'inventory'):
             unbuild_product = self.product_id.product_tmpl_id.subparent_id.id
-        else:
-            a = 1
         self.unbuild_product_tmpl_id = unbuild_product
     unbuild_product_tmpl_id = fields.Many2one('product.template', string='Unbuild Parent', store=True, readonly=True,
                                               compute='get_unbuild_product_tmpl_id'
