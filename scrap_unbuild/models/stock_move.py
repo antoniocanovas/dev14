@@ -18,6 +18,7 @@ class StockMove(models.Model):
             unbuild_product = self.inventory_id.unbuild_product_tmpl_id.id
         elif (not self.inventory_id.id) and (self.location_id.usage == 'inventory') \
                 and (self.product_id.product_tmpl_id.subparent_id.id) and (self.location_id.id):
+            print(self.location_id.name)
             unbuild_product = self.product_id.product_tmpl_id.subparent_id.id
         self.unbuild_product_tmpl_id = unbuild_product
     unbuild_product_tmpl_id = fields.Many2one('product.template', string='Unbuild Parent', store=True, readonly=True,
