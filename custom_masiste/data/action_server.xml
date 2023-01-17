@@ -1,0 +1,31 @@
+<odoo>
+
+    <record id="invoice_vat_required" model="base.automation">
+        <field name="name">=> Chequear si hay NIF al confirmar factura</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">
+if (record.state == 'posted') and (record.move_type in ['out_invoice','in_invoice','out_refund','in_refund']) and not (record.partner_id.vat):
+    raise Warning('Ponle el NIF al contacto')
+        </field>
+        <field name="trigger">on_write</field>
+        <field name="filter_pre_domain"></field>
+        <field name="filter_domain"></field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="invoice_delete_followers_on_createion" model="base.automation">
+        <field name="name">=> Borrar seguidores al crear factura</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">
+record['message_follower_ids'].unlink()
+        </field>
+        <field name="trigger">on_create</field>
+        <field name="filter_pre_domain"></field>
+        <field name="filter_domain"></field>
+        <field name="active" eval="True"/>
+    </record>
+
+
+</odoo>

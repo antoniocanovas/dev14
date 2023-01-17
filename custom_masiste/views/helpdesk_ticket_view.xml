@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <record id="helpdesk_form_masiste" model="ir.ui.view">
+        <field name="name">Masiste helpdesk Form inh</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="delegacion_id"/>
+                <!-- QUITADO 01/09/22, quieren poder elegir cualquier delegación por si es un fabricante quien llama:
+                <field name="delegacion_id" domain="[('type','!=','contact'),('parent_id','!=',False),
+                                            '|',('parent_id','=', partner_id),('parent_id','=',delegacion_id)]"/>
+                -->
+                <field name="provincia_id"/>
+                <field name="partner_invoiced_id"/>
+                <field name="partner_expired_debt"/>
+                <field name="currency_id" invisible="1"/>
+            </field>
+            <field name="partner_name" position="replace"/>
+            <field name="partner_email" position="replace"/>
+        </field>
+        <field name="priority">99</field>
+    </record>
+
+</odoo>

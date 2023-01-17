@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <record id="crm_lead_view_form_masiste" model="ir.ui.view">
+        <field name="name">Masiste CRM lead form view</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="outsourcing_partner"/>
+            </field>
+            <xpath expr="//sheet/group/group[@name='opportunity_partner']/div[2]" position="after">
+                <field name="mobile" widget="phone" string="Móvil"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_case_opportunities_filter_masiste" model="ir.ui.view">
+        <field name="name">Masiste CRM lead search view</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="outsourcing_partner" string="Cliente Final"
+                       filter_domain="[('outsourcing_partner', 'ilike', self)]"/>
+            </field>
+        </field>
+    </record>
+</odoo>

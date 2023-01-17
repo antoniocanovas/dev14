@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="sale_order_view_form_masiste" model="ir.ui.view">
+        <field name="name">Masiste SALE ORDER INH view form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_shipping_id" position="after">
+                <field name="delegacion_id"/>
+                <field name="contacto_id" domain="[('type','=','contact'),('parent_id','!=',False),
+                                            '|',('parent_id','=', partner_id),('parent_id','=',delegacion_id)]"/>
+            </field>
+
+            <!-- 2022/10 Solicitan que no se pueda modificar un pedido de venta completamente facturado: -->
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="attrs">{"readonly": ["|",["state","in",["done","cancel"]],["invoice_status","=","invoiced"]]}</attribute>
+            </xpath>
+        </field>
+        <field name="priority">99</field>
+    </record>
+
+</odoo>

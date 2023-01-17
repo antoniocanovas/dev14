@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="inh_partner_form_masiste_expired_debt" model="ir.ui.view">
+        <field name="name">inh partner form expired debt</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Dic 2022 - Solicitan la deuda también en ventas, no sólo en contabilidad: -->
+            <field name="team_id" position="after">
+                <field name="expired_debt" groups="sales_team.group_sale_salesman"/>
+            </field>
+        </field>
+    </record>
+</odoo>
