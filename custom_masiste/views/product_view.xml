@@ -1,8 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
+    ## Demanda de Ricardo (dic22). Todos los productos en vista tree por defecto.
     <record id="stock.product_template_action_product" model="ir.actions.act_window">
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="view_id" ref="product.product_template_tree_view" />
+    </record>
+    <record id="sale.product_template_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,kanban,activity</field>
+        <field name="view_id" ref="product.product_template_tree_view" />
+    </record>
+    <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,kanban,activity</field>
         <field name="view_id" ref="product.product_template_tree_view" />
     </record>
 
