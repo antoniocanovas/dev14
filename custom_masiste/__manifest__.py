@@ -19,6 +19,7 @@
         "views/sale_order_view.xml",
         "views/helpdesk_ticket_view.xml",
         "views/res_partner.xml",
+        "views/product_view.xml",
         "data/action_server.xml",
     ],
     "installable": True,
