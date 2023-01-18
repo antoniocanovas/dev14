@@ -16,9 +16,9 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree"/>
         <field name="arch" type="xml">
-            <xpath name="activity_ids" position = 'after'>
+            <field name="activity_ids" position = 'after'>
                 <field name="invoice_tag_ids" widget = "many2many_tags" options="{'color_field': 'color'}"/>
-            </xpath>
+            </field>
         </field>
     </record>
 
