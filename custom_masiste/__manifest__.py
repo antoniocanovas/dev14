@@ -13,7 +13,8 @@
                 'base_automation',
                 'sale_management',
                 'helpdesk_mgmt',
-                'partner_expired_debt',],
+                'partner_expired_debt',
+                'sale_order_lot_selection'],
     "data": [
         "views/crm_lead_view.xml",
         "views/sale_order_view.xml",
