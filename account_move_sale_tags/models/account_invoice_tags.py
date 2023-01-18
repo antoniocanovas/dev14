@@ -1,5 +1,3 @@
-:q
-:q
 # -*- coding: utf-8 -*-
 #################################################################################
 #
@@ -28,11 +26,3 @@ class AccountInvoice(models.Model):
 
     # define a many2many field into an account.invoice model name as 'Tags' for get tags from sale order
     invoice_tag_ids = fields.Many2many('crm.tag',string='Tags')
- 
-
-
-
-
-    
-
-
