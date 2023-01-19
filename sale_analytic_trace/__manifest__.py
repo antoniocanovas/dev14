@@ -11,7 +11,7 @@ Compares sold productos with analytic inputs.
         'analytic',
     ],
     'data': [
-        'security/ir.model-access.csv',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
 }
