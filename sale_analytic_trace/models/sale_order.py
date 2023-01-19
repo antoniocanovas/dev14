@@ -21,13 +21,13 @@ class SaleOrderLine(models.Model):
             if (record.product_uom.id != record.product_id.uom_id.id):
                 # uom_type: bigger, reference, smaller
                 if record.product_id.uom_id.uom_type == 'smaller':
-                    ratio = ratio / record.product_id.uom_po_id.factor
+                    ratio = ratio * record.product_id.uom_po_id.factor
                 elif record.product_id.uom_id.uom_type == 'bigger':
-                    ratio = ratio * record.product_id.uom_po_id.factor_inv
+                    ratio = ratio / record.product_id.uom_po_id.factor_inv
                 if record.product_uom.uom_type == 'smaller':
-                    ratio = ratio * record.product_uom.factor
+                    ratio = ratio / record.product_uom.factor
                 elif record.product_uom.uom_type == 'bigger':
-                    ratio = ratio / record.product_uom.factor_inv
+                    ratio = ratio * record.product_uom.factor_inv
             record['standard_qty'] = standard_qty * ratio
     standard_qty = fields.Float('Standard Qty', store=True, readonly=True, compute='_get_units_standard')
 
