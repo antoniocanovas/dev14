@@ -24,10 +24,10 @@ class SaleOrderLine(models.Model):
                     ratio = ratio / record.product_id.uom_po_id.factor
                 elif record.product_id.uom_id.uom_type == 'bigger':
                     ratio = ratio * record.product_id.uom_po_id.factor_inv
-                if self.product_uom.uom_type == 'smaller':
-                    ratio = ratio * self.product_uom.factor
-                elif self.product_uom.uom_type == 'bigger':
-                    ratio = ratio / self.product_uom.factor_inv
+                if record.product_uom.uom_type == 'smaller':
+                    ratio = ratio * record.product_uom.factor
+                elif record.product_uom.uom_type == 'bigger':
+                    ratio = ratio / record.product_uom.factor_inv
             record['standard_qty'] = standard_qty * ratio
     standard_qty = fields.Float('Standard Qty', store=True, readonly=True, compute='_get_units_standard')
 
