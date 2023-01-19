@@ -13,7 +13,25 @@ class SaleOrderLine(models.Model):
 
     trace_line_id = fields.Many2one('trace.line', string='Tracing')
 
-    @api.depends('product_id')
+    @api.depends('product_uom','product_uom_qty')
+    def _get_units_standard(self):
+        for record in self:
+            standard_qty = record.product_uom_qty
+            ratio = 1
+            if (record.product_uom_id != record.product_id.uom_id.id):
+                # uom_type: bigger, reference, smaller
+                if record.product_id.uom_id.uom_type == 'smaller':
+                    ratio = ratio / record.product_id.uom_po_id.factor
+                elif record.product_id.uom_id.uom_type == 'bigger':
+                    ratio = ratio * record.product_id.uom_po_id.factor_inv
+                if self.product_uom.uom_type == 'smaller':
+                    ratio = ratio * self.product_uom.factor
+                elif self.product_uom.uom_type == 'bigger':
+                    ratio = ratio / self.product_uom.factor_inv
+            record['standard_qty'] = standard_qty * ratio
+    standard_qty = fields.Float('Standard Qty', store=True, readonly=True, compute='_get_units_standard')
+
+#    @api.depends('product_id')
     def _get_trace_line(self):
         for record in self:
             trace_line = self.env['trace.line'].search([('sale_id','=',record.order_id.id),('product_id','=',record.product_id.id)])
@@ -21,6 +39,7 @@ class SaleOrderLine(models.Model):
                 trace_line = self.env['trace.line'].create({'sale_id':record.order_id.id,
                                                             'product_id':record.product_id.id,
                                                             'product_uom': record.product_id.uom_id.id})
-            record['trace_line_id'] = trace_line.id
+
+            record.write({'trace_line_id':trace_line.id, ''
         emptylines = self.env['trace.line'].search([('sale_id','=',record.order_id.id),('sale_line_ids','=',False)])
         emptylines.unlink()
