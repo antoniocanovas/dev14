@@ -11,6 +11,8 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    trace_line_id = fields.Many2one('trace.line', string='Tracing')
+
     @api.depends('product_id')
     def _get_trace_line(self):
         for record in self:
@@ -20,5 +22,3 @@ class SaleOrderLine(models.Model):
                                                             'product_id':record.product_id.id,
                                                             'product_uom': record.product_id.uom_id.id})
             record['trace_line_id'] = trace_line.id
-    trace_line_id = fields.Many2one('trace.line', string='Tracing', compute='_get_trace_line')
-
