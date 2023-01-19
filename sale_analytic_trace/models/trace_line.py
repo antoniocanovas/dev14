@@ -6,7 +6,7 @@ class SaleAnalyticResume(models.Model):
     _description = 'Sale Analtyic Line'
 
     sale_id = fields.Many2one('sale.order', string='Sale', store=True, readonly=True)
-    analytic_id = fields.Many2one('account.analytic', string='Account', related='sale_id.analytic_id')
+    analytic_account_id = fields.Many2one('account.analytic', string='Account', related='sale_id.analytic_account_id')
     product_id = fields.Many2one('product.product', string='Product')
     estimated_qty = fields.Float('Qty')
     consumed_qty = fields.Float('Consumed')
