@@ -11,4 +11,4 @@ class SaleAnalyticResume(models.Model):
     estimated_qty = fields.Float('Qty')
     consumed_qty = fields.Float('Consumed')
     product_uom = fields.Many2one('uom.uom', string='Uom')
-    sale_line_ids = fields.One2many('sale.order.line', 'trace_line_id' string='Sale lines', store=True, readonly=True)
+    sale_line_ids = fields.One2many('sale.order.line', 'trace_line_id', string='Sale lines', store=True, readonly=True)
