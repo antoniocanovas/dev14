@@ -41,5 +41,4 @@ class SaleOrderLine(models.Model):
                                                             'product_uom': record.product_id.uom_id.id})
 
             record.write({'trace_line_id':trace_line.id, ''
-        emptylines = self.env['trace.line'].search([('sale_id','=',record.order_id.id),('sale_line_ids','=',False)])
-        emptylines.unlink()
+        emptylines = self.env['trace.line'].search([('sale_id','=',record.order_id.id),('sale_line_ids','=',False)]).unlink()
