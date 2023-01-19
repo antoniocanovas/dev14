@@ -9,6 +9,7 @@ Compares sold productos with analytic inputs.
     'depends': [
         'sale_management',
         'analytic',
+        'base_automation',
     ],
     'data': [
         'security/ir.model.access.csv',
