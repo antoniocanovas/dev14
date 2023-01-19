@@ -8,7 +8,7 @@
 record._get_trace_line()
             </field>
             <field name="trigger">on_create_or_write</field>
-            <field name="trigger_field_ids">product_id</field>
+            <field name="trigger_field_ids" eval="[(6,0, [ref('sale.field_sale_order_line_product_id')])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
             <field name="active" eval="True"/>
