@@ -1,0 +1,38 @@
+<odoo>
+
+        <record id="crm_activity_done_data_in_mail_message" model="base.automation">
+            <field name="name">=> Creation Mail Message activity done data</field>
+            <field name="model_id" ref="model_mail_message"/>
+            <field name="state">code</field>
+            <field name="code">
+subtype = env['ir.model.data'].search([('name','=','mt_activities'),('module','=','mail'),('model','=','mail.message.subtype')])
+if (record.subtype_id.id == subtype.res_id):
+  name, stage_name, line = "", "", ""
+  model_id = env['ir.model'].search([('model', '=', record.model)])
+  item_id = env[record.model].search([('id', '=', record.res_id)])
+
+  if (model_id.name): name = model_id.name
+  stage_exist = env['ir.model.fields'].search([('model_id','=',model_id.id),('name','=','stage_id')])
+  if (stage_exist.id):
+    stage_name = item_id.stage_id.name
+    stage_id = env['mail.message.stage'].search([('name','=',stage_name)])
+    if not stage_id.id: stage_id = env['mail.message.stage'].create({'name':stage_name})
+    record['stage_id'] = stage_id.id
+
+  line = record.body.split("\n")[2]
+  line = line.split('&lt;span&gt;')[1]
+  line = line.split('&lt;/span&gt;')[0]
+  subject = record.body.split("\n")[4]
+  subject = subject.split('&lt;/span&gt;')[2]
+  subject = subject.split('&lt;/span&gt;')[0]
+
+  record.write({'name':subject, 'activity_type':line})
+
+            </field>
+            <field name="trigger">on_create</field>
+            <field name="filter_pre_domain"></field>
+            <field name="filter_domain"></field>
+            <field name="active" eval="True"/>
+    </record>
+
+</odoo>
