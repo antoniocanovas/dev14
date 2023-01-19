@@ -18,7 +18,7 @@ class SaleOrderLine(models.Model):
         for record in self:
             standard_qty = record.product_uom_qty
             ratio = 1
-            if (record.product_uom_id != record.product_id.uom_id.id):
+            if (record.product_uom.id != record.product_id.uom_id.id):
                 # uom_type: bigger, reference, smaller
                 if record.product_id.uom_id.uom_type == 'smaller':
                     ratio = ratio / record.product_id.uom_po_id.factor
