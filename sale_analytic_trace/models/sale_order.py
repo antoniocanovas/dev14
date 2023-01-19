@@ -18,7 +18,7 @@ class SaleOrderLine(models.Model):
             if not trace_line.id:
                 trace_line = self.env['trace.line'].create({'sale_id':record.order_id.id,
                                                             'product_id':record.product_id.id,
-                                                            'product_uom': record.product_id.})
+                                                            'product_uom': record.product_id.uom_id.id})
             record['trace_line_id'] = trace_line.id
     trace_line_id = fields.Many2one('trace.line', string='Tracing', compute='_get_trace_line')
 
