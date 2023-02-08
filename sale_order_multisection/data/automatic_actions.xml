@@ -59,9 +59,9 @@ if (hay_secciones) and (record.state == 'draft'):
         seccion = li.name.split()[0]
       li.write({'section':seccion})
     elif (li.display_type != 'line_section') and (seccion_id > 0):
-      li.write({'section_id':seccion_id, 'hide_subtotal':li.hide_subtotal})
+      li.write({'section_id':seccion_id})
     else:
-      li.write({'section_id':False, 'hide_subtotal':False})
+      li.write({'section_id':False})
 
     # Cálculo de 'parent_ids', 'child_ids' y 'level' por sección, si hay multinivel ($ o multisection_key):
   secciones = env['sale.order.line'].search([('order_id','=',record.id),('display_type','=','line_section')])

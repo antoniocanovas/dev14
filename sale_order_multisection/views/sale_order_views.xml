@@ -4,7 +4,7 @@
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <tree string="Sections">
-                <field name="hide_subtotal"/>
+                <field name="hide_subtotal_section"/>
                 <field name="name"/>
                 <field name="section_total"/>
             </tree>
@@ -14,7 +14,7 @@
         <field name="inherit_id" eval="False"/>
         <field name="key" eval="False"/>
         <field name="mode">primary</field>
-        <field name="model">sale.order.line</field>
+        <field name="model">sale.order.line
         <field name="name">SOL Set Tree</field>
         <field name="priority">99</field>
         <field name="type">tree</field>
@@ -33,7 +33,7 @@
                     <group>
                         <field name="parent_ids" widget="many2many_tags"/>
                         <field name="child_ids" widget="many2many_tags"/>
-                        <field name="hide_subtotal"/>
+                        <field name="hide_subtotal_section"/>
                     </group>
 
                     <field name="section_line_ids" widget="section_and_note_one2many" mode="tree" attrs="{'readonly': [('state', 'in', ('done','cancel'))]}" nolabel="1" context="{'default_ms_review':True}">
