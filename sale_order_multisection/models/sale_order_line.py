@@ -14,7 +14,7 @@ class SaleOrderLine(models.Model):
     section = fields.Char('Section', readonly=True)
     section_id = fields.Many2one('sale.order.line', readonly=True)
 
-    hide_subtotal = fields.Boolean('Hide subtotal', store=True, readonly=False, related='section_id.hide_subtotal')
+    hide_subtotal = fields.Boolean('Hide subtotal', store=True, readonly=False)
 
     level = fields.Integer(
         'Level',
