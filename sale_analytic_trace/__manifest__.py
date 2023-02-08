@@ -10,6 +10,7 @@ Compares sold productos with analytic inputs.
         'sale_management',
         'analytic',
         'base_automation',
+        'sale_mrp_bom',
     ],
     'data': [
         'security/ir.model.access.csv',

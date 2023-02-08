@@ -31,15 +31,19 @@ class SaleOrderLine(models.Model):
             record['standard_qty'] = standard_qty * ratio
     standard_qty = fields.Float('Standard Qty', store=True, readonly=True, compute='_get_units_standard')
 
-#    @api.depends('product_id')
     def _get_trace_line(self):
         for record in self:
-            trace_line = self.env['trace.line'].search([('sale_id','=',record.order_id.id),('product_id','=',record.product_id.id)])
-            if not trace_line.id:
-                trace_line = self.env['trace.line'].create({'sale_id':record.order_id.id,
-                                                            'product_id':record.product_id.id,
-                                                            'product_uom': record.product_id.uom_id.id})
-
-            record.write({'trace_line_id':trace_line.id})
+            if record.bom_ids.ids:
+                bom = record.bom_ids[0]
+                for li in bom:
+                    # Pasar por todas las líneas y crear nuevos registros. También escribir en li el SO ...:
+                    a=1
+            else:
+                trace_line = self.env['trace.line'].search([('sale_id','=',record.order_id.id),('product_id','=',record.product_id.id)])
+                if not trace_line.id:
+                    trace_line = self.env['trace.line'].create({'sale_id':record.order_id.id,
+                                                                'product_id':record.product_id.id,
+                                                                'product_uom': record.product_id.uom_id.id})
+                record.write({'trace_line_id':trace_line.id})
         emptylines = self.env['trace.line'].search([('sale_id','=',record.order_id.id),('sale_line_ids','=',False)])
         emptylines.unlink()
