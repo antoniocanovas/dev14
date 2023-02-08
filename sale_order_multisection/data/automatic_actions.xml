@@ -59,7 +59,7 @@ if (hay_secciones) and (record.state == 'draft'):
         seccion = li.name.split()[0]
       li.write({'section':seccion})
     elif (li.display_type != 'line_section') and (seccion_id > 0):
-      li.write({'section_id':seccion_id, 'hide_subtotal':section_id.hide_subtotal})
+      li.write({'section_id':seccion_id, 'hide_subtotal':seccion_id.hide_subtotal})
     else:
       li.write({'section_id':False})
 
