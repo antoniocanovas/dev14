@@ -39,6 +39,8 @@ class PurchasePriceUpdate(models.Model):
                                                      'product_id':self.product_id.id,
                                                      'product_uom':self.product_uom.id,
                                                      'price':self.price_unit,
+                                                     'min_qty':1,
+                                                     'product_tmpl_id':self.product_id.product_tmpl_id.id,
                                                      'delay':1})
 
     def update_product_standard_price(self):
