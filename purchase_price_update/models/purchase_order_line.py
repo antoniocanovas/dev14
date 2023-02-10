@@ -25,7 +25,7 @@ class PurchasePriceUpdate(models.Model):
     standard_price = fields.Float(string='Prev. Price', store=True, compute="get_standard_price")
 
     def update_supplier_price(self):
-        supplier_price = self.env['product_suppplierinfo'].search([
+        supplier_price = self.env['product_supplierinfo'].search([
             ('name','=',self.partner_id.id),
             ('product_id','=',self.product_id.id),
             ('product_uom','=',self.product_uom.id)
