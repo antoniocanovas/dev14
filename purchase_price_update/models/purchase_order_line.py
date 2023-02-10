@@ -31,14 +31,15 @@ class PurchasePriceUpdate(models.Model):
             ('product_uom','=',self.product_uom.id)
         ])
         if (supplier_price.id) and (supplier_price.price != self.price_unit):
-            self.supplier_price.price = self.price_unit
+            supplier_price.price = self.price_unit
         elif (supplier_price.id) and (supplier_price.price == self.price_unit):
             a = "Ok"
         else:
             self.env['product.supplierinfo'].create({'name':self.partner_id.id,
                                                      'product_id':self.product_id.id,
                                                      'product_uom':self.product_uom.id,
-                                                     'price':self.price_unit})
+                                                     'price':self.price_unit,
+                                                     'delay':1})
 
     def update_product_standard_price(self):
         monetary_precision = self.env['decimal.precision'].sudo().search([('id', '=', 1)]).digits
