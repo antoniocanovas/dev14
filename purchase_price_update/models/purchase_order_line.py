@@ -36,8 +36,7 @@ class PurchasePriceUpdate(models.Model):
 
     @api.depends('product_id')
     def get_standard_price(self):
-        for record in self:
-            record.standard_price = record.product_id.standard_price
+        self.standard_price = self.product_id.standard_price
     standard_price = fields.Float(string='Prev. Price', store=True, compute="get_standard_price")
 
     def update_supplier_price(self):
@@ -61,6 +60,7 @@ class PurchasePriceUpdate(models.Model):
                                                      'min_qty':0,
                                                      'product_tmpl_id':self.product_id.product_tmpl_id.id,
                                                      'delay':1})
+        self.price_supplierinfo_control = True
 
     def update_product_standard_price(self):
         monetary_precision = self.env['decimal.precision'].sudo().search([('id', '=', 1)]).digits
@@ -78,6 +78,7 @@ class PurchasePriceUpdate(models.Model):
         new_purchase_price = round((self.price_subtotal / self.product_qty * ratio), monetary_precision)
         if new_purchase_price != self.product_id.standard_price:
             self.product_id.standard_price = new_purchase_price
+        self.price_control = True
 
     @api.onchange('price_subtotal')
     def price_unit_wizard(self):
