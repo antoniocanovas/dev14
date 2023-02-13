@@ -29,7 +29,7 @@ class PurchasePriceUpdate(models.Model):
             ('min_qty', '=', 0),
         ])
         if (supplier_price.id) and (self.product_qty) and \
-                (self.price_subtotal / self.product_qty) == (supplier_price.price / (1 - supplier_price.discount/100)):
+                (self.price_subtotal / self.product_qty) == (supplier_price.price * (1 - supplier_price.discount/100)):
             control = True
         self.price_supplierinfo_control = control
     price_supplierinfo_control = fields.Boolean(string='Supplierinfo Control', compute='get_supplierinfo_control')
