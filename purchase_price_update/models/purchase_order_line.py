@@ -13,7 +13,7 @@ class PurchasePriceUpdate(models.Model):
     @api.depends('price_subtotal','price_unit')
     def get_price_control(self):
         control = False
-        if (self.product_qty) and (self.price_subtotal / self.product_qty) == self.standard_price:
+        if (self.product_qty) and (self.price_subtotal / self.product_qty) == self.product_id.standard_price:
             control = True
         self.price_control = control
     price_control = fields.Boolean(string='Price Control', compute='get_price_control')
