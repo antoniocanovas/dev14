@@ -18,11 +18,21 @@
 
     <!-- MENUS:   -->
     <menuitem
-            action="external_work_action"
+            action="external_work_menu"
             id="external_work_menu"
             name="External Works"
             sequence="10"
             web_icon="external_work,static/hr_worksheet_icon.png"
     />
-
+<!--
+    <record id="menu_hr_timesheet_work_sheet" model="ir.ui.menu">
+        <field name="action" ref="action_hr_timesheet_work_sheet"/>
+        <field name="active" eval="True"/>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+        <field name="name">Sheet</field>
+        <field name="parent_id" ref="menu_hr_timesheet_work"/>
+        <field name="sequence">1</field>
+        <field name="web_icon" eval="False"/>
+    </record>
+-->
 </odoo>
