@@ -71,7 +71,7 @@
 
     <record id="external_work_search" model="ir.ui.view">
         <field name="name">external.work.search</field>
-        <field name="model">external.work.search</field>
+        <field name="model">external.work</field>
         <field name="arch" type="xml">
             <search string="Search External Work">
                 <field name="name" filter_domain="[('name', 'ilike', self)]"/>
