@@ -11,6 +11,7 @@ External Work
     ],
     'data': [
 #        'data/action_server.xml',
+        'security/ir.model.access.csv',
         'views/external_work_views.xml',
         'views/menu_views.xml',
     ],
