@@ -31,7 +31,7 @@
                         <field name="currency_id" invisible="1"/>
                     </group>
                     <footer>
-                        <button name="%(get_create_timesheet_expense_sale)d" string="Apply" type="object" class="oe_highlight"/>
+                        <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
