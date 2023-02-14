@@ -97,7 +97,7 @@
                                     <field name="product_qty"/>
                                     <field name="uom_id"/>
                                     <field name="ticket_amount" optional="hide"/>
-                                    <field name="task_id" optional="hide" domain="[('project_id','=',project_id)]"/>
+                                    <field name="task_id" optional="hide" domain="[('project_id','=',project_id.id)]"/>
                                     <field name="project_id" optional="hide"/>
                                     <field name="time_begin" widget="timesheet_uom" optional="hide"/>
                                     <field name="time_end" widget="timesheet_uom" optional="hide"/>
