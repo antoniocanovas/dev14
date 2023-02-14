@@ -1,8 +1,8 @@
 from odoo import _, api, fields, models
 
 TYPE = [
-    ('eei', 'Employee expense to invoice'),
-    ('eep', 'Employee expense in project'),
+    ('ein', 'Employee expense to reinvoice'),
+    ('eni', 'Internal employee expense'),
     ('pin', 'Product to invoice'),
     ('pni', 'Product not invoiced'),
     ('sin', 'Service to invoice'),
@@ -38,5 +38,12 @@ class ExternalWork(models.Model):
     sale_id = fields.Many2one('sale.order', string="Sale")
     external_work_id = fields.Many2one('external.work', string='Work')
 
-#    @api.depends('unbuild_type')
-#    def get_refurbish_is_outlet(self):
+    def get_create_timesheet_expense_sale(self):
+        saleline, timesheet, expense = False, False, False
+        if self.type in ['ein','eni','pin','pni','sin','sni']: saleline = True
+        if self.type in ['ein','eni','pin','pni','sin','sni']: timesheet = True
+        if self.type in ['ein','eni','pin','pni','sin','sni']: expense = True
+
+        if (saleline = True):
+            if not (self.external_work_id.sale_id.id):
+                self.env['sale.order'].create({'partner_id':self.partner_id.id})
