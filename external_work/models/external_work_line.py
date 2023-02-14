@@ -23,7 +23,7 @@ class ExternalWork(models.Model):
     partner_id  = fields.Many2one('res.partner', string="Partner", related='external_work_id.partner_id')
     product_id  = fields.Many2one('product.product', string='Product')
     product_qty = fields.Float('Qty')
-    uom_id      = fields.Many2one('uom.uom', string='UOM')
+    uom_id      = fields.Many2one('uom.uom', string='UOM', related='product_id.uom_id')
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
     currency_id = fields.Many2one('res.currency', store=True, default=1)
 
