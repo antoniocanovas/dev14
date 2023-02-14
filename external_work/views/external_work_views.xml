@@ -71,9 +71,9 @@
                         <div>
                             <group>
                                 <group>
-                                    <field name="project_id" attrs="{'invisible':[('type','in',['sale'])]}">
-                                    <field name="task_id" attrs="{'invisible':[('type','in',['sale'])]}">
-                                    <field name="sale_id" attrs="{'invisible':[('type','in',['project','task'])]}">
+                                    <field name="project_id" attrs="{'invisible':[('type','in',['sale'])]}"/>
+                                    <field name="task_id" attrs="{'invisible':[('type','in',['sale'])]}"/>
+                                    <field name="sale_id" attrs="{'invisible':[('type','in',['project','task'])]}"/>
                                 </group>
                                 <group attrs="{'invisible':[('type','in',['warranty'])]}">
                                     <field name="sale_subtotal"/>
