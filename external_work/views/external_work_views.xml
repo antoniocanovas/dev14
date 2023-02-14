@@ -12,7 +12,7 @@
                         <field name="name" invisible="1"/>
                         <field name="date" invisible="1"/>
                         <field name="type" required="1"/>
-                        <field name="employee_id" invisible="1"/>
+                        <field name="employee_id"/>
                         <field name="user_id" invisible="1"/>
                         <field name="partner_id"/>
                         <field name="product_id"/>
@@ -86,7 +86,7 @@
                         </div>
                         <div name="external_work_lines">
                             <field name="line_ids"
-                                   context="{'default_external_work_id':active_id, 'default_task_id':task_id}">
+                                   context="{'default_external_work_id':active_id, 'default_task_id':task_id, 'default_employee_id':employee_id}">
                                 <tree>
                                     <field name="name" invisible="1"/>
                                     <field name="date" invisible="1"/>
