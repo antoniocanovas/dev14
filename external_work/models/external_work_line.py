@@ -1,15 +1,16 @@
 from odoo import _, api, fields, models
 
-class ExternalWork(models.Model):
-    _name = "external.work"
-    _description = "External Work"
-
 TYPE = [
     ('sale', 'Sale'),
     ('project', 'Project'),
     ('task', 'Tasks'),
     ('warranty', 'Maintenance or warranty'),
 ]
+
+class ExternalWork(models.Model):
+    _name = "external.work.line"
+    _description = "External Work Line"
+
 
     name        = fields.Char(string='Name')
     date        = fields.Date(string='Date')
