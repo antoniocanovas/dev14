@@ -67,7 +67,7 @@
                         <field name="employee_id" required="1"/>
                         <field name="partner_id" required="1"/>
                     </group></group>
-                    <div attrs="{'invisible':['|','|','|',('type','=',False),('partner_id','=',False),('employee_id','=',False),('date','=',False)]]}">
+                    <div attrs="{'invisible':['|','|','|',('type','=',False),('partner_id','=',False),('employee_id','=',False),('date','=',False)]}">
                         <div>
                             <field name="project_id"/>
                             <field name="task_id"/>
