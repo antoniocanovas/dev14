@@ -28,6 +28,7 @@
                         <field name="sale_line_id" optional="hide"/>
                         <field name="sale_id" optional="hide"/>
                         <field name="external_work_id" invisible="1"/>
+                        <field name="work_type" invisible="1"/>
                         <field name="currency_id" invisible="1"/>
                     </group>
                     <footer>

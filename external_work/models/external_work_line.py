@@ -37,6 +37,7 @@ class ExternalWork(models.Model):
     sale_line_id = fields.Many2one('sale.order.line')
     sale_id = fields.Many2one('sale.order', string="Sale")
     external_work_id = fields.Many2one('external.work', string='Work')
+    work_type = fields.Selection('Work type', related='external_work_id.type')
 
     def get_create_timesheet_expense_sale(self):
         saleline, timesheet, expense = False, False, False
