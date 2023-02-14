@@ -11,7 +11,7 @@
                     <group name="external_work_sheet_main">
                         <field name="name" invisible="1"/>
                         <field name="date" invisible="1"/>
-                        <field name="type"/>
+                        <field name="type" required="1"/>
                         <field name="employee_id" invisible="1"/>
                         <field name="user_id" invisible="1"/>
                         <field name="partner_id" invisible="1"/>

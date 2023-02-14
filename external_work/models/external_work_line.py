@@ -6,7 +6,7 @@ TYPE = [
     ('pin', 'Product to invoice'),
     ('pni', 'Product not invoiced'),
     ('sin', 'Service to invoice'),
-    ('sni', 'Service not invoiced or warranty')
+    ('sni', 'Service not invoiced or warranty'),
 ]
 
 class ExternalWork(models.Model):
