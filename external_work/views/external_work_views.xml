@@ -69,12 +69,18 @@
                     </group></group>
                     <div attrs="{'invisible':['|','|','|',('type','=',False),('partner_id','=',False),('employee_id','=',False),('date','=',False)]}">
                         <div>
-                            <field name="project_id"/>
-                            <field name="task_id"/>
-                            <field name="sale_id"/>
-                            <field name="sale_subtotal"/>
-                            <field name="sale_public"/>
-                            <fiend name="company_id" invisible="1"/>
+                            <group>
+                                <group>
+                                    <field name="project_id" attrs="{'invisible':[('type','in',['sale'])]}">
+                                    <field name="task_id" attrs="{'invisible':[('type','in',['sale'])]}">
+                                    <field name="sale_id" attrs="{'invisible':[('type','in',['project','task'])]}">
+                                </group>
+                                <group attrs="{'invisible':[('type','in',['warranty'])]}">
+                                    <field name="sale_subtotal"/>
+                                    <field name="sale_public"/>
+                                </group>
+                            </group>
+                            <field name="company_id" invisible="1"/>
                             <field name="currency_id" invisible="1"/>
                         </div>
                         <div name="external_work_lines">
