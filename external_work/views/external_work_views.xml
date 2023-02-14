@@ -21,8 +21,8 @@
                         <field name="ticket_amount" optional="hide"/>
                         <field name="task_id" optional="hide"/>
                         <field name="project_id" optional="hide"/>
-                        <field name="time_begin" optional="hide"/>
-                        <field name="time_end" optional="hide"/>
+                        <field name="time_begin" widget="timesheet_uom" optional="hide"/>
+                        <field name="time_end" widget="timesheet_uom" optional="hide"/>
                         <field name="expense_id" optional="hide"/>
                         <field name="analytic_line_id" optional="hide"/>
                         <field name="sale_line_id" optional="hide"/>
@@ -85,8 +85,8 @@
                                 <field name="ticket_amount" optional="hide"/>
                                 <field name="task_id" optional="hide"/>
                                 <field name="project_id" optional="hide"/>
-                                <field name="time_begin" optional="hide"/>
-                                <field name="time_end" optional="hide"/>
+                                <field name="time_begin" widget="timesheet_uom" optional="hide"/>
+                                <field name="time_end" widget="timesheet_uom" optional="hide"/>
                                 <field name="expense_id" optional="hide"/>
                                 <field name="analytic_line_id" optional="hide"/>
                                 <field name="sale_line_id" optional="hide"/>
