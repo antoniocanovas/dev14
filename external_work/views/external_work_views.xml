@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <!-- EXTERNAL WORK MAIN FORM:   -->
+    <record id="external_work_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <!-- MAIN Form:  -->
+                    <h1><field name="name" widget="text"/></h1>
+                    <group name="external_work_sheet_main"><group>
+                        <field name="date"/>
+                        <field name="partner_id"/>
+                    </group><group>
+                        <field name="employee_id"/>
+                        <field name="type"/>
+                    </group></group>
+
+                    <div name="signature">
+                        <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
+                    </div>
+                    <field name="company_id" invisible="1"/>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">external.work</field>
+        <field name="name">External Work form view</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="external_work_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree name="external_work_tree" string="External Work"  default_order='create_date desc'>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+                <field name="employee_id"/>
+                <field name="type"/>
+                <field name="project_id" optional="hide"/>
+                <field name="task_id" optional="hide"/>
+                <field name="sale_id" optional="hide"/>
+                <field name="sale_subtotal" optional="hide"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">external.work</field>
+        <field name="name">External Work Tree View</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <record id="external_work_search" model="ir.ui.view">
+        <field name="name">external.work.search</field>
+        <field name="model">external.work.search</field>
+        <field name="arch" type="xml">
+            <search string="Search External Work">
+                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="type" filter_domain="[('time_type_id', 'ilike', self)]"/>
+                <field name="partner_id" filter_domain="[('partner_id', 'ilike', self)]"/>
+                <separator/>
+                <filter string="Projects" name="type_project" domain="[('type', '=', 'project')]"/>
+                <separator/>
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="date" string="Date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+</odoo>
