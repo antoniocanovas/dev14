@@ -85,7 +85,8 @@
                             <field name="currency_id" invisible="1"/>
                         </div>
                         <div name="external_work_lines">
-                            <field name="line_ids" context="{'default_external_work_id':active_id}">
+                            <field name="line_ids"
+                                   context="{'default_external_work_id':active_id, 'default_task_id':task_id.id}">
                                 <tree>
                                     <field name="name" invisible="1"/>
                                     <field name="date" invisible="1"/>
