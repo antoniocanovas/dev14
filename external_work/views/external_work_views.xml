@@ -61,11 +61,11 @@
                     <!-- MAIN Form:  -->
                     <h1><field name="name" widget="text"/></h1>
                     <group name="external_work_sheet_main"><group>
-                        <field name="type"/>
-                        <field name="date"/>
+                        <field name="type" required="1"/>
+                        <field name="date" required="1"/>
                     </group><group>
-                        <field name="employee_id"/>
-                        <field name="partner_id"/>
+                        <field name="employee_id" required="1"/>
+                        <field name="partner_id" required="1"/>
                     </group></group>
                     <div>
                         <field name="project_id"/>
