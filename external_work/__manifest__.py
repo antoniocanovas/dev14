@@ -11,7 +11,8 @@ External Work
     ],
     'data': [
 #        'data/action_server.xml',
-#        'views/timesheet_work_views.xml',
+        'views/external_work_views.xml',
+        'views/menu_views.xml',
     ],
     'installable': True,
 }
