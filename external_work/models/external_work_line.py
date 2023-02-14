@@ -1,10 +1,12 @@
 from odoo import _, api, fields, models
 
 TYPE = [
-    ('sale', 'Sale'),
-    ('project', 'Project'),
-    ('task', 'Tasks'),
-    ('warranty', 'Maintenance or warranty'),
+    ('eei', 'Employee expense to invoice'),
+    ('eep', 'Employee expense in project'),
+    ('pin', 'Product to invoice'),
+    ('pni', 'Product not invoiced'),
+    ('sin', 'Service to invoice'),
+    ('sni', 'Service not invoiced or warranty')
 ]
 
 class ExternalWork(models.Model):
@@ -13,6 +15,8 @@ class ExternalWork(models.Model):
 
 
     name        = fields.Char(string='Name')
+    type        = fields.Selection(selection=TYPE, string="Type", default=TYPE[0][0])
+
     date        = fields.Date(string='Date')
     employee_id = fields.Many2one('hr.employee', string="Employee")
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
