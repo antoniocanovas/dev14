@@ -12,13 +12,46 @@
                     <!-- MAIN Form:  -->
                     <h1><field name="name" widget="text"/></h1>
                     <group name="external_work_sheet_main"><group>
+                        <field name="type"/>
                         <field name="date"/>
-                        <field name="partner_id"/>
                     </group><group>
                         <field name="employee_id"/>
-                        <field name="type"/>
+                        <field name="partner_id"/>
                     </group></group>
-
+                    <div>
+                        <field name="project_id"/>
+                        <field name="task_id"/>
+                        <field name="sale_id"/>
+                        <field name="sale_subtotal"/>
+                        <field name="sale_public"/>
+                        <fiend name="company_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                    </div>
+                    <div name="external_work_lines">
+                        <field name="line_ids">
+                            <tree>
+                                <field name="name" invisible="1"/>
+                                <field name="date" invisible="1"/>
+                                <field name="employee_id" invisible="1"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="partner_id" invisible="1"/>
+                                <field name="product_id"/>
+                                <field name="product_qty"/>
+                                <field name="uom_id"/>
+                                <field name="ticket_amount" optional="hide"/>
+                                <field name="task_id" optional="hide"/>
+                                <field name="project_id" optional="hide"/>
+                                <field name="time_begin" optional="hide"/>
+                                <field name="time_end" optional="hide"/>
+                                <field name="expense_id" optional="hide"/>
+                                <field name="analytic_line_id" optional="hide"/>
+                                <field name="sale_line_id" optional="hide"/>
+                                <field name="sale_id" optional="hide"/>
+                                <field name="external_work_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </div>
                     <div name="signature">
                         <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
                     </div>
