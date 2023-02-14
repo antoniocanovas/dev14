@@ -35,7 +35,7 @@ class ExternalWork(models.Model):
     expense_id  = fields.Many2one('hr.expense', 'Expense')
     analytic_line_id = fields.Many2one('account.analytic.line')
     sale_line_id = fields.Many2one('sale.order.line')
-    sale_id = fields.Many2one('sale.order', string="Sale")
+    sale_id = fields.Many2one('sale.order', string="Sale", related='external_work_id.sale_id')
     external_work_id = fields.Many2one('external.work', string='Work')
     work_type = fields.Selection('Work type', related='external_work_id.type')
 
