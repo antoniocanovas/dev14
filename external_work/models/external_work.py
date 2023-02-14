@@ -25,5 +25,6 @@ class ExternalWork(models.Model):
     sale_subtotal = fields.Float('Sale subtotal')
     sale_public =  fields.Float('Public price')
     signature   = fields.Binary('Signature')
-    line_ids    = fields.One2many('external.work.line', string='Lines')
+    line_ids    = fields.One2many('external.work.line', 'external_work_id', string='Lines')
     company_id  = fields.Many2one('res.company')
+    currency_id = fields.Many2one('res.currency', store=True, default=1)
