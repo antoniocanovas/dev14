@@ -44,6 +44,6 @@ class ExternalWork(models.Model):
         if self.type in ['ein','eni','pin','pni','sin','sni']: timesheet = True
         if self.type in ['ein','eni','pin','pni','sin','sni']: expense = True
 
-        if (saleline = True):
+        if (saleline == True):
             if not (self.external_work_id.sale_id.id):
                 self.env['sale.order'].create({'partner_id':self.partner_id.id})
