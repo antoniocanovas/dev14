@@ -132,13 +132,13 @@
                                     <field name="uom_id"/>
                                     <field name="ticket_amount" optional="hide"/>
                                     <field name="task_id" optional="hide" domain="[('project_id','=',project_id)]"/>
-                                    <field name="project_id" optional="hide"/>
                                     <field name="time_begin" widget="timesheet_uom" optional="hide"/>
                                     <field name="time_end" widget="timesheet_uom" optional="hide"/>
                                     <field name="expense_id" optional="hide"/>
                                     <field name="analytic_line_id" optional="hide"/>
                                     <field name="sale_line_id" optional="hide"/>
-                                    <field name="sale_id" optional="hide"/>
+                                    <field name="project_id" invisible="1"/>
+                                    <field name="sale_id" invisible="1"/>
                                     <field name="external_work_id" invisible="1"/>
                                     <field name="currency_id" invisible="1"/>
                                 </tree>
