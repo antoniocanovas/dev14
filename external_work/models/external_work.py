@@ -31,7 +31,7 @@ class ExternalWork(models.Model):
     @api.depends('partner_id','employee_id','type')
     def _get_work_name(self):
         name=""
-        if self.employee_id: name += self.employee_id.name + " "
+        if self.employee_id: name += self.employee_id.name
         if name: name += " - "
         if self.partner_id:     name += self.partner_id.name
         self.name = name
