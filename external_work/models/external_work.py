@@ -32,7 +32,7 @@ class ExternalWork(models.Model):
     def _get_work_name(self):
         name=""
         if self.employee_id: name += self.employee_id.name + " - "
-        if self.type:           name += self.type + " - "
+        if self.type:           name += self.type[1] + " - "
         if self.partner_id:     name += self.partner_id.name
         self.name = name
     name = fields.Char('Name', compute='_get_work_name')
