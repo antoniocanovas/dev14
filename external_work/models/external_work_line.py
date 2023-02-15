@@ -1,12 +1,12 @@
 from odoo import _, api, fields, models
 
 TYPE = [
-    ('ein', 'Employee expense to reinvoice'),
+    ('ein', 'Employee expense billable'),
     ('eni', 'Internal employee expense'),
-    ('pin', 'Product to invoice'),
-    ('pni', 'Product not invoiced'),
-    ('sin', 'Service to invoice'),
-    ('sni', 'Service not invoiced or warranty'),
+    ('pin', 'Product billable'),
+    ('pni', 'Product not billable'),
+    ('sin', 'Service billable'),
+    ('sni', 'Service not billable'),
 ]
 
 class ExternalWork(models.Model):

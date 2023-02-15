@@ -1,18 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-    <!--
-        ('ein', 'eni',
-        ('pin', 'Product to invoice'),
-        ('pni', 'Product not invoiced'),
-        ('sin', 'Service to invoice'),
-        ('sni', 'Service not invoiced or warranty'),
-        -->
+
+    <record model="ir.actions.act_window" id="work_new_line_action_wizard" >
+        <field name="name">New line</field>
+        <field name="res_model">external.work.line</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 
     <!-- EXTERNAL WORK LINE MAIN FORM:   -->
     <record id="external_work_line_form" model="ir.ui.view">
         <field name="active" eval="True"/>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button class="oe_highlight" type="action" name="%(work_new_line_action_wizard)d" string="New line"
+                            context="{'default_external_work_id':active_id, 'default_task_id':task_id, 'default_employee_id':employee_id}">
+                </header>
                 <sheet>
                     <!-- MAIN Form mobile:  -->
                     <group>
