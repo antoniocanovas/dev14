@@ -12,7 +12,6 @@ class ExternalWork(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "External Work"
 
-    name = fields.Char('Name')
     type = fields.Selection(selection=TYPE, string="Type", default=TYPE[0][0])
 
     date = fields.Date('Date')
@@ -28,3 +27,12 @@ class ExternalWork(models.Model):
     line_ids    = fields.One2many('external.work.line', 'external_work_id', string='Lines')
     company_id  = fields.Many2one('res.company')
     currency_id = fields.Many2one('res.currency', store=True, default=1)
+
+    @api.depends('partner_id','employee_id','type')
+    def _get_work_name(self):
+        name=""
+        if self.employee_id: name += self.employee_id.name + " - "
+        if self.type:           name += self.type + " - "
+        if self.partner_id:     name += self.partner_id.name
+        self.name = name
+    name = fields.Char('Name', compute='_get_work_name')
