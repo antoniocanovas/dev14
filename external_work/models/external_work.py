@@ -23,6 +23,7 @@ class ExternalWork(models.Model):
     partner_id  = fields.Many2one('res.partner', string="Partner")
     sale_subtotal = fields.Float('Sale subtotal')
     sale_public =  fields.Float('Public price')
+    signed_by   = fields.Char('Signed by')
     signature   = fields.Binary('Signature')
     line_ids    = fields.One2many('external.work.line', 'external_work_id', string='Lines')
     company_id  = fields.Many2one('res.company')

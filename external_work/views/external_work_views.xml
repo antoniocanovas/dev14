@@ -110,9 +110,10 @@
                                     <field name="task_id" attrs="{'invisible':[('type','in',['sale'])], 'required':[('type','in',['task'])]}"/>
                                     <field name="sale_id" attrs="{'invisible':[('type','in',['project','task'])]}"/>
                                 </group>
-                                <group attrs="{'invisible':[('type','in',['warranty'])]}">
-                                    <field name="sale_subtotal"/>
-                                    <field name="sale_public"/>
+                                <group>
+                                    <field name="signed_by"/>
+                                    <field name="sale_subtotal" attrs="{'invisible':[('type','in',['warranty'])]}"/>
+                                    <field name="sale_public" attrs="{'invisible':[('type','in',['warranty'])]}"/>
                                 </group>
                             </group>
                             <field name="company_id" invisible="1"/>
