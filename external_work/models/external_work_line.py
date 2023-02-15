@@ -21,9 +21,21 @@ class ExternalWork(models.Model):
     employee_id = fields.Many2one('hr.employee', string="Employee")
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
     partner_id  = fields.Many2one('res.partner', string="Partner", related='external_work_id.partner_id')
-    product_id  = fields.Many2one('product.product', string='Product')
+    material_id = fields.Many2one('product.product', string='Product', domain="[("type','!=','service"),('sale_ok','=',True)]")
+    service_id  = fields.Many2one('product.product', string='Product', domain="[("type','=','service"),('sale_ok','=',True)]")
+    expense_id  = fields.Many2one('product.product', string='Product', domain="[('can_be_expensed','=',True)]")
+
+    @api.depends('type','material_id','service_id','expense_id')
+    def get_product_id(self):
+        product = self.material_id
+        if self.type in ['ein','eni']: product = self.expense_id
+        if self.type in ['sin','sni']: product = self.service_id
+        self.product_id = product.id
+    product_id  = fields.Many2one('product.product', string='Product', compute='get_product_id')
+
     product_qty = fields.Float('Qty')
     uom_id      = fields.Many2one('uom.uom', string='UOM', related='product_id.uom_id')
+
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
     currency_id = fields.Many2one('res.currency', store=True, default=1)
 
@@ -32,7 +44,7 @@ class ExternalWork(models.Model):
     time_begin  = fields.Float('Begin')
     time_end    = fields.Float('End')
 
-    expense_id  = fields.Many2one('hr.expense', 'Expense')
+    hr_expense_id  = fields.Many2one('hr.expense', 'Expense')
     analytic_line_id = fields.Many2one('account.analytic.line')
     sale_line_id = fields.Many2one('sale.order.line')
     sale_id = fields.Many2one('sale.order', string="Sale", related='external_work_id.sale_id')
