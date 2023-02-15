@@ -62,9 +62,10 @@
                         <field name="currency_id" invisible="1"/>
                     </group>
                     <footer>
-                        <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight"
-                            attrs="{'invisible':[('id','!=',False)]}"/>
-                        or
+                        <div attrs="{'invisible':[('id','!=',False)]}">
+                            <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight"/>
+                            or
+                        </div>
                         <button name="get_update_timesheet_expense_sale" string="Update" type="object" class="oe_highlight"
                             attrs="{'invisible':[('id','=',False)]}"/>
                         or
