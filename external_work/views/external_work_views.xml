@@ -15,7 +15,10 @@
             <form>
                 <sheet>
                     <!-- MAIN Form mobile:  -->
-                    <div name="expense" attrs="{'invisible':[('type',' in',['ein','eni'])]}">
+                    <group>
+                        <field name="type" required="1"/>
+                    </group>
+                    <div name="expense" attrs="{'invisible':[('type','not in',['ein','eni'])]}">
                         <group name="group_expense">
                             <field name="product_id" domain="[('can_be_expensed','=',True)]"/>
                             <field name="employee_id"/>
@@ -27,7 +30,6 @@
                         <field name="name" invisible="1"/>
                         <field name="partner_id" invisible="1"/>
                         <field name="date" invisible="1"/>
-                        <field name="type" required="1"/>
                         <field name="employee_id" attrs="{}"/>
                         <field name="user_id" invisible="1"/>
                         <field name="product_id"/>
