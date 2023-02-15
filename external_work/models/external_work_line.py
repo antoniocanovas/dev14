@@ -17,7 +17,7 @@ class ExternalWork(models.Model):
     name        = fields.Char(string='Name')
     type        = fields.Selection(selection=TYPE, string="Type", default=TYPE[0][0])
 
-    date        = fields.Date(string='Date')
+    date        = fields.Date(string='Date', related='external_work_id.date')
     employee_id = fields.Many2one('hr.employee', string="Employee")
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
     partner_id  = fields.Many2one('res.partner', string="Partner", related='external_work_id.partner_id')
