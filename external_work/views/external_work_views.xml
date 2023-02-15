@@ -29,7 +29,6 @@
                     </div>
                     <div name="product" attrs="{'invisible':[('type','not in',['pin','pni'])]}">
                         <group name="group_product">
-                            <field name="project_id" optional="hide" nolabel="1"/>
                             <field name="task_id" optional="hide" domain="[('project_id','=',project_id)]"/>
                             <field name="material_id"/>
                             <field name="product_qty"/>
@@ -51,9 +50,10 @@
                     <group>
                         <field name="partner_id" invisible="1"/>
                         <field name="date" invisible="1"/>
+                        <field name="project_id"/>
                         <field name="user_id" invisible="1"/>
                         <field name="product_id"/>
-                        <field name="hr_expense_id"readonly="1"/>
+                        <field name="hr_expense_id" readonly="1"/>
                         <field name="analytic_line_id" readonly="1"/>
                         <field name="sale_line_id" readonly="1"/>
                         <field name="sale_id" readonly="1"/>
