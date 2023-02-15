@@ -32,7 +32,7 @@
                             <field name="material_id" attrs="{'required':[('type','in',['pin','pni'])]}"/>
                             <field name="product_qty" required="1"/>
                             <field name="uom_id"/>
-                            <field name="task_id" optional="hide" domain="[('project_id','=',project_id)]"/>
+                            <field name="task_id" domain="[('project_id','=',project_id)]"/>
                         </group>
                     </div>
                     <div name="service" attrs="{'invisible':[('type','not in',['sin','sni'])]}">
@@ -62,7 +62,11 @@
                         <field name="currency_id" invisible="1"/>
                     </group>
                     <footer>
-                        <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight"/>
+                        <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('id','!=',False)]}"/>
+                        or
+                        <button name="get_update_timesheet_expense_sale" string="Update" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('id','=',False)]}"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>

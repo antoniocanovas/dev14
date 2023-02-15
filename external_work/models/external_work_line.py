@@ -60,3 +60,13 @@ class ExternalWork(models.Model):
         if (saleline == True):
             if not (self.external_work_id.sale_id.id):
                 self.env['sale.order'].create({'partner_id':self.partner_id.id})
+
+    def get_update_timesheet_expense_sale(self):
+        saleline, timesheet, expense = False, False, False
+        if self.type in ['ein','eni','pin','pni','sin','sni']: saleline = True
+        if self.type in ['ein','eni','pin','pni','sin','sni']: timesheet = True
+        if self.type in ['ein','eni','pin','pni','sin','sni']: expense = True
+
+        if (saleline == True):
+            if not (self.external_work_id.sale_id.id):
+                self.env['sale.order'].create({'partner_id':self.partner_id.id})
