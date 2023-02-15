@@ -52,10 +52,11 @@
                         <field name="partner_id" invisible="1"/>
                         <field name="date" invisible="1"/>
                         <field name="user_id" invisible="1"/>
-                        <field name="expense_id" optional="hide" readonly="1"/>
-                        <field name="analytic_line_id" optional="hide" readonly="1"/>
-                        <field name="sale_line_id" optional="hide" readonly="1"/>
-                        <field name="sale_id" optional="hide" readonly="1"/>
+                        <field name="product_id"/>
+                        <field name="hr_expense_id"readonly="1"/>
+                        <field name="analytic_line_id" readonly="1"/>
+                        <field name="sale_line_id" readonly="1"/>
+                        <field name="sale_id" readonly="1"/>
                         <field name="external_work_id" invisible="1"/>
                         <field name="work_type" invisible="1"/>
                         <field name="currency_id" invisible="1"/>

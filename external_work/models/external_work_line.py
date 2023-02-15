@@ -21,9 +21,9 @@ class ExternalWork(models.Model):
     employee_id = fields.Many2one('hr.employee', string="Employee")
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
     partner_id  = fields.Many2one('res.partner', string="Partner", related='external_work_id.partner_id')
-    material_id = fields.Many2one('product.product', string='Product', domain="[('type','!=','service'),('sale_ok','=',True)]")
-    service_id  = fields.Many2one('product.product', string='Product', domain="[('type','=','service'),('sale_ok','=',True)]")
-    expense_id  = fields.Many2one('product.product', string='Product', domain="[('can_be_expensed','=',True)]")
+    material_id = fields.Many2one('product.product', string='Material', domain="[('type','!=','service'),('sale_ok','=',True)]")
+    service_id  = fields.Many2one('product.product', string='Service', domain="[('type','=','service'),('sale_ok','=',True)]")
+    expense_id  = fields.Many2one('product.product', string='Expense', domain="[('can_be_expensed','=',True)]")
 
     @api.depends('type','material_id','service_id','expense_id')
     def get_product_id(self):
@@ -44,7 +44,7 @@ class ExternalWork(models.Model):
     time_begin  = fields.Float('Begin')
     time_end    = fields.Float('End')
 
-    hr_expense_id  = fields.Many2one('hr.expense', 'Expense')
+    hr_expense_id  = fields.Many2one('hr.expense', 'Expense line')
     analytic_line_id = fields.Many2one('account.analytic.line')
     sale_line_id = fields.Many2one('sale.order.line')
     sale_id = fields.Many2one('sale.order', string="Sale", related='external_work_id.sale_id')
