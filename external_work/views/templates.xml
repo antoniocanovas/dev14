@@ -10,44 +10,57 @@
                     <div class="text-center">
                         <h1><span t-field="o.name"/></h1>
                     </div>
-                    <div>
-                        <div>
-                            <span t-field="o.type"/>
-                            <span t-field="o.employee_id"/>
-                            <span t-field="o.date"/>
-                            <span t-field="o.partner_id"/>
-                            <span t-field="o.type"/>
-                            <span t-field="o.type"/>
+                    <div class="row mt32 mb32">
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Sale Order:</strong>
+                            <p class="m-0" t-field="o.sale_id"/>
                         </div>
-                        <div class="text-center">
-                            <h3><span t-field="o.sale_id"/></h3>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Date:</strong>
+                            <p class="m-0" t-field="o.date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                         </div>
-                        <t t-if="o.line_ids">
-                            <h2>Productos:</h2>
-                            <table class="table table-sm o_main_table">
-                                <thead style="display: table-row-group">
-                                    <tr>
-                                        <th name="th_product">Producto</th>
-                                        <th name="td_units">Cantidad</th>
-                                        <th name="th_measure">Unidad de medida</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="sale_tbody">
-                                    <t t-foreach="o.line_ids" t-as="line">
-                                        <tr>
-                                            <td name="td_product"><span t-field="line.product_id" /></td>
-                                            <td name="td_units"><span t-field="line.product_uom_qty" /></td>
-                                            <td name="td_measure"><span t-field="line.product_uom.name" /></td>
-                                        </tr>
-                                    </t>
-                                </tbody>
-                            </table>
-                            <br/>
-                        </t>
-                        <p>Firmado por: <span t-field="o.partner_id.name" /> el <span t-field="o.write_date" />
-                            <br/>
-                            <img t-if="o.signature" t-attf-src="data:image/*;base64,{{o.signature}}"/></p>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Employee:</strong>
+                            <p class="m-0" t-field="o.employee_id" />
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Partner:</strong>
+                            <p class="m-0" t-field="o.partner_id"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Subtotal:</strong>
+                            <p class="m-0" t-field="o.sale_subtotal"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Public price:</strong>
+                            <p class="m-0" t-field="o.sale_public"/>
+                        </div>
                     </div>
+
+                    <h2>Productos:</h2>
+                    <table class="table table-sm o_main_table">
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th name="th_product">Producto</th>
+                                <th name="td_units">Cantidad</th>
+                                <th name="th_measure">Unidad de medida</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+                                    <td name="td_product"><span t-field="line.product_id" /></td>
+                                    <td name="td_units"><span t-field="line.product_qty" /></td>
+                                    <td name="td_measure"><span t-field="line.uom_id.name" /></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <p>Firmado por: <span t-field="o.signed_by" /> el <span t-field="o.write_date" />
+                        <br/>
+                        <img t-if="o.signature" t-attf-src="data:image/*;base64,{{o.signature}}"/>
+                    </p>
                 </div>
             </t>
         </template>

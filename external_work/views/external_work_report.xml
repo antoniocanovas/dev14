@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <record id="external_work_report" model="ir.actions.report">
-            <field name="name">Work Base Sheet</field>
+            <field name="name">External Work</field>
             <field name="model">external.work</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">external_work.work_sheet_report_document</field>
