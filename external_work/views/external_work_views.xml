@@ -43,7 +43,7 @@
                             <field name="time_begin" widget="timesheet_uom"/>
                             <field name="time_end" widget="timesheet_uom"/>
                             <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])]}"/>
-                            <field name="project_id"/>
+                            <field name="project_id" attrs="{'required':[('type','in',['sin','sni'])]}"/>
                             <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','in',['sin','sni'])]}"/>
                         </group>
                     </div>
@@ -94,7 +94,8 @@
                 <header>
                     <button class="oe_highlight" type="action" name="%(work_new_line_action_wizard)d" string="New line"
                             attrs="{'invisible':[('state','in','done')]}"
-                            context="{'default_external_work_id':active_id, 'default_task_id':task_id, 'default_employee_id':employee_id}">
+                            context="{'default_external_work_id':active_id, 'default_employee_id':employee_id,
+                                'default_project_id':project_id', 'default_task_id':task_id}">
                     </button>
                     <button name="action_work_confirm" string="Confirm" class="btn-secondary" type="object"
                             attrs="{'invisible':[('state','in','done')]}"/>
@@ -133,7 +134,8 @@
                         </div>
                         <div name="external_work_lines">
                             <field name="line_ids"
-                                   context="{'default_external_work_id':active_id, 'default_task_id':task_id, 'default_employee_id':employee_id}">
+                                   context="{'default_external_work_id':active_id, 'default_employee_id':employee_id,
+                                            'default_project_id':project_id', 'default_task_id':task_id}">
                                 <tree>
                                     <field name="name" invisible="1"/>
                                     <field name="date" invisible="1"/>

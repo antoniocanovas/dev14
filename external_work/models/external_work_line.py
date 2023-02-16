@@ -49,7 +49,7 @@ class ExternalWork(models.Model):
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
     currency_id = fields.Many2one('res.currency', store=True, default=1)
 
-    project_id  = fields.Many2one('project.project', string="Project", related='external_work_id.project_id')
+    project_id  = fields.Many2one('project.project', string="Project", store=True)
     task_id     = fields.Many2one('project.task', string="Task")
     time_begin  = fields.Float('Begin')
     time_end    = fields.Float('End')
