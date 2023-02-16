@@ -64,7 +64,7 @@ class ExternalWork(models.Model):
     work_type = fields.Selection('Work type', related='external_work_id.type')
 
     # IDS lines so for record in self is required:
-    @api.depends('sale_state','hr_expense_state')
+    @api.depends('sale_state','hr_expense_state','external_work_id.state')
     def _get_workline_is_readonly(self):
         for record in self:
             is_readonly = False
