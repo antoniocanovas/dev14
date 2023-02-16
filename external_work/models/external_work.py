@@ -64,7 +64,7 @@ class ExternalWork(models.Model):
 
             if timesheet == True:
                 newts = self.env['account.analytic.line'].create({'name':li.name, 'date':li.date,
-                                                                  'project_id':project_id.id, 'task_id':li.task_id.id,
+                                                                  'task_id':li.task_id.id,
                                                                   'unit_amount':li.product_qty, 'product_id':li.product_id.id,
                                                                   'employee_id':li.employee_id.id})
                 li.analytic_line_id = newts.id
