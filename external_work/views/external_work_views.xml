@@ -37,14 +37,14 @@
                     </div>
                     <div name="service" attrs="{'invisible':[('type','not in',['sin','sni'])]}">
                         <group name="group_service">
-                            <field name="service_id" attrs="{'required':[('type','in',['sin','sni'])]}"/>
-                            <field name="product_qty" required="1"/>
+                            <field name="service_id" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                             <field name="uom_id"/>
-                            <field name="time_begin" widget="timesheet_uom"/>
-                            <field name="time_end" widget="timesheet_uom"/>
-                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])]}"/>
-                            <field name="project_id" attrs="{'required':[('type','in',['sin','sni'])]}"/>
-                            <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','in',['sin','sni'])]}"/>
+                            <field name="time_begin" widget="timesheet_uom" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="time_end" widget="timesheet_uom" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="project_id" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
                         </group>
                     </div>
                     <group>
@@ -60,6 +60,7 @@
                         <field name="sale_state" attrs="{'invisible':[('sale_id','=',False)]}"/>
                         <field name="external_work_id" invisible="1"/>
                         <field name="work_type" invisible="1"/>
+                        <field name="is_readonly" invisible="1"/>
                         <field name="currency_id" invisible="1"/>
                     </group>
                     <footer>
