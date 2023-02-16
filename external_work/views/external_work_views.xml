@@ -91,12 +91,14 @@
             <form>
                 <header>
                     <button class="oe_highlight" type="action" name="%(work_new_line_action_wizard)d" string="New line"
+                            attrs="{'invisible':[('state','in','done')]}"
                             context="{'default_external_work_id':active_id, 'default_task_id':task_id, 'default_employee_id':employee_id}">
                     </button>
-                    <button name="action_work_confirm" string="Confirm" class="btn-primary" type="object"/>
-                    <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('signed_by', '=', False)]}" full_name="signed_by"/>
+                    <button name="action_work_confirm" string="Confirm" class="btn-primary" type="object"
+                            attrs="{'invisible':[('state','in','done')]}"/>
+                    <widget name="signature" string="Sign" highlight="1" full_name="signed_by"
+                            attrs="{'invisible': ['|',('state','=','draft'),('signed_by', '=', False)]}"/>
                     <field name="state" widget="statusbar"/>
-
                 </header>
                 <sheet>
                     <!-- MAIN Form:  -->
