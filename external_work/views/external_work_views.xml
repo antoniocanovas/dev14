@@ -187,8 +187,8 @@
                         </div>
 
                     </div>
-                    <field name="comment" placeholder="Write anything you want be printed or must be take in account."
-                           attrs="{'readonly':[('state','=','done')]}"/>
+                    <field name="note" placeholder="Write anything you want be printed or must be take in account."
+                           attrs="{'readonly':[('state','=','done')], 'invisible':[('sale_id','=',False)]}"/>
                     <div name="signature">
                         <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
                     </div>

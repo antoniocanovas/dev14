@@ -31,7 +31,7 @@ class ExternalWork(models.Model):
     company_id  = fields.Many2one('res.company')
     currency_id = fields.Many2one('res.currency', store=True, default=1)
     state       = fields.Selection([('draft','Draft'),('done','Done')], store=True, default='draft')
-    comment     = fields.Text('Notes')
+    note        = fields.Text('Note', related='sale_id.note', readonly=False)
 
     @api.depends('partner_id','employee_id')
     def _get_work_name(self):
