@@ -53,9 +53,9 @@ class ExternalWork(models.Model):
 
         for li in self.line_ids:
             timesheet, saleline, expense = False, False, False
-            if li.type in ['ein','pin','pni','sin']: saleline = True
-            if li.type in ['sin','sni']: timesheet = True
-            if li.type in ['ein','eni']: expense = True
+            if (li.type in ['ein','pin','pni','sin']) and (li.is_readonly == False): saleline = True
+            if (li.type in ['sin','sni']) and (li.is_readonly == False): timesheet = True
+            if (li.type in ['ein','eni']) and (li.is_readonly == False): expense = True
 
             # SALE LINE FOR PRODUCT OR SERVICE:
             if (saleline == True) and (li.sale_line_id.id == False):
@@ -99,7 +99,6 @@ class ExternalWork(models.Model):
                                                             'unit_amount':li.ticket_amount / li.product_qty,
                                                             'product_id':li.product_id.id, 'quantity':li.product_qty,
                                                             'product_uom_id':li.uom_id.id,})
-
         # Line STATE to DONE:
         self.state = 'done'
 
