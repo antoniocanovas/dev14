@@ -50,6 +50,7 @@
                     <group>
                         <field name="partner_id" invisible="1"/>
                         <field name="date" invisible="1"/>
+                        <field name="project_id"/>
                         <field name="user_id" invisible="1"/>
                         <field name="product_id" invisible="1"/>
                         <field name="hr_expense_id" readonly="1" attrs="{'invisible':[('hr_expense_id','=',False)]}"/>
