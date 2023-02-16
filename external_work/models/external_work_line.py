@@ -14,7 +14,15 @@ class ExternalWork(models.Model):
     _description = "External Work Line"
 
 
-    name        = fields.Char(string='Name')
+    @api.depends('external_work_id','employee_id','type')
+    def _get_work_name(self):
+        name=""
+        if self.external_work_id: name += self.external_work_id.name
+        if name: name += " - "
+        if self.product_id: name += self.product_id.name
+        self.name = name
+    name = fields.Char('Name', compute='_get_work_name')
+
     type        = fields.Selection(selection=TYPE, string="Type", default=TYPE[0][0])
 
     date        = fields.Date(string='Date', related='external_work_id.date')
@@ -70,3 +78,6 @@ class ExternalWork(models.Model):
         if (saleline == True):
             if not (self.external_work_id.sale_id.id):
                 self.env['sale.order'].create({'partner_id':self.partner_id.id})
+
+
+
