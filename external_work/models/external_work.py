@@ -107,8 +107,6 @@ class ExternalWork(models.Model):
     def action_work_back2draft(self):
         # Check if possible, deleting timesheet, expense and salelines:
         if self.sale_state != 'draft':
-            raise exceptions.ValidationError(
-                _("Sale order state must be DRAFT to back this Work")
-            )
+            raise ValidationError("Sale order state must be DRAFT to back this Work")
         self.state = 'draft'
 
