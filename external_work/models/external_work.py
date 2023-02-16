@@ -66,6 +66,7 @@ class ExternalWork(models.Model):
                 newts = self.env['account.analytic.line'].create({'name':li.name, 'date':li.date,
                                                                   'task_id':li.task_id.id,
                                                                   'account_id':li.project_id.analytic_account_id.id,
+                                                                  'amount':li.product_qty * li.product_id.standard_price,
                                                                   'unit_amount':li.product_qty, 'product_id':li.product_id.id,
                                                                   'employee_id':li.employee_id.id})
                 li.analytic_line_id = newts.id
