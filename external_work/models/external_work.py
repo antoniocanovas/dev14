@@ -1,4 +1,6 @@
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
+
 
 TYPE = [
     ('sale', 'Sale'),
@@ -61,14 +63,28 @@ class ExternalWork(models.Model):
                 li.sale_line_id = newsol.id
 
             if timesheet == True:
-                a = 1
+                newts = env['account.analytic.line'].create({'name':li.name, 'date':li.date,
+                                                             'project_id':project_id.id, 'task_id':li.task_id.id,
+                                                             'unit_amount':li.product_qty, 'product_id':li.product_id.id,
+                                                             'employee_id':li.employee_id.id})
+                li.analytic_line_id = newts.id
+
             if expense == True:
-                a = 1
+                newexpense = env['hr.expense'].create({'employee_id':li.employee_id.id, 'name': li.name,
+                                                       'date': li.date, 'payment_mode':'own_account',
+                                                       'unit_amount':li.ticket_amount / li.product_qty,
+                                                       'product_id':li.product_id.id, 'quantity':li.product_qty,
+                                                       'product_uom_id':li.uom_id.id,})
+                li.hr_expense_id = newexpense.id
 
         self.state = 'done'
 
 
     def action_work_back2draft(self):
         # Check if possible, deleting timesheet, expense and salelines:
+        if self.sale_state != 'draft':
+            raise exceptions.ValidationError(
+                _("Sale order state must be DRAFT to back this Work")
+            )
         self.state = 'draft'
 
