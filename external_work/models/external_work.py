@@ -20,6 +20,7 @@ class ExternalWork(models.Model):
     project_id  = fields.Many2one('project.project', string="Project")
     task_id     = fields.Many2one('project.task', string="Task")
     sale_id     = fields.Many2one('sale.order', string="Sale")
+    sale_state  = fields.Selection(related='sale_id.state')
     partner_id  = fields.Many2one('res.partner', string="Partner")
     sale_subtotal = fields.Float('Sale subtotal')
     sale_public =  fields.Float('Public price')
