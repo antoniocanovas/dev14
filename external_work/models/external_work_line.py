@@ -14,14 +14,14 @@ class ExternalWork(models.Model):
     _description = "External Work Line"
 
 
-    @api.depends('external_work_id','employee_id','type')
-    def _get_work_name(self):
+    @api.depends('external_work_id','employee_id')
+    def _get_workline_name(self):
         name=""
-        if self.external_work_id: name += self.external_work_id.name
+        if self.external_work_id.id: name += self.external_work_id.name
         if name: name += " - "
-        if self.product_id: name += self.product_id.name
+        if self.product_id.id: name += self.product_id.name
         self.name = name
-    name = fields.Char('Name', compute='_get_work_name')
+    name = fields.Char('Name', compute='_get_workline_name')
 
     type        = fields.Selection(selection=TYPE, string="Type", default=TYPE[0][0])
 
