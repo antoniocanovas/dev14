@@ -121,7 +121,7 @@
                                     <field name="sale_id" attrs="{'invisible':[('type','in',['project','task'])]}"/>
                                 </group>
                                 <group>
-                                    <field name="signed_by"/>
+                                    <field name="signed_by" placeholder="Name or VAT ..."/>
                                     <field name="sale_subtotal" attrs="{'invisible':[('type','in',['warranty'])]}"/>
                                     <field name="sale_public" attrs="{'invisible':[('type','in',['warranty'])]}"/>
                                 </group>
