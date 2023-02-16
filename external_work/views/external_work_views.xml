@@ -60,7 +60,7 @@
                         <field name="sale_state" attrs="{'invisible':[('sale_id','=',False)]}"/>
                         <field name="external_work_id" invisible="1"/>
                         <field name="work_type" invisible="1"/>
-                        <field name="is_readonly" invisible="1"/>
+                        <field name="is_readonly"/>
                         <field name="currency_id" invisible="1"/>
                     </group>
                     <!--

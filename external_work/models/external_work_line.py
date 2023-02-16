@@ -69,7 +69,7 @@ class ExternalWork(models.Model):
         for record in self:
             is_readonly = False
             if (record.hr_expense_state != 'draft') and (record.type in ['ein','eni']): is_readonly = True
-            if (record.sale_state != 'draft') and (record.type in ['ein','pin','pni','sin']) and (record.sale_line_id != False): is_readonly = True
+            if (record.sale_state != 'draft') and (record.type in ['ein','pin','pni','sin']) and (record.id) and (record.sale_line_id): is_readonly = True
             record['is_readonly'] = is_readonly
     is_readonly = fields.Boolean('Is readonly', compute='_get_workline_is_readonly', store=True, readonly=True)
 
