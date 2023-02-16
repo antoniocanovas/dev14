@@ -157,7 +157,7 @@
                             <field name="line_ids"
                                    context="{'default_external_work_id':active_id, 'default_employee_id':employee_id,
                                             'default_project_id':project_id, 'default_task_id':task_id}">
-                                <tree attrs="{'readonly':[('is_readonly','=',True)]}">
+                                <tree decoration-success="is_readonly == True">
                                     <field name="name" invisible="1"/>
                                     <field name="date" invisible="1"/>
                                     <field name="type" invisible="1"/>
