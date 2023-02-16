@@ -40,17 +40,31 @@ class ExternalWork(models.Model):
     name = fields.Char('Name', compute='_get_work_name')
 
     def action_work_confirm(self):
+        # Create sale.order if not:
+        if not self.sale_id.id:
+            create_sale = False
+            for li in self.line_ids:
+                if li.type in ['ein', 'sin', 'pin', 'pno']: create_sale = True
+            if create_sale == True:
+                sale = self.env['sale.order'].create({'partner_id':self.partner_id.id})
+            self.sale_id = sale.id
+
+        for li in self.line_ids:
+            timesheet, saleline, expense = False, False, False
+            if self.type in ['ein','pin','pni','sin']: saleline = True
+            if self.type in ['sin','sni']: timesheet = True
+            if self.type in ['ein','eni']: expense = True
+            if saleline == True:
+                a = 1
+            if timesheet == True:
+                a = 1
+            if expense == True:
+                a = 1
+
         self.state = 'done'
 
+
     def action_work_back2draft(self):
+        # Check if possible, deleting timesheet, expense and salelines:
         self.state = 'draft'
 
-    def get_create_timesheet_expense_sale(self):
-        saleline, timesheet, expense = False, False, False
-        if self.type in ['ein','eni','pin','pni','sin','sni']: saleline = True
-        if self.type in ['ein','eni','pin','pni','sin','sni']: timesheet = True
-        if self.type in ['ein','eni','pin','pni','sin','sni']: expense = True
-
-        if (saleline == True):
-            if not (self.external_work_id.sale_id.id):
-                self.env['sale.order'].create({'partner_id':self.partner_id.id})
