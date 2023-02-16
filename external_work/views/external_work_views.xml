@@ -118,8 +118,10 @@
                             context="{'default_external_work_id':active_id, 'default_employee_id':employee_id,
                                 'default_project_id':project_id, 'default_task_id':task_id}">
                     </button>
-                    <button name="action_work_confirm" string="Confirm" class="btn-secondary" type="object"
+                    <button name="action_work_update" string="Update" class="btn-secondary" type="object"
                             attrs="{'invisible':[('state','in','done')]}"/>
+                    <button name="action_work_confirm" string="Confirm" class="btn-secondary" type="object"
+                            attrs="{'invisible':['|',('line_ids.is_readonly','=',False),('state','in','done')]}"/>
                     <button name="action_work_back2draft" string="Back to draft" class="btn-secondary" type="object"
                             attrs="{'invisible':[('state','in','draft')]}"/>
                     <widget name="signature" string="Sign" highlight="1" full_name="signed_by"

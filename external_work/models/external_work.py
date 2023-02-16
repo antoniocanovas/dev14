@@ -42,7 +42,7 @@ class ExternalWork(models.Model):
         self.name = name
     name = fields.Char('Name', compute='_get_work_name', store=True)
 
-    def action_work_confirm(self):
+    def action_work_update(self):
         # Create sale.order if not:
         if not self.sale_id.id:
             create_sale = False
@@ -113,9 +113,9 @@ class ExternalWork(models.Model):
                                                             'unit_amount':li.ticket_amount / li.product_qty,
                                                             'product_id':li.product_id.id, 'quantity':li.product_qty,
                                                             'product_uom_id':li.uom_id.id,})
-        # Line STATE to DONE:
-        self.state = 'done'
 
+    def action_work_confirm(self):
+        self.state = 'done'
 
     def action_work_back2draft(self):
         # Check if possible, deleting timesheet, expense and salelines:
