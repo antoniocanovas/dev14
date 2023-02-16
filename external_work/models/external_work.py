@@ -33,6 +33,11 @@ class ExternalWork(models.Model):
     state       = fields.Selection([('draft','Draft'),('done','Done')], store=True, default='draft')
     note        = fields.Text('Note', related='sale_id.note', readonly=False)
 
+    @api.depends('line_ids')
+    def get_line_count(self):
+        self.line_count = len(line_ids.ids)
+    line_count  = fields.Integer('Lines', store=False, compute='get_line_count')
+
     @api.depends('partner_id','employee_id')
     def _get_work_name(self):
         name=""

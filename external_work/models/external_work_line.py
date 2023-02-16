@@ -61,14 +61,14 @@ class ExternalWork(models.Model):
     time_begin  = fields.Float('Begin')
     time_end    = fields.Float('End')
 
-    hr_expense_id  = fields.Many2one('hr.expense', 'Expense line')
-    hr_expense_state = fields.Selection(related='hr_expense_id.state')
-    analytic_line_id = fields.Many2one('account.analytic.line')
-    sale_line_id = fields.Many2one('sale.order.line')
-    sale_id = fields.Many2one('sale.order', string="Sale", related='external_work_id.sale_id')
-    sale_state = fields.Selection(related='sale_id.state')
-    external_work_id = fields.Many2one('external.work', string='Work')
-    work_type = fields.Selection('Work type', related='external_work_id.type')
+    hr_expense_id       = fields.Many2one('hr.expense', 'Expense line')
+    hr_expense_state    = fields.Selection(related='hr_expense_id.state')
+    analytic_line_id    = fields.Many2one('account.analytic.line')
+    sale_line_id        = fields.Many2one('sale.order.line')
+    sale_id             = fields.Many2one('sale.order', string="Sale", related='external_work_id.sale_id')
+    sale_state          = fields.Selection(related='sale_id.state')
+    external_work_id    = fields.Many2one('external.work', string='Work')
+    work_type           = fields.Selection('Work type', related='external_work_id.type')
 
     # IDS lines so for record in self is required:
     @api.depends('sale_state','hr_expense_state','external_work_id.state')

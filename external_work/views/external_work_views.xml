@@ -84,14 +84,7 @@
                         </div>
                     </footer>
                     -->
-                    <!--
-                    <footer>
-                        <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight" attrs="{'invisible':[('id','!=',False)]}"/>
-                        <button name="get_update_timesheet_expense_sale" string="Update" type="object" class="oe_highlight" attrs="{'invisible':[('id','=',False)]}"/>
-                        or
-                        <button string="Cancel" class="oe_link" special="cancel"/>
-                    </footer>
-                    -->
+
                 </sheet>
             </form>
         </field>
@@ -129,6 +122,11 @@
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-info" type="action" name="%(action_external_lines)d" groups="base.group_user">
+                            <field name="work_count" string="Works" widget="statinfo"/>
+                        </button>
+                    </div>
                     <!-- MAIN Form:  -->
                     <h1><field name="name" widget="text"/></h1>
                     <group name="external_work_sheet_main"><group>
