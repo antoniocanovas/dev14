@@ -42,9 +42,15 @@ class ExternalWork(models.Model):
             if record.type in ['sin','sni']: product = record.service_id
             record['product_id'] = product.id
     product_id  = fields.Many2one('product.product', string='Product', compute='get_product_id', store=True)
-
-    product_qty = fields.Float('Qty')
     uom_id      = fields.Many2one('uom.uom', string='UOM', related='product_id.uom_id')
+
+    @api.depends('time_begin','time_end')
+    def _get_timesheet_qty(self):
+        qty = self.product_qty
+        if (self.type in ['sin','sni']) and (self.time_begin < self.time_end):
+            qty = self.time_end - self.time_begin
+        self.product_qty = qty
+    product_qty = fields.Float('Qty', compute='_get_timesheet_qty', readonly=False)
 
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
     currency_id = fields.Many2one('res.currency', store=True, default=1)
