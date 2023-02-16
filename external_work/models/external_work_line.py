@@ -18,9 +18,9 @@ class ExternalWork(models.Model):
     def _get_workline_name(self):
         for record in self:
             name=""
-            if self.external_work_id.id: name += self.external_work_id.name
+            if record.external_work_id.id: name += str(record.external_work_id.name)
             if name: name += " - "
-            if self.product_id.id: name += self.product_id.name
+            if record.product_id.id: name += str(record.product_id.name)
             record['name'] = name
     name = fields.Char('Name', compute='_get_workline_name')
 
