@@ -115,6 +115,7 @@ class ExternalWork(models.Model):
                                                             'product_uom_id':li.uom_id.id,})
 
     def action_work_confirm(self):
+        self.action_work_update()
         self.state = 'done'
 
     def action_work_back2draft(self):
