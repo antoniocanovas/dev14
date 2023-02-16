@@ -16,23 +16,23 @@
                 <sheet>
                     <!-- MAIN Form mobile:  -->
                     <group>
-                        <field name="type" required="1"/>
+                        <field name="type" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                     </group>
                     <div name="expense" attrs="{'invisible':[('type','not in',['ein','eni'])]}">
                         <group name="group_expense">
-                            <field name="expense_id" attrs="{'required':[('type','in',['ein','eni'])]}"/>
-                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])]}"/>
-                            <field name="product_qty" required="1"/>
+                            <field name="expense_id" attrs="{'required':[('type','in',['ein','eni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                             <field name="uom_id"/>
-                            <field name="ticket_amount"/>
+                            <field name="ticket_amount" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                         </group>
                     </div>
                     <div name="product" attrs="{'invisible':[('type','not in',['pin','pni'])]}">
                         <group name="group_product">
-                            <field name="material_id" attrs="{'required':[('type','in',['pin','pni'])]}"/>
-                            <field name="product_qty" required="1"/>
+                            <field name="material_id" attrs="{'required':[('type','in',['pin','pni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                             <field name="uom_id"/>
-                            <field name="task_id" domain="[('project_id','=',project_id)]"/>
+                            <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                         </group>
                     </div>
                     <div name="service" attrs="{'invisible':[('type','not in',['sin','sni'])]}">
@@ -63,6 +63,7 @@
                         <field name="is_readonly" invisible="1"/>
                         <field name="currency_id" invisible="1"/>
                     </group>
+                    <!--
                     <footer>
                         <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">
                             <button t-if="widget.is_action_enabled('edit')" class="btn btn-primary o_form_button_edit" accesskey="a">
@@ -82,6 +83,7 @@
                             <button string="Guardar y Salir" special="save" class="btn btn-primary" />
                         </div>
                     </footer>
+                    -->
                     <!--
                     <footer>
                         <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight" attrs="{'invisible':[('id','!=',False)]}"/>
