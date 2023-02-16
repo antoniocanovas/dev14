@@ -38,7 +38,7 @@ class ExternalWork(models.Model):
         if name: name += " - "
         if self.partner_id.id:  name += self.partner_id.name
         self.name = name
-    name = fields.Char('Name', compute='_get_work_name')
+    name = fields.Char('Name', compute='_get_work_name', store=True)
 
     def action_work_confirm(self):
         # Create sale.order if not:
