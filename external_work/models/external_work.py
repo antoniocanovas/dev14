@@ -108,5 +108,5 @@ class ExternalWork(models.Model):
         # Check if possible, deleting timesheet, expense and salelines:
         if self.sale_state != 'draft':
             raise ValidationError("Sale order state must be DRAFT to back this Work")
-        self.state = 'draft'
+        self.write({'state':'draft', 'signature':False})
 
