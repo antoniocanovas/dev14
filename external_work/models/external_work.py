@@ -56,7 +56,7 @@ class ExternalWork(models.Model):
             if li.type in ['ein','eni']: expense = True
             if (saleline == True) and (li.sale_line_id.id == False):
                 newsol = self.env['sale.order.line'].create({'product_id':li.product_id.id, 'name':li.product_id.name,
-                                                             'product_uom':li.uom.id, 'product_uom_qty':li.product_qty,
+                                                             'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
                                                              'order_id':self.sale_id.id})
                 li.sale_line_id = newsol.id
 
