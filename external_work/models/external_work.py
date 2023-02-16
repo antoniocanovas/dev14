@@ -40,7 +40,10 @@ class ExternalWork(models.Model):
     name = fields.Char('Name', compute='_get_work_name')
 
     def action_work_confirm(self):
-        saleline, timesheet, expense = False, False, False
+        self.state = 'done'
+
+    def action_work_back2draft(self):
+        self.state = 'draft'
 
     def get_create_timesheet_expense_sale(self):
         saleline, timesheet, expense = False, False, False
