@@ -31,12 +31,12 @@ class ExternalWork(models.Model):
     currency_id = fields.Many2one('res.currency', store=True, default=1)
     state = fields.Selection([('draft','Draft'),('done','Done')], store=True, default='draft')
 
-    @api.depends('partner_id','employee_id','type')
+    @api.depends('partner_id','employee_id')
     def _get_work_name(self):
         name=""
-        if self.employee_id: name += self.employee_id.name
+        if self.employee_id.id: name += self.employee_id.name
         if name: name += " - "
-        if self.partner_id:     name += self.partner_id.name
+        if self.partner_id.id:     name += self.partner_id.name
         self.name = name
     name = fields.Char('Name', compute='_get_work_name')
 
