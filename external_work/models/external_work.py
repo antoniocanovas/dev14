@@ -47,7 +47,7 @@ class ExternalWork(models.Model):
                 if li.type in ['ein', 'sin', 'pin', 'pno']: create_sale = True
             if create_sale == True:
                 sale = self.env['sale.order'].create({'partner_id':self.partner_id.id})
-            self.sale_id = sale.id
+                self.sale_id = sale.id
 
         for li in self.line_ids:
             timesheet, saleline, expense = False, False, False
