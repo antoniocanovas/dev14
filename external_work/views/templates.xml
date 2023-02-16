@@ -32,8 +32,8 @@
                             <p class="m-0" t-field="o.sale_subtotal"/>
                         </div>
                         <div class="col-auto col-3 mw-100 mb-2">
-                            <strong>Public price:</strong>
-                            <p class="m-0" t-field="o.sale_public"/>
+                            <strong>Sale State:</strong>
+                            <p class="m-0" t-field="o.sale_state"/>
                         </div>
                     </div>
 

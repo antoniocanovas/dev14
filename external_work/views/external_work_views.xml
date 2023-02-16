@@ -62,6 +62,25 @@
                         <field name="work_type" invisible="1"/>
                         <field name="currency_id" invisible="1"/>
                     </group>
+                    <footer>
+                        <div class="o_form_buttons_view" role="toolbar" aria-label="Main actions">
+                            <button t-if="widget.is_action_enabled('edit')" class="btn btn-primary o_form_button_edit" accesskey="a">
+                                Editar
+                            </button>
+                            <button string="Salir" special="cancel" class="btn btn-secondary" />
+                        </div>
+                        <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
+                            <button
+                                    class="btn btn-primary o_form_button_save" accesskey="s">
+                                Guardar
+                            </button>
+                            <button
+                                    class="btn btn-secondary o_form_button_cancel" accesskey="j">
+                                Descartar
+                            </button>
+                            <button string="Guardar y Salir" special="save" class="btn btn-primary" />
+                        </div>
+                    </footer>
                     <!--
                     <footer>
                         <button name="get_create_timesheet_expense_sale" string="Apply" type="object" class="oe_highlight" attrs="{'invisible':[('id','!=',False)]}"/>
