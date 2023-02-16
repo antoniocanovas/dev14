@@ -61,12 +61,14 @@ class ExternalWork(models.Model):
     external_work_id = fields.Many2one('external.work', string='Work')
     work_type = fields.Selection('Work type', related='external_work_id.type')
 
+    # IDS lines so for record in self is required:
     @api.depends('sale_state','hr_expense_state')
     def _get_workline_is_readonly(self):
-        is_readonly = False
-        if (self.hr_expense_state != 'draft') and (self.type in ['ein','eni']): is_readonly = True
-        if (self.sale_state != 'draft') and (self.type in ['ein','pin','pni','sin']): is_readonly = True
-        self.is_readonly = is_readonly
+        for record in self:
+            is_readonly = False
+            if (record.hr_expense_state != 'draft') and (record.type in ['ein','eni']): is_readonly = True
+            if (record.sale_state != 'draft') and (record.type in ['ein','pin','pni','sin']): is_readonly = True
+            record['is_readonly'] = is_readonly
     is_readonly = fields.Boolean('Is readonly', compute='_get_workline_is_readonly', store=True, readonly=True)
 
 
