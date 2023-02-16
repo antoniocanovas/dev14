@@ -60,7 +60,7 @@ class ExternalWork(models.Model):
             if (li.type in ['ein','eni']) and (li.is_readonly == False): expense = True
 
             # SALE LINE FOR PRODUCT OR SERVICE:
-                # Sale order based on list price:
+            # Sale order based on list price:
             if (saleline == True) and (li.sale_line_id.id == False) and (li.type in ['pin','sin','ein']):
                 newsol = self.env['sale.order.line'].create({'product_id':li.product_id.id, 'name':li.product_id.name,
                                                              'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
@@ -73,13 +73,13 @@ class ExternalWork(models.Model):
                 # Overwrite line with list price:
             elif (saleline == True) and (li.sale_line_id.id == False) and (li.type in ['pin','sin','ein']):
                 li.sale_line_id.write({'product_id':li.product_id.id, 'name':li.product_id.name,
-                                                             'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
-                                                             'order_id':self.sale_id.id})
+                                       'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
+                                       'order_id':self.sale_id.id})
                 # Overwrite line with price = 0
             elif (saleline == True) and (li.sale_line_id.id != False) and (li.type in ['pni']):
                 li.sale_line_id.write({'product_id':li.product_id.id, 'name':li.product_id.name,
-                                                             'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
-                                                             'order_id':self.sale_id.id, 'price_unit':0})
+                                       'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
+                                       'order_id':self.sale_id.id, 'price_unit':0})
             if newsol: li.sale_line_id = newsol.id
 
             # EMPLOYEE TIMESHEETS:
@@ -93,11 +93,11 @@ class ExternalWork(models.Model):
                 li.analytic_line_id = newts.id
             else:
                 li.analytic_line_id.write({'name':li.name, 'date':li.date,
-                                                                  'task_id':li.task_id.id,
-                                                                  'account_id':li.project_id.analytic_account_id.id,
-                                                                  'amount':li.product_qty * li.product_id.standard_price,
-                                                                  'unit_amount':li.product_qty, 'product_id':li.product_id.id,
-                                                                  'employee_id':li.employee_id.id})
+                                           'task_id':li.task_id.id,
+                                           'account_id':li.project_id.analytic_account_id.id,
+                                           'amount':li.product_qty * li.product_id.standard_price,
+                                           'unit_amount':li.product_qty, 'product_id':li.product_id.id,
+                                           'employee_id':li.employee_id.id})
 
             # EMPLOYEE EXPENSES:
             if expense == True:
@@ -108,11 +108,12 @@ class ExternalWork(models.Model):
                                                             'product_uom_id':li.uom_id.id,})
                 li.hr_expense_id = newexpense.id
             else:
+                amount = 0
+                if li.product_qty != 0: amount = li.ticket_amount / li.product_qty
                 li.hr_expense_id.write({'employee_id':li.employee_id.id, 'name': li.name,
-                                                            'date': li.date, 'payment_mode':'own_account',
-                                                            'unit_amount':li.ticket_amount / li.product_qty,
-                                                            'product_id':li.product_id.id, 'quantity':li.product_qty,
-                                                            'product_uom_id':li.uom_id.id,})
+                                        'date': li.date, 'payment_mode':'own_account',
+                                        'product_id':li.product_id.id, 'quantity':li.product_qty,
+                                        'unit_amount':amount, 'product_uom_id':li.uom_id.id,})
 
     def action_work_confirm(self):
         self.action_work_update()
