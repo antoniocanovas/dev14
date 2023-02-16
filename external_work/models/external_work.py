@@ -51,10 +51,10 @@ class ExternalWork(models.Model):
 
         for li in self.line_ids:
             timesheet, saleline, expense = False, False, False
-            if self.type in ['ein','pin','pni','sin']: saleline = True
-            if self.type in ['sin','sni']: timesheet = True
-            if self.type in ['ein','eni']: expense = True
-            if saleline == True:
+            if li.type in ['ein','pin','pni','sin']: saleline = True
+            if li.type in ['sin','sni']: timesheet = True
+            if li.type in ['ein','eni']: expense = True
+            if (saleline == True) and (li.sale_line_id.id == False):
                 newsol = env['sale.order.line'].create({'product_id':li.product_id.id, 'name':li.product_id.name,
                                                         'product_uom':li.uom.id, 'product_uom_qty':li.product_qty,
                                                         'order_id':self.sale_id.id})
