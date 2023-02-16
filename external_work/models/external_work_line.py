@@ -46,10 +46,11 @@ class ExternalWork(models.Model):
 
     @api.depends('time_begin','time_end')
     def _get_timesheet_qty(self):
-        qty = self.product_qty
-        if (self.type in ['sin','sni']) and (self.time_begin < self.time_end):
-            qty = self.time_end - self.time_begin
-        self.product_qty = qty
+        for record in self:
+            qty = record.product_qty
+            if (record.type in ['sin','sni']) and (record.time_begin < record.time_end):
+                qty = record.time_end - record.time_begin
+            record['product_qty'] = qty
     product_qty = fields.Float('Qty', compute='_get_timesheet_qty', readonly=False)
 
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
