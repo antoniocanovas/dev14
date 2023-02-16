@@ -53,7 +53,7 @@ class ExternalWork(models.Model):
 
         # Models to check:
         for li in self.line_ids:
-            timesheet, saleline, expense = False, False, False
+            timesheet, saleline, expense, newsol = False, False, False, False
             if (li.type in ['ein','pin','pni','sin']) and (li.is_readonly == False): saleline = True
             if (li.type in ['sin','sni']) and (li.is_readonly == False): timesheet = True
             if (li.type in ['ein','eni']) and (li.is_readonly == False): expense = True
