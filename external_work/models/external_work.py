@@ -28,6 +28,7 @@ class ExternalWork(models.Model):
     line_ids    = fields.One2many('external.work.line', 'external_work_id', string='Lines')
     company_id  = fields.Many2one('res.company')
     currency_id = fields.Many2one('res.currency', store=True, default=1)
+    state = fields.Selection([('draft','Draft'),('done','Done')], store=True, default='draft')
 
     @api.depends('partner_id','employee_id','type')
     def _get_work_name(self):
@@ -37,3 +38,16 @@ class ExternalWork(models.Model):
         if self.partner_id:     name += self.partner_id.name
         self.name = name
     name = fields.Char('Name', compute='_get_work_name')
+
+    def action_work_confirm(self):
+        saleline, timesheet, expense = False, False, False
+
+    def get_create_timesheet_expense_sale(self):
+        saleline, timesheet, expense = False, False, False
+        if self.type in ['ein','eni','pin','pni','sin','sni']: saleline = True
+        if self.type in ['ein','eni','pin','pni','sin','sni']: timesheet = True
+        if self.type in ['ein','eni','pin','pni','sin','sni']: expense = True
+
+        if (saleline == True):
+            if not (self.external_work_id.sale_id.id):
+                self.env['sale.order'].create({'partner_id':self.partner_id.id})
