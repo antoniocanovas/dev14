@@ -37,11 +37,12 @@ class ExternalWork(models.Model):
 
     @api.depends('type','material_id','service_id','expense_id')
     def get_product_id(self):
-        product = self.material_id
-        if self.type in ['ein','eni']: product = self.expense_id
-        if self.type in ['sin','sni']: product = self.service_id
-        self.product_id = product.id
-    product_id  = fields.Many2one('product.product', string='Product', compute='get_product_id')
+        for record in self:
+            product = record.material_id
+            if record.type in ['ein','eni']: product = record.expense_id
+            if record.type in ['sin','sni']: product = record.service_id
+            record['product_id'] = product.id
+    product_id  = fields.Many2one('product.product', string='Product', compute='get_product_id', store=True)
 
     product_qty = fields.Float('Qty')
     uom_id      = fields.Many2one('uom.uom', string='UOM', related='product_id.uom_id')
