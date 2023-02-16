@@ -56,12 +56,19 @@ class ExternalWork(models.Model):
             if li.type in ['ein','pin','pni','sin']: saleline = True
             if li.type in ['sin','sni']: timesheet = True
             if li.type in ['ein','eni']: expense = True
+
+            # SALE LINE FOR PRODUCT OR SERVICE:
             if (saleline == True) and (li.sale_line_id.id == False):
                 newsol = self.env['sale.order.line'].create({'product_id':li.product_id.id, 'name':li.product_id.name,
                                                              'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
                                                              'order_id':self.sale_id.id})
                 li.sale_line_id = newsol.id
+            else:
+                li.sale_line_id.write({'product_id':li.product_id.id, 'name':li.product_id.name,
+                                                             'product_uom':li.uom_id.id, 'product_uom_qty':li.product_qty,
+                                                             'order_id':self.sale_id.id})
 
+            # EMPLOYEE TIMESHEETS:
             if timesheet == True:
                 newts = self.env['account.analytic.line'].create({'name':li.name, 'date':li.date,
                                                                   'task_id':li.task_id.id,
@@ -70,7 +77,15 @@ class ExternalWork(models.Model):
                                                                   'unit_amount':li.product_qty, 'product_id':li.product_id.id,
                                                                   'employee_id':li.employee_id.id})
                 li.analytic_line_id = newts.id
+            else:
+                li.analytic_line_id.write({'name':li.name, 'date':li.date,
+                                                                  'task_id':li.task_id.id,
+                                                                  'account_id':li.project_id.analytic_account_id.id,
+                                                                  'amount':li.product_qty * li.product_id.standard_price,
+                                                                  'unit_amount':li.product_qty, 'product_id':li.product_id.id,
+                                                                  'employee_id':li.employee_id.id})
 
+            # EMPLOYEE EXPENSES:
             if expense == True:
                 newexpense = self.env['hr.expense'].create({'employee_id':li.employee_id.id, 'name': li.name,
                                                             'date': li.date, 'payment_mode':'own_account',
@@ -78,7 +93,14 @@ class ExternalWork(models.Model):
                                                             'product_id':li.product_id.id, 'quantity':li.product_qty,
                                                             'product_uom_id':li.uom_id.id,})
                 li.hr_expense_id = newexpense.id
+            else:
+                li.hr_expense_id.write({'employee_id':li.employee_id.id, 'name': li.name,
+                                                            'date': li.date, 'payment_mode':'own_account',
+                                                            'unit_amount':li.ticket_amount / li.product_qty,
+                                                            'product_id':li.product_id.id, 'quantity':li.product_qty,
+                                                            'product_uom_id':li.uom_id.id,})
 
+        # Line STATE to DONE:
         self.state = 'done'
 
 
