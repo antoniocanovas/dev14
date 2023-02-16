@@ -187,6 +187,7 @@
                         </div>
 
                     </div>
+                    <field name="comment"/>
                     <div name="signature">
                         <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
                     </div>
