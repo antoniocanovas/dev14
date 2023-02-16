@@ -250,6 +250,7 @@
                 <field name="type" filter_domain="[('time_type_id', 'ilike', self)]"/>
                 <field name="partner_id" filter_domain="[('partner_id', 'ilike', self)]"/>
                 <separator/>
+                <filter string="My works" name="my_works" domain="[('user_id', '=', uid)]"/>
                 <filter string="Projects" name="type_project" domain="[('type', '=', 'project')]"/>
                 <separator/>
                 <group expand="0" name="group_by" string="Group By">
