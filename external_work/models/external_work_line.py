@@ -26,7 +26,10 @@ class ExternalWork(models.Model):
 
     type        = fields.Selection(selection=TYPE, string="Type", default=TYPE[0][0])
 
-    date        = fields.Date(string='Date', related='external_work_id.date')
+    @api.depends('external_work_id')
+    def _get_default_date(self):
+        self.date = self.external_work_id.date
+    date        = fields.Date(string='Date', compute=_get_default_date)
 
     @api.depends('external_work_id')
     def _get_default_employee(self):
@@ -61,8 +64,16 @@ class ExternalWork(models.Model):
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
     currency_id = fields.Many2one('res.currency', store=True, default=1)
 
-    project_id  = fields.Many2one('project.project', string="Project", store=True)
-    task_id     = fields.Many2one('project.task', string="Task")
+    @api.depends('external_work_id')
+    def _get_default_project_id(self):
+        self.project_id = self.external_work_id.project_id.id
+    project_id  = fields.Many2one('project.project', string="Project", store=True, compute=_get_default_project_id)
+
+    @api.depends('external_work_id')
+    def _get_default_task_id(self):
+        self.task_id = self.external_work_id.task_id.id
+    task_id     = fields.Many2one('project.task', string="Task", compute=_get_default_task_id)
+
     time_begin  = fields.Float('Begin')
     time_end    = fields.Float('End')
 
