@@ -1,13 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-    <!-- WIZARD INICIAL V0 - PARA BORRAR
-    <record model="ir.actions.act_window" id="work_new_line_action_wizard" >
-        <field name="name">New line</field>
-        <field name="res_model">external.work.line</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-    -->
 
     <!-- ACCIÓN DE VENTANA O2M PARA LÍNEAS DESDE EXTERNAL WORK: -->
     <record id="action_external_lines" model="ir.actions.act_window">
@@ -33,11 +25,6 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button class="oe_highlight" type="action" name="%(work_new_line_action_wizard)d" string="New line"
-                            attrs="{'invisible':[('state','in','done')]}"
-                            context="{'default_external_work_id':active_id, 'default_employee_id':employee_id,
-                                'default_project_id':project_id, 'default_task_id':task_id}">
-                    </button>
                     <button name="action_work_update" string="Update" class="btn-secondary" type="object"
                             attrs="{'invisible':[('state','in','done')]}"/>
                     <button name="action_work_confirm" string="Confirm" class="btn-secondary" type="object"
