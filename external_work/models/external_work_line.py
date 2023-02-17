@@ -29,8 +29,8 @@ class ExternalWork(models.Model):
     date        = fields.Date(string='Date', related='external_work_id.date')
 
     def _get_default_employee(self):
-        return self.external_work_id.employee_id
-    employee_id = fields.Many2one('hr.employee', string="Employee", default='_get_default_employee')
+        return self.external_work_id.employee_id.id
+    employee_id = fields.Many2one('hr.employee', string="Employee", default=_get_default_employee)
 
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
     partner_id  = fields.Many2one('res.partner', string="Partner", related='external_work_id.partner_id')
