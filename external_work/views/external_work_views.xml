@@ -23,6 +23,7 @@
         <field name="res_model">external.work.line</field>
         <field name="target">current</field>
         <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="external_work_line_tree"/>
         <field name="view_mode">tree,form</field>
     </record>
 
