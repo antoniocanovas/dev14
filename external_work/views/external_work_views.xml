@@ -142,7 +142,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button" icon="fa-info" type="action" name="%(action_external_lines)d" groups="base.group_user">
-                            <field name="work_count" string="Works" widget="statinfo"/>
+                            <field name="line_count" string="Works" widget="statinfo"/>
                         </button>
                     </div>
                     <!-- MAIN Form:  -->
