@@ -67,11 +67,11 @@
             <form>
                 <header>
                     <button name="action_work_update" string="Update" class="btn-primary" type="object"
-                            attrs="{'invisible':[('state','in','done')]}"/>
+                            attrs="{'invisible':['|',('line_count','=',0),('state','in','done')]}"/>
                     <button name="action_work_confirm" string="Confirm" class="btn-secondary" type="object"
-                            attrs="{'invisible':[('state','in','done')]}"/>
+                            attrs="{'invisible':['|',('line_count','=',0),('state','in','done')]}"/>
                     <button name="action_work_back2draft" string="Back to draft" class="btn-secondary" type="object"
-                            attrs="{'invisible':[('state','in','draft')]}"/>
+                            attrs="{'invisible':['|',('line_count','=',0),('state','in','draft')]}"/>
                     <widget name="signature" string="Sign" highlight="1" full_name="signed_by"
                             attrs="{'invisible': ['|',('state','=','draft'),('signed_by', '=', False)]}"/>
                     <field name="state" widget="statusbar"/>
@@ -234,6 +234,7 @@
                             <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                             <field name="uom_id"/>
                             <field name="ticket_amount" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="date"/>
                         </group>
                     </div>
                     <div name="product" attrs="{'invisible':[('type','not in',['pin','pni'])]}">
@@ -241,6 +242,7 @@
                             <field name="material_id" attrs="{'required':[('type','in',['pin','pni'])], 'readonly':[('is_readonly','=',True)]}"/>
                             <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                             <field name="uom_id"/>
+                            <field name="date"/>
                             <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'readonly':[('is_readonly','=',True)]}"/>
                         </group>
                     </div>
@@ -254,11 +256,11 @@
                             <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
                             <field name="project_id" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
                             <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="date"/>
                         </group>
                     </div>
                     <group>
                         <field name="partner_id" invisible="1"/>
-                        <field name="date" invisible="1"/>
                         <field name="user_id" invisible="1"/>
                         <field name="product_id" invisible="1"/>
                         <field name="hr_expense_id" readonly="1" attrs="{'invisible':[('hr_expense_id','=',False)]}"/>
