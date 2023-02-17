@@ -27,7 +27,11 @@ class ExternalWork(models.Model):
     type        = fields.Selection(selection=TYPE, string="Type", default=TYPE[0][0])
 
     date        = fields.Date(string='Date', related='external_work_id.date')
-    employee_id = fields.Many2one('hr.employee', string="Employee")
+
+    def _get_default_employee(self):
+        return self.external_work_id.employee_id.id
+    employee_id = fields.Many2one('hr.employee', string="Employee", default='_get_default_employee')
+
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
     partner_id  = fields.Many2one('res.partner', string="Partner", related='external_work_id.partner_id')
     material_id = fields.Many2one('product.product', string='Material', domain="[('type','!=','service'),('sale_ok','=',True)]")
