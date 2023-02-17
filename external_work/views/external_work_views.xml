@@ -26,77 +26,6 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-
-    <!-- EXTERNAL WORK LINE MAIN FORM:   -->
-    <record id="external_work_line_form" model="ir.ui.view">
-        <field name="active" eval="True"/>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <!-- MAIN Form mobile:  -->
-                    <group>
-                        <field name="type" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                    </group>
-                    <div name="expense" attrs="{'invisible':[('type','not in',['ein','eni'])]}">
-                        <group name="group_expense">
-                            <field name="expense_id" attrs="{'required':[('type','in',['ein','eni'])], 'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="uom_id"/>
-                            <field name="ticket_amount" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                        </group>
-                    </div>
-                    <div name="product" attrs="{'invisible':[('type','not in',['pin','pni'])]}">
-                        <group name="group_product">
-                            <field name="material_id" attrs="{'required':[('type','in',['pin','pni'])], 'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="uom_id"/>
-                            <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                        </group>
-                    </div>
-                    <div name="service" attrs="{'invisible':[('type','not in',['sin','sni'])]}">
-                        <group name="group_service">
-                            <field name="service_id" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="uom_id"/>
-                            <field name="time_begin" widget="timesheet_uom" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="time_end" widget="timesheet_uom" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="project_id" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
-                            <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
-                        </group>
-                    </div>
-                    <group>
-                        <field name="partner_id" invisible="1"/>
-                        <field name="date" invisible="1"/>
-                        <field name="user_id" invisible="1"/>
-                        <field name="product_id" invisible="1"/>
-                        <field name="hr_expense_id" readonly="1" attrs="{'invisible':[('hr_expense_id','=',False)]}"/>
-                        <field name="hr_expense_state" attrs="{'invisible':[('hr_expense_id','=',False)]}"/>
-                        <field name="analytic_line_id" readonly="1" attrs="{'invisible':[('analytic_line_id','=',False)]}"/>
-                        <field name="sale_line_id" readonly="1" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
-                        <field name="sale_id" readonly="1" attrs="{'invisible':[('sale_id','=',False)]}"/>
-                        <field name="sale_state" attrs="{'invisible':[('sale_id','=',False)]}"/>
-                        <field name="external_work_id" invisible="1"/>
-                        <field name="work_type" invisible="1"/>
-                        <field name="is_readonly" invisible="1"/>
-                        <field name="currency_id" invisible="1"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-        <field name="field_parent" eval="False"/>
-        <field name="groups_id" eval="[(6, 0, [])]"/>
-        <field name="inherit_id" eval="False"/>
-        <field name="key" eval="False"/>
-        <field name="mode">primary</field>
-        <field name="model">external.work.line</field>
-        <field name="name">External Work Line form view</field>
-        <field name="priority">16</field>
-        <field name="type">form</field>
-    </record>
-
-
     <!-- EXTERNAL WORK MAIN FORM:   -->
     <record id="external_work_form" model="ir.ui.view">
         <field name="active" eval="True"/>
@@ -120,7 +49,8 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button" icon="fa-info" type="action" name="%(action_external_lines)d" groups="base.group_user">
+                        <button class="oe_stat_button" icon="fa-info" type="action"
+                                name="%(external_work.action_external_lines)d" groups="base.group_user">
                             <field name="line_count" string="Lines" widget="statinfo"/>
                         </button>
                     </div>
@@ -253,6 +183,76 @@
                 </group>
             </search>
         </field>
+    </record>
+
+
+    <!-- EXTERNAL WORK LINE MAIN FORM:   -->
+    <record id="external_work_line_form" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!-- MAIN Form mobile:  -->
+                    <group>
+                        <field name="type" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                    </group>
+                    <div name="expense" attrs="{'invisible':[('type','not in',['ein','eni'])]}">
+                        <group name="group_expense">
+                            <field name="expense_id" attrs="{'required':[('type','in',['ein','eni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="uom_id"/>
+                            <field name="ticket_amount" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                        </group>
+                    </div>
+                    <div name="product" attrs="{'invisible':[('type','not in',['pin','pni'])]}">
+                        <group name="group_product">
+                            <field name="material_id" attrs="{'required':[('type','in',['pin','pni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="uom_id"/>
+                            <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                        </group>
+                    </div>
+                    <div name="service" attrs="{'invisible':[('type','not in',['sin','sni'])]}">
+                        <group name="group_service">
+                            <field name="service_id" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="product_qty" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="uom_id"/>
+                            <field name="time_begin" widget="timesheet_uom" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="time_end" widget="timesheet_uom" required="1" attrs="{'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="employee_id" attrs="{'required':[('type','in',['ein','eni','sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="project_id" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                            <field name="task_id" domain="[('project_id','=',project_id)]" attrs="{'required':[('type','in',['sin','sni'])], 'readonly':[('is_readonly','=',True)]}"/>
+                        </group>
+                    </div>
+                    <group>
+                        <field name="partner_id" invisible="1"/>
+                        <field name="date" invisible="1"/>
+                        <field name="user_id" invisible="1"/>
+                        <field name="product_id" invisible="1"/>
+                        <field name="hr_expense_id" readonly="1" attrs="{'invisible':[('hr_expense_id','=',False)]}"/>
+                        <field name="hr_expense_state" attrs="{'invisible':[('hr_expense_id','=',False)]}"/>
+                        <field name="analytic_line_id" readonly="1" attrs="{'invisible':[('analytic_line_id','=',False)]}"/>
+                        <field name="sale_line_id" readonly="1" attrs="{'invisible':[('sale_line_id','=',False)]}"/>
+                        <field name="sale_id" readonly="1" attrs="{'invisible':[('sale_id','=',False)]}"/>
+                        <field name="sale_state" attrs="{'invisible':[('sale_id','=',False)]}"/>
+                        <field name="external_work_id" invisible="1"/>
+                        <field name="work_type" invisible="1"/>
+                        <field name="is_readonly" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">external.work.line</field>
+        <field name="name">External Work Line form view</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
     </record>
 
     <record id="external_work_line_tree" model="ir.ui.view">
