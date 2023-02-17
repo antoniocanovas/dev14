@@ -29,12 +29,13 @@ class ExternalWork(models.Model):
     @api.depends('external_work_id')
     def _get_default_date(self):
         self.date = self.external_work_id.date
-    date        = fields.Date(string='Date', compute=_get_default_date)
+    date        = fields.Date(string='Date', compute=_get_default_date, readonly=False)
 
     @api.depends('external_work_id')
     def _get_default_employee(self):
         self.employee_id = self.external_work_id.employee_id.id
-    employee_id = fields.Many2one('hr.employee', string="Employee", compute=_get_default_employee)
+    employee_id = fields.Many2one('hr.employee', string="Employee", store=True,
+                                  readonly=False, compute=_get_default_employee)
 
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
     partner_id  = fields.Many2one('res.partner', string="Partner", related='external_work_id.partner_id')
@@ -43,13 +44,13 @@ class ExternalWork(models.Model):
     expense_id  = fields.Many2one('product.product', string='Expense', domain="[('can_be_expensed','=',True)]")
 
     @api.depends('type','material_id','service_id','expense_id')
-    def get_product_id(self):
+    def _get_product_id(self):
         for record in self:
             product = record.material_id
             if record.type in ['ein','eni']: product = record.expense_id
             if record.type in ['sin','sni']: product = record.service_id
             record['product_id'] = product.id
-    product_id  = fields.Many2one('product.product', string='Product', compute='get_product_id', store=True)
+    product_id  = fields.Many2one('product.product', string='Product', compute='_get_product_id', store=True)
     uom_id      = fields.Many2one('uom.uom', string='UOM', related='product_id.uom_id')
 
     @api.depends('time_begin','time_end')
@@ -67,12 +68,14 @@ class ExternalWork(models.Model):
     @api.depends('external_work_id')
     def _get_default_project_id(self):
         self.project_id = self.external_work_id.project_id.id
-    project_id  = fields.Many2one('project.project', string="Project", store=True, compute=_get_default_project_id)
+    project_id  = fields.Many2one('project.project', string="Project", store=True,
+                                  readonly=False, compute=_get_default_project_id)
 
     @api.depends('external_work_id')
     def _get_default_task_id(self):
         self.task_id = self.external_work_id.task_id.id
-    task_id     = fields.Many2one('project.task', string="Task", compute=_get_default_task_id)
+    task_id     = fields.Many2one('project.task', string="Task", store=True,
+                                  readonly=False, compute=_get_default_task_id)
 
     time_begin  = fields.Float('Begin')
     time_end    = fields.Float('End')
