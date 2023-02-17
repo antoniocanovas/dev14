@@ -35,7 +35,7 @@ class ExternalWork(models.Model):
 
     @api.depends('line_ids')
     def get_line_count(self):
-        self.line_count = len(line_ids.ids)
+        self.line_count = len(self.line_ids.ids)
     line_count  = fields.Integer('Lines', store=False, compute='get_line_count')
 
     @api.depends('partner_id','employee_id')
