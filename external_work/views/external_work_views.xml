@@ -1,12 +1,54 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
+    <!-- EXTERNAL WORK_LINE MAIN TREE:   -->
+    <record id="external_work_line_tree" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree name="external_work_line_tree" string="External Work Line"  default_order='create_date desc'
+                  decoration-success="is_readonly == True">
+                <field name="name" invisible="1"/>
+                <field name="date" optional="hide"/>
+                <field name="type" optional="show"/>
+                <field name="employee_id" optional="hide"/>
+                <field name="user_id" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="uom_id"/>
+                <field name="ticket_amount" optional="hide"/>
+                <field name="task_id" optional="hide"/>
+                <field name="time_begin" widget="timesheet_uom" optional="hide"/>
+                <field name="time_end" widget="timesheet_uom" optional="hide"/>
+                <field name="expense_id" optional="hide"/>
+                <field name="analytic_line_id" optional="hide"/>
+                <field name="sale_line_id" optional="hide"/>
+                <field name="project_id" optional="hide"/>
+                <field name="hr_expense_id" optional="hide"/>
+                <field name="hr_expense_state" optional="hide"/>
+                <field name="sale_id" optional="hide"/>
+                <field name="sale_state" optional="hide"/>
+                <field name="external_work_id" invisible="1"/>
+                <field name="is_readonly" optional="hide"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">external.work.line</field>
+        <field name="name">Default External Work Line Tree View</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
 
     <!-- ACCIÓN DE VENTANA O2M PARA LÍNEAS, DESDE EXTERNAL WORK: -->
     <record id="action_external_lines" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
         <field name="context">{'default_external_work_id':active_id, 'default_employee_id':employee_id,
-            'default_project_id':project_id, 'default_task_id':task_id, 'default_date':date}</field>
+            'default_project_id':project_id, 'default_task_id':task_id}</field>
         <field name="domain">[('external_work_id', '=',active_id)]</field>
         <field name="groups_id" eval="[(6, 0, [])]"/>
         <field name="help"><![CDATA[<p> Work lines for products, services  and expenses.</p>]]></field>
@@ -15,7 +57,7 @@
         <field name="res_model">external.work.line</field>
         <field name="target">current</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_id" ref="external_work_line_tree"/>
+        <field name="view_id" ref="external_work.external_work_line_tree"/>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -245,48 +287,7 @@
         <field name="type">form</field>
     </record>
 
-    <!-- EXTERNAL WORK_LINE MAIN TREE:   -->
-    <record id="external_work_line_tree" model="ir.ui.view">
-        <field name="active" eval="True"/>
-        <field name="arch" type="xml">
-            <tree name="external_work_line_tree" string="External Work Line"  default_order='create_date desc'
-                  decoration-success="is_readonly == True">
-                <field name="name" invisible="1"/>
-                <field name="date" optional="hide"/>
-                <field name="type" optional="show"/>
-                <field name="employee_id" optional="hide"/>
-                <field name="user_id" invisible="1"/>
-                <field name="partner_id" invisible="1"/>
-                <field name="product_id"/>
-                <field name="product_qty"/>
-                <field name="uom_id"/>
-                <field name="ticket_amount" optional="hide"/>
-                <field name="task_id" optional="hide"/>
-                <field name="time_begin" widget="timesheet_uom" optional="hide"/>
-                <field name="time_end" widget="timesheet_uom" optional="hide"/>
-                <field name="expense_id" optional="hide"/>
-                <field name="analytic_line_id" optional="hide"/>
-                <field name="sale_line_id" optional="hide"/>
-                <field name="project_id" optional="hide"/>
-                <field name="hr_expense_id" optional="hide"/>
-                <field name="hr_expense_state" optional="hide"/>
-                <field name="sale_id" optional="hide"/>
-                <field name="sale_state" optional="hide"/>
-                <field name="external_work_id" invisible="1"/>
-                <field name="is_readonly" optional="hide"/>
-                <field name="currency_id" invisible="1"/>
-            </tree>
-        </field>
-        <field name="field_parent" eval="False"/>
-        <field name="groups_id" eval="[(6, 0, [])]"/>
-        <field name="inherit_id" eval="False"/>
-        <field name="key" eval="False"/>
-        <field name="mode">primary</field>
-        <field name="model">external.work.line</field>
-        <field name="name">Default External Work Line Tree View</field>
-        <field name="priority">16</field>
-        <field name="type">tree</field>
-    </record>
+
 
 
 </odoo>
