@@ -60,7 +60,8 @@ class ExternalWork(models.Model):
             if (record.type in ['sin','sni']) and (record.time_begin < record.time_end):
                 qty = record.time_end - record.time_begin
             record['product_qty'] = qty
-    product_qty = fields.Float('Qty', compute='_get_timesheet_qty', readonly=False)
+
+    product_qty = fields.Float('Qty', store=True, readonly=False)
 
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
     currency_id = fields.Many2one('res.currency', store=True, default=1)
