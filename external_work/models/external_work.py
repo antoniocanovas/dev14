@@ -34,10 +34,11 @@ class ExternalWork(models.Model):
 
     @api.depends('sale_id')
     def _get_default_note_from_sale_id(self):
-        note = ""
-        if (self.sale_id.id) and (self.note == False) and (self.sale_id.note != False):
-            note = self.sale_id.note
-        self.note = note
+        for record in self:
+            note = ""
+            if (record.sale_id.id) and (record.note == False) and (record.sale_id.note != False):
+                note = record.sale_id.note
+            record['note'] = note
     note = fields.Text('Note', store=True, compute=_get_default_note_from_sale_id, readonly=False)
 
     @api.depends('line_ids')
