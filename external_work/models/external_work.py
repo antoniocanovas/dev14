@@ -31,7 +31,14 @@ class ExternalWork(models.Model):
     company_id  = fields.Many2one('res.company')
     currency_id = fields.Many2one('res.currency', store=True, default=1)
     state       = fields.Selection([('draft','Draft'),('done','Done')], store=True, default='draft')
-    note        = fields.Text('Note', related='sale_id.note', readonly=False)
+
+    @api.depends('sale_id')
+    def _get_default_note_from_sale_id(self):
+        note = ""
+        if (self.note == False) and (self.sale_id.note != False):
+            note = self.sale_id.note
+        self.note = note
+    note = fields.Text('Note', store=True, compute=_get_default_note_from_sale_id, readonly=False)
 
     @api.depends('line_ids')
     def get_line_count(self):
@@ -54,7 +61,7 @@ class ExternalWork(models.Model):
             for li in self.line_ids:
                 if li.type in ['ein', 'sin', 'pin', 'pno']: create_sale = True
             if create_sale == True:
-                sale = self.env['sale.order'].create({'partner_id':self.partner_id.id})
+                sale = self.env['sale.order'].create({'partner_id':self.partner_id.id, 'note':self.note})
                 self.sale_id = sale.id
 
         # Models to check:

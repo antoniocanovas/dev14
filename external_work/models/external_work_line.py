@@ -54,14 +54,20 @@ class ExternalWork(models.Model):
     uom_id      = fields.Many2one('uom.uom', string='UOM', related='product_id.uom_id')
 
     @api.depends('time_begin','time_end')
-    def _get_timesheet_qty(self):
+    def _get_time_elapsed(self):
         for record in self:
             qty = record.product_qty
-            if (record.type in ['sin','sni']) and (record.time_begin < record.time_end):
+            if (record.type in ['sin','sni']) and (record.time_begin < record.time_end) and ((record.time_begin - record.time_end) != 0):
                 qty = record.time_end - record.time_begin
-            record['product_qty'] = qty
+            record['time_elapsed'] = qty
+    time_elapsed = fields.Float('Time elapsed', store=True, compute=_get_time_elapsed)
 
-    product_qty = fields.Float('Qty', store=True, readonly=False)
+    @api.depends('time_elapsed')
+    def _get_timesheet_qty(self):
+        for record in self:
+            if record.time_elapsed != 0
+            record['product_qty'] = record.time_elapsed
+    product_qty = fields.Float('Qty', store=True, readonly=False, compute=_get_timesheet_qty, default="1")
 
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
     currency_id = fields.Many2one('res.currency', store=True, default=1)

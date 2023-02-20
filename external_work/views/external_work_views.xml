@@ -106,9 +106,11 @@
                                     <field name="sale_state"/>
                                 </group>
                             </group>
+                            <field name="note" placeholder="Write anything you want be printed or must be take in account."/>
                             <field name="company_id" invisible="1"/>
                             <field name="currency_id" invisible="1"/>
                         </div>
+
                         <div name="external_work_lines">
                             <field name="line_ids"
                                    context="{'default_external_work_id':active_id, 'default_employee_id':employee_id,
@@ -141,10 +143,7 @@
                                 </tree>
                             </field>
                         </div>
-
                     </div>
-                    <field name="note" placeholder="Write anything you want be printed or must be take in account."
-                           attrs="{'readonly':[('state','=','done')], 'invisible':[('sale_id','=',False)]}"/>
                     <div name="signature">
                         <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
                     </div>
