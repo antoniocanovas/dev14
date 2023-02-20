@@ -36,7 +36,7 @@ class ExternalWork(models.Model):
     def _get_default_note_from_sale_id(self):
         for record in self:
             note = ""
-            if (record.sale_id.id) and (record.note == False) and (record.sale_id.note != False):
+            if (record.sale_id.id) and (record.note == "") and (record.sale_id.note != ""):
                 note = record.sale_id.note
             record['note'] = note
     note = fields.Text('Note', store=True, compute=_get_default_note_from_sale_id, readonly=False)
