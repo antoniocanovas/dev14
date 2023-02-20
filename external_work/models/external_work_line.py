@@ -65,8 +65,8 @@ class ExternalWork(models.Model):
     @api.depends('time_elapsed')
     def _get_timesheet_qty(self):
         for record in self:
-            if record.time_elapsed != 0
-            record['product_qty'] = record.time_elapsed
+            if record.time_elapsed != 0:
+                record['product_qty'] = record.time_elapsed
     product_qty = fields.Float('Qty', store=True, readonly=False, compute=_get_timesheet_qty, default="1")
 
     ticket_amount = fields.Monetary('Ticket value', store=True, readonly=False)
