@@ -56,7 +56,7 @@ class ExternalWork(models.Model):
     name = fields.Char('Name', compute='_get_work_name', store=True)
 
     def action_work_update(self):
-        # Create sale.order if not:
+        # Create or update sale.order if not:
         if not self.sale_id.id:
             create_sale = False
             for li in self.line_ids:
@@ -64,6 +64,8 @@ class ExternalWork(models.Model):
             if create_sale == True:
                 sale = self.env['sale.order'].create({'partner_id':self.partner_id.id, 'note':self.note})
                 self.sale_id = sale.id
+        else:
+            self.sale_id['note'] = self.note
 
         # Models to check:
         for li in self.line_ids:
