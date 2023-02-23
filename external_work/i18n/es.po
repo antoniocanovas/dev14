@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-23 01:14+0000\n"
-"PO-Revision-Date: 2023-02-23 02:19+0100\n"
+"PO-Revision-Date: 2023-02-23 02:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -70,7 +70,7 @@ msgstr "Decorador de actividad por excepción"
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__activity_state
 msgid "Activity State"
-msgstr "Estado de la actividad "
+msgstr "Estado de la actividad"
 
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__activity_type_icon
@@ -135,7 +135,7 @@ msgstr "Fecha"
 #. module: external_work
 #: model:ir.model.fields,help:external_work.field_external_work_line__uom_id
 msgid "Default unit of measure used for all stock operations."
-msgstr "Unidad de medida por defecto para todas las operaciones de stock"
+msgstr "Unidad de medida por defecto para todas las operaciones de stock."
 
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__display_name
@@ -312,7 +312,7 @@ msgstr "Mantenimiento o garantía"
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work_line__material_id
 msgid "Material"
-msgstr "Material y complementos"
+msgstr "Material y otros servicios"
 
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__message_has_error
