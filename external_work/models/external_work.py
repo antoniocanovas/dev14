@@ -98,7 +98,7 @@ class ExternalWork(models.Model):
             if newsol: li.sale_line_id = newsol.id
 
             # EMPLOYEE TIMESHEETS:
-            if timesheet == True:
+            if (timesheet == True) and not (li.analytic_line_id.id):
                 newts = self.env['account.analytic.line'].create({'name':li.name, 'date':li.date,
                                                                   'task_id':li.task_id.id,
                                                                   'account_id':li.project_id.analytic_account_id.id,
@@ -106,7 +106,7 @@ class ExternalWork(models.Model):
                                                                   'unit_amount':li.product_qty, 'product_id':li.product_id.id,
                                                                   'employee_id':li.employee_id.id})
                 li.analytic_line_id = newts.id
-            else:
+            elif (timesheet == True) and (li.analytic_line_id.id):
                 li.analytic_line_id.write({'name':li.name, 'date':li.date,
                                            'task_id':li.task_id.id,
                                            'account_id':li.project_id.analytic_account_id.id,
@@ -115,14 +115,14 @@ class ExternalWork(models.Model):
                                            'employee_id':li.employee_id.id})
 
             # EMPLOYEE EXPENSES:
-            if expense == True:
+            if (expense == True) and not (li.hr_expense_id.id):
                 newexpense = self.env['hr.expense'].create({'employee_id':li.employee_id.id, 'name': li.name,
                                                             'date': li.date, 'payment_mode':'own_account',
                                                             'unit_amount':li.ticket_amount / li.product_qty,
                                                             'product_id':li.product_id.id, 'quantity':li.product_qty,
                                                             'product_uom_id':li.uom_id.id,})
                 li.hr_expense_id = newexpense.id
-            else:
+            elif (expense == True) and (li.hr_expense_id.id):
                 amount = 0
                 if li.product_qty != 0: amount = li.ticket_amount / li.product_qty
                 li.hr_expense_id.write({'employee_id':li.employee_id.id, 'name': li.name,
