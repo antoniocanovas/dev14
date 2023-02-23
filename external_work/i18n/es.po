@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 15:48+0000\n"
-"PO-Revision-Date: 2023-02-21 16:50+0100\n"
+"POT-Creation-Date: 2023-02-23 01:14+0000\n"
+"PO-Revision-Date: 2023-02-23 02:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -70,7 +70,7 @@ msgstr "Decorador de actividad por excepción"
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__activity_state
 msgid "Activity State"
-msgstr "Estado de la actividad"
+msgstr "Estado de la actividad "
 
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__activity_type_icon
@@ -135,11 +135,12 @@ msgstr "Fecha"
 #. module: external_work
 #: model:ir.model.fields,help:external_work.field_external_work_line__uom_id
 msgid "Default unit of measure used for all stock operations."
-msgstr "Unidad de medida por defecto para todas las operaciones de stock."
+msgstr "Unidad de medida por defecto para todas las operaciones de stock"
 
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__display_name
 #: model:ir.model.fields,field_description:external_work.field_external_work_line__display_name
+#: model:ir.model.fields,field_description:external_work.field_product_product__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -227,6 +228,7 @@ msgstr "Agrupar por"
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__id
 #: model:ir.model.fields,field_description:external_work.field_external_work_line__id
+#: model:ir.model.fields,field_description:external_work.field_product_product__id
 msgid "ID"
 msgstr ""
 
@@ -267,8 +269,14 @@ msgid "Is readonly"
 msgstr "Sólo lectura"
 
 #. module: external_work
+#: model:ir.model.fields,field_description:external_work.field_product_product__is_work_time
+msgid "Is working time"
+msgstr "Es tiempo de trabajo"
+
+#. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work____last_update
 #: model:ir.model.fields,field_description:external_work.field_external_work_line____last_update
+#: model:ir.model.fields,field_description:external_work.field_product_product____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
 
@@ -304,7 +312,7 @@ msgstr "Mantenimiento o garantía"
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work_line__material_id
 msgid "Material"
-msgstr "Material"
+msgstr "Material y complementos"
 
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work__message_has_error
@@ -389,6 +397,7 @@ msgid "Partner"
 msgstr "Cliente"
 
 #. module: external_work
+#: model:ir.model,name:external_work.model_product_product
 #: model:ir.model.fields,field_description:external_work.field_external_work_line__product_id
 #: model_terms:ir.ui.view,arch_db:external_work.work_sheet_report_document_report
 msgid "Product"
@@ -424,7 +433,7 @@ msgstr "Proyectos"
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work_line__product_qty
 msgid "Qty"
-msgstr "Cantidad"
+msgstr "Cent"
 
 #. module: external_work
 #: model_terms:ir.ui.view,arch_db:external_work.work_sheet_report_document_report
@@ -463,21 +472,6 @@ msgstr "Subtotal pedido"
 #: model_terms:ir.ui.view,arch_db:external_work.external_work_search
 msgid "Search External Work"
 msgstr "Buscar trabajo externo"
-
-#. module: external_work
-#: model:ir.model.fields,field_description:external_work.field_external_work_line__service_id
-msgid "Service"
-msgstr "Servicio"
-
-#. module: external_work
-#: model:ir.model.fields.selection,name:external_work.selection__external_work_line__type__sin
-msgid "Service billable"
-msgstr "Servicio facturable"
-
-#. module: external_work
-#: model:ir.model.fields.selection,name:external_work.selection__external_work_line__type__sni
-msgid "Service not billable"
-msgstr "Servicio NO facturable"
 
 #. module: external_work
 #: model_terms:ir.ui.view,arch_db:external_work.external_work_form
@@ -539,6 +533,16 @@ msgstr "Tarea"
 #: model:ir.model.fields.selection,name:external_work.selection__external_work__type__task
 msgid "Tasks"
 msgstr "Tareas"
+
+#. module: external_work
+#: model:ir.model.fields.selection,name:external_work.selection__external_work_line__type__sin
+msgid "Technical Service billable"
+msgstr "Partes de trabajo facturables"
+
+#. module: external_work
+#: model:ir.model.fields.selection,name:external_work.selection__external_work_line__type__sni
+msgid "Technical Service not billable"
+msgstr "Partes de trabajo NO facturables"
 
 #. module: external_work
 #: model:ir.model.fields,field_description:external_work.field_external_work_line__ticket_amount
@@ -617,6 +621,11 @@ msgstr "Líneas de parte de trabajo"
 #: model_terms:ir.actions.act_window,help:external_work.action_external_lines
 msgid "Work lines for products, services  and expenses."
 msgstr "Líneas de productos, servicios y gastos."
+
+#. module: external_work
+#: model:ir.model.fields,field_description:external_work.field_external_work_line__service_id
+msgid "Work product"
+msgstr "Prod. Ser. Técnico"
 
 #. module: external_work
 #: model_terms:ir.ui.view,arch_db:external_work.external_work_form
