@@ -13,7 +13,7 @@
             name="Issues"
             action="action_external_web_issues"
             groups="base.group_user"
-            web_icon="konery_rrhh,static/icon.png"
+            web_icon="konery_rrhh,static/description/icon.png"
             sequence="10"
     />
 
