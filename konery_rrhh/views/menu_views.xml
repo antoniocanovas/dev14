@@ -2,32 +2,18 @@
 <odoo>
 
     <record id="action_external_web_issues" model="ir.actions.act_url">
-        <field name="name">Home Google</field>
+        <field name="name">Google</field>
         <field name="binding_type">action</field>
-        <field name="binding_view_types">list,form</field>
         <field name="url">https://www.google.es</field>
         <field name="target">new</field>
-<!--
-        <field name="res_model">product.product</field>
-        <field name="view_mode">tree,kanban,form</field>
-        <field name="context">{'default_detailed_type':'product', 'default_stage_id':1, 'default_pet_ok':True}</field>
-        <field name="domain">[('pet_ok','=',True)]</field>
-        <field name="search_view_id" eval="shelter_product_pet_search_view"/>
-        <field name="view_ids"
-               eval="[(5, 0, 0),
-                          (0, 0, {'view_mode': 'tree', 'view_id': ref('shelter_product_pet_tree_view')}),
-                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('shelter_product_pet_kanban_view')}),
-                          (0, 0, {'view_mode': 'form', 'view_id': ref('shelter_product_pet_form_view')}),
-                          ]"/>
--->
     </record>
 
     <menuitem
-            id="menu_shelter_main"
-            name="Shelter"
+            id="menu_external_issues_main"
+            name="Issues"
             action="action_external_web_issues"
             groups="base.group_user"
-            web_icon="shelter_pet,static/icon.png"
+            web_icon="konery_rrhh,static/icon.png"
             sequence="10"
     />
 
