@@ -1,1 +1,1 @@
-Show/hide website menu items by user group.
+Avoid loose admin access to website menu when selecting "portal" or "public" user group.

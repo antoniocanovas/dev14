@@ -1,14 +1,22 @@
 <?xml version="1.0"?>
 <odoo>
 
+  <!-- Modify global standar permission (no global): -->
   <record id="website_menu_access" model="ir.rule">
-    <field name="name">website_menu_permission group access</field>
+    <field name="name">website.website_menu</field>
     <field name="model_id" ref="model_website_menu"/>
-    <field name="domain_force">['|',('group_ids','in', user.groups_id.ids), ('group_ids','=',False)]</field>
+    <field name="groups" eval="[(6, 0, [ref('base.group_user'), ref('base.group_user'), ref('base.group_portal')])]"/>
+  </record>
+
+  <!-- ADD ADMIN PERMISSION: -->
+  <record id="website_menu_admin_access" model="ir.rule">
+    <field name="name">website_menu admin group access</field>
+    <field name="model_id" ref="model_website_menu"/>
+    <field name="domain_force">[(1,'='1)]</field>
     <field name="perm_read" eval="True"/>
-    <field name="perm_create" eval="False"/>
-    <field name="perm_write" eval="False"/>
-    <field name="perm_unlink" eval="False"/>
+    <field name="perm_create" eval="True"/>
+    <field name="perm_write" eval="True"/>
+    <field name="perm_unlink" eval="True"/>
   </record>
 
 </odoo>
