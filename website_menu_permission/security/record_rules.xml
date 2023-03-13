@@ -3,7 +3,7 @@
 
   <!-- Modify global standar permission (no global): -->
   <record id="website.website_menu" model="ir.rule">
-    <field name="groups" eval="[(4, ref('base.group_public'), (4, ref('base.group_user'), (4, ref('base.group_portal'))]"/>
+    <field name="groups" eval="[(4, ref('base.group_public'), (4, ref('base.group_user'), (4, ref('base.group_portal')]"/>
   </record>
 
   <!-- ADD ADMIN PERMISSION: -->
