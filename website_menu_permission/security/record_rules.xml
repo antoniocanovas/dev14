@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <odoo>
 
-  <!-- Modify global standar permission (no global): -->
+  <!-- Modify standard "global" rule: -->
   <record id="website.website_menu" model="ir.rule">
     <field name="groups" eval="[(4, ref('base.group_public')), (4, ref('base.group_user')), (4, ref('base.group_portal'))]"/>
   </record>
 
-  <!-- ADD ADMIN PERMISSION: -->
+  <!-- Add Admin Rule: -->
   <record id="website_menu_admin_access" model="ir.rule">
     <field name="name">website_menu admin group access</field>
     <field name="model_id" ref="website.model_website_menu"/>
