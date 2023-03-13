@@ -9,7 +9,7 @@
   <!-- ADD ADMIN PERMISSION: -->
   <record id="website_menu_admin_access" model="ir.rule">
     <field name="name">website_menu admin group access</field>
-    <field name="model_id" ref="model_website_menu"/>
+    <field name="model_id" ref="website.model_website_menu"/>
     <field name="domain_force">[(1,'='1)]</field>
     <field name="perm_read" eval="True"/>
     <field name="perm_create" eval="True"/>
