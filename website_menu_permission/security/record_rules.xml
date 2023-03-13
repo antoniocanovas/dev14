@@ -15,7 +15,7 @@
     <field name="perm_create" eval="True"/>
     <field name="perm_write" eval="True"/>
     <field name="perm_unlink" eval="True"/>
-    <field name="groups" eval="[(4, 0, ref('base.group_system'))]"/>
+    <field name="groups" eval="[(4, ref('base.group_system'))]"/>
   </record>
 
 </odoo>
