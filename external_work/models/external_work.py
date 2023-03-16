@@ -24,7 +24,7 @@ class ExternalWork(models.Model):
         self.employee_id = self.env.user.employee_id.id
     employee_id = fields.Many2one('hr.employee', string="Employee",
 #                                  default=lambda self: self.env.user.employee_id.id,
-                                  default=_get_default_employee,
+                                  default=self.env.user.employee_id.id,
                                   )
 
     user_id     = fields.Many2one('res.users', string="User", related='employee_id.user_id')
