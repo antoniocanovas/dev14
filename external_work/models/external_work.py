@@ -21,7 +21,7 @@ class ExternalWork(models.Model):
 
 
     def _get_default_employee(self):
-        self.employee_id = self.user.employee_id.id
+        self.employee_id = self.env.user.employee_id.id
     employee_id = fields.Many2one('hr.employee', string="Employee",
 #                                  default=lambda self: self.env.user.employee_id.id,
                                   default=_get_default_employee,
