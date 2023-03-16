@@ -19,7 +19,7 @@ class ExternalWork(models.Model):
     subject     = fields.Char('Subject')
     date        = fields.Date('Date')
 
-    test = fields.Many2one('usuario activo', store=True, default=self.env.uid)
+    test = fields.Many2one('usuario activo', store=True, default=lambda self: self.env.uid)
     employee_id = fields.Many2one('hr.employee', string="Employee",
 #                                  default=lambda self: self.env.user.employee_id.id,
                                   default=self.test.employee_id.id,
