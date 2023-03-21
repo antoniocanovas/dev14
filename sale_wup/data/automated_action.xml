@@ -24,7 +24,7 @@ if record.wup_line_ids.ids:
                    ref('sale_wup.field_sale_order_line__wup_cost_amount')])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
-            <field name="active" eval="True"/>
+            <field name="active" eval="False"/>
         </record>
 
         <record id="so_wup_tasks" model="base.automation">
