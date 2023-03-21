@@ -30,9 +30,9 @@ class SaleOrderWup(models.Model):
                     sm = svl.stock_move_id
                     if (svl.id) and not (sm.sale_line_id.id):
                         extra.append(aal.id)
-            record.product_consumed_ids = [(6, 0, extra)]
-#    product_consumed_ids = fields.Many2many('account.analytic.line', compute=get_worksheets_products, store=False)
-    product_consumed_ids = fields.Many2many('account.analytic.line', store=False)
+            record['product_consumed_ids'] = [(6, 0, extra)]
+    product_consumed_ids = fields.Many2many('account.analytic.line', compute=get_worksheets_products, store=False)
+#    product_consumed_ids = fields.Many2many('account.analytic.line', store=False)
     new_sale_id = fields.Many2one('sale.order', string='New quotation')
 
     def action_view_wup_line(self):
