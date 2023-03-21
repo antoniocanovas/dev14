@@ -27,8 +27,7 @@ class SaleOrderWup(models.Model):
                     ('product_id.type','in',['product','consu'])])
                 for aal in aal_ids:
                     svl = self.env['stock.valuation.layer'].search([('analytic_id', '=', aal.id)])
-                    sm = svl.stock_move_id
-                    if (svl.id) and not (sm.sale_line_id.id):
+                    if (svl.id) and not (svl.stock_move_id.sale_line_id.id):
                         extra.append(aal.id)
             record['product_consumed_ids'] = [(6, 0, extra)]
     product_consumed_ids = fields.Many2many('account.analytic.line', compute=get_worksheets_products, store=False)
