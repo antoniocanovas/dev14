@@ -42,7 +42,7 @@ if (record.state == 'sale'):
     if li.sale_line_id.product_id.type in ['service']: sale_line = li.sale_line_id.id
 
     name = li.sale_line_id.name + ".- " + li.name
-    newtask = env['project.task'].create({'name':name, 'sale_line_id':li.sale_line_id.id ,'sale_order_id':record.id,
+    newtask = env['project.task'].create({'name':name, 'sale_line_id':sale_line ,'sale_order_id':record.id,
       'project_id': record.project_id.id, 'planned_hours':li.product_uom_qty, 'wup_line_id':li.id})
     li['task_id'] = newtask.id
             </field>
