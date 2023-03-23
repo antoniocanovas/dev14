@@ -16,7 +16,7 @@ if (record.wup_line_ids.ids) and not (record.wup_line_note_id.id) and (record.wu
                                                     ref('sale_wup.field_sale_order_line__wup_template_id')])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
-            <field name="active" eval="False"/>
+            <field name="active" eval="True"/>
         </record>
 
         <record id="so_wup_tasks" model="base.automation">
@@ -43,7 +43,7 @@ if (record.state == 'sale'):
             </field>
             <field name="trigger">on_create_or_write</field>
             <field name="trigger_field_ids" eval="[(6,0, [ref('sale.field_sale_order__state')])]"/>
-            <field name="active" eval="False"/>
+            <field name="active" eval="True"/>
         </record>
 
 
