@@ -20,7 +20,7 @@ class WupSaleOrderLine(models.Model):
 
     wup_cost_amount = fields.Monetary('wup Cost', store=True, compute='get_wup_cost_amount')
 
-    @api.depends('product_uom_qty','wup_cost_amount')
+    @api.depends('product_uom_qty','wup_cost_amount', 'wup_price_unit')
     def update_sol_price_unit(self):
         for record in self:
             # Change default behaviour when change QYT on SOL with WUP, and update purchase_price on SOL:
