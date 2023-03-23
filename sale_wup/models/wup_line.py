@@ -103,7 +103,7 @@ class WupLine(models.Model):
 
     # Recalcular wup si se borran líneas o modifican las actuales:
 #    @api.onchange('price_unit','price_unit_cost','product_uom_qty', 'sale_line_id.wup_line_ids')
-    @api.onchange('price_unit','price_unit_cost','product_uom_qty')
+    @api.depends('price_unit','price_unit_cost','product_uom_qty')
     def update_sol_prices_from_wup(self):
         for record in self:
             sol_price_unit, sol_purchase_price = 0,0
