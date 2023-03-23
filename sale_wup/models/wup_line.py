@@ -19,7 +19,9 @@ class WupLine(models.Model):
     effective_hours = fields.Float(string="Eff. Hours", related='task_id.effective_hours', store=False)
     #Modificado 09/09/2022 por formato de impresión sin respetar formato, puede hacerse calculado para pasar a char.
     sale_line_name = fields.Text(string='Sale line', related='sale_line_id.name')
+
     service_tracking = fields.Selection('Service tracking', store=False, related='product_id.service_tracking')
+    state = fields.Selection('State', store=True, related='sale_line_id.state')
 
     @api.depends('sale_line_id.product_uom_qty', 'product_uom_qty')
     def get_wup_product_sale_qty(self):
