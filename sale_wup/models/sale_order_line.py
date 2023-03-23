@@ -25,8 +25,8 @@ class WupSaleOrderLine(models.Model):
     @api.depends('wup_line_ids','wup_line_ids.price_unit','wup_line_ids.product_uom_qty')
     def get_wup_price_unit_amount2(self):
         for record in self:
+            raise Warning('si')
             if record.wup_line_ids.ids:
-                raise Warning('si')
                 total = 0
                 for line in record.wup_line_ids:
                     total += line.price_unit * line.product_uom_qty
