@@ -102,11 +102,13 @@ class WupLine(models.Model):
                                  store=True, readonly=True, compute="get_subtotal_sale")
 
     # Recalcular wup si se borran líneas o modifican las actuales:
-    @api.onchange('price_unit','price_unit_cost','product_uom_qty', 'sale_line_id.wup_line_ids')
+#    @api.onchange('price_unit','price_unit_cost','product_uom_qty', 'sale_line_id.wup_line_ids')
+    @api.onchange('price_unit','price_unit_cost','product_uom_qty')
     def update_sol_prices_from_wup(self):
         for record in self:
             sol_price_unit, sol_purchase_price = 0,0
-            for li in record.sale_line_id.wup_line_ids:
+            sol = record.sale_line_id
+            for li in sol.wup_line_ids:
                 sol_price_unit += li.product_uom_qty * li.price_unit
                 sol_purchase_price += li.product_uom_qty * li.price_unit_cost
-            record.sale_line_id.write({'price_unit':sol_price_unit, 'purchase_price':sol_purchase_price})
+            sol.write({'price_unit':sol_price_unit, 'purchase_price':sol_purchase_price})
