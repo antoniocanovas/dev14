@@ -29,13 +29,14 @@ class WupLine(models.Model):
             record.product_sale_qty = record.product_uom_qty * record.sale_line_id.product_uom_qty
     product_sale_qty = fields.Float(string='Sale Qty', compute='get_wup_product_sale_qty')
 
-
+    # Set default name from product_id:
     @api.depends('product_id')
     def get_product_id_name(self):
         for record in self:
             record.name = record.product_id.name
     name = fields.Char(string='Description', readonly=False, store=True, compute='get_product_id_name')
 
+    # Set wup_line subtotal main form, not in window action o2m wup_lines (replaced by subtotal_sale):
     @api.depends('price_unit', 'product_uom_qty')
     def get_subtotal(self):
         for record in self:
@@ -43,6 +44,7 @@ class WupLine(models.Model):
 
     subtotal = fields.Monetary('Subtotal', currency_field='currency_id', compute="get_subtotal",  store=True )
 
+    # Set lst_price now, from product_id as readonly to estimate discounts:
     @api.depends('product_id')
     def get_lst_price(self):
         for record in self:
@@ -50,6 +52,7 @@ class WupLine(models.Model):
 
     lst_price = fields.Monetary('List Price', currency_field='currency_id', compute="get_lst_price", store=True)
 
+    # Get discount from standar lst_price:
     @api.depends('product_id', 'price_unit')
     def get_lst_price_discount(self):
         for record in self:
@@ -61,6 +64,7 @@ class WupLine(models.Model):
     lst_price_discount = fields.Monetary('List price discount %', currency_field='currency_id',
                                          store=False, compute="get_lst_price_discount")
 
+    # Get default cost from product_id on creation:
     @api.depends('product_id')
     def get_price_unit_cost(self):
         for record in self:
@@ -69,6 +73,7 @@ class WupLine(models.Model):
     price_unit_cost = fields.Monetary('Unit Cost', currency_field='currency_id',
                                       readonly=False, store=True, compute="get_price_unit_cost")
 
+    # Get subtotal cost:
     @api.depends('product_id','product_uom_qty')
     def get_wupline_cost(self):
         for record in self:
@@ -77,6 +82,7 @@ class WupLine(models.Model):
     price_cost = fields.Monetary('Cost', currency_field='currency_id',
                                       readonly=False, store=True, compute="get_wupline_cost")
 
+    # Get standard lst_price from product_id as NO READONLY:
     @api.depends('product_id')
     def get_price_unit(self):
         for record in self:
@@ -85,6 +91,7 @@ class WupLine(models.Model):
     price_unit = fields.Monetary('Price Unit', currency_field='currency_id',
                                  store=True, readonly=False, compute="get_price_unit")
 
+    # Get SALE Sutotal line, para mostrar y totalizar sólo en Acción de ventana o2m WUP_LINES::
     @api.depends('sale_line_id.discount', 'sale_line_id.product_uom_qty', 'subtotal')
     def get_subtotal_sale(self):
         for record in self:
@@ -93,3 +100,12 @@ class WupLine(models.Model):
 
     subtotal_sale = fields.Monetary('Sale subtotal', currency_field='currency_id',
                                  store=True, readonly=True, compute="get_subtotal_sale")
+
+    # Recalcular wup si se borran líneas o modifican las actuales:
+    @api.onchange('price_unit','price_unit_cost','product_uom_qty', 'sale_line_id.wup_line_ids')
+    for record in self:
+        sol_price_unit, sol_purchase_price = 0,0
+        for li in record.sale_line_id.wup_line_ids:
+            sol_price_unit += li.product_uom_qty * li.price_unit
+            sol_purchase_price += li.product_uom_qty * li.price_unit_cost
+        record.sale_line_id.write({'price_unit':sol_price_unit, 'purchase_price':sol_purchase_price})
