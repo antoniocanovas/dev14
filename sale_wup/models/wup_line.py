@@ -15,7 +15,7 @@ class WupLine(models.Model):
     sale_line_id = fields.Many2one('sale.order.line', string='SO Line')
     sale_id = fields.Many2one('sale.order', related='sale_line_id.order_id', string='Sale')
     sale_discount = fields.Float('Disc.(%)', related='sale_line_id.discount', store=False)
-    task_id = fields.Many2one('project.task', string='WU Task')
+    task_id = fields.Many2one('project.task', string='WU Task', copied=False)
     effective_hours = fields.Float(string="Eff. Hours", related='task_id.effective_hours', store=False)
     #Modificado 09/09/2022 por formato de impresión sin respetar formato, puede hacerse calculado para pasar a char.
     sale_line_name = fields.Text(string='Sale line', related='sale_line_id.name')
