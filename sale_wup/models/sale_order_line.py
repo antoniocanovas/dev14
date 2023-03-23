@@ -23,7 +23,7 @@ class WupSaleOrderLine(models.Model):
 
     # Actualizar price_unit si hay wups (ya está en la última función):
 #    @api.depends('wup_line_ids','wup_line_ids.price_unit','wup_line_ids.product_uom_qty')
-    @api.depends('write_date')
+    @api.depends('wup_line_ids.write_date')
     def get_wup_price_unit_amount2(self):
         for record in self:
             if record.wup_line_ids.ids:
