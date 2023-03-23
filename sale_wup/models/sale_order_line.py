@@ -10,22 +10,12 @@ class WupSaleOrderLine(models.Model):
     wup_line_ids = fields.One2many('wup.line', 'sale_line_id', string='wup Line', copy=True)
     wup_line_note_id = fields.Many2one('sale.order.line')
 
-#########################
     @api.depends('wup_line_ids','wup_line_ids.price_unit')
     def get_wup_price_unit(self):
         for record in self:
-            total = 0
-            for line in record.wup_line_ids:
-                total += line.price_unit * line.product_uom_qty
+            total = sum(record.wup_line_ids.mapped('subtotal')) if record.wup_line_ids else 0
             record.wup_price_unit = total
     wup_price_unit = fields.Monetary('wup Cost', store=True, compute='get_wup_price_unit')
-
-    @api.depends('wup_price_unit')
-    def update_sol_price_unit(self):
-        for record in self:
-            if (record.wup_line_ids.ids) and (record.wup_price_unit != record.price_unit):
-                record.sudo().write({'price_unit': record.wup_price_unit})
-##########################
 
 
     @api.depends('wup_line_ids','wup_line_ids.price_unit_cost')
@@ -63,7 +53,7 @@ class WupSaleOrderLine(models.Model):
             record['lst_price_discount'] = discount
 
     lst_price_discount = fields.Float('List price discount %', currency_field='currency_id',
-                                         store=False, compute="get_lst_price_discount")
+                                      store=False, compute="get_lst_price_discount")
 
     @api.depends('product_id')
     def get_price_unit_cost(self):
