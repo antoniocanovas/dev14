@@ -27,8 +27,8 @@ class WupSaleOrderLine(models.Model):
         for record in self:
             total = 0
             for line in record.wup_line_ids:
-                cost += line.price_unit * line.product_uom_qty
-            record.price_unit = total
+                total += line.price_unit * line.product_uom_qty
+            record['price_unit'] = total
 
 
     @api.depends('product_id', 'product_uom', 'discount', 'price_unit')
