@@ -8,7 +8,7 @@ class WupSaleOrderLine(models.Model):
 
     wup_template_id = fields.Many2one('wup.template', string='wup Template', copy=True)
     wup_line_ids = fields.One2many('wup.line', 'sale_line_id', string='wup Line', copy=True)
-    wup_line_note_id = fields.Many2one('sale.order.line', copied=False)
+    wup_line_note_id = fields.Many2one('sale.order.line', copy=False)
 
     @api.depends('wup_line_ids','wup_line_ids.price_unit')
     def get_wup_price_unit(self):
