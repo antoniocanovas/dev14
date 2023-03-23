@@ -21,14 +21,16 @@ class WupSaleOrderLine(models.Model):
 
     wup_cost_amount = fields.Monetary('wup Cost', store=True, compute='get_wup_cost_amount')
 
-    # Actualizar price_unit si hay wups:
-    @api.depends('wup_line_ids','wup_line_ids.price_unit','wup_line_ids.product_uom_qty')
-    def get_wup_price_unit_amount(self):
+    # Actualizar price_unit si hay wups (ya está en la última función):
+#    @api.depends('wup_line_ids','wup_line_ids.price_unit','wup_line_ids.product_uom_qty')
+    @api.depends('write_date')
+    def get_wup_price_unit_amount2(self):
         for record in self:
-            total = 0
-            for line in record.wup_line_ids:
-                total += line.price_unit * line.product_uom_qty
-            record['price_unit'] = total
+            if record.wup_line_ids.ids:
+                total = 0
+                for line in record.wup_line_ids:
+                    total += line.price_unit * line.product_uom_qty
+                record['price_unit'] = total
 
 
     @api.depends('product_id', 'product_uom', 'discount', 'price_unit')
