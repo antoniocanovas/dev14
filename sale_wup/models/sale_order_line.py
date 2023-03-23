@@ -10,7 +10,6 @@ class WupSaleOrderLine(models.Model):
     wup_line_ids = fields.One2many('wup.line', 'sale_line_id', string='wup Line', copy=True)
     wup_line_note_id = fields.Many2one('sale.order.line')
 
-    # Update ¿cambiar a purchase_price si funciona la de price_unit?
     @api.depends('wup_line_ids','wup_line_ids.price_unit_cost')
     def get_wup_cost_amount(self):
         for record in self:
@@ -20,17 +19,6 @@ class WupSaleOrderLine(models.Model):
             record.wup_cost_amount = cost
 
     wup_cost_amount = fields.Monetary('wup Cost', store=True, compute='get_wup_cost_amount')
-
-    # Actualizar price_unit si hay wups (ya está en la última función):
-    @api.depends('wup_line_ids','wup_line_ids.price_unit','wup_line_ids.product_uom_qty')
-    def get_wup_price_unit_amount2(self):
-        for record in self:
-            if record.wup_line_ids.ids:
-                raise Warning('si')
-                total = 0
-                for line in record.wup_line_ids:
-                    total += line.price_unit * line.product_uom_qty
-                record['price_unit'] = total
 
 
     @api.depends('product_id', 'product_uom', 'discount', 'price_unit')

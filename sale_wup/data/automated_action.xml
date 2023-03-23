@@ -1,7 +1,4 @@
 <odoo>
-
-    # Es SOL, cambia el precio cuando se modifica la cantidad en SOL, NO en wup.
-    # Para wup habría que hacer una que al cambiar precio venta wup, cambie esto, no se entera aunque sea de SOL por write_date.
     <record id="wup_sol_update_general" model="base.automation">
             <field name="name">=> Update SOL from WUP</field>
             <field name="model_id" ref="sale.model_sale_order_line"/>
@@ -13,7 +10,7 @@ if record.wup_line_ids.ids:
     for li in record.wup_line_ids:
         wup_price_unit += li.price_unit * li.product_uom_qty
 
-    if not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description != ""):
+    if not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
         # Create a line note from wup template description:
         new_note = env['sale.order.line'].create({'sequence':record.sequence, 'name':record.wup_template_id.description, 'display_type':'line_note', 'order_id':record.order_id.id})
         record.write({'price_unit':wup_price_unit, 'purchase_price':record.wup_cost_amount, 'wup_line_note_id':new_note.id})
