@@ -11,6 +11,24 @@ class WupSaleOrderLine(models.Model):
     wup_line_note_id = fields.Many2one('sale.order.line')
 
     @api.depends('wup_line_ids','wup_line_ids.price_unit_cost')
+    def get_wup_price_unit(self):
+        for record in self:
+            total = 0
+            for line in record.wup_line_ids:
+                total += line.price_unit * line.product_uom_qty
+            record.wup_price_unit = cost
+
+    wup_price_unit = fields.Monetary('wup Cost', store=True, compute='get_wup_price_unit')
+
+    @api.depends('wup_price_unit')
+    def update_sol_price_unit(self):
+        for record in self:
+            if (record.wup_line_ids.ids) and (record.wup_price_unit != record.price_unit):
+                record['price_unit'] = record.wup_price_unit
+
+
+
+    @api.depends('wup_line_ids','wup_line_ids.price_unit_cost')
     def get_wup_cost_amount(self):
         for record in self:
             cost = 0
