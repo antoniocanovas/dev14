@@ -10,7 +10,7 @@ class WupSaleOrderLine(models.Model):
     wup_line_ids = fields.One2many('wup.line', 'sale_line_id', string='wup Line', copy=True)
     wup_line_note_id = fields.Many2one('sale.order.line')
 
-    @api.depends('wup_line_ids','wup_line_ids.product_uom_qty','wup_line_ids.price_unit_cost')
+    @api.depends('wup_line_ids','wup_line_ids.price_unit_cost')
     def get_wup_cost_amount(self):
         for record in self:
             cost = 0
@@ -19,28 +19,6 @@ class WupSaleOrderLine(models.Model):
             record.wup_cost_amount = cost
 
     wup_cost_amount = fields.Monetary('wup Cost', store=True, compute='get_wup_cost_amount')
-
-    @api.depends('product_uom_qty','wup_cost_amount', 'wup_price_unit')
-    def update_sol_price_unit(self):
-        for record in self:
-            # Change default behaviour when change QYT on SOL with WUP, and update purchase_price on SOL:
-            if record.wup_line_ids.ids:
-                wup_price, wup_cost_amount = 0, 0
-                for li in record.wup_line_ids:
-                    wup_price += li.price_unit * li.product_uom_qty
-                    wup_cost_amount += li.price_unit_cost * li.product_uom_qty
-
-                if not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
-                    # Create a line note from wup template description:
-                    new_note = env['sale.order.line'].create(
-                        {'sequence': record.sequence, 'name': record.wup_template_id.description, 'display_type': 'line_note',
-                         'order_id': record.order_id.id})
-                    record.write({'price_unit': wup_price, 'purchase_price': wup_cost_amount,
-                                  'wup_line_note_id': new_note.id})
-                else:
-                    record.write({'price_unit': wup_price, 'purchase_price': wup_cost_amount})
-
-
 
 
     @api.depends('product_id', 'product_uom', 'discount', 'price_unit')

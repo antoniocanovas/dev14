@@ -27,7 +27,6 @@ class WupLine(models.Model):
     def get_wup_product_sale_qty(self):
         for record in self:
             record.product_sale_qty = record.product_uom_qty * record.sale_line_id.product_uom_qty
-
     product_sale_qty = fields.Float(string='Sale Qty', compute='get_wup_product_sale_qty')
 
 
@@ -35,7 +34,6 @@ class WupLine(models.Model):
     def get_product_id_name(self):
         for record in self:
             record.name = record.product_id.name
-
     name = fields.Char(string='Description', readonly=False, store=True, compute='get_product_id_name')
 
     @api.depends('price_unit', 'product_uom_qty')
@@ -79,7 +77,7 @@ class WupLine(models.Model):
     price_cost = fields.Monetary('Cost', currency_field='currency_id',
                                       readonly=False, store=True, compute="get_wupline_cost")
 
-    @api.onchange('product_id')
+    @api.depends('product_id')
     def get_price_unit(self):
         for record in self:
             record.price_unit = record.product_id.lst_price
