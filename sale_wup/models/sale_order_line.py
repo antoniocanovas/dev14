@@ -25,19 +25,20 @@ class WupSaleOrderLine(models.Model):
         for record in self:
             # Change default behaviour when change QYT on SOL with WUP, and update purchase_price on SOL:
             if record.wup_line_ids.ids:
-                wup_price = 0
+                wup_price, wup_cost_amount = 0, 0
                 for li in record.wup_line_ids:
                     wup_price += li.price_unit * li.product_uom_qty
+                    wup_cost_amount += li.price_unit_cost * li.product_uom_qty
 
                 if not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
                     # Create a line note from wup template description:
                     new_note = env['sale.order.line'].create(
                         {'sequence': record.sequence, 'name': record.wup_template_id.description, 'display_type': 'line_note',
                          'order_id': record.order_id.id})
-                    record.write({'price_unit': wup_price, 'purchase_price': record.wup_cost_amount,
+                    record.write({'price_unit': wup_price, 'purchase_price': wup_cost_amount,
                                   'wup_line_note_id': new_note.id})
                 else:
-                    record.write({'price_unit': wup_price_unit, 'purchase_price': record.wup_cost_amount})
+                    record.write({'price_unit': wup_price, 'purchase_price': wup_cost_amount})
 
 
 
