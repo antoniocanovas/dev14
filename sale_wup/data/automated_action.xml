@@ -1,24 +1,19 @@
 <odoo>
-    <record id="wup_sol_update_general" model="base.automation">
-            <field name="name">=> Update SOL from WUP</field>
+    <record id="wup_sol_update" model="base.automation">
+            <field name="name">=> Update SOL price_unit and notes from WUP</field>
             <field name="model_id" ref="sale.model_sale_order_line"/>
             <field name="state">code</field>
             <field name="code">
-# Change default behaviour when change QYT on SOL with WUP, and update purchase_price on SOL:
-if record.wup_line_ids.ids:
-    wup_price_unit = 0
-    for li in record.wup_line_ids:
-        wup_price_unit += li.price_unit * li.product_uom_qty
-
-    if not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
-        # Create a line note from wup template description:
-        new_note = env['sale.order.line'].create({'sequence':record.sequence, 'name':record.wup_template_id.description, 'display_type':'line_note', 'order_id':record.order_id.id})
-        record.write({'price_unit':wup_price_unit, 'purchase_price':record.wup_cost_amount, 'wup_line_note_id':new_note.id})
-    else:
-        record.write({'price_unit':wup_price_unit, 'purchase_price':record.wup_cost_amount})
-
+if (record.wup_line_ids.ids) and (record.wup_price_unit != record.price_unit):
+  record['price_unit'] = record.wup_price_unit
+if (record.wup_line_ids.ids) and not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
+    # Create a line note from wup template description:
+    new_note = env['sale.order.line'].create({'sequence':record.sequence, 'name':record.wup_template_id.description, 'display_type':'line_note', 'order_id':record.order_id.id})
             </field>
             <field name="trigger">on_write</field>
+            <field name="trigger_field_ids" eval="[(6,0, [ref('sale.field_sale_order__product_uom_qty'),
+                                                    ref('sale_wup.field_sale_order__wup_price_unit'),
+                                                    ref('sale_wup.field_sale_order__wup_template_id')])"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
             <field name="active" eval="False"/>
@@ -47,9 +42,7 @@ if (record.state == 'sale'):
     li['task_id'] = newtask.id
             </field>
             <field name="trigger">on_create_or_write</field>
-            <!--<field name="on_change_fields">state</field>-->
-            <field name="filter_pre_domain">[('state','=','sale')]</field>
-            <field name="filter_domain">[('state','=','sale')]</field>
+            <field name="trigger_field_ids" eval="[(6,0, [ref('sale.field_sale_order__state')])]"/>
             <field name="active" eval="False"/>
         </record>
 

@@ -15,7 +15,7 @@ class WupSaleOrderLine(models.Model):
         for record in self:
             total = sum(record.wup_line_ids.mapped('subtotal')) if record.wup_line_ids else 0
             record.wup_price_unit = total
-    wup_price_unit = fields.Monetary('wup Cost', store=True, compute='get_wup_price_unit')
+    wup_price_unit = fields.Monetary('Wup Price Unit', store=True, compute='get_wup_price_unit')
 
 
     @api.depends('wup_line_ids','wup_line_ids.price_unit_cost')
