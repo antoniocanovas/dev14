@@ -24,7 +24,7 @@ class WupSaleOrderLine(models.Model):
     def update_sol_price_unit(self):
         for record in self:
             if (record.wup_line_ids.ids) and (record.wup_price_unit != record.price_unit):
-                record['price_unit'] = record.wup_price_unit
+                record.sudo().write({'price_unit': record.wup_price_unit})
 ##########################
 
 
