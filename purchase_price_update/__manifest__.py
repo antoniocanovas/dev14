@@ -21,6 +21,7 @@
         "views/model_view.xml",
         "wizards/wizard_template.xml",
         "security/ir.model.access.csv",
+        "security/user_groups.xml",
     ],
     "installable": True,
 }
