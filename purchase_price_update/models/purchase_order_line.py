@@ -89,7 +89,7 @@ class PurchasePriceUpdate(models.Model):
         message = ''
         group = self.env['ir.model.data'].search([('name', '=', 'purchase_price_update_warning')])
         group = self.env['res.groups'].search([('id', '=', group.res_id)])
-        if not gruoup.id: mensaje = 'No encuentro el grupo de permisos, habla con tu administador'
+        if not group.id: mensaje = 'No encuentro el grupo de permisos, habla con tu administador'
         if (group.id) and (group.id in user.groups_id.ids):
             # Purchase price_unit in SOL:
             # Unique parameter for all companies:
