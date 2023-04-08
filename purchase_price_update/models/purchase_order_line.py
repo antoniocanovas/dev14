@@ -87,8 +87,8 @@ class PurchasePriceUpdate(models.Model):
     @api.onchange('price_subtotal')
     def price_unit_wizard(self):
         message = ''
-        group = env['ir.model.data'].search([('name', '=', 'purchase_price_update_warning')])
-        group = env['res.groups'].search([('id', '=', group.res_id)])
+        group = self.env['ir.model.data'].search([('name', '=', 'purchase_price_update_warning')])
+        group = self.env['res.groups'].search([('id', '=', group.res_id)])
         if not gruoup.id: mensaje = 'No encuentro el grupo de permisos, habla con tu administador'
         if (group.id) and (group.id in user.groups_id.ids):
             # Purchase price_unit in SOL:
