@@ -90,7 +90,7 @@ class PurchasePriceUpdate(models.Model):
         group = self.env['ir.model.data'].search([('name', '=', 'purchase_price_update_warning')])
         group = self.env['res.groups'].search([('id', '=', group.res_id)])
         if not group.id: mensaje = 'No encuentro el grupo de permisos, habla con tu administador'
-        if (group.id) and (group.id in user.groups_id.ids):
+        if (group.id) and (group.id in self.env.user.groups_id.ids):
             # Purchase price_unit in SOL:
             # Unique parameter for all companies:
             monetary_precision = self.env['decimal.precision'].sudo().search([('id', '=', 1)]).digits
