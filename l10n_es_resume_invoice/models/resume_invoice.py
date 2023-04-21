@@ -11,4 +11,4 @@ class ResumeInvoice(models.Model):
     name = fields.Char(string='Nombre', required=True)
     date = fields.Date(string='Fecha')
     partner_id = fields.Many2one('res.partner', string='Fecha')
-    pos_order_ids = fields.One2many('pos.order', 'resume_invoice', string='Tickets')
+    pos_order_ids = fields.One2many('pos.order', 'resume_invoice_id', string='Tickets')
