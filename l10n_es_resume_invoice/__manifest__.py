@@ -1,9 +1,9 @@
 {
-    'name': 'Partner Activity done',
+    'name': 'POS Resume Invoice',
     'version': '14.0.1.0.0',
     'category': '',
     'description': u"""
-Partner Activities done based on mail.messages
+Crear facturas resumen de tickets históricos.
 """,
     'author': 'Serincloud',
     'depends': [
