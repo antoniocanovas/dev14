@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <odoo>
-    <data>
+    <data noupdate="1">
 
         <record id="pos_factura_canje_code" model="ir.sequence">
             <field name="name">pos.factura.canje.code</field>
