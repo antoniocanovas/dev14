@@ -11,7 +11,14 @@ class ResumeInvoice(models.Model):
     name = fields.Char(string='Nombre', required=True)
     date = fields.Date(string='Fecha')
     partner_id = fields.Many2one('res.partner', string='Partner')
-    pos_order_ids = fields.One2many('pos.order', 'resume_invoice_id', string='Tickets')
+    pos_order_ids = fields.Many2many(comodel_name='pos.order',
+                                     relation='posorder_canje_rel',
+                                     column1='posorder_id',
+                                     column2='resume_invoice_id',
+                                     string="Factura de canje",
+                                     domain="[('resume_invoice_id','=',False)]"
+                                     )
+
 
 
     @api.depends('create_date')

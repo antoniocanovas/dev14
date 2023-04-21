@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_resume_invoice, Resume Invoice,model_resume_invoice,account.group_account_invoice,1,1,1,1
+access_pos_order_resume_rel, PosOrder Resume Rel,model_posorder_canje_rel,account.group_account_invoice,1,1,1,1
