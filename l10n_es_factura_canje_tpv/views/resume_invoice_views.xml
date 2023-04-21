@@ -27,14 +27,18 @@
                     <group name="basic_params">
                         <group>
                             <field name="partner_id"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
                             <field name="date"/>
                         </group>
                     </group>
-                    <notebook>
+                    <notebook attrs="{'invisible':[('type','=','historica')]}">
                         <page string="Tickets">
                             <field name="pos_order_ids"/>
                         </page>
                     </notebook>
+                    <field name="description" placeholder="Notas en caso de facturas actuales, o detalle completo fiscal de históricas"/>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>

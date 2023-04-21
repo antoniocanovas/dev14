@@ -11,6 +11,8 @@ class ResumeInvoice(models.Model):
     name = fields.Char(string='Nombre', required=True)
     date = fields.Date(string='Fecha')
     partner_id = fields.Many2one('res.partner', string='Partner')
+    type = fields.Selection([('actual', 'Actual'),('historica','Histórica')], string='Type')
+    description = fields.Text('Description')
     pos_order_ids = fields.Many2many(comodel_name='pos.order',
                                      relation='posorder_canje_rel',
                                      column1='posorder_id',
