@@ -4,7 +4,7 @@
 
         <record id="pos_resume_invoice_code" model="ir.sequence">
             <field name="name">pos.resume.invoice.code</field>
-            <field name="prefix">XX</field>
+            <field name="prefix">FCanje</field>
             <field name="padding">4</field>
             <field name="number_increment">1</field>
             <field name="code">pos.resume.invoice.code</field>
