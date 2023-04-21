@@ -8,7 +8,7 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <field name="state" position="after">
-                <field name=="resume_invoice_id" widget="many2many_tags" readonly="1"/>
+                <field name=="resume_invoice_id" widget="many2many_tags" readonly="1" optional="show"/>
             </field>
         </field>
     </record>
