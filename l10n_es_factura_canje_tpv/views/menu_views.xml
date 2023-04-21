@@ -17,27 +17,6 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-
-<!--
-    <record id="view_search_partner_credentials" model="ir.ui.view">
-            <field name="name">partner.credentials.search</field>
-            <field name="model">partner.credentials</field>
-            <field name="arch" type="xml">
-                <search string="Partner Credential">
-            <field name="name" string="Credential" filter_domain="['|','|',('name','ilike',self),('type','ilike',self),('partner_id','child_of',self)]"/>
-    </search>
-            </field>
-        </record>
-
-    <menuitem
-            action="action_credentials"
-            id="menu_partner_credentials"
-            name="Credentials"
-            sequence="1"
-            web_icon="partner_credentials,static/description/credentials.png"
-    />
--->
-
     <record id="menu_factura_canje" model="ir.ui.menu">
         <field name="action" ref="factura_canje_action_view"/>
         <field name="active" eval="True"/>
