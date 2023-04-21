@@ -4,7 +4,8 @@
 
         <record id="pos_factura_canje_code" model="ir.sequence">
             <field name="name">pos.factura.canje.code</field>
-            <field name="prefix">FCanje</field>
+            <field name="prefix">FCanje/%year)s/</field>
+            <field name="use_date_range">True</field>
             <field name="padding">4</field>
             <field name="number_increment">1</field>
             <field name="code">pos.factura.canje.code</field>
