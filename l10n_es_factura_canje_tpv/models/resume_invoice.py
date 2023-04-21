@@ -18,7 +18,7 @@ class ResumeInvoice(models.Model):
                                      column1='posorder_id',
                                      column2='resume_invoice_id',
                                      string="Factura de canje",
-                                     domain="[('resume_invoice_id','=',False)]"
+                                     domain="[('resume_invoice_id','=',False),('status','in',['done','paid'])]"
                                      )
 
 
