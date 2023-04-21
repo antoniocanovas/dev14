@@ -9,7 +9,7 @@ class ResumeInvoice(models.Model):
     _description = 'Facturas de canje'
 
     name = fields.Char(string='Nombre', required=True)
-    date = fields.Date(string='Fecha')
+    date = fields.Date(string='Fecha', default=lambda self: fields.datetime.now())
     partner_id = fields.Many2one('res.partner', string='Partner')
     type = fields.Selection([('actual', 'Actual'),('historica','Histórica')], string='Type', default='actual')
     description = fields.Text('Description')
