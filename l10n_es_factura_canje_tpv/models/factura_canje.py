@@ -25,5 +25,5 @@ class FacturaCanje(models.Model):
 
     @api.depends('create_date')
     def _get_pos_factura_canje_code(self):
-        self.name = self.env['ir.sequence'].next_by_code('pos.resume.invoice.code')
+        self.name = self.env['ir.sequence'].next_by_code('pos.factura.canje.code')
     name = fields.Char('Code', store=True, readonly=True, compute=_get_pos_factura_canje_code)

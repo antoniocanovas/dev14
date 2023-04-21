@@ -10,14 +10,14 @@
                 <field name="date"/>
             </tree>
         </field>
-        <field name="model">resume.invoice</field>
-        <field name="name">Default tree view for resume invoice</field>
+        <field name="model">factura.canje</field>
+        <field name="name">Default tree view for factura canje</field>
         <field name="type">tree</field>
     </record>
 
     <record id="factura_canje_form" model="ir.ui.view">
-        <field name="name">resume.invoice.form</field>
-        <field name="model">resume.invoice</field>
+        <field name="name">factura.canje.form</field>
+        <field name="model">factura.canje</field>
         <field name="arch" type="xml">
             <form>
                 <sheet name="main" string="Facturas de canje">

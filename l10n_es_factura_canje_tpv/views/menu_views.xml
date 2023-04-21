@@ -8,7 +8,7 @@
         <field name="filter" eval="False"/>
         <field name="limit">80</field>
         <field name="name">Facturas de canje</field>
-        <field name="res_model">resume.invoice</field>
+        <field name="res_model">factura.canje</field>
         <field name="search_view_id" eval="False"/>
         <field name="target">current</field>
         <field name="type">ir.actions.act_window</field>
