@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="pos_factura_canje_inh_tree" model="ir.ui.view">
+        <field name="name">pos.factura.canje.inh.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name=="resume_invoice_id" widget="many2many_tags" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

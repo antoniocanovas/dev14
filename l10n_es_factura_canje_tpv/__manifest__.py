@@ -14,6 +14,7 @@ Facturas de canje para TPV.
         'data/sequence.xml',
         'views/menu_views.xml',
         'views/resume_invoice_views.xml',
+        'views/pos_order_views.xml',
     ],
     'installable': True,
 }
