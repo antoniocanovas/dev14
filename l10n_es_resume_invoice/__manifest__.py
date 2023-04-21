@@ -7,7 +7,7 @@ Crear facturas resumen de tickets históricos.
 """,
     'author': 'Serincloud',
     'depends': [
-        'contacts',
+        'point_of_sale',
     ],
     'data': [
         'security/ir.model.access.csv',
