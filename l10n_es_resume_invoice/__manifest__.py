@@ -3,7 +3,7 @@
     'version': '14.0.1.0.0',
     'category': '',
     'description': u"""
-Crear facturas resumen de tickets históricos.
+Facturas de canje para TPV.
 """,
     'author': 'Serincloud',
     'depends': [
@@ -11,7 +11,7 @@ Crear facturas resumen de tickets históricos.
     ],
     'data': [
         'security/ir.model.access.csv',
-        'data/sequence',
+        'data/sequence.xml',
         'views/menu_views.xml',
         'views/resume_invoice_views.xml',
     ],
