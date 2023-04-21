@@ -11,7 +11,7 @@ Crear facturas resumen de tickets históricos.
     ],
     'data': [
         'security/ir.model.access.csv',
-#        'views/menu_views.xml',
+        'views/menu_views.xml',
 #        'views/resume_invoice_views.xml',
     ],
     'installable': True,
