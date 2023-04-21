@@ -12,7 +12,7 @@ class ResumeInvoice(models.Model):
     date = fields.Date(string='Fecha')
     partner_id = fields.Many2one('res.partner', string='Partner')
     pos_order_ids = fields.Many2many(comodel_name='pos.order',
-                                     relation='posorder_canje_rel',
+                                     relation='posorder.canje.rel',
                                      column1='posorder_id',
                                      column2='resume_invoice_id',
                                      string="Factura de canje",
