@@ -13,7 +13,7 @@ Facturas de canje para TPV.
         'security/ir.model.access.csv',
         'data/sequence.xml',
         'views/menu_views.xml',
-        'views/resume_invoice_views.xml',
+        'views/factura_canje_views.xml',
         'views/pos_order_views.xml',
     ],
     'installable': True,

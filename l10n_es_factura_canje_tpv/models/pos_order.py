@@ -5,7 +5,7 @@ class PosOrder(models.Model):
 
     resume_invoice_id = fields.Many2many(comodel_name='resume.invoice',
                                          relation='posorder_canje_rel',
-                                         column1='resume_invoice_id',
+                                         column1='fcanje_id',
                                          column2='posorder_id',
                                          string="Factura de canje",
                                          )

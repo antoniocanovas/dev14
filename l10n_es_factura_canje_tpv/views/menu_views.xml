@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="resume_invoice_action_view" model="ir.actions.act_window">
+    <record id="factura_canje_action_view" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">action</field>
         <field name="domain" eval="False"/>
@@ -38,8 +38,8 @@
     />
 -->
 
-    <record id="menu_resume_invoice" model="ir.ui.menu">
-        <field name="action" ref="resume_invoice_action_view"/>
+    <record id="menu_factura_canje" model="ir.ui.menu">
+        <field name="action" ref="factura_canje_action_view"/>
         <field name="active" eval="True"/>
         <field name="name">Facturas de canje</field>
         <field name="parent_id" ref="point_of_sale.menu_point_of_sale"/>

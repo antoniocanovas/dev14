@@ -7,4 +7,4 @@ class PosorderCanjeRel(models.Model):
     _name = 'posorder.canje.rel'
 
     posorder_id = fields.Many2one('pos.order', string='Pos order')
-    resume_invoice_id =  fields.Many2one('resume.invoice', string='Resume invoice')
+    resume_invoice_id =  fields.Many2one('factura.canje', string='Factura canje')

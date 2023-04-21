@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id="resume_invoice_tree" model="ir.ui.view">
+    <record id="factura_canje_tree" model="ir.ui.view">
         <field name="arch" type="xml">
             <tree string="Facturas de canje">
                 <field name="name" modifiers="{}"/>
@@ -15,7 +15,7 @@
         <field name="type">tree</field>
     </record>
 
-    <record id="resume_invoice_form" model="ir.ui.view">
+    <record id="factura_canje_form" model="ir.ui.view">
         <field name="name">resume.invoice.form</field>
         <field name="model">resume.invoice</field>
         <field name="arch" type="xml">

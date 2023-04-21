@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id="pos_resume_invoice_code" model="ir.sequence">
+        <record id="pos_factura_canje_code" model="ir.sequence">
             <field name="name">pos.resume.invoice.code</field>
             <field name="prefix">FCanje</field>
             <field name="padding">4</field>

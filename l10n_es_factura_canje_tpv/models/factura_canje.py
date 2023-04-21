@@ -3,8 +3,8 @@
 
 from odoo import fields, models, api
 
-class ResumeInvoice(models.Model):
-    _name = 'resume.invoice'
+class FacturaCanje(models.Model):
+    _name = 'factura.canje'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Facturas de canje'
 
@@ -16,14 +16,14 @@ class ResumeInvoice(models.Model):
     pos_order_ids = fields.Many2many(comodel_name='pos.order',
                                      relation='posorder_canje_rel',
                                      column1='posorder_id',
-                                     column2='resume_invoice_id',
+                                     column2='fcanje_id',
                                      string="Factura de canje",
-                                     domain="[('resume_invoice_id','=',False),('state','in',['done','paid'])]"
+                                     domain="[('fcanje_id','=',False),('state','in',['done','paid'])]"
                                      )
 
 
 
     @api.depends('create_date')
-    def _get_pos_resume_invoice_code(self):
+    def _get_pos_factura_canje_code(self):
         self.name = self.env['ir.sequence'].next_by_code('pos.resume.invoice.code')
-    name = fields.Char('Code', store=True, readonly=True, compute=_get_pos_resume_invoice_code)
+    name = fields.Char('Code', store=True, readonly=True, compute=_get_pos_factura_canje_code)
