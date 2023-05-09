@@ -71,7 +71,8 @@ class WorkTimesheetWizard(models.TransientModel):
                          'company_id': record.work_sheet_id.company_id.id,
                          'tag_ids': [(6,0,record.analytic_tag_ids.ids)],
                          'employee_id': li.id, 'unit_amount': duration, 'time_type_id': record.time_type_id.id,
-                         'user_id':li.user_id.id
+                         'user_id':li.user_id.id,
+                         'wizard_id':record.id
                          })
                     if (record.set_start_stop == True):
                         duration = record.stop - record.start
