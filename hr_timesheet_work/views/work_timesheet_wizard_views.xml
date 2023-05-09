@@ -25,7 +25,6 @@
                         <field name="analytic_tag_ids" widget="many2many_tags"/>
                     </group>
                     <field name="timesheet_ids"
-                           context="{'default_wizard_id':active_id}"
                            domain="[('project_id','=',project_id), ('work_sheet_id','=',False)]"/>
                     <field name="work_sheet_id" invisible="1"/>
                     <footer>
