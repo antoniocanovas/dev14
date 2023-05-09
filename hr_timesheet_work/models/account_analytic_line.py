@@ -13,5 +13,6 @@ class AccountAnalyticLine(models.Model):
 
     @api.depends('create_date')
     def _get_wizard_id(self):
-        self.wizard_id = self.id
+        for record in self:
+            record['wizard_id'] = record.id
     wizard_id = fields.Integer('Wizard', store=True, compute=_get_wizard_id)
