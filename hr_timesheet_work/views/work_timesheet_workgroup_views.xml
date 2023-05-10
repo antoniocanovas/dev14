@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="timesheet_workgroup_default_form" model="ir.ui.view">
+        <field name="name">Default timesheet workgrouop form view</field>
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Timesheet Workgroup">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <field name="work_sheet_id" readonly="1"/>
+                        <field name="hour_laboral"/>
+                        <field name="hour_extra"/>
+                        <field name="task_ids"/>
+                        <field name="employee_ids"/>
+                        <field name="analytic_line_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">work.timesheet.workgroup</field>
+        <field name="priority">16</field>
+        <field name="type">form</field>
+    </record>
+
+    <record id="timesheet_workgroup_default_tree" model="ir.ui.view">
+        <field name="name">Default timesheet Workgroup tree view</field>
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+            <tree name="timesheet_workgroup" default_order="date desc">
+                <field name="name"/>
+                <field name="work_sheet_id" optional="hide"/>
+                <field name="hour_laboral"/>
+                <field name="hour_extra"/>
+                <field name="task_ids" widget="many2many_tags" optional="hide"/>
+                <field name="employee_ids" widget="many2many_tags" optional="hide"/>
+            </tree>
+        </field>
+        <field name="field_parent" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="inherit_id" eval="False"/>
+        <field name="key" eval="False"/>
+        <field name="mode">primary</field>
+        <field name="model">work.timesheet.workgroup</field>
+        <field name="priority">16</field>
+        <field name="type">tree</field>
+    </record>
+
+    <!--
+    <record id="timesheet_workgroup_search_view" model="ir.ui.view">
+        <field name="name">Default timesheet.workgroup.search</field>
+        <field name="model">work.timesheet.workgroup</field>
+        <field name="arch" type="xml">
+            <search string="Search Work Milestone Done">
+                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                <field name="todo_id" filter_domain="[('todo_id', 'ilike', self)]"/>
+                <field name="work_id" filter_domain="[('work_id', 'ilike', self)]"/>
+                <separator/>
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="work" string="Work" domain="[]" context="{'group_by' : 'work_id'}"/>
+                    <filter name="date" string="Date" domain="[]" context="{'group_by' : 'date'}"/>
+                    <filter name="product" string="Product" domain="[]" context="{'group_by' : 'product_id'}"/>
+                    <filter name="work_sheet_id" string="Sheet" context="{'group_by': 'work_sheet_id'}"/>
+                    <filter name="sale_line_id" string="Sale line" context="{'group_by': 'sale_line_id'}"/>
+                    <filter name="sale_id" string="Sale order" context="{'group_by': 'sale_id'}"/>
+                </group>
+            </search>
+        </field>
+        -->
+
+    </record>
+
+
+</odoo>
