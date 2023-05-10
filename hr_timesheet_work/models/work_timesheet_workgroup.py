@@ -16,8 +16,6 @@ class WorkTimesheetWorkgroup(models.Model):
     name = fields.Char('Name', store=True, readonly=False, required=True)
     work_sheet_id = fields.Many2one('work.sheet', string='Work Sheet', readonly=True)
     analytic_line_ids = fields.One2many('account.analytic.line', 'workgroup_id', string='Timesheets')
-    task_ids = fields.Many2many('project.task', string='Tasks')
-    employee_ids = fields.Many2many('hr.employee', string='Employees')
     date = fields.Date('Date', store=True, required="1")
 
     @api.depends('analytic_line_ids.unit_amount', 'analytic_line_ids.time_type_id')
@@ -36,3 +34,19 @@ class WorkTimesheetWorkgroup(models.Model):
                 total += li.unit_amount
         self.hour_extra = total
     hour_extra   = fields.Float('Extra hours', store=False, compute='_get_hour_extra')
+
+    def _get_employee_list(self):
+        total = []
+        for li in self.analytic_line_ids:
+            if li.employee_id.id not in total:
+                total.append(li.employee_id.id)
+        self.employee_ids = [(6,0,total)]
+    employee_ids = fields.Many2many('hr.employee', string='Employees', store=False, compute='_get_employee_list')
+
+    def _get_tasks_list(self):
+        total = []
+        for li in self.analytic_line_ids:
+            if li.task_id.id not in total:
+                total.append(li.task_id.id)
+        self.task_ids = [(6,0,total)]
+    task_ids = fields.Many2many('project.task', string='Tasks', store=False, compute='_get_tasks_list')
