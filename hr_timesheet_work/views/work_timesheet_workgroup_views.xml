@@ -12,7 +12,7 @@
                     </h1>
                     <group>
                         <field name="work_sheet_id" readonly="1"/>
-                        <field name="date" readonly="1"/>
+                        <field name="date" attrs="{'readonly:[('analytic_line_ids','!=',False)]}"/>
                         <field name="hour_laboral"/>
                         <field name="hour_extra"/>
                         <field name="task_ids"/>
