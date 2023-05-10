@@ -66,6 +66,7 @@ class WorkTimesheetWizard(models.TransientModel):
                     workgroup = self.env['work.timesheet.workgroup'].create({
                         'name': str(self.id) + " " + self.name,
                         'work_sheet_id':work_sheet_id.id,
+                        'date':self.date,
                         })
                     new = self.env['account.analytic.line'].create(
                         {'work_sheet_id': record.work_sheet_id.id, 'name': record.name,
