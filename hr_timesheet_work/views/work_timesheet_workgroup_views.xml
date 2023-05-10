@@ -13,16 +13,14 @@
                     <group>
                         <group>
                             <field name="date" attrs="{'readonly':[('analytic_line_ids','!=',[])]}"/>
-                        </group>
-                        <group>
                             <field name="hour_laboral"/>
                             <field name="hour_extra"/>
                         </group>
+                        <group>
+                            <field name="employee_ids"
+                            <field name="task_ids" widget="many2many_tags"/>
+                        </group>
                     </group>
-                    <h3>Employees:</h3>
-                    <field name="employee_ids"/>
-                    <h3>Tasks:</h3>
-                    <field name="task_ids"/>
                     <h3>Timesheets:</h3>
                     <field name="analytic_line_ids"/>
                     <field name="work_sheet_id" readonly="1"/>
