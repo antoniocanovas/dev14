@@ -121,7 +121,7 @@
                 <sheet>
                     <!-- O2M Buttons:  -->
                     <div class="oe_button_box" name="button_box">
-                        <button name="hr_timesheet_work.hr_work_sheet_workgroup_button" class="oe_stat_button" icon="fa-arrows-h" type="action" help="List workgroup timesheets">
+                        <button name="hr_timesheet_work.hr_work_sheet_workgroup_button" class="oe_stat_button" icon="fa-list-ol" type="action" help="List workgroup timesheets">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Lot services</span>
                             </div>
