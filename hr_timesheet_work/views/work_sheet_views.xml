@@ -52,6 +52,24 @@
         <field name="view_mode">tree,form,pivot</field>
     </record>
 
+    <!-- PICKINGS WIZARD window action in Work Sheet FORM:   -->
+    <record id="hr_work_sheet_add_picking_wizard" model="ir.actions.act_window">
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">action</field>
+        <field name="domain" eval="False"/>
+        <!--    <field name="context" eval="False"/> -->
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">Work Sheet Add SO Picking wizard view</field>
+        <field name="res_model">work.picking.wizard</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">new</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="hr_timesheet_work.work_picking_wizard_default_form" />
+        <field name="view_mode">form</field>
+    </record>
+
     <!-- WORKGROUP window action o2m buttom in Work Sheet FORM:   -->
     <record id="hr_work_sheet_workgroup_button" model="ir.actions.act_window">
         <field name="domain">[('work_sheet_id','=',active_id)]</field>
