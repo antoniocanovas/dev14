@@ -15,6 +15,7 @@ class WorkTimesheetWorkgroup(models.Model):
 
     name = fields.Char('Name', store=True, readonly=False, required=True)
     work_sheet_id = fields.Many2one('work.sheet', string='Work Sheet', readonly=True)
+    work_id = fields.Many2one('timesheet.work', related='work_sheet_id.work_id', store=True)
     analytic_line_ids = fields.One2many('account.analytic.line', 'workgroup_id', string='Timesheets')
     date = fields.Date('Date', store=True, required="1")
 
