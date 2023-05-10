@@ -20,4 +20,4 @@ class WorkTimesheetWorkgroup(models.Model):
     hour_extra   = fields.Float('Extra hours')
     task_ids = fields.Many2many('project.task', string='Tasks')
     employee_ids = fields.Many2many('hr.employee', string='Employees')
-    date = fields.Date('Date')
+    date = fields.Date('Date', store=True, required="1")
