@@ -13,7 +13,7 @@ class WorkTimesheetWorkgroup(models.Model):
     _description = "Work Sheet Timesheet Workgroup"
 
 
-    name = fields.Char('Name', store=True, readonly=False)
+    name = fields.Char('Name', store=True, readonly=False, required=True)
     work_sheet_id = fields.Many2one('work.sheet', string='Work Sheet', readonly=True)
     analytic_line_ids = fields.One2many('account.analytic.line', 'workgroup_id', string='Timesheets')
     hour_laboral = fields.Float('Laboral hours')

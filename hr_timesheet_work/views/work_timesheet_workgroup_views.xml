@@ -7,17 +7,17 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Timesheet Workgroup">
-                    <h1>
-                        <field name="name"/>
-                    </h1>
+                    <h4>
+                        <field name="name" widget="text"/>
+                    </h4>
                     <group>
-                        <field name="work_sheet_id" readonly="1"/>
                         <field name="date" attrs="{'readonly':[('analytic_line_ids','!=',[])]}"/>
                         <field name="hour_laboral"/>
                         <field name="hour_extra"/>
                         <field name="task_ids"/>
                         <field name="employee_ids"/>
                         <field name="analytic_line_ids"/>
+                        <field name="work_sheet_id" readonly="1"/>
                     </group>
                 </sheet>
             </form>
