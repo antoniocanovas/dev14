@@ -11,5 +11,5 @@ from . import hr_expense
 from . import work_picking_wizard
 from . import work_timesheet_wizard
 from . import work_timesheet_workgroup
-
+from . import project_time_type
 
