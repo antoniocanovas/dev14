@@ -8,7 +8,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
-class WorkTimesheetWizard(models.TransientModel):
+class WorkTimesheetWizard(models.Model):
     _name = "work.timesheet.wizard"
     _description = "Work Sheet Timesheet Wizard"
 
