@@ -92,12 +92,12 @@
                 <header>
                     <button name="hr_timesheet_work.hr_work_sheet_timesheet_wizard"
                             context="{'default_work_sheet_id':active_id, 'default_name':name, 'default_project_id':project_id, 'default_date':date}"
-                            string="Lot Services" type="action" class="btn-primary"
-                            attrs="{'invisible':[('project_id','=',False)]}"/>
+                            string="Lot Services" type="action" class="btn-primary" attrs="{'invisible':[('project_id','=',False)]}"/>
                     <button name="hr_timesheet_work.hr_work_sheet_add_picking_wizard"
                             context="{'default_work_sheet_id':active_id}"
                             string="Sale Pickings" type="action" class="btn-primary"/>
-                    <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
+                    <widget name="signature" string="Sign" highlight="1"
+                            attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
                 </header>
                 <sheet>
@@ -137,7 +137,7 @@
                     </group></group>
 
 
-                              <!-- WORK AND TASK ESTABLISMENT: -->
+                    <!-- WORK AND TASK ESTABLISMENT: -->
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
                             <div attrs="{'invisible':[('project_id','!=',False)]}">
