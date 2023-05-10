@@ -12,3 +12,6 @@ access_done_user,timesheet done line user,hr_timesheet_work.model_timesheet_line
 
 access_picking_wizard_user,timesheet work picking wizard user,hr_timesheet_work.model_work_picking_wizard,stock.group_stock_user,1,1,1,1
 access_timesheet_wizard_user,timesheet work timesheet wizard user,hr_timesheet_work.model_work_timesheet_wizard,project.group_project_manager,1,1,1,1
+
+access_timesheet_workgroup_user,timesheet work workgroup user,hr_timesheet_work.model_work_timesheet_workgroup,group_project_user,1,0,0,0
+access_timesheet_workgroup_admin,timesheet work workgroup user,hr_timesheet_work.model_work_timesheet_workgroup,project.group_project_manager,1,1,1,1

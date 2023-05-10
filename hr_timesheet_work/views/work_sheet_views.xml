@@ -105,7 +105,7 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="hr_timesheet_work.hr_work_sheet_workgroup_button" class="oe_stat_button" icon="fa-arrows-h" type="action" help="List workgroup timesheets">
                             <div class="o_form_field o_stat_info">
-                                <span class="o_stat_text">Workgroups</span>
+                                <span class="o_stat_text">Lot services</span>
                             </div>
                         </button>
                         <button name="hr_timesheet_work.hr_work_sheet_picking_button" class="oe_stat_button" icon="fa-arrows-v" type="action" help="List picking operations">
