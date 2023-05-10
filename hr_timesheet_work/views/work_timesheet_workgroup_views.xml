@@ -23,7 +23,7 @@
                     </group>
                     <h3>Timesheets:</h3>
                     <field name="analytic_line_ids"
-                           context="{'default_date':date, 'default_work_sheet_id':work_sheet_id.id}"
+                           context="{'default_date':date, 'default_work_sheet_id':work_sheet_id}"
                            attrs="{'invisible':[('date','=',False)]}"/>
                     <field name="work_sheet_id" readonly="1"/>
                 </sheet>
