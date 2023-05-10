@@ -12,7 +12,7 @@
                     </h4>
                     <group>
                         <group>
-                            <field name="date" attrs="{'readonly':[('analytic_line_ids','!=',[])]}"/>
+                            <field name="date"/>
                             <field name="hour_laboral"/>
                             <field name="hour_extra"/>
                         </group>
@@ -22,7 +22,9 @@
                         </group>
                     </group>
                     <h3>Timesheets:</h3>
-                    <field name="analytic_line_ids"/>
+                    <field name="analytic_line_ids"
+                           context="{'default_date':date, 'default_work_sheet_id':work_sheet_id.id}"
+                           attrs="{'invisible':[('date','=',False)]}"/>
                     <field name="work_sheet_id" readonly="1"/>
                 </sheet>
             </form>
