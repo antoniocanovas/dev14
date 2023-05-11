@@ -209,13 +209,13 @@ class TimeSheetWorkSheet(models.Model):
         for record in self:
             # Searching for unique employees and task names:
             unique_ts_task, name_unique_task, sheet_employee = [], [], []
-            for li in record.project_service_ids:
-                if li.employee_id not in sheet_employee: sheet_employee.append(li.employee_id)
+            for aal in record.project_service_ids:
+                if aal.employee_id not in sheet_employee: sheet_employee.append(aal.employee_id)
 
-                name_task = str(li.task_id.id) + li.name
+                name_task = str(aal.task_id.id) + li.name
                 if name_task not in name_unique_task:
                     # esto está mal, hay que apuntar a la imputación y desde ahí a la tarea:
-                    unique_ts_task.append(li.task_id)
+                    unique_ts_task.append(aal.task_id)
                     name_unique_task.append(name_task)
 
             # Cleaning old data:
@@ -251,7 +251,7 @@ class TimeSheetWorkSheet(models.Model):
 
                 exist = self.env['work.sheet.task'].search([('sheet_id', '=', record.id), ('task_id', '=', aal.task_id.id)])
                 lines = self.env['account.analytic.line'].search(
-                    [('work_sheet_id', '=', record.id), ('task_id', '=', aal.task.id)])
+                    [('work_sheet_id', '=', record.id), ('task_id', '=', aal.task_id.id)])
 
                 for li in lines:
                     if (li.time_type_id.extra == False):
