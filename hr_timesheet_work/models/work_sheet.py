@@ -63,7 +63,7 @@ class TimeSheetWorkSheet(models.Model):
     )
 
     sheet_employee_ids = fields.One2many('work.sheet.employee', 'sheet_id', string='Employees', store=True)
-    sheet_task_ids = fields.Many2many('work.sheet.task', 'sheet_id', string='Employees', store=True)
+    sheet_task_ids = fields.Many2many('work.sheet.task', string='Employees', store=True)
 
     # SO pickings available to add:
     @api.depends('work_id.sale_order_ids', 'picking_ids')
@@ -240,6 +240,7 @@ class TimeSheetWorkSheet(models.Model):
                              'standard_time': standard, 'extra_time': extra})
 
         # Computing tasks:
+        task_list = []
         for task in sheet_task:
             standard, extra, name = 0 ,0, ""
             exist = self.env['work.sheet.task'].search([('sheet_id','=',self.id),('task_id','=',task.id)])
@@ -249,8 +250,10 @@ class TimeSheetWorkSheet(models.Model):
                 else:                                   extra += li.unit_amount
 
             if not exist.id:
-                new = self.env['work.sheet.task'].create({'task_id':task.id, 'sheet_id':self.id, 'name': task.name,
+                exist = self.env['work.sheet.task'].create({'task_id':task.id, 'sheet_id':self.id, 'name': task.name,
                                                     'standard_time':standard, 'extra_time':extra})
             else:
                 exist.write({'task_id': task.id, 'sheet_id': self.id, 'name': task.name,
                              'standard_time': standard, 'extra_time': extra})
+            task_list.append(exist.id)
+        record['sheet_task_ids'] = [(6,0,task_list)]
