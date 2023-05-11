@@ -214,8 +214,7 @@ class TimeSheetWorkSheet(models.Model):
 
                 name_task = str(aal.task_id.id) + aal.name
                 if name_task not in name_unique_task:
-                    # esto está mal, hay que apuntar a la imputación y desde ahí a la tarea:
-                    unique_ts_task.append(aal.task_id)
+                    unique_ts_task.append(aal)
                     name_unique_task.append(name_task)
 
             # Cleaning old data:
@@ -260,7 +259,7 @@ class TimeSheetWorkSheet(models.Model):
                         extra += li.unit_amount
 
                 if not exist.id:
-                    new = self.env['work.sheet.task'].create({'task_id': task.id, 'sheet_id': record.id, 'name': task.name,
+                    new = self.env['work.sheet.task'].create({'task_id': aal.task_id.id, 'sheet_id': record.id, 'name': aal.name,
                                                          'standard_time': standard, 'extra_time': extra})
                     task_list.append(new.id)
                 else:
