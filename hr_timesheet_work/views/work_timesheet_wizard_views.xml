@@ -8,7 +8,7 @@
             <form>
                 <sheet string="Work timesheet wizard">
                     <h4>
-                        <field name="name" required="1"/>
+                        <field name="name" widget="text" required="1"/>
                     </h4>
                     <group>
                         <field name="project_id" invisible="1"/>
