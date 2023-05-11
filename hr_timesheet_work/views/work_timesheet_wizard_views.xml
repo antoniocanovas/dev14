@@ -7,9 +7,9 @@
         <field name="arch" type="xml">
             <form>
                 <sheet string="Work timesheet wizard">
-                    <h1>
+                    <h4>
                         <field name="name" required="1"/>
-                    </h1>
+                    </h4>
                     <group>
                         <field name="project_id" invisible="1"/>
                         <field name="set_start_stop" invisible="1"/>

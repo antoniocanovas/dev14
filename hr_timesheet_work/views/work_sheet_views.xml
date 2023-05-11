@@ -94,7 +94,7 @@
             <form>
                 <header>
                     <button name="hr_timesheet_work.hr_work_sheet_timesheet_wizard"
-                            context="{'default_work_sheet_id':active_id, 'default_name':name, 'default_project_id':project_id, 'default_date':date}"
+                            context="{'default_work_sheet_id':active_id, 'default_project_id':project_id, 'default_date':date}"
                             string="Lot Services" type="action" class="btn-primary"
                             attrs="{'invisible':[('project_id','=',False)]}"/>
                     <button name="hr_timesheet_work.hr_work_sheet_add_picking_wizard"
