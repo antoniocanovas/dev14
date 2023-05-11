@@ -204,7 +204,7 @@ class TimeSheetWorkSheet(models.Model):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
 
-    @api.depends('write_date')
+    @api.onchange('project_service_ids')
     def update_employees_and_tasks_resume(self):
         for record in self:
             # Searching for unique employees and task names:
@@ -244,9 +244,10 @@ class TimeSheetWorkSheet(models.Model):
                                  'standard_time': standard, 'extra_time': extra})
 
             # Computing tasks:
-            task_list = []
+            task_list, employees = [], []
             for aal in unique_ts_task:
                 standard, extra, name = 0, 0, ""
+                if aal.employee_id not in employees: employees.append(aal.employee_id.id)
 
                 exist = self.env['work.sheet.task'].search([('sheet_id', '=', record.id), ('task_id', '=', aal.task_id.id)])
                 lines = self.env['account.analytic.line'].search(
@@ -259,11 +260,12 @@ class TimeSheetWorkSheet(models.Model):
                         extra += li.unit_amount
 
                 if not exist.id:
-                    new = self.env['work.sheet.task'].create({'task_id': aal.task_id.id, 'sheet_id': record.id, 'name': aal.name,
-                                                         'standard_time': standard, 'extra_time': extra})
+                    new = self.env['work.sheet.task'].create({'task_id': aal.task_id.id, 'sheet_id': record.id,
+                                                              'name': aal.name, 'employee_ids':[(6,0,employees)],
+                                                              'standard_time': standard, 'extra_time': extra})
                     task_list.append(new.id)
                 else:
                     exist.write({'task_id': aal.task_id.id, 'sheet_id': record.id, 'name': aal.name,
-                                 'standard_time': standard, 'extra_time': extra})
+                                 'employee_ids':[(6,0,employees)], 'standard_time': standard, 'extra_time': extra})
                     task_list.append(exist.id)
             record['sheet_task_ids'] = [(6, 0, task_list)]
