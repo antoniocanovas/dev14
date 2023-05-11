@@ -16,3 +16,4 @@ class WorkSheetEmployee(models.Model):
     sheet_id = fields.Many2one('work.sheet')
     standard_time = fields.Float('Laboral time', store=True, readonly=True)
     extra_time = fields.Float('Extra time', store=True, readonly=True)
+    task_ids = fields.Many2many('project.task', string='Tasks', store=True, readonly=True)

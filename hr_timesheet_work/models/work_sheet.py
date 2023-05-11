@@ -224,6 +224,7 @@ class TimeSheetWorkSheet(models.Model):
                 if li.task_id.id not in unique_ts_task: li.unlink()
 
             # Computing employees:
+            tasks = []
             for employee in sheet_employee:
                 standard, extra = 0, 0
                 exist = self.env['work.sheet.employee'].search(
@@ -232,15 +233,18 @@ class TimeSheetWorkSheet(models.Model):
                     [('work_sheet_id', '=', record.id), ('employee_id', '=', employee.id)])
 
                 for li in lines:
+                    if li.task_id.id not in tasks: tasks.append(li.task_id.id)
+
                     if (li.employee_id.id == employee.id) and (li.time_type_id.extra == False):
                         standard += li.unit_amount
                     else:
                         extra += li.unit_amount
                 if not exist.id:
                     new = self.env['work.sheet.employee'].create({'employee_id': employee.id, 'sheet_id': record.id,
-                                                             'standard_time': standard, 'extra_time': extra})
+                                                             'standard_time': standard, 'extra_time': extra,
+                                                                  'task_ids':[(6,0,tasks)]})
                 else:
-                    exist.write({'employee_id': employee.id, 'sheet_id': record.id,
+                    exist.write({'employee_id': employee.id, 'sheet_id': record.id, 'task_ids':[(6,0,tasks)],
                                  'standard_time': standard, 'extra_time': extra})
 
             # Computing tasks:
