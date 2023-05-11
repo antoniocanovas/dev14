@@ -204,7 +204,7 @@ class TimeSheetWorkSheet(models.Model):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
 
-    #@api.depends('write_date')
+    @api.depends('write_date')
     def update_employees_and_tasks_resume(self):
         for record in self:
             # Searching for unique employees and task names:
@@ -226,9 +226,9 @@ class TimeSheetWorkSheet(models.Model):
             # Computing employees:
             for employee in sheet_employee:
                 standard, extra = 0, 0
-                exist = env['work.sheet.employee'].search(
+                exist = self.env['work.sheet.employee'].search(
                     [('sheet_id', '=', record.id), ('employee_id', '=', employee.id)])
-                lines = env['account.analytic.line'].search(
+                lines = self.env['account.analytic.line'].search(
                     [('work_sheet_id', '=', record.id), ('employee_id', '=', employee.id)])
 
                 for li in lines:
@@ -237,7 +237,7 @@ class TimeSheetWorkSheet(models.Model):
                     else:
                         extra += li.unit_amount
                 if not exist.id:
-                    new = env['work.sheet.employee'].create({'employee_id': employee.id, 'sheet_id': record.id,
+                    new = self.env['work.sheet.employee'].create({'employee_id': employee.id, 'sheet_id': record.id,
                                                              'standard_time': standard, 'extra_time': extra})
                 else:
                     exist.write({'employee_id': employee.id, 'sheet_id': record.id,
@@ -247,8 +247,8 @@ class TimeSheetWorkSheet(models.Model):
             task_list = []
             for task in sheet_task:
                 standard, extra, name = 0, 0, ""
-                exist = env['work.sheet.task'].search([('sheet_id', '=', record.id), ('task_id', '=', task.id)])
-                lines = record.env['account.analytic.line'].search(
+                exist = self.env['work.sheet.task'].search([('sheet_id', '=', record.id), ('task_id', '=', task.id)])
+                lines = self.env['account.analytic.line'].search(
                     [('work_sheet_id', '=', record.id), ('task_id', '=', task.id)])
 
                 for li in lines:
@@ -258,7 +258,7 @@ class TimeSheetWorkSheet(models.Model):
                         extra += li.unit_amount
 
                 if not exist.id:
-                    new = env['work.sheet.task'].create({'task_id': task.id, 'sheet_id': record.id, 'name': task.name,
+                    new = self.env['work.sheet.task'].create({'task_id': task.id, 'sheet_id': record.id, 'name': task.name,
                                                          'standard_time': standard, 'extra_time': extra})
                     task_list.append(new.id)
                 else:
