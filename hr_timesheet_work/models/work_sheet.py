@@ -203,3 +203,54 @@ class TimeSheetWorkSheet(models.Model):
                     if (record.set_start_stop == True):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
+
+    @api.depends('write_date')
+    def _update_employees_and_tasks_resume(self):
+
+        # Searching for unique employees and task names:
+        sheet_task, name_unique_task, sheet_employee = [], [], []
+        for li in self.project_service_ids:
+            if li.employee_id.id not in sheet_employee: sheet_employee.append(li.employee_id.id)
+            name_task = str(li.task_id.id) + li.task_id.name
+            if name_task not in name_unique_task:
+                sheeat_task.append(li.task_id.id)
+                name_unique_task.append(name_task)
+
+        # Cleaning old data:
+        for li in self.sheet_employee_ids:
+            if li.employee_id.id not in sheet_employee: li.unlink()
+        for li in self.sheet_task_ids:
+            if li.task_id.id not in sheet_task: li.unlink()
+
+        # Computing employees:
+        for employee in sheet_employee:
+            standard, extra = 0 ,0
+            exist = env['work.sheet.employee'].search([('sheet_id','=',self.id),('employee_id','=',employee.id)])
+            lines = env['account.analytic.line'].search([('sheet_id','=',self.id),('employee_id','=',employee.id)])
+            for li in lines:
+                if (li.employee_id.id == employee.id) and (li.time_type_id.extra == False):
+                    standard += li.unit_amount
+                else:
+                    extra += li.unit_amount
+            if not exist.id:
+                new = env['work.sheet.employee'].create({'employee_id':employee.id, 'sheet_id':self.id,
+                                                         'standard_time':standard, 'extra_time':extra})
+            else:
+                exist.write({'employee_id': employee.id, 'sheet_id': self.id,
+                             'standard_time': standard, 'extra_time': extra})
+
+        # Computing tasks:
+        for task in sheet_task:
+            standard, extra, name = 0 ,0, ""
+            exist = env['work.sheet.task'].search([('sheet_id','=',self.id),('task_id','=',task.id)])
+            lines = env['account.analytic.line'].search([('sheet_id','=',self.id),('task_id','=',task.id)])
+            for li in lines:
+                if (li.time_type_id.extra == False):    standard += li.unit_amount
+                else:                                   extra += li.unit_amount
+
+            if not exist.id:
+                new = env['work.sheet.task'].create({'task_id':task.id, 'sheet_id':self.id, 'name': task.name,
+                                                    'standard_time':standard, 'extra_time':extra})
+            else:
+                exist.write({'task_id': task.id, 'sheet_id': self.id, 'name': task.name,
+                             'standard_time': standard, 'extra_time': extra})

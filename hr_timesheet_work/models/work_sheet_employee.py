@@ -13,5 +13,6 @@ class WorkSheetEmployee(models.Model):
     _description = 'Work Sheet Employee time'
 
     employee_id = fields.Many2one('hr.employee', store=True, readonly=True)
-    work_id = fields.Many2one('timesheet.work')
-    amount = fields.Float('Hours', store=True, readonly=True)
+    sheet_id = fields.Many2one('work.sheet')
+    standard_time = fields.Float('Laboral time', store=True, readonly=True)
+    extra_time = fields.Float('Extra time', store=True, readonly=True)
