@@ -208,20 +208,21 @@ class TimeSheetWorkSheet(models.Model):
     def update_employees_and_tasks_resume(self):
         for record in self:
             # Searching for unique employees and task names:
-            sheet_task, name_unique_task, sheet_employee = [], [], []
+            unique_ts_task, name_unique_task, sheet_employee = [], [], []
             for li in record.project_service_ids:
                 if li.employee_id not in sheet_employee: sheet_employee.append(li.employee_id)
 
-                name_task = str(li.task_id.id) + li.task_id.name
+                name_task = str(li.task_id.id) + li.name
                 if name_task not in name_unique_task:
-                    sheet_task.append(li.task_id)
+                    # esto está mal, hay que apuntar a la imputación y desde ahí a la tarea:
+                    unique_ts_task.append(li.task_id)
                     name_unique_task.append(name_task)
 
             # Cleaning old data:
             for li in record.sheet_employee_ids:
                 if li.employee_id.id not in sheet_employee: li.unlink()
             for li in record.sheet_task_ids:
-                if li.task_id.id not in sheet_task: li.unlink()
+                if li.task_id.id not in unique_ts_task: li.unlink()
 
             # Computing employees:
             for employee in sheet_employee:
@@ -245,11 +246,12 @@ class TimeSheetWorkSheet(models.Model):
 
             # Computing tasks:
             task_list = []
-            for task in sheet_task:
+            for aal in unique_ts_task:
                 standard, extra, name = 0, 0, ""
-                exist = self.env['work.sheet.task'].search([('sheet_id', '=', record.id), ('task_id', '=', task.id)])
+
+                exist = self.env['work.sheet.task'].search([('sheet_id', '=', record.id), ('task_id', '=', aal.task_id.id)])
                 lines = self.env['account.analytic.line'].search(
-                    [('work_sheet_id', '=', record.id), ('task_id', '=', task.id)])
+                    [('work_sheet_id', '=', record.id), ('task_id', '=', aal.task.id)])
 
                 for li in lines:
                     if (li.time_type_id.extra == False):
@@ -262,7 +264,7 @@ class TimeSheetWorkSheet(models.Model):
                                                          'standard_time': standard, 'extra_time': extra})
                     task_list.append(new.id)
                 else:
-                    exist.write({'task_id': task.id, 'sheet_id': record.id, 'name': task.name,
+                    exist.write({'task_id': aal.task.id, 'sheet_id': record.id, 'name': aal.name,
                                  'standard_time': standard, 'extra_time': extra})
                     task_list.append(exist.id)
             record['sheet_task_ids'] = [(6, 0, task_list)]
