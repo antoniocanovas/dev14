@@ -192,7 +192,7 @@
                         <page name="resume" string="Resume">
                             <div name="employee_and_task_resume">
                                 <h3>Employees:</h3>
-                                <field name="sheet_employee_ids">
+                                <field name="sheet_employee_ids" readonly="1">
                                         <tree>
                                             <field name="employee_id"/>
                                             <field name="standard_time" widget="timesheet_uom"/>
@@ -200,9 +200,10 @@
                                         </tree>
                                 </field>
                                 <h3>Tasks:</h3>
-                                <field name="sheet_task_ids">
+                                <field name="sheet_task_ids" readonly="1">
                                         <tree>
                                             <field name="task_id"/>
+                                            <field name="name"/>
                                             <field name="standard_time" widget="timesheet_uom"/>
                                             <field name="extra_time" widget="timesheet_uom"/>
                                         </tree>
