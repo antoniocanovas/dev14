@@ -263,7 +263,7 @@ class TimeSheetWorkSheet(models.Model):
                                                          'standard_time': standard, 'extra_time': extra})
                     task_list.append(new.id)
                 else:
-                    exist.write({'task_id': aal.task.id, 'sheet_id': record.id, 'name': aal.name,
+                    exist.write({'task_id': aal.task_id.id, 'sheet_id': record.id, 'name': aal.name,
                                  'standard_time': standard, 'extra_time': extra})
                     task_list.append(exist.id)
             record['sheet_task_ids'] = [(6, 0, task_list)]
