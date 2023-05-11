@@ -204,7 +204,7 @@ class TimeSheetWorkSheet(models.Model):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
 
-#    @api.onchange('project_service_ids')
+    @api.depends('state')
     def update_employees_and_tasks_resume(self):
         for record in self:
             # Searching for unique employees and task names:
