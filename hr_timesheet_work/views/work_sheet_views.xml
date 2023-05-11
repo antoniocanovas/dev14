@@ -204,6 +204,7 @@
                                         <tree>
                                             <field name="task_id"/>
                                             <field name="name"/>
+                                            <field name="employee_ids" widget="many2many_tags" optional="show"/>
                                             <field name="standard_time" widget="timesheet_uom"/>
                                             <field name="extra_time" widget="timesheet_uom"/>
                                         </tree>
