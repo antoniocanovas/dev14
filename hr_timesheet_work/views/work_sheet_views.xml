@@ -196,6 +196,9 @@
                                 <h3>Tasks:</h3>
                                 <field name="sheet_task_ids"/>
                             </div>
+                            <div>
+                                <button class="oe_highlight" type="action" name="%(update_employees_and_tasks_resume)d" string="Recompute"/>
+                            </div>
                             <div name="signature">
                                 <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
                             </div>

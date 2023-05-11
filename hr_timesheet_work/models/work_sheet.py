@@ -205,7 +205,7 @@ class TimeSheetWorkSheet(models.Model):
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
 
     @api.depends('write_date')
-    def _update_employees_and_tasks_resume(self):
+    def update_employees_and_tasks_resume(self):
 
         # Searching for unique employees and task names:
         sheet_task, name_unique_task, sheet_employee = [], [], []
