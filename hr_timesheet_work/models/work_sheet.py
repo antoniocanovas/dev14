@@ -225,15 +225,15 @@ class TimeSheetWorkSheet(models.Model):
         # Computing employees:
         for employee in sheet_employee:
             standard, extra = 0 ,0
-            exist = env['work.sheet.employee'].search([('sheet_id','=',self.id),('employee_id','=',employee.id)])
-            lines = env['account.analytic.line'].search([('sheet_id','=',self.id),('employee_id','=',employee.id)])
+            exist = self.env['work.sheet.employee'].search([('sheet_id','=',self.id),('employee_id','=',employee.id)])
+            lines = self.env['account.analytic.line'].search([('sheet_id','=',self.id),('employee_id','=',employee.id)])
             for li in lines:
                 if (li.employee_id.id == employee.id) and (li.time_type_id.extra == False):
                     standard += li.unit_amount
                 else:
                     extra += li.unit_amount
             if not exist.id:
-                new = env['work.sheet.employee'].create({'employee_id':employee.id, 'sheet_id':self.id,
+                new = self.env['work.sheet.employee'].create({'employee_id':employee.id, 'sheet_id':self.id,
                                                          'standard_time':standard, 'extra_time':extra})
             else:
                 exist.write({'employee_id': employee.id, 'sheet_id': self.id,
@@ -242,14 +242,14 @@ class TimeSheetWorkSheet(models.Model):
         # Computing tasks:
         for task in sheet_task:
             standard, extra, name = 0 ,0, ""
-            exist = env['work.sheet.task'].search([('sheet_id','=',self.id),('task_id','=',task.id)])
-            lines = env['account.analytic.line'].search([('sheet_id','=',self.id),('task_id','=',task.id)])
+            exist = self.env['work.sheet.task'].search([('sheet_id','=',self.id),('task_id','=',task.id)])
+            lines = self.env['account.analytic.line'].search([('sheet_id','=',self.id),('task_id','=',task.id)])
             for li in lines:
                 if (li.time_type_id.extra == False):    standard += li.unit_amount
                 else:                                   extra += li.unit_amount
 
             if not exist.id:
-                new = env['work.sheet.task'].create({'task_id':task.id, 'sheet_id':self.id, 'name': task.name,
+                new = self.env['work.sheet.task'].create({'task_id':task.id, 'sheet_id':self.id, 'name': task.name,
                                                     'standard_time':standard, 'extra_time':extra})
             else:
                 exist.write({'task_id': task.id, 'sheet_id': self.id, 'name': task.name,
