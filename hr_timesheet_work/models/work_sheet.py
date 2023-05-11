@@ -213,7 +213,7 @@ class TimeSheetWorkSheet(models.Model):
             if li.employee_id.id not in sheet_employee: sheet_employee.append(li.employee_id.id)
             name_task = str(li.task_id.id) + li.task_id.name
             if name_task not in name_unique_task:
-                sheeat_task.append(li.task_id.id)
+                sheet_task.append(li.task_id.id)
                 name_unique_task.append(name_task)
 
         # Cleaning old data:
