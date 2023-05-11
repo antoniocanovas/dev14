@@ -62,9 +62,6 @@ class TimeSheetWorkSheet(models.Model):
         string='Imputaciones'
     )
 
-    sheet_employee_ids = fields.Many2many('work.sheet.employee', string='Employees', store=True)
-    sheet_task_ids = fields.Many2many('work.sheet.task', string='Employees', store=True)
-
     # SO pickings available to add:
     @api.depends('work_id.sale_order_ids', 'picking_ids')
     def get_pending_order_pickings(self):

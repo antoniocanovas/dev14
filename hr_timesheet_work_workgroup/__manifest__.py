@@ -26,6 +26,8 @@ Printed format as receipt to customer.
         'views/timesheet_work_views.xml',
         'views/work_picking_wizard_views.xml',
         'views/work_timesheet_wizard_views.xml',
+        'views/work_timesheet_workgroup_views.xml',
+        'views/project_time_type_views.xml',
         'views/work_sheet_views.xml',
         'views/stock_picking_views.xml',
         'views/account_analytic_tag_views.xml',
@@ -37,8 +39,7 @@ Printed format as receipt to customer.
         'views/timesheet_line_done_views.xml',
         'views/sale_order_views.xml',
         'views/hr_expense_views.xml',
-        'views/project_time_type_views.xml',
         'views/menu_views.xml',
     ],
-    'installable': True,
+    'installable': False,
 }

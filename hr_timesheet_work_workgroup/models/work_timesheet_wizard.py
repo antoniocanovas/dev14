@@ -63,6 +63,11 @@ class WorkTimesheetWizard(models.TransientModel):
                 for li in employee_ids:
                     if not li.user_id:
                         raise ValidationError('Empleado sin usuario asignado, revisa su ficha de empleado')
+                    workgroup = self.env['work.timesheet.workgroup'].create({
+                        'name': str(self.id) + " " + self.name,
+                        'work_sheet_id':work_sheet_id.id,
+                        'date':self.date,
+                        })
                     new = self.env['account.analytic.line'].create(
                         {'work_sheet_id': record.work_sheet_id.id, 'name': record.name,
                          'project_id': record.project_id.id,
@@ -72,7 +77,7 @@ class WorkTimesheetWizard(models.TransientModel):
                          'tag_ids': [(6,0,record.analytic_tag_ids.ids)],
                          'employee_id': li.id, 'unit_amount': duration, 'time_type_id': record.time_type_id.id,
                          'user_id':li.user_id.id,
-                         'wizard_id': record.id
+                         'workgroup_id': workgroup.id
                          })
                     if (record.set_start_stop == True):
                         duration = record.stop - record.start

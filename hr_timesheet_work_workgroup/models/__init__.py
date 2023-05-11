@@ -10,6 +10,6 @@ from . import sale_order
 from . import hr_expense
 from . import work_picking_wizard
 from . import work_timesheet_wizard
+from . import work_timesheet_workgroup
 from . import project_time_type
-from . import work_sheet_employee
-from . import work_sheet_task
+

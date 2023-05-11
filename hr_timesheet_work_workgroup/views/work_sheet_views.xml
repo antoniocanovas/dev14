@@ -70,6 +70,21 @@
         <field name="view_mode">form</field>
     </record>
 
+    <!-- WORKGROUP window action o2m buttom in Work Sheet FORM:   -->
+    <record id="hr_work_sheet_workgroup_button" model="ir.actions.act_window">
+        <field name="domain">[('work_sheet_id','=',active_id)]</field>
+        <field name="context">{'default_work_sheet_id':active_id}</field>
+        <field name="filter" eval="False"/>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="limit">80</field>
+        <field name="name">Workgroup Sheet button view</field>
+        <field name="res_model">work.timesheet.workgroup</field>
+        <field name="search_view_id" eval="False"/>
+        <field name="target">current</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <!-- TIMESHEET WIZARD window action in Work Sheet FORM:   -->
     <record id="hr_work_sheet_timesheet_wizard" model="ir.actions.act_window">
         <field name="binding_model_id" eval="False"/>
@@ -95,17 +110,22 @@
                 <header>
                     <button name="hr_timesheet_work.hr_work_sheet_timesheet_wizard"
                             context="{'default_work_sheet_id':active_id, 'default_name':name, 'default_project_id':project_id, 'default_date':date}"
-                            string="Lot Services" type="action" class="btn-primary"
-                            attrs="{'invisible':[('project_id','=',False)]}"/>
+                            string="Lot Services" type="action" class="btn-primary" attrs="{'invisible':[('project_id','=',False)]}"/>
                     <button name="hr_timesheet_work.hr_work_sheet_add_picking_wizard"
                             context="{'default_work_sheet_id':active_id}"
                             string="Sale Pickings" type="action" class="btn-primary"/>
-                    <widget name="signature" string="Sign" highlight="1" attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
+                    <widget name="signature" string="Sign" highlight="1"
+                            attrs="{'invisible': [('partner_id', '=', False)]}" full_name="partner_id"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
                 </header>
                 <sheet>
                     <!-- O2M Buttons:  -->
                     <div class="oe_button_box" name="button_box">
+                        <button name="hr_timesheet_work.hr_work_sheet_workgroup_button" class="oe_stat_button" icon="fa-list-ol" type="action" help="List workgroup timesheets">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">Lot services</span>
+                            </div>
+                        </button>
                         <button name="hr_timesheet_work.hr_work_sheet_picking_button" class="oe_stat_button" icon="fa-arrows-v" type="action" help="List picking operations">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">Pickings</span>
@@ -135,7 +155,7 @@
                     </group></group>
 
 
-                              <!-- WORK AND TASK ESTABLISMENT: -->
+                    <!-- WORK AND TASK ESTABLISMENT: -->
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
                             <div attrs="{'invisible':[('project_id','!=',False)]}">
@@ -192,11 +212,6 @@
                     <div name="signature">
                         <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
                     </div>
-                    <div name="employee_and_task_resume">
-                        <field name="sheet_employee_ids"/>
-                        <field name="sheet_task_ids"/>
-                    </div>
-
                     <field name="type" invisible="1"/>
                     <field name="set_start_stop" invisible="1"/>
                     <field name="project_analytic_id" invisible="1"/>
