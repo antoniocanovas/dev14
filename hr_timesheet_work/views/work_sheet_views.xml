@@ -135,7 +135,7 @@
                     </group></group>
 
 
-                              <!-- WORK AND TASK ESTABLISMENT: -->
+                    <!-- WORK AND TASK ESTABLISMENT: -->
                     <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
                         <div name="project_services" string="Hours">
                             <div attrs="{'invisible':[('project_id','!=',False)]}">
@@ -163,7 +163,8 @@
                                 </field>
                             </div>
                         </div>
-
+                        <notebook>
+                        <page name="general" string="General">
                         <div name="work_sheet_project_products" string="Products" attrs="{'invisible':[('type','!=','project')]}">
                             <h2>Products:</h2>
                             <field name="project_product_ids">
@@ -186,79 +187,85 @@
                             <h2>Milestones:</h2>
                             <field name="line_done_ids"/>
                         </div>
-
                     </div>
-
                     <div name="signature">
                         <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
                     </div>
+                </page>
+
+                <page name="resume" string="Resume">
                     <div name="employee_and_task_resume">
+                        <h3>Employees:</h3>
                         <field name="sheet_employee_ids"/>
+                        <h3>Tasks:</h3>
                         <field name="sheet_task_ids"/>
                     </div>
+                </page>
 
-                    <field name="type" invisible="1"/>
-                    <field name="set_start_stop" invisible="1"/>
-                    <field name="project_analytic_id" invisible="1"/>
-                    <field name="project_so_id" invisible="1"/>
-                    <field name="company_id" invisible="1"/>
-                </sheet>
+            </notebook>
 
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
-                </div>
-            </form>
-        </field>
-        <field name="field_parent" eval="False"/>
-        <field name="groups_id" eval="[(6, 0, [])]"/>
-        <field name="inherit_id" eval="False"/>
-        <field name="key" eval="False"/>
-        <field name="mode">primary</field>
-        <field name="model">work.sheet</field>
-        <field name="name">Work Sheet form view</field>
-        <field name="priority">16</field>
-        <field name="type">form</field>
-    </record>
+            <field name="type" invisible="1"/>
+            <field name="set_start_stop" invisible="1"/>
+            <field name="project_analytic_id" invisible="1"/>
+            <field name="project_so_id" invisible="1"/>
+            <field name="company_id" invisible="1"/>
+        </sheet>
 
-    <record id="work_sheet_tree" model="ir.ui.view">
-        <field name="active" eval="True"/>
-        <field name="arch" type="xml">
-            <tree name="work_sheet_tree" string="Work Sheet"  default_order='create_date desc'>
-                <field name="name"/>
-                <field name="work_id"/>
-                <field name="date"/>
-                <field name="state"/>
-            </tree>
-        </field>
-        <field name="field_parent" eval="False"/>
-        <field name="groups_id" eval="[(6, 0, [])]"/>
-        <field name="inherit_id" eval="False"/>
-        <field name="key" eval="False"/>
-        <field name="mode">primary</field>
-        <field name="model">work.sheet</field>
-        <field name="name">Work Sheet Tree View</field>
-        <field name="priority">16</field>
-        <field name="type">tree</field>
-    </record>
+        <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+        </div>
+    </form>
+</field>
+<field name="field_parent" eval="False"/>
+<field name="groups_id" eval="[(6, 0, [])]"/>
+<field name="inherit_id" eval="False"/>
+<field name="key" eval="False"/>
+<field name="mode">primary</field>
+<field name="model">work.sheet</field>
+<field name="name">Work Sheet form view</field>
+<field name="priority">16</field>
+<field name="type">form</field>
+        </record>
 
-    <record id="work_sheet_tree_search" model="ir.ui.view">
-        <field name="name">work.sheet.tree.search</field>
-        <field name="model">work.sheet</field>
-        <field name="arch" type="xml">
-            <search string="Search Work Sheet">
-                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
-                <field name="type" filter_domain="[('time_type_id', 'ilike', self)]"/>
-                <field name="work_id" filter_domain="[('work_id', 'ilike', self)]"/>
-                <separator/>
-                <filter string="Projects" name="type_project" domain="[('type', '=', 'project')]"/>
-                <separator/>
-                <group expand="0" name="group_by" string="Group By">
-                    <filter name="date" string="Date" context="{'group_by': 'date'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<record id="work_sheet_tree" model="ir.ui.view">
+<field name="active" eval="True"/>
+<field name="arch" type="xml">
+    <tree name="work_sheet_tree" string="Work Sheet"  default_order='create_date desc'>
+        <field name="name"/>
+        <field name="work_id"/>
+        <field name="date"/>
+        <field name="state"/>
+    </tree>
+</field>
+<field name="field_parent" eval="False"/>
+<field name="groups_id" eval="[(6, 0, [])]"/>
+<field name="inherit_id" eval="False"/>
+<field name="key" eval="False"/>
+<field name="mode">primary</field>
+<field name="model">work.sheet</field>
+<field name="name">Work Sheet Tree View</field>
+<field name="priority">16</field>
+<field name="type">tree</field>
+</record>
 
-</odoo>
+<record id="work_sheet_tree_search" model="ir.ui.view">
+<field name="name">work.sheet.tree.search</field>
+<field name="model">work.sheet</field>
+<field name="arch" type="xml">
+    <search string="Search Work Sheet">
+        <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+        <field name="type" filter_domain="[('time_type_id', 'ilike', self)]"/>
+        <field name="work_id" filter_domain="[('work_id', 'ilike', self)]"/>
+        <separator/>
+        <filter string="Projects" name="type_project" domain="[('type', '=', 'project')]"/>
+        <separator/>
+        <group expand="0" name="group_by" string="Group By">
+            <filter name="date" string="Date" context="{'group_by': 'date'}"/>
+        </group>
+    </search>
+</field>
+</record>
+
+        </odoo>
