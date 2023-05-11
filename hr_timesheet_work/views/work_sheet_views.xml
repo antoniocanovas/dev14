@@ -192,9 +192,21 @@
                         <page name="resume" string="Resume">
                             <div name="employee_and_task_resume">
                                 <h3>Employees:</h3>
-                                <field name="sheet_employee_ids"/>
+                                <field name="sheet_employee_ids">
+                                        <tree>
+                                            <field name="employee_id"/>
+                                            <field name="standard_time" widget="timesheet_uom"/>
+                                            <field name="extra_time" widget="timesheet_uom"/>
+                                        </tree>
+                                </field>
                                 <h3>Tasks:</h3>
-                                <field name="sheet_task_ids"/>
+                                <field name="sheet_task_ids">
+                                        <tree>
+                                            <field name="task_id"/>
+                                            <field name="standard_time" widget="timesheet_uom"/>
+                                            <field name="extra_time" widget="timesheet_uom"/>
+                                        </tree>
+                                </field>
                             </div>
                             <div>
                                 <button class="oe_highlight" type="object" name="update_employees_and_tasks_resume" string="Recompute"/>
