@@ -134,76 +134,74 @@
                         <field name="work_readonly" invisible="1"/>
                     </group></group>
 
-
-                    <!-- WORK AND TASK ESTABLISMENT: -->
-                    <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
-                        <div name="project_services" string="Hours">
-                            <div attrs="{'invisible':[('project_id','!=',False)]}">
-                                <h2>Active projects:</h2>
-                                <field name="project_ids"/>
+                    <notebook>
+                        <page name="general" string="General">
+                            <!-- WORK AND TASK ESTABLISMENT: -->
+                            <div name="project_services" attrs="{'invisible':[('work_id','=',False)]}">
+                                <div name="project_services" string="Hours">
+                                    <div attrs="{'invisible':[('project_id','!=',False)]}">
+                                        <h2>Active projects:</h2>
+                                        <field name="project_ids"/>
+                                    </div>
+                                    <div attrs="{'invisible':[('project_id','=',False)]}">
+                                        <field name="project_service_ids" context="{'default_project_id':project_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
+                                            <tree editable="bottom" string="Timesheet Activities" default_order="date">
+                                                <field name="task_id" options="{'no_create': True}"/>
+                                                <field name="user_id" invisible="1"/>
+                                                <field name="employee_id" required="1" widget="many2one_avatar_employee" options="{'no_create': True}"/>
+                                                <field name="name" required="0" widget="text"/>
+                                                <field name="time_start" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
+                                                <field name="time_stop" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
+                                                <field name="unit_amount" widget="timesheet_uom" force_save="1" decoration-danger="unit_amount &gt; 24" attrs="{'readonly':[('set_start_stop','=',True)]}"/>
+                                                <field name="time_type_id"/>
+                                                <field name="project_id" invisible="1"/>
+                                                <field name="date"/>
+                                                <field name="tag_ids" widget="many2many_tags"/>
+                                                <field name="account_id" invisible="1"/>
+                                                <field name="company_id" invisible="1"/>
+                                                <field name="set_start_stop" invisible="1"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
                             </div>
-                            <div attrs="{'invisible':[('project_id','=',False)]}">
-                                <field name="project_service_ids" context="{'default_project_id':project_id,'default_account_id':project_analytic_id, 'default_name':'/', 'default_company_id': company_id}">
-                                    <tree editable="bottom" string="Timesheet Activities" default_order="date">
-                                        <field name="task_id" options="{'no_create': True}"/>
-                                        <field name="user_id" invisible="1"/>
-                                        <field name="employee_id" required="1" widget="many2one_avatar_employee" options="{'no_create': True}"/>
-                                        <field name="name" required="0" widget="text"/>
-                                        <field name="time_start" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
-                                        <field name="time_stop" widget="timesheet_uom" attrs="{'invisible':[('set_start_stop','=',False)]}"/>
-                                        <field name="unit_amount" widget="timesheet_uom" force_save="1" decoration-danger="unit_amount &gt; 24" attrs="{'readonly':[('set_start_stop','=',True)]}"/>
-                                        <field name="time_type_id"/>
-                                        <field name="project_id" invisible="1"/>
-                                        <field name="date"/>
-                                        <field name="tag_ids" widget="many2many_tags"/>
-                                        <field name="account_id" invisible="1"/>
-                                        <field name="company_id" invisible="1"/>
-                                        <field name="set_start_stop" invisible="1"/>
+                            <div name="work_sheet_project_products" string="Products" attrs="{'invisible':[('type','!=','project')]}">
+                                <h2>Products:</h2>
+                                <field name="project_product_ids">
+                                    <tree>
+                                        <field name="product_id"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="product_uom"/>
+                                        <field name="state"/>
                                     </tree>
                                 </field>
+                                <field name="order_picking_ids" invisible="1"/>
                             </div>
-                        </div>
 
-                        <notebook>
-                            <page name="general" string="General">
-                                <div name="work_sheet_project_products" string="Products" attrs="{'invisible':[('type','!=','project')]}">
-                                    <h2>Products:</h2>
-                                    <field name="project_product_ids">
-                                        <tree>
-                                            <field name="product_id"/>
-                                            <field name="product_uom_qty"/>
-                                            <field name="product_uom"/>
-                                            <field name="state"/>
-                                        </tree>
-                                    </field>
-                                    <field name="order_picking_ids" invisible="1"/>
-                                </div>
+                            <div name="work_sheet_expenses" string="Expenses" attrs="{'invisible':[('type','!=','project')]}">
+                                <h2>Expenses:</h2>
+                                <field name="reinvoice_expense_ids"/>
+                            </div>
 
-                                <div name="work_sheet_expenses" string="Expenses" attrs="{'invisible':[('type','!=','project')]}">
-                                    <h2>Expenses:</h2>
-                                    <field name="reinvoice_expense_ids"/>
-                                </div>
+                            <div name="work_sheet_milestones" string="Milestones" attrs="{'invisible':[('type','!=','project')]}">
+                                <h2>Milestones:</h2>
+                                <field name="line_done_ids"/>
+                            </div>
+                        </page>
 
-                                <div name="work_sheet_milestones" string="Milestones" attrs="{'invisible':[('type','!=','project')]}">
-                                    <h2>Milestones:</h2>
-                                    <field name="line_done_ids"/>
-                                </div>
-                            </page>
+                        <page name="resume" string="Resume">
+                            <div name="employee_and_task_resume">
+                                <h3>Employees:</h3>
+                                <field name="sheet_employee_ids"/>
+                                <h3>Tasks:</h3>
+                                <field name="sheet_task_ids"/>
+                            </div>
+                            <div name="signature">
+                                <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
+                            </div>
+                        </page>
 
-                            <page name="resume" string="Resume">
-                                <div name="employee_and_task_resume">
-                                    <h3>Employees:</h3>
-                                    <field name="sheet_employee_ids"/>
-                                    <h3>Tasks:</h3>
-                                    <field name="sheet_task_ids"/>
-                                </div>
-                            </page>
-
-                        </notebook>
-                    </div>
-                    <div name="signature">
-                        <field name="signature" widget="image" attrs="{'invisible':[('signature','=',False)]}"/>
-                    </div>
+                    </notebook>
 
                     <field name="type" invisible="1"/>
                     <field name="set_start_stop" invisible="1"/>
