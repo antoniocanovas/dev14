@@ -212,7 +212,7 @@ class TimeSheetWorkSheet(models.Model):
             for aal in record.project_service_ids:
                 if aal.employee_id not in sheet_employee: sheet_employee.append(aal.employee_id)
 
-                name_task = str(aal.task_id.id) + li.name
+                name_task = str(aal.task_id.id) + aal.name
                 if name_task not in name_unique_task:
                     # esto está mal, hay que apuntar a la imputación y desde ahí a la tarea:
                     unique_ts_task.append(aal.task_id)
