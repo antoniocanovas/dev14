@@ -210,10 +210,10 @@ class TimeSheetWorkSheet(models.Model):
         # Searching for unique employees and task names:
         sheet_task, name_unique_task, sheet_employee = [], [], []
         for li in self.project_service_ids:
-            if li.employee_id.id not in sheet_employee: sheet_employee.append(li.employee_id.id)
+            if li.employee_id.id not in sheet_employee: sheet_employee.append(li.employee_id)
             name_task = str(li.task_id.id) + li.task_id.name
             if name_task not in name_unique_task:
-                sheet_task.append(li.task_id.id)
+                sheet_task.append(li.task_id)
                 name_unique_task.append(name_task)
 
         # Cleaning old data:
