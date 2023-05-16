@@ -7,6 +7,7 @@ Crea apuntes analíticos con precio de coste a partir de la aceptación de la fa
 """,
     'author': 'Serincloud',
     'depends': [
+        'account',
         'analytic',
     ],
     'data': [
