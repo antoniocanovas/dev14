@@ -10,6 +10,7 @@
             <xpath expr="//div[@name='options']" position="inside">
                 <div>
                     <field name="autoanalytic"/>
+                    <label for="autoanalytic"/>
                 </div>
             </xpath>
         </field>
