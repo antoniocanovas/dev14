@@ -1,7 +1,7 @@
 from odoo import api, fields, models, _
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.move'
+    _inherit = "account.move"
 
 
     def _create_analytic_line(self):
