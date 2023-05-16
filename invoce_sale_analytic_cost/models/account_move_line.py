@@ -1,7 +1,4 @@
-from odoo import _, api, fields, models
-
-import logging
-_logger = logging.getLogger(__name__)
+from odoo import fields, models, api
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'

@@ -1,7 +1,5 @@
-from odoo import _, api, fields, models
+from odoo import fields, models, api
 
-import logging
-_logger = logging.getLogger(__name__)
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
