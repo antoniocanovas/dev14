@@ -16,4 +16,4 @@ class AccountInvoice(models.Model):
                         'unit_amount': li.quantity,
                         'product_uom_id': li.product_uom_id.id
                     })
-                    #li['analytic_cost_id'] = new.id
+                    li['analytic_cost_id'] = new.id
