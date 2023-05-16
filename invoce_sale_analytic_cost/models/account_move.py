@@ -19,8 +19,3 @@ class AccountMove(models.Model):
                         'product_uom_id': li.product_uom_id.id
                     })
                     li['analytic_cost_id'] = new.id
-
-class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
-
-    analytic_cost_id = fields.Many2one('account.analytic.line', 'Analytic cost')
