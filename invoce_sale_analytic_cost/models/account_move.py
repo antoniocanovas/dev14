@@ -1,8 +1,8 @@
-from odoo import fields, models, api
+from odoo import api, fields, models, _
 
-
-class AccountMove(models.Model):
+class AccountInvoice(models.Model):
     _inherit = 'account.move'
+
 
     def _create_analytic_line(self):
         if self.move_type in ['out_invoice']:
