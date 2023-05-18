@@ -62,6 +62,7 @@ class PurchasePriceUpdate(models.Model):
             supplier_price = self.env['product.supplierinfo'].search([
                 ('name', '=', self.partner_id.id),
                 ('product_tmpl_id', '=', self.product_id.product_tmpl_id.id),
+                ('product_id', '=', False),
                 ('product_uom', '=', self.product_uom.id),
                 ('min_qty', '=', 0),
             ])[0]
