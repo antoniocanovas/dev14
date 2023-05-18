@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_price_update_warning" model="res.groups">
+        <field name="name">Purchase price update warning</field>
+        <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+<!--
+        <field name="rule_groups" eval="[(4, ref('base.res_company_rule_erp_manager'))]"/>
+-->
+    </record>
+
+
+</odoo>
