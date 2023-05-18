@@ -55,7 +55,7 @@ class PurchasePriceUpdate(models.Model):
             ('product_id', '=', self.product_id.id),
             ('product_uom', '=', self.product_uom.id),
             ('min_qty', '=', 0),
-        ])[0]
+        ])
 
         # Case 'b': No variants => product_tmpl_id ok but no product_id.id in supplierinfo:
         if not supplier_price.id:
@@ -65,7 +65,7 @@ class PurchasePriceUpdate(models.Model):
                 ('product_id', '=', False),
                 ('product_uom', '=', self.product_uom.id),
                 ('min_qty', '=', 0),
-            ])[0]
+            ])
 
         control = False
         if (supplier_price.id) and (supplier_price.price != self.price_unit):   control = True
