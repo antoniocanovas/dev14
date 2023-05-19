@@ -12,7 +12,55 @@
                     </div>
                     <div>
                         <t name="project" t-if="o.type == 'project'">
-                            <t t-if="o.project_service_ids">
+                            <h4>Employees:</h4>
+                           <t t-if="o.sheet_employee_ids">
+                             <table class="table table-sm o_main_table">
+                               <thead>
+                                 <tr>
+                                   <th>Employee</th>
+                                   <th>Task</th>
+                                   <th>Laboral time</th>
+                                   <th>Extra time</th>
+                                 </tr>
+                               </thead>
+                               <tbody>
+                                  <t t-foreach="o.sheet_employee_ids" t-as="em">
+                                   <tr>
+                                     <td name="employee_id"><span t-field="em.employee_id"/></td>
+                                     <td name="task_ids"><span t-field="em.task_ids"/></td>
+                                     <td name="standard_time"><span t-field="em.standard_time"/></td>
+                                     <td name="extra_time"><span t-field="em.extra_time"/></td>
+                                   </tr>
+                                  </t>
+                               </tbody>
+                             </table>
+                           </t>
+
+                           <t t-if="o.sheet_task_ids">
+                             <h4>Services:</h4>
+                             <table class="table table-sm o_main_table">
+                               <thead>
+                                 <tr>
+                                   <th>Name</th>
+                                   <th>Employees</th>
+                                   <th>Laboral time</th>
+                                   <th>Extra time</th>
+                                 </tr>
+                               </thead>
+                               <tbody>
+                                  <t t-foreach="o.sheet_task_ids" t-as="em">
+                                   <tr>
+                                     <td name="employee_id"><span t-field="em.name"/></td>
+                                     <td name="task_ids"><span t-field="em.employee_ids"/></td>
+                                     <td name="standard_time"><span t-field="em.standard_time"/></td>
+                                     <td name="extra_time"><span t-field="em.extra_time"/></td>
+                                   </tr>
+                                  </t>
+                               </tbody>
+                             </table>
+                           </t>
+
+                            <!-- <t t-if="o.project_service_ids">
                                 <h2>Servicios:</h2>
                                 <table class="table table-sm o_main_table">
                                     <thead style="display: table-row-group">
@@ -39,7 +87,7 @@
                                     </tbody>
                                 </table>
                                 <br/>
-                            </t>
+                            </t> -->
                             <t t-if="o.project_product_ids">
                                 <h2>Productos:</h2>
                                 <table class="table table-sm o_main_table">
