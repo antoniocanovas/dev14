@@ -258,7 +258,9 @@ class TimeSheetWorkSheet(models.Model):
                 lines = self.env['account.analytic.line'].search(
                     [('work_sheet_id', '=', record.id), ('task_id', '=', aal.task_id.id)])
 
+
                 for li in lines:
+                    if li.employee_id.id not in employees: employees.append(li.employee_id.id)
                     if (li.time_type_id.extra == True):
                         extra += li.unit_amount
                     else:
