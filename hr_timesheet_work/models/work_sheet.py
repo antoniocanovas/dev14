@@ -103,14 +103,14 @@ class TimeSheetWorkSheet(models.Model):
 
     project_ids = fields.Many2many('project.project', compute=get_projects, store=False)
 
-#    @api.depends('project_service_ids', 'project_product_ids', 'repair_service_ids', 'repair_product_ids','mrp_service_ids', 'mrp_product_ids')
+    #    @api.depends('project_service_ids', 'project_product_ids', 'repair_service_ids', 'repair_product_ids','mrp_service_ids', 'mrp_product_ids')
     @api.depends('project_service_ids', 'project_product_ids')
     def get_workread_only(self):
         for record in self:
             isreadonly = False
-#            if record.project_service_ids or record.project_product_ids or record.repair_service_ids.ids or record.repair_product_ids or record.mrp_service_ids or record.mrp_product_ids:
+            #            if record.project_service_ids or record.project_product_ids or record.repair_service_ids.ids or record.repair_product_ids or record.mrp_service_ids or record.mrp_product_ids:
             if record.project_service_ids or record.project_product_ids:
-                    isreadonly = True
+                isreadonly = True
             record['work_readonly'] = isreadonly
 
     work_readonly = fields.Boolean(string='Read only', compute=get_workread_only, store=True)
@@ -125,7 +125,7 @@ class TimeSheetWorkSheet(models.Model):
                 # pdf result is a list
                 b64_pdf = base64.b64encode(pdf[0])
                 main_attachment = self.env['ir.attachment'].sudo().search(
-                   ['&', ('res_id', '=', record.id), ('name', '=', str(record.time_type_id.name) + '.pdf')]
+                    ['&', ('res_id', '=', record.id), ('name', '=', str(record.time_type_id.name) + '.pdf')]
                 )
                 main_attachment.unlink()
                 # save pdf as attachment
@@ -224,9 +224,8 @@ class TimeSheetWorkSheet(models.Model):
                 if li.task_id.id not in unique_ts_task: li.unlink()
 
             # Computing employees:
-            tasks = []
             for employee in sheet_employee:
-                standard, extra = 0, 0
+                standard, extra, tasks = 0, 0, []
                 exist = self.env['work.sheet.employee'].search(
                     [('sheet_id', '=', record.id), ('employee_id', '=', employee.id)])
                 lines = self.env['account.analytic.line'].search(
@@ -235,21 +234,23 @@ class TimeSheetWorkSheet(models.Model):
                 for li in lines:
                     if li.task_id.id not in tasks: tasks.append(li.task_id.id)
 
-                    if (li.employee_id.id == employee.id) and (li.time_type_id.extra == False):
-                        standard += li.unit_amount
-                    else:
+                    if (li.time_type_id.extra == True):
                         extra += li.unit_amount
+                    else:
+                        standard += li.unit_amount
+
                 if not exist.id:
                     new = self.env['work.sheet.employee'].create({'employee_id': employee.id, 'sheet_id': record.id,
-                                                             'standard_time': standard, 'extra_time': extra,
+                                                                  'standard_time': standard, 'extra_time': extra,
                                                                   'task_ids':[(6,0,tasks)]})
                 else:
                     exist.write({'employee_id': employee.id, 'sheet_id': record.id, 'task_ids':[(6,0,tasks)],
                                  'standard_time': standard, 'extra_time': extra})
 
-            # Computing tasks:
-            task_list, employees = [], []
+            # Computing tasks: (voy revisando por aquí)
+            task_list = []
             for aal in unique_ts_task:
+                employees = []
                 standard, extra, name = 0, 0, ""
                 if aal.employee_id not in employees: employees.append(aal.employee_id.id)
 
@@ -258,10 +259,10 @@ class TimeSheetWorkSheet(models.Model):
                     [('work_sheet_id', '=', record.id), ('task_id', '=', aal.task_id.id)])
 
                 for li in lines:
-                    if (li.time_type_id.extra == False):
-                        standard += li.unit_amount
-                    else:
+                    if (li.time_type_id.extra == True):
                         extra += li.unit_amount
+                    else:
+                        standard += li.unit_amount
 
                 if not exist.id:
                     new = self.env['work.sheet.task'].create({'task_id': aal.task_id.id, 'sheet_id': record.id,
