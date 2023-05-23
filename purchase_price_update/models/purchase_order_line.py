@@ -38,7 +38,7 @@ class PurchasePriceUpdate(models.Model):
 
             # Case 'b': Variants disabled => product_tmpl_id ok but no product_id.id in supplierinfo:
             if not supplierinfo.id:
-                supplier_price = self.env['product.supplierinfo'].search([
+                supplierinfo = self.env['product.supplierinfo'].search([
                     ('name', '=', record.partner_id.id),
                     ('product_tmpl_id', '=', record.product_id.product_tmpl_id.id),
                     ('product_id', '=', False),
