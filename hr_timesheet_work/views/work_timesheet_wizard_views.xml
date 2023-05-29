@@ -24,17 +24,13 @@
                         <field name="time_type_id" widget="selection"/>
                         <field name="analytic_tag_ids" widget="many2many_tags"/>
                         <field name="work_id" invisible="1"/>
-                        <!--
-                        <field name="todo_id" attrs="{'domain':[('work_id','=',work_id)]}"/>
+                        <field name="todo_id" domain="[('work_id','=',work_id)]"/>
                         <field name="todo_uom_id"/>
                         <field name="todo_qty"/>
-                        -->
                     </group>
                     <field name="timesheet_ids" domain="[('project_id','=',project_id), ('work_sheet_id','=',False)]"/>
                     <field name="work_sheet_id" invisible="1"/>
-                    <!--
-                    <field name="done_ids"/>
-                    -->
+                    <field name="done_ids" context="{'default_work_id':work_id}"/>
                     <footer>
                         <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
                              <button class="oe_highlight oe_right" type="object"
