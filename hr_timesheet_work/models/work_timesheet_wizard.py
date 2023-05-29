@@ -92,6 +92,13 @@ class WorkTimesheetWizard(models.TransientModel):
                         duration = record.stop - record.start
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
                     record['version'] = record.version + 1
+
+                # Milestone creation:
+                if (record.todo_id.id):
+                    new_done = env['timesheet.line.done'].create({'work_id':work_id.id, 'todo_id': record.todo_id.id,
+                                                                  'name': record.name, 'time_elapsed': duration,
+                                                                  'qty':record.todo_qty
+                                                                  })
         return {
             'name': 'Work Sheet Add Timesheet wizard view',
             'view_type': 'tree',
