@@ -94,6 +94,7 @@ class WorkTimesheetWizard(models.TransientModel):
                     record['version'] = record.version + 1
 
                 # Milestone creation:
+                duration_total = duration * len(record.employee_ids.ids)
                 if (record.todo_id.id):
                     new_done = self.env['timesheet.line.done'].create({'work_sheet_id':record.work_sheet_id.id,
                                                                        'todo_id': record.todo_id.id, 'name': record.name,
