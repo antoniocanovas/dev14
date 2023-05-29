@@ -30,7 +30,6 @@ class WorkTimesheetWizard(models.TransientModel):
                                         )
 
 
-    # <!-- 29/05/23:
     work_id = fields.Many2one('timesheet.work', string='Work', related='work_sheet_id.work_id')
     todo_id = fields.Many2one('timesheet.line.todo', string='Milestone', store=True)
     todo_uom_id = fields.Many2one('uom.uom', string='UOM', related='todo_id.uom_id')
@@ -41,7 +40,7 @@ class WorkTimesheetWizard(models.TransientModel):
         self.done_ids = [(6,0,self.work_sheet_id.line_done_ids.ids)]
     done_ids = fields.Many2many('timesheet.line.done', store=True, readonly=False,
                                 compute="get_line_done_ids")
-    # FIN 29/05/23 -->
+
 
 
     @api.depends('version')
