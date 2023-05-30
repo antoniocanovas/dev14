@@ -35,7 +35,10 @@
                         <div class="o_form_buttons_edit" role="toolbar" aria-label="Main actions">
                              <button class="oe_highlight oe_right" type="object"
                                     name="create_lot_worksheet_services"
-                                    string="Create"/>
+                                    string="Create Services"/>
+                             <button class="oe_highlight oe_right" type="object"
+                                    name="create_milestones"
+                                    string="Create Mileston"/>
                             <button string="Cancel" special="cancel" class="btn btn-secondary" />
                         </div>
                     </footer>

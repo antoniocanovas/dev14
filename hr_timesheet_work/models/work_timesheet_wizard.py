@@ -93,13 +93,27 @@ class WorkTimesheetWizard(models.TransientModel):
                         new.write({'time_start':record.start, 'time_stop':record.stop, 'unit_amount':duration})
                     record['version'] = record.version + 1
 
-                # Milestone creation:
-                duration_total = duration * len(record.employee_ids.ids)
-                if (record.todo_id.id):
-                    new_done = self.env['timesheet.line.done'].create({'work_sheet_id':record.work_sheet_id.id,
-                                                                       'todo_id': record.todo_id.id, 'name': record.name,
-                                                                       'time_elapsed': duration_total, 'qty':record.todo_qty
-                                                                       })
+        return {
+            'name': 'Work Sheet Add Timesheet wizard view',
+            'view_type': 'tree',
+            'view_mode': 'form',
+            'res_model': 'work.timesheet.wizard',
+            'type': 'ir.actions.act_window',
+            'view_id':
+                self.env.ref('hr_timesheet_work.work_timesheet_wizard_default_form').id,
+            'context': dict(self.env.context),
+            'target': 'new',
+            'res_id': self.id,
+        }
+
+    def create_milestones(self):
+        for record in self:
+            duration_total = duration * len(record.employee_ids.ids)
+            if (record.todo_id.id) and (record.todo_qty != 0):
+                new_done = self.env['timesheet.line.done'].create({'work_sheet_id':record.work_sheet_id.id,
+                                                                   'todo_id': record.todo_id.id, 'name': record.name,
+                                                                   'time_elapsed': duration_total, 'qty':record.todo_qty
+                                                                   })
         return {
             'name': 'Work Sheet Add Timesheet wizard view',
             'view_type': 'tree',
