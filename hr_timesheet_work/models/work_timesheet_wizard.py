@@ -114,6 +114,7 @@ class WorkTimesheetWizard(models.TransientModel):
                                                                    'todo_id': record.todo_id.id, 'name': record.name,
                                                                    'time_elapsed': duration, 'qty':record.todo_qty
                                                                    })
+            record['version'] = record.version + 1
         return {
             'name': 'Work Sheet Add Timesheet wizard view',
             'view_type': 'tree',
