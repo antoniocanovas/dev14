@@ -38,7 +38,7 @@
                                     string="Create Services"/>
                              <button class="oe_highlight oe_right" type="object"
                                     name="create_milestones"
-                                    string="Create Mileston"/>
+                                    string="Create Milestones"/>
                             <button string="Cancel" special="cancel" class="btn btn-secondary" />
                         </div>
                     </footer>
