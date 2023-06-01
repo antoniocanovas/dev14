@@ -6,7 +6,7 @@ class AccountInvoice(models.Model):
 
     @api.depends('state')
     def _create_analytic_line(self):
-        if (self.move_type in ['out_invoice']) and (self.state in ['posted']):
+        if (self.move_type in ['out_invoice']) and (self.state not in ['draft','cancel']):
             cost = 0
             for li in self.invoice_line_ids:
                 if not (li.analytic_cost_id.id) and (li.analytic_account_id.id) and (li.product_id.product_tmpl_id.autoanalytic):
