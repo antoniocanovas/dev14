@@ -7,8 +7,8 @@ class AccountInvoice(models.Model):
     @api.onchange('state')
     def _create_analytic_line(self):
         if (self.move_type in ['out_invoice']) and (self.state in ['posted']):
-            cost = 0
             for li in self.invoice_line_ids:
+                cost = 0
                 if not (li.analytic_cost_id.id) and (li.analytic_account_id.id) and (li.product_id.product_tmpl_id.autoanalytic):
                     if li.product_uom_id.uom_type == 'reference':
                         cost = li.product_id.standard_price
