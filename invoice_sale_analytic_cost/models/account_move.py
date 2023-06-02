@@ -4,7 +4,6 @@ from odoo.exceptions import ValidationError
 class AccountInvoice(models.Model):
     _inherit = "account.move"
 
-    @api.onchange('state')
     def _create_analytic_line(self):
         if (self.move_type in ['out_invoice']) and (self.state in ['posted']):
             for li in self.invoice_line_ids:
