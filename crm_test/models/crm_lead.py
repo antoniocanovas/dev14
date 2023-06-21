@@ -1,7 +1,7 @@
 from odoo import _, api, fields, models
 
 
-class CRMLead(models.Model):
+class Lead2opportunity(models.TransientModel):
     _inherit = 'crm.lead2opportunity.partner'
 
     action = fields.Selection(selection='_get_types', string='Related Customer',
