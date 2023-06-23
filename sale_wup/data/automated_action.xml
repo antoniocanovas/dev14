@@ -13,10 +13,9 @@ if (record.wup_line_ids.ids):
             </field>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids" eval="[(6,0, [ref('sale.field_sale_order_line__product_uom_qty'),
-                                                    ref('sale_wup.field_sale_order_line__wup_price_unit'),
+                                                    ref('sale_wup.field_sale_order_line__wup_update'),
                                                     ref('sale_wup.field_sale_order_line__wup_template_id'),
-                                                    ref('sale_wup.field_sale_order_line__wup_line_ids'),
-                                                    ref('sale_wup.field_sale_order_line__wup_cost_amount')])]"/>
+                                                    ])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
             <field name="active" eval="True"/>

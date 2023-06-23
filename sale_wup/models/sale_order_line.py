@@ -9,12 +9,13 @@ class WupSaleOrderLine(models.Model):
     wup_template_id = fields.Many2one('wup.template', string='wup Template', copy=True)
     wup_line_ids = fields.One2many('wup.line', 'sale_line_id', string='wup Line', copy=True)
     wup_line_note_id = fields.Many2one('sale.order.line', copy=False)
+    wup_update = fields.Boolean('Wup udpate', default=False)
 
     @api.depends('wup_line_ids','wup_line_ids.price_unit')
     def get_wup_price_unit(self):
         for record in self:
             total = sum(record.wup_line_ids.mapped('subtotal')) if record.wup_line_ids else 0
-            record.wup_price_unit = total
+            record.write({'wup_price_unit': total, 'wup_update':True})
     wup_price_unit = fields.Monetary('Wup Price Unit', store=True, compute='get_wup_price_unit')
 
 
@@ -24,7 +25,7 @@ class WupSaleOrderLine(models.Model):
             cost = 0
             for line in record.wup_line_ids:
                 cost += line.price_unit_cost * line.product_uom_qty
-            record['wup_cost_amount'] = cost
+            record.write({'wup_cost_amount':cost, 'wup_update':True})
 
     wup_cost_amount = fields.Monetary('wup Cost', store=True, compute='get_wup_cost_amount')
 
