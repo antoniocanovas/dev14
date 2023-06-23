@@ -4,15 +4,18 @@
             <field name="model_id" ref="sale.model_sale_order_line"/>
             <field name="state">code</field>
             <field name="code">
-if (record.wup_line_ids.ids) and (record.wup_price_unit != record.price_unit):
-  record['price_unit'] = record.wup_price_unit
-if (record.wup_line_ids.ids) and not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
+if (record.wup_line_ids.ids):
+  if (record.wup_price_unit != record.price_unit) or (record.wup_cost_amount != record.purchase_price):
+    record.write({'price_unit':record.wup_price_unit, 'purchase_price':record.wup_cost_amount})
+  if not (record.wup_line_note_id.id) and (record.wup_template_id.id) and (record.wup_template_id.description):
     # Create a line note from wup template description:
     new_note = env['sale.order.line'].create({'sequence':record.sequence, 'name':record.wup_template_id.description, 'display_type':'line_note', 'order_id':record.order_id.id})
             </field>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids" eval="[(6,0, [ref('sale.field_sale_order_line__product_uom_qty'),
                                                     ref('sale_wup.field_sale_order_line__wup_price_unit'),
+                                                    ref('sale_wup.wup_line_ids'),
+                                                    ref('wup_line_ids.price_unit_cost'),
                                                     ref('sale_wup.field_sale_order_line__wup_template_id')])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
