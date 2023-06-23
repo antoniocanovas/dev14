@@ -14,7 +14,7 @@
                         <group>
                             <field name="product_uom_qty" readonly="1"/>
                             <field name="product_uom" readonly="1"/>
-                            <field name="wup_cost_amount"/>
+                            <field name="wup_purchase_price"/>
                             <field name="display_type" invisible="1"/>
                             <field name="state" invisible="1"/>
                         </group>
@@ -157,7 +157,7 @@
             <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
                 <field name="lst_price" optional="hide"/>
                 <field name="lst_price_discount" optional="hide"/>
-                <field name="wup_cost_amount" optional="hide"/>
+                <field name="wup_purchase_price" optional="hide"/>
             </xpath>
             <xpath expr="//page/field[@name='order_line']/.." position="after">
                 <page string="Extra Products" name="extra_products"
