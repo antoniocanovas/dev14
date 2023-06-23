@@ -16,7 +16,7 @@ if (record.wup_line_ids.ids):
                                                     ref('sale_wup.field_sale_order_line__wup_price_unit'),
                                                     ref('sale_wup.field_sale_order_line__wup_template_id'),
                                                     ref('sale_wup.field_sale_order_line__wup_line_ids'),
-                                                    ref('sale_wup.field_sale_order_line__wup_line_ids.price_unit_cost')])]"/>
+                                                    ref('sale_wup.field_sale_order_line__wup_cost_amount')])]"/>
             <field name="filter_pre_domain"></field>
             <field name="filter_domain"></field>
             <field name="active" eval="True"/>
