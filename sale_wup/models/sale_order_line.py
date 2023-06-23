@@ -24,7 +24,7 @@ class WupSaleOrderLine(models.Model):
             cost = 0
             for line in record.wup_line_ids:
                 cost += line.price_unit_cost * line.product_uom_qty
-            record.wup_cost_amount = cost
+            record.write({'wup_cost_amount':cost, 'purchase_price':cost})
 
     wup_cost_amount = fields.Monetary('wup Cost', store=True, compute='get_wup_cost_amount')
 
