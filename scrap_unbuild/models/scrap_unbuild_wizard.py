@@ -42,7 +42,7 @@ class ScrapUnbuildWizard(models.TransientModel):
         units = 0
         for li in self.line_ids: units += li.qty
         if units > 0:
-            name = self.name + " " + rootpt.default_code
+            name = self.name.name + " " + rootpt.default_code
             newsi = self.env['stock.inventory'].create({'name': name, 'unbuild_product_tmpl_id': self.product_tmpl_id.id})
             self.inventory_id = newsi.id
         else:
