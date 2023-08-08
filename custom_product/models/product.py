@@ -22,6 +22,10 @@ class ProductTemplate(models.Model):
         help='La referencia del fabricante del tractor.'
     )
 
+    @api.onchange('dictionary_name')
+    def copy_dictionary_name(self):
+        self.name = self.dictionary_name.name
+
     @api.depends('seller_ids.product_code')
     def get_ref_supplier_codes(self):
         name = ""

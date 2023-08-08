@@ -16,7 +16,7 @@
             <xpath expr="//h1" position="replace">
                 <h1>
                     <div groups="base.group_user">
-                        <field name="display_name" placeholder="Product Name" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                        <field name="dictionary_name" placeholder="Product Name" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
                     </div>
                     <div groups="stock.group_stock_manager,purchase.group_purchase_manager,sales_team.group_sale_manager">
                         <field name="name" placeholder="Product Name" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
