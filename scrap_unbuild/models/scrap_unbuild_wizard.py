@@ -28,6 +28,11 @@ class ScrapUnbuildWizard(models.TransientModel):
     def get_scrap_unbuild_action(self):
         rootcode = self.product_tmpl_id.default_code[:6]
         location = self.env['stock.location'].search([('name', '=', rootcode)])
+        # Para productos que no son IDR:
+        if (self.product_tmpl_id.unbuild_type in ['main']) and (len(self.product_tmpl_id.default_code) != 6):
+            rootcode = self.product_tmpl_id.default_code
+            location = self.product_tmpl_id.unbuild_location_id
+        # - - - -
         rootpt = self.env['product.template'].search([('default_code', '=', rootcode)])
         if not rootpt.id or not location.id:
             raise UserError(

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!--
+        Desarrollo para m2o que no permita crear, hay que añadir OPTIONS:
+        <h1><field name="name" placeholder="Product Name" options="{'limit': 10, 'create': false, 'create_edit': false}"/></h1>
+        Comprobado que funciona la vista en plantilla de productos y en variantes.
+        La vista origen:
+        Poner en inventario. Configuración => Inventario => Diccionario (responsable de almacén, Rventas, Rcompras
+    -->
+
     <record id="custom_product_product_template_only_form_view" model="ir.ui.view">
         <field name="name">custom.product.product.template.only.form.view</field>
         <field name="model">product.template</field>

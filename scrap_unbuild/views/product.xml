@@ -26,7 +26,7 @@
                     <group>
                         <field name="parent_id" force_save="1"
                                domain="[('id','!=',active_id),('unbuild_type','=','main')]"
-                               attrs="{'invisible':[('unbuild_type','!=','subproduct')], 'readonly':[('parent_id','!=',False)]}"/>
+                               attrs="{'invisible':[('unbuild_type','!=','subproduct')], 'readonly':[('parent_id','!=',False)], 'required':[('unbuild_type','=','subproduct')]}"/>
                     </group>
                     <div name="unbuild_section" attrs="{'invisible':[('unbuild_type','=','subproduct'),('parent_id','=',False)]}">
                         <group col="4">
