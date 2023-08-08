@@ -20,6 +20,7 @@
         "product_chassis",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "views/product.xml",
         "views/stock.xml",
     ],
