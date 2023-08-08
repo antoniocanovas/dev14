@@ -10,7 +10,7 @@ from odoo import api, fields, models, _
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    name = fields.Many2one('product.dictionary', store=True, copy=True)
+    dictionary_name = fields.Many2one('product.dictionary', store=True, copy=True)
     uses = fields.Text('Product Uses')
     references = fields.Text('References')
     ref_market = fields.Char(
