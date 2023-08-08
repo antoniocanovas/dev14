@@ -18,6 +18,9 @@
                     <field name="unbuild_type" force_save="1" attrs="{'readonly':[('unbuild_type_readonly','=',True)]}"/>
                 </group>
             </xpath>
+            <field name="product_brand_id" position="attributes">
+                <attribute name="attrs">{"required": [("unbuild_type",'!=',False)]}</attribute>
+            </field>
             <xpath expr="//page[@name='general_information']" position="after">
                 <page name="desguace" string="Desguace" attrs="{'invisible':[('unbuild_type','not in',['main','subproduct'])]}">
                     <div attrs="{'invisible':['|',('unbuild_type','!=','subproduct'),('parent_id','!=',False)]}">

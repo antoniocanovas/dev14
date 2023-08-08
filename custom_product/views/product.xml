@@ -9,6 +9,13 @@
         Poner en inventario. Configuración => Inventario => Diccionario (responsable de almacén, Rventas, Rcompras
     -->
 
+    <!-- poner la marca como obligatoria si scrap_unbuild está establecido:
+    Vista original: product_brand.product_template_form_brand_add
+
+    -->
+
+
+
     <record id="custom_product_product_template_only_form_view" model="ir.ui.view">
         <field name="name">custom.product.product.template.only.form.view</field>
         <field name="model">product.template</field>
