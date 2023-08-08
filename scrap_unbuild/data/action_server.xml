@@ -143,7 +143,7 @@ for r in records:
   if (rootpt.unbuild_type in ['main','subproduct']):
     project = env['project.project'].search([('analytic_account_id','=',rootpt.income_analytic_account_id.id)])
     if not project.id:
-      project = env['project.project'].create({'name':rootpt.display_name, 'analytic_account_id':rootpt.income_analytic_account_id.id,
+      project = env['project.project'].create({'name':rootpt.name.name, 'analytic_account_id':rootpt.income_analytic_account_id.id,
         'allow_timesheets':True, 'user_id':manager.id
       })
     description = "Solicitud de pieza en stock de almacén principal."
