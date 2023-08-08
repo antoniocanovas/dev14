@@ -24,7 +24,8 @@ class ProductTemplate(models.Model):
 
     @api.onchange('dictionary_name')
     def copy_dictionary_name(self):
-        self.name = self.dictionary_name.name
+        if self.dictionary_name.id:
+            self.name = self.dictionary_name.name
 
     @api.depends('seller_ids.product_code')
     def get_ref_supplier_codes(self):
