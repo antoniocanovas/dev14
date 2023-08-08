@@ -9,7 +9,7 @@ class ScrapUnbuildWizard(models.TransientModel):
     @api.depends('product_tmpl_id', 'unbuild_set_id', 'create_date')
     def get_unbuild_wizard_name(self):
         name = str(date.today())
-        if self.product_tmpl_id.id: name += " " + self.product_tmpl_id.name
+        if self.product_tmpl_id.id: name += " " + self.product_tmpl_id.name.name
         if self.unbuild_set_id.id: name += " " + self.unbuild_set_id.name
         self.name = name
     name = fields.Char('Name', compute='get_unbuild_wizard_name', readonly=False)
