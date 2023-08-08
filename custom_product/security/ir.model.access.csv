@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+product_dictionary_user,product.dictionary.user,custom_product.model_product_dictionary,base.group_user,0,0,0,1
+product_dictionary_admin,product.dictionary.admin,custom_product.model_product_dictionary,sales_team.group_sale_manager,1,1,1,1
