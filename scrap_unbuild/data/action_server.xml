@@ -73,7 +73,7 @@ if (record.unbuild_type in ['main','refurbish']) or (record.parent_id.id):
   project = env['project.project'].search([('analytic_account_id','=', record.income_analytic_account_id.id)])
   if not project.id:
     manager = env.company.unbuild_manager_id
-    name = record.name + " [" + record.default_code +"]"
+    name = record.name.name + " [" + record.default_code +"]"
     project = env['project.project'].create({'name':name, 'analytic_account_id':record.income_analytic_account_id.id,
       'allow_timesheets':True, 'user_id':manager.id, 'allow_billable':True
     })
