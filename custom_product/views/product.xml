@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- poner la marca como obligatoria si scrap_unbuild está establecido:
+    Vista original: product_brand.product_template_form_brand_add
+
+    -->
+
+
+    <record id="custom_product_form_view" model="ir.ui.view">
+        <field name="name">custom.product.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h1" position="replace">
+                <h1>
+                    <div groups="base.group_user">
+                        <field name="dictionary_name" placeholder="Product Name" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                    </div>
+                    <div groups="stock.group_stock_manager,purchase.group_purchase_manager,sales_team.group_sale_manager">
+                        <field name="name" placeholder="Product Name" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                    </div>
+                </h1>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="custom_product_product_template_only_form_view" model="ir.ui.view">
+        <field name="name">custom.product.product.template.only.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="plate"/>
+                <field name="uses"/>
+                <field name="references"/>
+                <field name="ref_market"/>
+                <field name="ref_oem"/>
+                <field name="ref_supplier"/>
+                <field name="stock_global_pt"/>
+            </field>
+            <xpath expr="/form/sheet/notebook/page/group[1]" position="after">
+                <group string="Referencias similares">
+                    <field name="quant_refs" nolabel="1">
+                        <tree>
+                            <field name="product_id"/>
+                            <field name="location_id"/>
+                            <field name="available_quantity"/>
+                            <field name="quantity"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="custom_product_product_template_tree_view" model="ir.ui.view">
+        <field name="name">custom.product.product.template.tree.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="plate"/>
+                <field name="uses" optional="hide"/>
+                <field name="references" optional="show"/>
+                <field name="ref_oem" optional="show"/>
+                <field name="ref_market" optional="hide"/>
+                <field name="chassis_pt" optional="hide"/>
+            </field>
+            <field name="qty_available" position="after">
+                <field name="stock_global_pt" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="custom_product_product_template_search_view" model="ir.ui.view">
+        <field name="name">custom.product.product.template.search.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="replace">
+                <field name="name" string="Product" filter_domain="['|', '|', '|', '|', '|','|','|','|', ('chassis_pt', 'ilike', self), ('ref_oem', 'ilike', self), ('ref_market', 'ilike', self), ('default_code', 'ilike', self), ('name', 'ilike', self), ('barcode', 'ilike', self),('uses', 'ilike', self), ('references', 'ilike', self), ('description', 'ilike', self)]"/>
+                <field name="plate"/>
+                <field name="uses" string="Uses" filter_domain="[('uses', 'ilike', self)]"/>
+                <field name="references" string="References" filter_domain="['|',('references', 'ilike', self),('ref_market', 'ilike', self)]"/>
+                <field name="ref_supplier" string="Supplier reference" filter_domain="[('ref_supplier', 'ilike', self)]"/>
+                <filter string="Modificados última semana" name="last_week_write"
+                        domain="[('write_date', '&gt;=', (datetime.datetime.combine(context_today() + relativedelta(days=-7), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                <filter string="Modificados últimos 15 días" name="last_2_week_write"
+                        domain="[('write_date', '&gt;=', (datetime.datetime.combine(context_today() + relativedelta(days=-15), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                <filter string="Usuario última modificación" name="write_uid" context="{'group_by':'write_uid'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="custom_product_product_search_view" model="ir.ui.view">
+        <field name="name">custom.product.product.search.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="replace">
+                <field name="name" string="Product" filter_domain="['|', '|', '|', '|', '|','|','|','|', ('chassis_pp', 'ilike', self), ('ref_oem', 'ilike', self), ('ref_market', 'ilike', self), ('default_code', 'ilike', self), ('name', 'ilike', self), ('barcode', 'ilike', self),('uses', 'ilike', self), ('references', 'ilike', self), ('description', 'ilike', self)]"/>
+                <field name="plate"/>
+                <field name="uses" string="Uses" filter_domain="[('uses', 'ilike', self)]"/>
+                <field name="references" string="References" filter_domain="['|',('references', 'ilike', self),('ref_market', 'ilike', self)]"/>
+                <field name="ref_supplier" string="Supplier reference" filter_domain="[('ref_supplier', 'ilike', self)]"/>
+                <filter string="Modificados última semana" name="last_week_write"
+                        domain="[('write_date', '&gt;=', (datetime.datetime.combine(context_today() + relativedelta(days=-7), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                <filter string="Modificados últimas 15 días" name="last_2_week_write"
+                        domain="[('write_date', '&gt;=', (datetime.datetime.combine(context_today() + relativedelta(days=-15), datetime.time(0,0,0)).to_utc()).strftime('%Y-%m-%d %H:%M:%S'))]"/>
+                <filter string="Usuario de última modificación" name="write_uid" context="{'group_by':'write_uid'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="custom_product_product_normal_form_view" model="ir.ui.view">
+        <field name="name">custom.product.product.normal.form.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <field name="default_code" position="replace">
+            </field>
+            <xpath expr="//div[@name='options']" position="before">
+                <label class="oe_edit_only" for="default_code" string="Default Code"/>
+                <h2><field name="default_code"/></h2>
+            </xpath>
+            <field name="barcode" position="after">
+                <field name="plate"/>
+                <field name="uses"/>
+                <field name="references"/>
+                <field name="ref_oem" optional="show"/>
+                <field name="ref_market" optional="hide"/>
+                <field name="ref_supplier"/>
+                <field name="stock_global_pp"/>
+            </field>
+            <xpath expr="/form/sheet/notebook/page/group[1]" position="after">
+                <group string="Referencias similares">
+                    <field name="quant_refs" nolabel="1">
+                        <tree>
+                            <field name="product_id"/>
+                            <field name="location_id"/>
+                            <field name="available_quantity"/>
+                            <field name="quantity"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="custom_product_product_tree_view" model="ir.ui.view">
+        <field name="name">custom.product.product.tree.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="categ_id" />
+                <field name="plate" optional="hide"/>
+                <field name="uses" optional="hide"/>
+                <field name="references" optional="show"/>
+                <field name="ref_oem" optional="show"/>
+                <field name="ref_market" optional="hide"/>
+                <field name="chassis_pp" optional="hide"/>
+                <field name="stock_global_pp" optional="show"/>
+
+                <field name="lst_price" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="standard_price" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="barcode" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="barcode" position="after">
+                    <field name="description" />
+                </field>
+            </field>
+        </field>
+    </record>
+
+    <!-- VISTAS KANBAN: -->
+    <record id="custom_product_template_kanban_view" model="ir.ui.view">
+        <field name="name">custom.product.template.kanban.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//kanban" position="inside">
+                    <field name="stock_global_pt"/>
+                </xpath>
+                <xpath expr="//div[@name='product_lst_price']" position="after">
+                    <div t-if="record.stock_global_pt.raw_value">Global: <field name="stock_global_pt"/> <field name="uom_id"/></div>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+
+</odoo>

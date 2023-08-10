@@ -1,0 +1,499 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* scrap_unbuild
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-13 14:19+0000\n"
+"PO-Revision-Date: 2023-01-13 16:22+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: scrap_unbuild
+#: model:base.automation,name:scrap_unbuild.assign_standard_code_to_scrap_product_templates
+#: model:ir.actions.server,name:scrap_unbuild.assign_standard_code_to_scrap_product_templates_ir_actions_server
+msgid "=> Assign standard_code and Analytic account to scrap products"
+msgstr "=> Asignar código y cuenta analítica a productos de desguace"
+
+#. module: scrap_unbuild
+#: model:base.automation,name:scrap_unbuild.change_unbuild_set_parts_producttemplate
+#: model:ir.actions.server,name:scrap_unbuild.change_unbuild_set_parts_producttemplate_ir_actions_server
+msgid "=> Change SET unbuild parts on scrap products"
+msgstr "=> Cambiar el SET para productos de desguace"
+
+#. module: scrap_unbuild
+#: model:base.automation,name:scrap_unbuild.change_unbuild_set_parts_wizard
+#: model:ir.actions.server,name:scrap_unbuild.change_unbuild_set_parts_wizard_ir_actions_server
+msgid "=> Change SET unbuild parts on scrap wizard"
+msgstr "=> Cambiar el SET de partes del Wizard"
+
+#. module: scrap_unbuild
+#: model:ir.actions.server,name:scrap_unbuild.scrap_assign_subproduct_code
+msgid "=> Crear código a subproducto sin vehículo origen definido."
+msgstr "=> Crear código a subproducto sin vehículo origen definido."
+
+#. module: scrap_unbuild
+#: model:ir.actions.server,name:scrap_unbuild.task_to_unbuild_product_template
+msgid "=> Crear tarea de desmontaje y suministro a almacén"
+msgstr "=> Crear tarea de desmontaje y suministro a almacén"
+
+#. module: scrap_unbuild
+#: model:ir.actions.server,name:scrap_unbuild.scrap_set_unbuild
+msgid "=> Scrap Wizard Set Unbuild"
+msgstr "=>  Despiezar producto"
+
+#. module: scrap_unbuild
+#: model:base.automation,name:scrap_unbuild.scrap_unbuild_update_main_products_location_to_unbuild
+#: model:ir.actions.server,name:scrap_unbuild.scrap_unbuild_update_main_products_location_to_unbuild_ir_actions_server
+msgid "=> Update trucks and tools location to unbuild"
+msgstr "=> Update trucks and tools location to unbuild"
+
+#. module: scrap_unbuild
+#: model:base.automation,name:scrap_unbuild.update_unbuild_parent_product_value_aa
+#: model:ir.actions.server,name:scrap_unbuild.update_unbuild_parent_product_value_aa_ir_actions_server
+msgid "=> Update unbuild parent product value"
+msgstr "=> Actualizar el valor en el producto padre"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_wizard_form
+msgid "Apply"
+msgstr "Ejecutar"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_product_product_template_only_form_view
+msgid ""
+"Asigna el vehículo o parte para poder seguir desguazando este subproducto:"
+msgstr ""
+"Asigna el vehículo o parte para poder seguir desguazando este subproducto:"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__autovalidate
+msgid "Autovalidate"
+msgstr "Autovalidar"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__category_id
+msgid "Category"
+msgstr "Categoría"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__subparent_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__subparent_id
+msgid "Child"
+msgstr "Hijo"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__create_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__create_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__create_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__create_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__create_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__create_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__create_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__create_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__create_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__create_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_product_product_template_only_form_view
+msgid "Desguace"
+msgstr "Desguace"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_res_company__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory_line__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_move__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__display_name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__finished
+msgid "Fully diassembled"
+msgstr "Completamente desmontado"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_res_company__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory_line__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_move__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_stock_inventory
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__inventory_ids
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__inventory_ids
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__inventory_id
+msgid "Inventory"
+msgstr "Inventario"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_stock_inventory_line
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__inventory_line_ids
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__inventory_line_ids
+msgid "Inventory Line"
+msgstr "Línea inventario"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_res_company____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory_line____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_move____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set____last_update
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__write_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__write_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__write_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__write_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__write_uid
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__write_uid
+msgid "Last Updated by"
+msgstr "Última modificación por"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__write_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__write_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__write_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__write_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__write_date
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__write_date
+msgid "Last Updated on"
+msgstr "Última modificación el"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_unbuild_set_line
+msgid "Line for unbuilds"
+msgstr "A desmontar"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__name
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__newproduct_id
+msgid "New product"
+msgstr "Nuevo producto"
+
+#. module: scrap_unbuild
+#: code:addons/scrap_unbuild/models/scrap_unbuild_wizard.py:0
+#, python-format
+msgid "No hay productos nuevos que crear en: "
+msgstr "No hay productos nuevos que crear en: "
+
+#. module: scrap_unbuild
+#: model:ir.model.fields.selection,name:scrap_unbuild.selection__product_template__unbuild_type__other
+msgid "Otros finales desguazados"
+msgstr "Otros finales desguazados"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields.selection,name:scrap_unbuild.selection__product_template__unbuild_type__refurbish
+msgid "Para compra/venta"
+msgstr "Para compra/venta"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__part_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__part_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set__line_ids
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__part_id
+msgid "Part"
+msgstr "Parte"
+
+#. module: scrap_unbuild
+#: model:ir.actions.act_window,name:scrap_unbuild.action_parts
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__line_ids
+#: model:ir.ui.menu,name:scrap_unbuild.menu_parts
+msgid "Parts"
+msgstr "Partes"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_location_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_location_id
+msgid "Parts location"
+msgstr "Ubicación de piezas"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_unbuild_part
+msgid "Parts of scrap product"
+msgstr "Piezas del producto"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_task_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_task_id
+msgid "Parts task"
+msgstr "Tarea de piezas"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__product_tmpl_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_part__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__attribute_line_ids
+msgid "Product Attributes"
+msgstr "Atributos de producto"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__product_tmpl_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__product_tmpl_id
+msgid "Product template"
+msgstr "Plantilla de producto"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_project_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_project_id
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__qty
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__qty
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_type_readonly
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_type_readonly
+msgid "Readonly context"
+msgstr ""
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_res_company__refurbish_location_id
+msgid "Refurbish location"
+msgstr "Ubicación de taller"
+
+#. module: scrap_unbuild
+#: code:addons/scrap_unbuild/models/scrap_unbuild_wizard.py:0
+#, python-format
+msgid ""
+"Revisa los códigos de los productos padre anidados, no encuentro el raiz "
+"con los 6 primeros dígitos; o la localizacón de almacén con este código."
+msgstr ""
+"Revisa los códigos de los productos padre anidados, no encuentro el raiz "
+"con los 6 primeros dígitos; o la localizacón de almacén con este código."
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_scrap_unbuild_wizard__unbuild_set_id
+msgid "SET"
+msgstr "SET"
+
+#. module: scrap_unbuild
+#: model:ir.ui.menu,name:scrap_unbuild.menu_scrap
+msgid "Scrap"
+msgstr "Producto de desguace"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_type
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_type
+msgid "Scrap Type"
+msgstr "Tipo de desguace"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_scrap_unbuild_wizard
+msgid "Scrap Unbuild Wizard"
+msgstr "Wizard de despiece"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_sequence
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_sequence
+msgid "Sequencia de piezas"
+msgstr "Sequencia de piezas"
+
+#. module: scrap_unbuild
+#: model:ir.actions.act_window,name:scrap_unbuild.action_set
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_set_line__set_id
+#: model:ir.ui.menu,name:scrap_unbuild.menu_set
+msgid "Set"
+msgstr "Set"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_unbuild_set
+msgid "Set for unbuilds"
+msgstr "Set de despiece"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,help:scrap_unbuild.field_unbuild_part__product_id
+msgid ""
+"Si asignas un producto, al despiezar se añadirá la cantidad al stock.Se "
+"utilizarán sus fotos y precio de este producto sin distinción con otras "
+"piezas similares."
+msgstr ""
+"Si asignas un producto, al despiezar se añadirá la cantidad al stock.Se "
+"utilizarán sus fotos y precio de este producto sin distinción con otras "
+"piezas similares."
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields.selection,name:scrap_unbuild.selection__product_template__unbuild_type__subproduct
+msgid "Subproducto"
+msgstr "Subproducto"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__subproduct_ids
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__subproduct_ids
+msgid "Subproductos"
+msgstr "Subproductos"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__stock_move_ids
+msgid "Subproducts"
+msgstr "Subproductos"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_product_product_template_only_form_view
+msgid "Subproducts:"
+msgstr "Subproductos:"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_product_line_ids
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_product_line_ids
+msgid "Un.Prod Lines"
+msgstr "Líneas de producto"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_product_product_template_only_form_view
+msgid "Unbuild"
+msgstr "Desguazar"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_res_company__unbuild_manager_id
+msgid "Unbuild Manager"
+msgstr "Gestor de desguace"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_move__unbuild_product_tmpl_id
+msgid "Unbuild Parent"
+msgstr "Desguace padre"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory__unbuild_product_tmpl_id
+msgid "Unbuild Product"
+msgstr "Producto a desguazar"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_unbuild_product_line
+msgid "Unbuild Product Line"
+msgstr "Línea de desguace"
+
+#. module: scrap_unbuild
+#: model:ir.model,name:scrap_unbuild.model_unbuild_product_line_wizard
+msgid "Unbuild Product Line Wizard"
+msgstr "Wizard de desguace"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_set_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_set_id
+msgid "Unbuild Set"
+msgstr "Set de desguace"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__unbuild_sm_ids
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__unbuild_sm_ids
+msgid "Unbuild Sm"
+msgstr "Desguace SM"
+
+#. module: scrap_unbuild
+#: model:ir.actions.act_window,name:scrap_unbuild.action_scrap_unbuild_wizard
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__unbuild_wizard_id
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_wizard_form
+msgid "Unbuild Wizard"
+msgstr "Wizard despiece"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_res_company__unbuild_location_id
+msgid "Unbuild location"
+msgstr "Ubicación desguazados"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_product_product_template_only_form_view
+msgid "Unbuilds:"
+msgstr "Desguaces:"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_stock_inventory_line__unbuild_unit_value
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line__standard_price
+#: model:ir.model.fields,field_description:scrap_unbuild.field_unbuild_product_line_wizard__standard_price
+msgid "Unit value"
+msgstr "Valor Ud."
+
+#. module: scrap_unbuild
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_product__parent_id
+#: model:ir.model.fields,field_description:scrap_unbuild.field_product_template__parent_id
+msgid "Vehicle"
+msgstr "Padre"
+
+#. module: scrap_unbuild
+#: model:ir.model.fields.selection,name:scrap_unbuild.selection__product_template__unbuild_type__main
+msgid "Vehículo o Parte para desguace"
+msgstr "Vehículo o Parte para desguace"
+
+#. module: scrap_unbuild
+#: model_terms:ir.ui.view,arch_db:scrap_unbuild.scrap_unbuild_wizard_form
+msgid "or"
+msgstr "o"

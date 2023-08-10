@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="view_res_partner_riocabo_inh" model="ir.ui.view">
+        <field name="name">res.partner.form.inh</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="ref" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
