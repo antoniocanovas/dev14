@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-
     <record id="res_partner_crm_scrap_inh_kanban" model="ir.ui.view">
         <field name="name">res.partner.crm.scrap.inh.kanban</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="type">kanban</field>
         <field name="priority" eval="99"/>
         <field name="arch" type="xml">
             <field name="type" position="after">
@@ -28,11 +28,10 @@
             <field name="phone" position="before">
                 <field name="ref"/>
             </field>
+            <field name="phone" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
         </field>
     </record>
-
-
-
-
 
 </odoo>
