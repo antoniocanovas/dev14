@@ -22,7 +22,7 @@
         'base_automation',
         'product_analytic',
         'product_brand',
-x        'product_chassis',
+        'product_chassis',
     ],
     "data": [
         "data/action_server.xml",
