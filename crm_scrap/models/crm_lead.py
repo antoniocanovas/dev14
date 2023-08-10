@@ -11,7 +11,6 @@ class CrmLead(models.Model):
     market_value    = fields.Monetary('Market value', currency_field='company_currency')
     quotation_value = fields.Monetary('Quotation', currency_field='company_currency')
     description_tech = fields.Text('Technical notes', store=True)
-    partner_ref = fields.Char('Cód. cliente', store=True, related='partner_id.ref')
 
     # Lo quito porque lo pide Cristina 9/8/23, siempre seleccionarán empresa y sólo se muestran etiquetas del primer contacto:
     @api.depends('partner_id')
