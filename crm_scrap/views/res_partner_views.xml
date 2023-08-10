@@ -29,7 +29,7 @@
                 <field name="ref"/>
             </field>
             <field name="phone" position="attributes">
-                <attribute name="optional">show</attribute>
+                <attribute name="optional">hide</attribute>
             </field>
         </field>
     </record>
