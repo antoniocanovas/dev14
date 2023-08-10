@@ -11,6 +11,9 @@
             <xpath expr="//div[hasclass('oe_title')]" position="before">
                 <h2><field name="brand_id" placeholder="Brand" required="1"/></h2>
             </xpath>
+            <field name="vat" position="after">
+                <field name="partner_ref"/>
+            </field>
             <field name="tag_ids" position="after">
                 <field name="partner_tag_ids" widget="many2many_tags"  options="{'color_field': 'color'}"/>
             </field>
