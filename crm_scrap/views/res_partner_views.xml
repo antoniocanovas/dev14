@@ -1,6 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
+
+    <record id="res_partner_crm_scrap_inh_kanban" model="ir.ui.view">
+        <field name="name">res.partner.crm.scrap.inh.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='activity_ids']" position="before">
+                <field name="ref" display="full"/>
+            </xpath>
+        </field>
+    </record>
+
+
     <record id="res_partner_crm_scrap_inh" model="ir.ui.view">
         <field name="name">res.partner.crm.scrap.inh</field>
         <field name="model">res.partner</field>
@@ -13,5 +27,9 @@
             </field>
         </field>
     </record>
+
+
+
+
 
 </odoo>
