@@ -8,8 +8,11 @@
         <field name="inherit_id" ref="base.res_partner_kanban_view"/>
         <field name="priority" eval="99"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='activity_ids']" position="before">
-                <field name="ref" display="full"/>
+            <field name="type" position="after">
+                <field name="ref"/>
+            </field>
+            <xpath expr="//span[hasclass('oe_kanban_partner_links')]" position="after">
+                <field name="ref"/>
             </xpath>
         </field>
     </record>
